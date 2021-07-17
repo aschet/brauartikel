@@ -5,73 +5,72 @@ import pandas as pa
 # Refractometer Correlation Function Evaluation
 # greetings, Thomas Ascher
 
-# AAT = apparent attenuation in %
-# AE = apparent extract in °P
-# BX = brix
-# OE = original extract in °P
-# SE = specific extract in °P
-# SG = specific gravity
+# aat = apparent attenuation in %
+# ae = apparent extract in °P
+# oe = original extract in °P
+# ri = refractive index
+# sg = specific gravity
 # WCF = wort correction factor
 
 wcf = 1.0
 
-def correct_bx(bx, wcf):
-    return bx / wcf
+def correct_ri(ri, wcf):
+    return ri / wcf
 
 # https://www.brewersfriend.com/plato-to-sg-conversion-chart
 def sg_to_plato(sg):
     return (-1.0 * 616.868) + (1111.14 * sg) - (630.272 * sg**2) + (135.997 * sg**3)
 
 # The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
-def cor_bonham(bxi, bxf, wcf):
-    bxic = correct_bx(bxi, wcf)
-    return sg_to_plato(1.001843 - 0.002318474 * bxic - 0.000007775 * bxic**2 - \
-        0.000000034 * bxic**3 + 0.00574 * bxf + \
-        0.00003344 * bxf**2 + 0.000000086 * bxf**3)
+def cor_bonham(rii, rif, wcf):
+    rifc = correct_ri(rii, wcf)
+    return sg_to_plato(1.001843 - 0.002318474 * rifc - 0.000007775 * rifc**2 - \
+        0.000000034 * rifc**3 + 0.00574 * rif + \
+        0.00003344 * rif**2 + 0.000000086 * rif**3)
 
 # The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
-def cor_gardner(bxi, bxf, wcf):
-    bxic = correct_bx(bxi, wcf)
-    return 1.53 * bxf - 0.59 * bxic
+def cor_gardner(rii, rif, wcf):
+    rifc = correct_ri(rii, wcf)
+    return 1.53 * rif - 0.59 * rifc
 
 # http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
-def cor_novotny_linear(bxi, bxf, wcf):
-    bxic = correct_bx(bxi, wcf)
-    bxfc = correct_bx(bxf, wcf)
-    return sg_to_plato(-0.002349 * bxic + 0.006276 * bxfc + 1.0)
+def cor_novotny_linear(rii, rif, wcf):
+    oe = correct_ri(rii, wcf)
+    rifc = correct_ri(rif, wcf)
+    return sg_to_plato(-0.002349 * oe + 0.006276 * rifc + 1.0)
 
 # http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html     
-def cor_novotny_quadratic(bxi, bxf, wcf):
-    bxic = correct_bx(bxi, wcf)
-    bxfc = correct_bx(bxf, wcf)
-    return sg_to_plato(1.335 * 10.0**-5 * bxic**2 - \
-        3.239 * 10.0**-5 * bxic * bxfc + \
-        2.916 * 10.0**-5 * bxfc**2 - \
-        2.421 * 10.0**-3 * bxic + \
-        6.219 * 10.0**-3 * bxfc + 1.0)
+def cor_novotny_quadratic(rii, rif, wcf):
+    oe = correct_ri(rii, wcf)
+    rifc = correct_ri(rif, wcf)
+    return sg_to_plato(1.335 * 10.0**-5 * oe**2 - \
+        3.239 * 10.0**-5 * oe * rifc + \
+        2.916 * 10.0**-5 * rifc**2 - \
+        2.421 * 10.0**-3 * oe + \
+        6.219 * 10.0**-3 * rifc + 1.0)
 
 # http://seanterrill.com/2011/04/07/refractometer-fg-results/
-def cor_terrill_linear(bxi, bxf, wcf):
-    bxic = correct_bx(bxi, wcf)
-    bxfc = correct_bx(bxf, wcf)           
-    return sg_to_plato(1.0 - 0.000856829 * bxic + 0.00349412 * bxfc)
+def cor_terrill_linear(rii, rif, wcf):
+    oe = correct_ri(rii, wcf)
+    rifc = correct_ri(rif, wcf)           
+    return sg_to_plato(1.0 - 0.000856829 * oe + 0.00349412 * rifc)
 
 # http://seanterrill.com/2011/04/07/refractometer-fg-results/
-def cor_terrill_cubic(bxi, bxf, wcf):
-    bxic = correct_bx(bxi, wcf)
-    bxfc = correct_bx(bxf, wcf)          
-    return sg_to_plato(1.0 - 0.0044993 * bxic + 0.000275806 * bxic**2 - \
-        0.00000727999 * bxic**3 + 0.0117741 * bxfc - \
-        0.00127169 * bxfc**2 + 0.0000632929 * bxfc**3)
+def cor_terrill_cubic(rii, rif, wcf):
+    oe = correct_ri(rii, wcf)
+    rifc = correct_ri(rif, wcf)          
+    return sg_to_plato(1.0 - 0.0044993 * oe + 0.000275806 * oe**2 - \
+        0.00000727999 * oe**3 + 0.0117741 * rifc - \
+        0.00127169 * rifc**2 + 0.0000632929 * rifc**3)
 
-def calc_abv(oe, fe):
-    return (261.1/(261.53-fe))*(81.92*(oe-fe)/(206.65-1.0665*oe))/0.7894
+def calc_abv(oe, ae):
+    return (261.1/(261.53-ae))*(81.92*(oe-ae)/(206.65-1.0665*oe))/0.7894
 
 data = pa.read_csv("data.csv", delimiter=',')
 data['AAT'] = (data['OE'] - data['AE']) * 100.0 / data['OE']
 data['ABV'] = data.apply(lambda row: calc_abv(row.OE, row.AE), axis=1)
 wcf_col_name = 'WCF'
-data[wcf_col_name] = data['BXI'] / data['OE']
+data[wcf_col_name] = data['RII'] / data['OE']
 
 def col_name(section, name):
     return section + ' ' + name
@@ -89,9 +88,9 @@ def col_name_abv_err(name):
     return col_name('ABV Error', name)
 
 def add_cor_model_data(name, functor):
-    data[col_name_ae(name)] = data.apply(lambda row: functor(row.BXI, row.BXF, wcf), axis=1)
+    data[col_name_ae(name)] = data.apply(lambda row: functor(row.RII, row.RIF, wcf), axis=1)
     data[col_name_ae_err(name)] = data.apply(lambda row: row[col_name_ae(name)] - row.AE, axis=1)
-    data[col_name_abv(name)] = data.apply(lambda row: calc_abv(correct_bx(row.BXI, wcf), row[col_name_ae(name)]), axis=1)
+    data[col_name_abv(name)] = data.apply(lambda row: calc_abv(correct_ri(row.RII, wcf), row[col_name_ae(name)]), axis=1)
     data[col_name_abv_err(name)] = data.apply(lambda row: row[col_name_abv(name)] - row.ABV, axis=1)
 
 name_bonham = 'Bonham'
