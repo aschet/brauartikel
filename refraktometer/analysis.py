@@ -8,11 +8,13 @@ import pandas as pa
 # aat = apparent attenuation in %
 # ae = apparent extract in °P
 # oe = original extract in °P
-# ri = refractive index
+# rii = refractive index initial
+# rif = refractive index final
 # sg = specific gravity
 # WCF = wort correction factor
 
 wcf = 1.0
+filter_outliers = False
 
 def correct_ri(ri, wcf):
     return ri / wcf
@@ -66,12 +68,6 @@ def cor_terrill_cubic(rii, rif, wcf):
 def calc_abv(oe, ae):
     return (261.1/(261.53-ae))*(81.92*(oe-ae)/(206.65-1.0665*oe))/0.7894
 
-data = pa.read_csv("data.csv", delimiter=',')
-data['AAT'] = (data['OE'] - data['AE']) * 100.0 / data['OE']
-data['ABV'] = data.apply(lambda row: calc_abv(row.OE, row.AE), axis=1)
-wcf_col_name = 'WCF'
-data[wcf_col_name] = data['RII'] / data['OE']
-
 def col_name(section, name):
     return section + ' ' + name
 
@@ -86,6 +82,21 @@ def col_name_abv(name):
 
 def col_name_abv_err(name):
     return col_name('ABV Error', name)
+
+data = pa.read_csv("data.csv", delimiter=',')
+
+col_name_riic_err = 'RIIC Err'
+data[col_name_riic_err] = data.apply(lambda row: correct_ri(row.RII, wcf) - row.OE, axis=1)
+if filter_outliers == True:
+    riic_err_threshold = data[col_name_riic_err].std()
+    print('Filtering outliers over ' + col_name_riic_err + ': ' + str(riic_err_threshold))
+    print()
+    data = data[(abs(data[col_name_riic_err]) <= riic_err_threshold)]
+
+data['AAT'] = (data['OE'] - data['AE']) * 100.0 / data['OE']
+data['ABV'] = data.apply(lambda row: calc_abv(row.OE, row.AE), axis=1)
+wcf_col_name = 'WCF'
+data[wcf_col_name] = data['RII'] / data['OE']
 
 def add_cor_model_data(name, functor):
     data[col_name_ae(name)] = data.apply(lambda row: functor(row.RII, row.RIF, wcf), axis=1)
