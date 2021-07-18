@@ -11,7 +11,7 @@ import pandas as pa
 # rii = refractive index initial
 # rif = refractive index final
 # sg = specific gravity
-# WCF = wort correction factor
+# wcf = wort correction factor
 
 wcf = 1.0
 filter_outliers = False
