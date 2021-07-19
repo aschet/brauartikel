@@ -153,14 +153,20 @@ stats = pa.DataFrame(stats_list, columns = ['Name' , 'ABV Error Abs Mean', 'ABV 
 stats.to_csv("stats_abv.csv")
 print(stats)
 
+marker_shape = 's'
+marker_size = 5
+
+def add_plot_part(model_name, ax, col_name, functor, color):
+    data.plot.scatter(x=col_name, y=functor(model_name), label=model_name, c=color, marker=marker_shape, s=marker_size, ax=ax)
+
 def add_plot(col_name, functor):
     ax = data.plot.scatter(x=col_name, y=col_name, c='#000000', marker='.')
-    data.plot.scatter(x=col_name, y=functor(name_bonham), label=name_bonham, c='#a9f693', marker='.', ax=ax)
-    data.plot.scatter(x=col_name, y=functor(name_gardner), label=name_gardner, c='#00c295', marker='.', ax=ax)
-    data.plot.scatter(x=col_name, y=functor(name_novotny_linear), label=name_novotny_linear, marker='.', c='#5f5959', ax=ax)
-    data.plot.scatter(x=col_name, y=functor(name_novotny_quadratic), label=name_novotny_quadratic, marker='.', c='#ff0043', ax=ax)
-    data.plot.scatter(x=col_name, y=functor(name_terrill_linear), label=name_terrill_linear, marker='.', c='#ff795b', ax=ax)
-    data.plot.scatter(x=col_name, y=functor(name_terrill_cubic), label=name_terrill_cubic, marker='.', c='#fddb85', ax=ax)
+    add_plot_part(name_bonham, ax, col_name, functor, '#a9f693')
+    add_plot_part(name_gardner, ax, col_name, functor, '#00c295')
+    add_plot_part(name_novotny_linear, ax, col_name, functor, '#5f5959')
+    add_plot_part(name_novotny_quadratic, ax, col_name, functor, '#ff0043')
+    add_plot_part(name_terrill_linear, ax, col_name, functor, '#ff795b')
+    add_plot_part(name_terrill_cubic, ax, col_name, functor, '#fddb85')
     plt.xlabel('Reference ' + col_name)
     plt.ylabel('Correlation Function ' + col_name)
 
