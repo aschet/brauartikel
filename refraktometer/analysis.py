@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from numpy.core.fromnumeric import mean
 import pandas as pa
+import matplotlib.pyplot as plt
 
 # Refractometer Correlation Function Evaluation
 # greetings, Thomas Ascher
@@ -141,5 +142,20 @@ calc_model_stats(name_terrill_cubic),
 data.to_csv("data_ext.csv")
 
 stats = pa.DataFrame(stats_list, columns = ['Name' , 'ABV Error Abs Mean', 'ABV Error Min', 'ABV Error Max', 'ABV Error MAD', 'ABV Error STD', 'ABV Error % Below 0.5'])
-stats.to_csv("stats.csv")
+stats.to_csv("stats_abv.csv")
 print(stats)
+
+def add_plot(col_name, functor):
+    ax = data.plot.scatter(x=col_name, y=col_name, c='#000000', marker='.')
+    data.plot.scatter(x=col_name, y=functor(name_bonham), label=name_bonham, c='#a9f693', marker='.', ax=ax)
+    data.plot.scatter(x=col_name, y=functor(name_gardner), label=name_gardner, c='#00c295', marker='.', ax=ax)
+    data.plot.scatter(x=col_name, y=functor(name_novotny_linear), label=name_novotny_linear, marker='.', c='#5f5959', ax=ax)
+    data.plot.scatter(x=col_name, y=functor(name_novotny_quadratic), label=name_novotny_quadratic, marker='.', c='#ff0043', ax=ax)
+    data.plot.scatter(x=col_name, y=functor(name_terrill_linear), label=name_terrill_linear, marker='.', c='#ff795b', ax=ax)
+    data.plot.scatter(x=col_name, y=functor(name_terrill_cubic), label=name_terrill_cubic, marker='.', c='#fddb85', ax=ax)
+    plt.xlabel('Reference ' + col_name)
+    plt.ylabel('Calculated ' + col_name)
+
+add_plot("ABV", col_name_abv)
+plt.savefig("stats_abv.png")
+#plt.show()
