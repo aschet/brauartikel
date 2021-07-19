@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from numpy.core.fromnumeric import mean
+import numpy as np
 import pandas as pa
 import matplotlib.pyplot as plt
 
@@ -157,16 +158,17 @@ marker_shape = 's'
 marker_size = 5
 
 def add_plot_part(model_name, ax, col_name, functor, color):
-    data.plot.scatter(x=col_name, y=functor(model_name), label=model_name, c=color, marker=marker_shape, s=marker_size, ax=ax)
+    return data.plot.scatter(x=col_name, y=functor(model_name), label=model_name, c=color, marker=marker_shape, s=marker_size, ax=ax)
 
 def add_plot(col_name, functor):
-    ax = data.plot.scatter(x=col_name, y=col_name, c='#000000', marker='.')
-    add_plot_part(name_bonham, ax, col_name, functor, '#a9f693')
+    ax = add_plot_part(name_bonham, None, col_name, functor, '#a9f693')
     add_plot_part(name_gardner, ax, col_name, functor, '#00c295')
     add_plot_part(name_novotny_linear, ax, col_name, functor, '#5f5959')
     add_plot_part(name_novotny_quadratic, ax, col_name, functor, '#ff0043')
     add_plot_part(name_terrill_linear, ax, col_name, functor, '#ff795b')
     add_plot_part(name_terrill_cubic, ax, col_name, functor, '#fddb85')
+    x = data[col_name]
+    plt.plot(x, x, c='#000000', linewidth=1)
     plt.xlabel('Reference ' + col_name)
     plt.ylabel('Correlation Function ' + col_name)
 
