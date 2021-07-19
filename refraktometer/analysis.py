@@ -154,11 +154,8 @@ stats = pa.DataFrame(stats_list, columns = ['Name' , 'ABV Error Abs Mean', 'ABV 
 stats.to_csv("stats_abv.csv")
 print(stats)
 
-marker_shape = 's'
-marker_size = 5
-
 def add_plot_part(model_name, ax, col_name, functor, color):
-    return data.plot.scatter(x=col_name, y=functor(model_name), label=model_name, c=color, marker=marker_shape, s=marker_size, ax=ax)
+    return data.plot.scatter(x=col_name, y=functor(model_name), label=model_name, c=color, ax=ax)
 
 def add_plot(col_name, functor):
     ax = add_plot_part(name_bonham, None, col_name, functor, '#a9f693')
@@ -170,8 +167,8 @@ def add_plot(col_name, functor):
     x = data[col_name]
     plt.plot(x, x, c='#000000', linewidth=1)
     plt.xlabel('Reference ' + col_name)
-    plt.ylabel('Correlation Function ' + col_name)
+    plt.ylabel('Refractometer ' + col_name)
 
 add_plot("ABV", col_name_abv)
 plt.savefig("stats_abv.png")
-#plt.show()
+plt.show()
