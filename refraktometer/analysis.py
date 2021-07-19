@@ -162,7 +162,7 @@ def add_plot(col_name, functor):
     data.plot.scatter(x=col_name, y=functor(name_terrill_linear), label=name_terrill_linear, marker='.', c='#ff795b', ax=ax)
     data.plot.scatter(x=col_name, y=functor(name_terrill_cubic), label=name_terrill_cubic, marker='.', c='#fddb85', ax=ax)
     plt.xlabel('Reference ' + col_name)
-    plt.ylabel('Calculated ' + col_name)
+    plt.ylabel('Correlation Function ' + col_name)
 
 add_plot("ABV", col_name_abv)
 plt.savefig("stats_abv.png")
