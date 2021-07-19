@@ -24,6 +24,10 @@ def correct_ri(ri, wcf):
 def sg_to_plato(sg):
     return (-1.0 * 616.868) + (1111.14 * sg) - (630.272 * sg**2) + (135.997 * sg**3)
 
+# https://www.brewersfriend.com/plato-to-sg-conversion-chart
+def plato_to_sg(se):
+    return 1.0 + (se / (258.6 - ((se / 258.2) * 227.1)))
+
 # The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
 def cor_bonham(rii, rif, wcf):
     rifc = correct_ri(rii, wcf)
@@ -66,8 +70,12 @@ def cor_terrill_cubic(rii, rif, wcf):
         0.00000727999 * oe**3 + 0.0117741 * rifc - \
         0.00127169 * rifc**2 + 0.0000632929 * rifc**3)
 
+# Revisiting ABV Calculations, Zymurgy July/August 2019 p. 48
 def calc_abv(oe, ae):
-    return (261.1/(261.53-ae))*(81.92*(oe-ae)/(206.65-1.0665*oe))/0.7894
+    og = plato_to_sg(oe)
+    fg = plato_to_sg(ae)
+    return fg * (5118.0 * (og**2 - fg**2) + 16755.0 * (fg - og)) / (8.739 * og**4 \
+        - 57.22 * og**3 + 89.09 * og**2 + 14.95 + og - 105.99)
 
 def col_name(section, name):
     return section + ' ' + name
