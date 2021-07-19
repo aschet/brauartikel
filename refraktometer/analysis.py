@@ -167,7 +167,7 @@ def add_plot(col_name, functor):
     x = data[col_name]
     plt.plot(x, x, c='#000000', linewidth=1)
     plt.xlabel('Reference ' + col_name)
-    plt.ylabel('Refractometer ' + col_name)
+    plt.ylabel('Refractometer ' + col_name + ' at WCF=' + str(wcf))
 
 add_plot("ABV", col_name_abv)
 plt.savefig("stats_abv.png")
