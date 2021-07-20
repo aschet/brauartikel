@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pa
 import matplotlib.pyplot as plt
 
-# Refractometer Correlation Function Evaluation
+# Refractometer Correlation Model Evaluation
 # greetings, Thomas Ascher
 
 # aat = apparent attenuation in %
@@ -77,7 +77,7 @@ cor_models = [
     ('Novotny Linear', cor_novotny_linear, '#5f5959'),
     ('Novotny Quadratic', cor_novotny_quadratic, '#ff0043'),
     ('Terrill Linear', cor_terrill_linear, '#ff795b'),
-    ('Terrill Cubic', cor_terrill_cubic, '#fddb85'),    
+    ('Terrill Cubic', cor_terrill_cubic, '#fddb85'),   
 ]
 
 # Revisiting ABV Calculations, Zymurgy July/August 2019 p. 48
@@ -93,24 +93,24 @@ def col_name(section, name):
 def col_name_ae(name):
     return col_name('AE', name)
 
-def col_name_ae_err(name):
-    return col_name('AE Error', name)
+def col_name_ae_dev(name):
+    return col_name('AE Dev', name)
 
 def col_name_abv(name):
     return col_name('ABV', name)
 
-def col_name_abv_err(name):
-    return col_name('ABV Error', name)
+def col_name_abv_dev(name):
+    return col_name('ABV Dev', name)
 
-data = pa.read_csv("data.csv", delimiter=',')
+data = pa.read_csv('data.csv', delimiter=',')
 
-col_name_riic_err = 'RIIC Error'
-data[col_name_riic_err] = data.apply(lambda row: correct_ri(row.RII, wcf) - row.OE, axis=1)
+col_name_riic_dev = 'RIIC Dev'
+data[col_name_riic_dev] = data.apply(lambda row: correct_ri(row.RII, wcf) - row.OE, axis=1)
 if filter_outliers == True:
-    riic_err_threshold = data[col_name_riic_err].std()
-    print('Filtering outliers over ' + col_name_riic_err + ': ' + str(riic_err_threshold))
+    riic_dev_threshold = data[col_name_riic_dev].std()
+    print('Filtering outliers over ' + col_name_riic_dev + ': ' + str(riic_dev_threshold))
     print()
-    data = data[(abs(data[col_name_riic_err]) <= riic_err_threshold)]
+    data = data[(abs(data[col_name_riic_dev]) <= riic_dev_threshold)]
 
 data['AAT'] = (data['OE'] - data['AE']) * 100.0 / data['OE']
 data['ABV'] = data.apply(lambda row: calc_abv(row.OE, row.AE), axis=1)
@@ -119,30 +119,23 @@ data[wcf_col_name] = data['RII'] / data['OE']
 
 def add_cor_model_data(name, functor):
     data[col_name_ae(name)] = data.apply(lambda row: functor(row.RII, row.RIF, wcf), axis=1)
-    data[col_name_ae_err(name)] = data.apply(lambda row: row[col_name_ae(name)] - row.AE, axis=1)
+    data[col_name_ae_dev(name)] = data.apply(lambda row: row[col_name_ae(name)] - row.AE, axis=1)
     data[col_name_abv(name)] = data.apply(lambda row: calc_abv(correct_ri(row.RII, wcf), row[col_name_ae(name)]), axis=1)
-    data[col_name_abv_err(name)] = data.apply(lambda row: row[col_name_abv(name)] - row.ABV, axis=1)
-
-name_bonham = 'Bonham'
-name_gardner = 'Gardner'
-name_novotny_linear = 'Novotny Linear'
-name_novotny_quadratic = 'Novotny Quadratic'
-name_terrill_linear = 'Terrill Linear'
-name_terrill_cubic = 'Terrill Cubic'
+    data[col_name_abv_dev(name)] = data.apply(lambda row: row[col_name_abv(name)] - row.ABV, axis=1)
 
 for model in cor_models:
     add_cor_model_data(model[0], model[1])
 
 wcf_list = data[wcf_col_name]
-wcf_stats = pa.DataFrame([(wcf_list.mean(), wcf_list.min(), wcf_list.max(), wcf_list.mad(), wcf_list.std())], columns = ['WCF Mean', 'WCF Min', 'WCF Max', 'WCF MAD', 'WCF STD'])
+wcf_stats = pa.DataFrame([(wcf_list.min(), wcf_list.max(), wcf_list.mean(), wcf_list.std())], columns = ['WCF Min', 'WCF Max', 'WCF Mean', 'WCF STD'])
 print(wcf_stats)
 print()
 
 def calc_model_stats(name):
-    abv_err = data[col_name_abv_err(name)]
-    abv_err_abs = abv_err.abs()
-    abv_err_below = abv_err_abs.le(0.5).sum() / len(abv_err_abs) * 100.0
-    return name, abv_err_abs.mean(), abv_err[abv_err_abs.idxmin()], abv_err[abv_err_abs.idxmax()], abv_err.mad(), abv_err.std(), abv_err_below
+    abv_dev = data[col_name_abv_dev(name)]
+    abv_dev_abs = abv_dev.abs()
+    abv_dev_below = abv_dev_abs.le(0.5).sum() / len(abv_dev_abs) * 100.0
+    return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev_abs.mean(), abv_dev.std(), abv_dev_below
 
 stats_list = []
 for model in cor_models:
@@ -150,24 +143,35 @@ for model in cor_models:
 
 data.to_csv("data_ext.csv")
 
-stats = pa.DataFrame(stats_list, columns = ['Name' , 'ABV Error Abs Mean', 'ABV Error Min', 'ABV Error Max', 'ABV Error MAD', 'ABV Error STD', 'ABV Error % Below 0.5'])
+stats_columns = ['Name' , 'ABV Min Dev', 'ABV Max Dev', 'ABV Mean Dev', 'ABV Standard Dev', 'ABV Dev % Below 0.5']
+stats_colors = ['#a9f693', '#00c295', '#ff0043', '#ff795b']
+stats = pa.DataFrame(stats_list, columns=stats_columns)
 stats.to_csv("stats_abv.csv")
 print(stats)
 
-def add_plot_part(model_name, ax, col_name, functor, color):
+fig, axes = plt.subplots(1, 2, constrained_layout=True)
+fig.suptitle('Refractometer Correlation Model Evaluation')
+ax_stats = axes[0]
+ax_data = axes[1]
+
+stats.plot(x='Name', y=stats_columns[1:-1], kind='bar', color=stats_colors, ax=ax_stats)
+ax_stats.title.set_text('ABV Deviation Statistics')
+ax_stats.set_xlabel('')
+ax_stats.set_ylabel('Model ABV Deviation at WCF=' + str(wcf))
+
+def add_data_plot_part(model_name, ax, col_name, functor, color):
     return data.plot.scatter(x=col_name, y=functor(model_name), label=model_name, c=color, ax=ax)
 
-def add_plot(col_name, functor):
-    first_model = cor_models[0]
-    ax = add_plot_part(first_model[0], None, col_name, functor, first_model[2])
-    if len(cor_models) > 1:
-        for model in cor_models[1:]:
-            add_plot_part(model[0], ax, col_name, functor, model[2])
+def add_data_plot(col_name, functor, ax):
     x = data[col_name]
-    plt.plot(x, x, c='#000000', linewidth=1)
-    plt.xlabel('Reference ' + col_name)
-    plt.ylabel('Refractometer ' + col_name + ' at WCF=' + str(wcf))
+    plt.plot(x, x, c='#000000', linewidth=1, axes=ax)
+    for model in cor_models:
+            add_data_plot_part(model[0], axes[1], col_name, functor, model[2])
+    ax.title.set_text(col_name + ' Deviation')
+    ax.set_xlabel('Reference ' + col_name)
+    ax.set_ylabel('Model ' + col_name + ' at WCF=' + str(wcf))                
 
-add_plot("ABV", col_name_abv)
-plt.savefig("stats_abv.png")
+add_data_plot('ABV', col_name_abv, ax_data)
+
+plt.savefig('stats_abv.png')
 plt.show()
