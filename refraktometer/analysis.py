@@ -71,6 +71,15 @@ def cor_terrill_cubic(rii, rif, wcf):
         0.00000727999 * oe**3 + 0.0117741 * rifc - \
         0.00127169 * rifc**2 + 0.0000632929 * rifc**3)
 
+cor_models = [
+    ('Bonham', cor_bonham, '#a9f693'),
+    ('Gardner', cor_gardner, '#00c295'),
+    ('Novotny Linear', cor_novotny_linear, '#5f5959'),
+    ('Novotny Quadratic', cor_novotny_quadratic, '#ff0043'),
+    ('Terrill Linear', cor_terrill_linear, '#ff795b'),
+    ('Terrill Cubic', cor_terrill_cubic, '#fddb85'),    
+]
+
 # Revisiting ABV Calculations, Zymurgy July/August 2019 p. 48
 def calc_abv(oe, ae):
     og = plato_to_sg(oe)
@@ -95,7 +104,7 @@ def col_name_abv_err(name):
 
 data = pa.read_csv("data.csv", delimiter=',')
 
-col_name_riic_err = 'RIIC Err'
+col_name_riic_err = 'RIIC Error'
 data[col_name_riic_err] = data.apply(lambda row: correct_ri(row.RII, wcf) - row.OE, axis=1)
 if filter_outliers == True:
     riic_err_threshold = data[col_name_riic_err].std()
@@ -121,12 +130,8 @@ name_novotny_quadratic = 'Novotny Quadratic'
 name_terrill_linear = 'Terrill Linear'
 name_terrill_cubic = 'Terrill Cubic'
 
-add_cor_model_data(name_bonham, cor_bonham)
-add_cor_model_data(name_gardner, cor_gardner)
-add_cor_model_data(name_novotny_linear, cor_novotny_linear)
-add_cor_model_data(name_novotny_quadratic, cor_novotny_quadratic)
-add_cor_model_data(name_terrill_linear, cor_terrill_linear)
-add_cor_model_data(name_terrill_cubic, cor_terrill_cubic)
+for model in cor_models:
+    add_cor_model_data(model[0], model[1])
 
 wcf_list = data[wcf_col_name]
 wcf_stats = pa.DataFrame([(wcf_list.mean(), wcf_list.min(), wcf_list.max(), wcf_list.mad(), wcf_list.std())], columns = ['WCF Mean', 'WCF Min', 'WCF Max', 'WCF MAD', 'WCF STD'])
@@ -139,14 +144,9 @@ def calc_model_stats(name):
     abv_err_below = abv_err_abs.le(0.5).sum() / len(abv_err_abs) * 100.0
     return name, abv_err_abs.mean(), abv_err[abv_err_abs.idxmin()], abv_err[abv_err_abs.idxmax()], abv_err.mad(), abv_err.std(), abv_err_below
 
-stats_list = [
-calc_model_stats(name_bonham),
-calc_model_stats(name_gardner),
-calc_model_stats(name_novotny_linear),
-calc_model_stats(name_novotny_quadratic),
-calc_model_stats(name_terrill_linear),
-calc_model_stats(name_terrill_cubic),
-]
+stats_list = []
+for model in cor_models:
+    stats_list.append(calc_model_stats(model[0]))
 
 data.to_csv("data_ext.csv")
 
@@ -158,12 +158,11 @@ def add_plot_part(model_name, ax, col_name, functor, color):
     return data.plot.scatter(x=col_name, y=functor(model_name), label=model_name, c=color, ax=ax)
 
 def add_plot(col_name, functor):
-    ax = add_plot_part(name_bonham, None, col_name, functor, '#a9f693')
-    add_plot_part(name_gardner, ax, col_name, functor, '#00c295')
-    add_plot_part(name_novotny_linear, ax, col_name, functor, '#5f5959')
-    add_plot_part(name_novotny_quadratic, ax, col_name, functor, '#ff0043')
-    add_plot_part(name_terrill_linear, ax, col_name, functor, '#ff795b')
-    add_plot_part(name_terrill_cubic, ax, col_name, functor, '#fddb85')
+    first_model = cor_models[0]
+    ax = add_plot_part(first_model[0], None, col_name, functor, first_model[2])
+    if len(cor_models) > 1:
+        for model in cor_models[1:]:
+            add_plot_part(model[0], ax, col_name, functor, model[2])
     x = data[col_name]
     plt.plot(x, x, c='#000000', linewidth=1)
     plt.xlabel('Reference ' + col_name)
