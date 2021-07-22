@@ -134,8 +134,9 @@ print()
 def calc_model_stats(name):
     abv_dev = data[col_name_abv_dev(name)]
     abv_dev_abs = abv_dev.abs()
-    abv_dev_below = abv_dev_abs.le(0.5).sum() / len(abv_dev_abs) * 100.0
-    return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev_abs.mean(), abv_dev.std(), abv_dev_below
+    abv_dev_below_25 = abv_dev_abs.le(0.25).sum() / len(abv_dev_abs) * 100.0    
+    abv_dev_below_50 = abv_dev_abs.le(0.5).sum() / len(abv_dev_abs) * 100.0
+    return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev_abs.mean(), abv_dev.std(), abv_dev_below_25, abv_dev_below_50
 
 stats_list = []
 for model in cor_models:
@@ -143,7 +144,7 @@ for model in cor_models:
 
 data.to_csv("data_ext.csv")
 
-stats_columns = ['Name' , 'ABV Min Dev', 'ABV Max Dev', 'ABV Mean Dev', 'ABV Standard Dev', 'ABV Dev % Below 0.5']
+stats_columns = ['Name' , 'ABV Min Dev', 'ABV Max Dev', 'ABV Mean Dev', 'ABV Standard Dev', 'ABV Dev % Below 0.25', 'ABV Dev % Below 0.5']
 stats_colors = ['#a9f693', '#00c295', '#ff0043', '#ff795b']
 stats = pa.DataFrame(stats_list, columns=stats_columns)
 stats.to_csv("stats_abv.csv")
@@ -154,7 +155,7 @@ fig.suptitle('Refractometer Correlation Model Evaluation')
 ax_stats = axes[0]
 ax_data = axes[1]
 
-stats.plot(x='Name', y=stats_columns[1:-1], kind='bar', color=stats_colors, ax=ax_stats)
+stats.plot(x='Name', y=stats_columns[1:-2], kind='bar', color=stats_colors, ax=ax_stats)
 ax_stats.title.set_text('ABV Deviation Statistics')
 ax_stats.set_xlabel('')
 ax_stats.set_ylabel('Model ABV Deviation at WCF=' + str(wcf))
