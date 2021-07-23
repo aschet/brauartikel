@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 # wcf = wort correction factor
 
 wcf = 1.0
-filter_outliers = False
+filter_outliers = True
 
 def correct_ri(ri, wcf):
     return ri / wcf
