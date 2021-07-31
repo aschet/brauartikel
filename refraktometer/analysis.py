@@ -113,7 +113,7 @@ cor_models = [
     ('Bonham', calc_abv_bonham, '#a9f693'),
     ('Gardner', calc_abv_gardner, '#00c295'),
     ('Gossett', calc_abv_gosett, '#84c5ea'),    
-    ('Novotny Linear', calc_abv_novotny_linear, '#ca98c9'),
+    ('Novotny Linear', calc_abv_novotny_linear, '#2e709f'),
     ('Novotny Quadratic', calc_abv_novotny_quadratic, '#ff0043'),
     ('Terrill Linear', calc_abv_terrill_linear, '#ff795b'),
     ('Terrill Cubic', calc_abv_terrill_cubic, '#fddb85'),
