@@ -113,7 +113,7 @@ cor_models = [
     ('Bonham', calc_abv_bonham, '#a9f693'),
     ('Gardner', calc_abv_gardner, '#00c295'),
     ('Gossett', calc_abv_gosett, '#84c5ea'),    
-    ('Novotny Linear', calc_abv_novotny_linear, '#5f5959'),
+    ('Novotny Linear', calc_abv_novotny_linear, '#ca98c9'),
     ('Novotny Quadratic', calc_abv_novotny_quadratic, '#ff0043'),
     ('Terrill Linear', calc_abv_terrill_linear, '#ff795b'),
     ('Terrill Cubic', calc_abv_terrill_cubic, '#fddb85'),
@@ -138,7 +138,6 @@ if filter_outliers == True:
     print()
     data = data[(abs(data[col_name_riic_dev]) <= riic_dev_threshold)]
 
-data['AAT'] = (data['OE'] - data['AE']) * 100.0 / data['OE']
 data['ABV'] = data.apply(lambda row: calc_abv(row.OE, row.AE), axis=1)
 wcf_col_name = 'WCF'
 data[wcf_col_name] = data['RII'] / data['OE']
