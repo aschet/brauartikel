@@ -15,10 +15,10 @@ import matplotlib.pyplot as plt
 # sg = specific gravity
 # wcf = wort correction factor
 
-wcf = 1.04
+wcf = 1.0
 filter_outliers = True
 
-def correct_ri(ri, wcf):
+def correct_ri(ri):
     return ri / wcf
 
 # https://www.brewersfriend.com/plato-to-sg-conversion-chart
@@ -29,57 +29,6 @@ def sg_to_plato(sg):
 def plato_to_sg(se):
     return 1.0 + (se / (258.6 - ((se / 258.2) * 227.1)))
 
-# The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
-def cor_bonham(rii, rif, wcf):
-    oe = correct_ri(rii, wcf)
-    return sg_to_plato(1.001843 - 0.002318474 * oe - 0.000007775 * oe**2 - \
-        0.000000034 * oe**3 + 0.00574 * rif + \
-        0.00003344 * rif**2 + 0.000000086 * rif**3)
-
-# The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
-def cor_gardner(rii, rif, wcf):
-    oe = correct_ri(rii, wcf)
-    return 1.53 * rif - 0.59 * oe
-
-# http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
-def cor_novotny_linear(rii, rif, wcf):
-    oe = correct_ri(rii, wcf)
-    rifc = correct_ri(rif, wcf)
-    return sg_to_plato(-0.002349 * oe + 0.006276 * rifc + 1.0)
-
-# http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html     
-def cor_novotny_quadratic(rii, rif, wcf):
-    oe = correct_ri(rii, wcf)
-    rifc = correct_ri(rif, wcf)
-    return sg_to_plato(1.335 * 10.0**-5 * oe**2 - \
-        3.239 * 10.0**-5 * oe * rifc + \
-        2.916 * 10.0**-5 * rifc**2 - \
-        2.421 * 10.0**-3 * oe + \
-        6.219 * 10.0**-3 * rifc + 1.0)
-
-# http://seanterrill.com/2011/04/07/refractometer-fg-results/
-def cor_terrill_linear(rii, rif, wcf):
-    oe = correct_ri(rii, wcf)
-    rifc = correct_ri(rif, wcf)           
-    return sg_to_plato(1.0 - 0.000856829 * oe + 0.00349412 * rifc)
-
-# http://seanterrill.com/2011/04/07/refractometer-fg-results/
-def cor_terrill_cubic(rii, rif, wcf):
-    oe = correct_ri(rii, wcf)
-    rifc = correct_ri(rif, wcf)          
-    return sg_to_plato(1.0 - 0.0044993 * oe + 0.000275806 * oe**2 - \
-        0.00000727999 * oe**3 + 0.0117741 * rifc - \
-        0.00127169 * rifc**2 + 0.0000632929 * rifc**3)
-
-cor_models = [
-    ('Bonham', cor_bonham, '#a9f693'),
-    ('Gardner', cor_gardner, '#00c295'),
-    ('Novotny Linear', cor_novotny_linear, '#5f5959'),
-    ('Novotny Quadratic', cor_novotny_quadratic, '#ff0043'),
-    ('Terrill Linear', cor_terrill_linear, '#ff795b'),
-    ('Terrill Cubic', cor_terrill_cubic, '#fddb85'),   
-]
-
 # Revisiting ABV Calculations, Zymurgy July/August 2019 p. 48
 def calc_abv(oe, ae):
     og = plato_to_sg(oe)
@@ -87,14 +36,91 @@ def calc_abv(oe, ae):
     return fg * (5118.0 * (og**2 - fg**2) + 16755.0 * (fg - og)) / (8.739 * og**4 \
         - 57.22 * og**3 + 89.09 * og**2 + 14.95 + og - 105.99)
 
+def calc_model_abv(rii, rif, functor):
+    oe, fe = functor(rii, rif)
+    return calc_abv(oe, fe)
+
+# The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
+def cor_bonham(rii, rif):
+    oe = correct_ri(rii)
+    return oe, sg_to_plato(1.001843 - 0.002318474 * oe - 0.000007775 * oe**2 - \
+        0.000000034 * oe**3 + 0.00574 * rif + \
+        0.00003344 * rif**2 + 0.000000086 * rif**3)
+
+def calc_abv_bonham(rii, rif):
+    return calc_model_abv(rii, rif, cor_bonham)
+
+# The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
+def cor_gardner(rii, rif):
+    oe = correct_ri(rii)
+    return oe, 1.53 * rif - 0.59 * oe
+
+def calc_abv_gardner(rii, rif):
+    return calc_model_abv(rii, rif, cor_gardner)
+
+# http://www.ithacoin.com/brewing/Derivation.htm
+def calc_abv_gosett(rii, rif):
+    k = 0.445
+    c = 100.0 * (rii - rif) / (100.0 - 48.4 * k - 0.582 * rif)
+    abw = 48.4 * c / (100 - 0.582 * c)
+    oe, fe = cor_bonham(rii, rif)
+    fg = plato_to_sg(fe)
+    return abw * fg / 0.794
+
+# http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
+def cor_novotny_linear(rii, rif):
+    oe = correct_ri(rii)
+    rifc = correct_ri(rif)
+    return oe, sg_to_plato(-0.002349 * oe + 0.006276 * rifc + 1.0)
+
+def calc_abv_novotny_linear(rii, rif):
+    return calc_model_abv(rii, rif, cor_novotny_linear)
+
+# http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html     
+def cor_novotny_quadratic(rii, rif):
+    oe = correct_ri(rii)
+    rifc = correct_ri(rif)
+    return oe, sg_to_plato(1.335 * 10.0**-5 * oe**2 - \
+        3.239 * 10.0**-5 * oe * rifc + \
+        2.916 * 10.0**-5 * rifc**2 - \
+        2.421 * 10.0**-3 * oe + \
+        6.219 * 10.0**-3 * rifc + 1.0)
+
+def calc_abv_novotny_quadratic(rii, rif):
+    return calc_model_abv(rii, rif, cor_novotny_quadratic)
+
+# http://seanterrill.com/2011/04/07/refractometer-fg-results/
+def cor_terrill_linear(rii, rif):
+    oe = correct_ri(rii)
+    rifc = correct_ri(rif)           
+    return oe, sg_to_plato(1.0 - 0.000856829 * oe + 0.00349412 * rifc)
+
+def calc_abv_terrill_linear(rii, rif):
+    return calc_model_abv(rii, rif, cor_terrill_linear)
+
+# http://seanterrill.com/2011/04/07/refractometer-fg-results/
+def cor_terrill_cubic(rii, rif):
+    oe = correct_ri(rii)
+    rifc = correct_ri(rif)          
+    return oe, sg_to_plato(1.0 - 0.0044993 * oe + 0.000275806 * oe**2 - \
+        0.00000727999 * oe**3 + 0.0117741 * rifc - \
+        0.00127169 * rifc**2 + 0.0000632929 * rifc**3)
+
+def calc_abv_terrill_cubic(rii, rif):
+    return calc_model_abv(rii, rif, cor_terrill_cubic)
+
+cor_models = [
+    ('Bonham', calc_abv_bonham, '#a9f693'),
+    ('Gardner', calc_abv_gardner, '#00c295'),
+    ('Gossett', calc_abv_gosett, '#84c5ea'),    
+    ('Novotny Linear', calc_abv_novotny_linear, '#5f5959'),
+    ('Novotny Quadratic', calc_abv_novotny_quadratic, '#ff0043'),
+    ('Terrill Linear', calc_abv_terrill_linear, '#ff795b'),
+    ('Terrill Cubic', calc_abv_terrill_cubic, '#fddb85'),
+]
+
 def col_name(section, name):
     return section + ' ' + name
-
-def col_name_ae(name):
-    return col_name('AE', name)
-
-def col_name_ae_dev(name):
-    return col_name('AE Dev', name)
 
 def col_name_abv(name):
     return col_name('ABV', name)
@@ -105,7 +131,7 @@ def col_name_abv_dev(name):
 data = pa.read_csv('data.csv', delimiter=',')
 
 col_name_riic_dev = 'RIIC Dev'
-data[col_name_riic_dev] = data.apply(lambda row: correct_ri(row.RII, wcf) - row.OE, axis=1)
+data[col_name_riic_dev] = data.apply(lambda row: correct_ri(row.RII) - row.OE, axis=1)
 if filter_outliers == True:
     riic_dev_threshold = data[col_name_riic_dev].std()
     print('Filtering outliers over ' + col_name_riic_dev + ': ' + str(riic_dev_threshold))
@@ -118,9 +144,7 @@ wcf_col_name = 'WCF'
 data[wcf_col_name] = data['RII'] / data['OE']
 
 def add_cor_model_data(name, functor):
-    data[col_name_ae(name)] = data.apply(lambda row: functor(row.RII, row.RIF, wcf), axis=1)
-    data[col_name_ae_dev(name)] = data.apply(lambda row: row[col_name_ae(name)] - row.AE, axis=1)
-    data[col_name_abv(name)] = data.apply(lambda row: calc_abv(correct_ri(row.RII, wcf), row[col_name_ae(name)]), axis=1)
+    data[col_name_abv(name)] = data.apply(lambda row: functor(row.RII, row.RIF), axis=1)
     data[col_name_abv_dev(name)] = data.apply(lambda row: row[col_name_abv(name)] - row.ABV, axis=1)
 
 for model in cor_models:
