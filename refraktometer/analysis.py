@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 # sg = specific gravity
 # wcf = wort correction factor
 
-wcf = 1.0
+wcf = 1.04
 filter_outliers = True
 
 def correct_ri(ri, wcf):
@@ -31,15 +31,15 @@ def plato_to_sg(se):
 
 # The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
 def cor_bonham(rii, rif, wcf):
-    rifc = correct_ri(rii, wcf)
-    return sg_to_plato(1.001843 - 0.002318474 * rifc - 0.000007775 * rifc**2 - \
-        0.000000034 * rifc**3 + 0.00574 * rif + \
+    oe = correct_ri(rii, wcf)
+    return sg_to_plato(1.001843 - 0.002318474 * oe - 0.000007775 * oe**2 - \
+        0.000000034 * oe**3 + 0.00574 * rif + \
         0.00003344 * rif**2 + 0.000000086 * rif**3)
 
 # The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
 def cor_gardner(rii, rif, wcf):
-    rifc = correct_ri(rii, wcf)
-    return 1.53 * rif - 0.59 * rifc
+    oe = correct_ri(rii, wcf)
+    return 1.53 * rif - 0.59 * oe
 
 # http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
 def cor_novotny_linear(rii, rif, wcf):
