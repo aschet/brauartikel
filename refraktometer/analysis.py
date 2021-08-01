@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 # sg = specific gravity
 # wcf = wort correction factor
 
-wcf = 1.0
+wcf = 1.04
 filter_outliers = True
 
 def correct_ri(ri):
@@ -130,13 +130,13 @@ def col_name_abv_dev(name):
 
 data = pa.read_csv('data.csv', delimiter=',')
 
-col_name_riic_dev = 'RIIC Dev'
-data[col_name_riic_dev] = data.apply(lambda row: correct_ri(row.RII) - row.OE, axis=1)
+col_name_rii_dev = 'RII Dev'
+data[col_name_rii_dev] = data.apply(lambda row: row.RII - row.OE, axis=1)
 if filter_outliers == True:
-    riic_dev_threshold = data[col_name_riic_dev].std()
-    print('Filtering outliers over ' + col_name_riic_dev + ': ' + str(riic_dev_threshold))
+    rii_dev_threshold = data[col_name_rii_dev].std()
+    print('Filtering outliers over ' + col_name_rii_dev + ': ' + str(rii_dev_threshold))
     print()
-    data = data[(abs(data[col_name_riic_dev]) <= riic_dev_threshold)]
+    data = data[(abs(data[col_name_rii_dev]) <= rii_dev_threshold)]
 
 data['ABV'] = data.apply(lambda row: calc_abv(row.OE, row.AE), axis=1)
 wcf_col_name = 'WCF'
