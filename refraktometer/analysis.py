@@ -196,20 +196,21 @@ ax_data = axes[1]
 wcf_caption_part = 'at WCF=' + '%.2f'%wcf
 
 stats.plot(x='Name', y=stats_columns[1:-3], kind='bar', color=color_palette, ax=ax_stats)
+
 ax_stats.title.set_text('ABV Deviation Statistics')
 ax_stats.set_xlabel('')
 ax_stats.set_ylabel('Model ABV Deviation ' + wcf_caption_part)
 
-def add_data_plot_part(model_name, ax, col_name, functor, color):
-    specific_col_name = functor(model_name)
-    rsquare = calc_rsquare(data[specific_col_name], data[col_name])
-    label_content = model_name + ' (R²=' + '%.3f'%rsquare + ')'
-    return data.plot.scatter(x=col_name, y=specific_col_name, label=label_content, c=color, ax=ax)
-
+name_indexed_stats = stats.set_index('Name')
 regression_line = data[col_name_abv]
 plt.plot(regression_line, regression_line, c='#000000', linewidth=1, axes=ax_data)
 for abv_model in abv_models:
-        add_data_plot_part(abv_model[0], axes[1], col_name_abv, model_col_name_abv, abv_model[2])
+    model_name = abv_model[0]
+    specific_col_name = model_col_name_abv(model_name)
+    rsquare = name_indexed_stats.loc[model_name]['R-Squared']
+    label_content = model_name + ' (R²=' + '%.3f'%rsquare + ')'
+    data.plot.scatter(x=col_name_abv, y=specific_col_name, label=label_content, c=abv_model[2], ax=axes[1])
+
 ax_data.title.set_text(col_name_abv + ' Deviation')
 ax_data.set_xlabel('Reference ' + col_name_abv)
 ax_data.set_ylabel('Model ' + col_name_abv + ' ' + wcf_caption_part)                
