@@ -152,7 +152,8 @@ for abv_model in abv_models:
     data[model_col_name_abv(abv_model[0])] = abv_model[1](data[col_name_rii], data[col_name_rif])
 
 wcf_list = data[col_name_wcf]
-wcf_stats = pa.DataFrame([(wcf_list.min(), wcf_list.max(), wcf_list.mean(), wcf_list.std())], columns = ['WCF Min', 'WCF Max', 'WCF Mean', 'WCF STD'])
+wcf_stats = pa.DataFrame([(wcf_list.min(), wcf_list.max(), wcf_list.mean(), wcf_list.std())], columns = ['Min', 'Max', 'Mean', 'STD'])
+print("WCF Statistics:")
 print(wcf_stats)
 print()
 
@@ -170,7 +171,7 @@ def calc_abv_model_stats(name):
     abv_dev_below_25 = abv_dev_abs.le(0.25).sum() / float(len(abv_dev_abs)) * 100.0    
     abv_dev_below_50 = abv_dev_abs.le(0.5).sum() / float(len(abv_dev_abs)) * 100.0
     rsquare = calc_rsquare(abv_observed, abv_reference)
-    return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev_abs.mean(), abv_dev_abs.median(), abv_dev.std(), rsquare, abv_dev_below_25, abv_dev_below_50
+    return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev_abs.median(), abv_dev_abs.mean(), abv_dev.std(), rsquare, abv_dev_below_25, abv_dev_below_50
 
 stats_list = []
 for abv_model in abv_models:
@@ -178,10 +179,11 @@ for abv_model in abv_models:
 
 data.to_csv("data_ext.csv")
 
-stats_columns = ['Name' , 'ABV Min Dev', 'ABV Max Dev', 'ABV Mean Dev', 'ABV Median Dev', 'ABV Standard Dev', 'ABV R-Squared', 'ABV Dev % Below 0.25', 'ABV Dev % Below 0.5']
+stats_columns = ['Name' , 'Min', 'Max', 'Median', 'Mean', 'STD', 'R-Squared', '% Below 0.25', '% Below 0.5']
 stats_colors = ['#a9f693', '#00c295', '#ff0043', '#ff795b']
 stats = pa.DataFrame(stats_list, columns=stats_columns)
-stats.to_csv("stats_abv.csv")
+stats.to_csv("stats_abvdev.csv")
+print("ABV Deviation Statistics:")
 print(stats)
 
 fig, axes = plt.subplots(1, 2, constrained_layout=True)
@@ -189,10 +191,12 @@ fig.suptitle('Refractometer Correlation Model Evaluation')
 ax_stats = axes[0]
 ax_data = axes[1]
 
+wcf_caption_part = 'at WCF=' + '%.2f'%wcf
+
 stats.plot(x='Name', y=stats_columns[1:-3], kind='bar', color=color_palette, ax=ax_stats)
 ax_stats.title.set_text('ABV Deviation Statistics')
 ax_stats.set_xlabel('')
-ax_stats.set_ylabel('Model ABV Deviation at WCF=' + '%.2f'%wcf)
+ax_stats.set_ylabel('Model ABV Deviation ' + wcf_caption_part)
 
 def add_data_plot_part(model_name, ax, col_name, functor, color):
     specific_col_name = functor(model_name)
@@ -200,16 +204,13 @@ def add_data_plot_part(model_name, ax, col_name, functor, color):
     label_content = model_name + ' (R²=' + '%.3f'%rsquare + ')'
     return data.plot.scatter(x=col_name, y=specific_col_name, label=label_content, c=color, ax=ax)
 
-def add_data_plot(col_name, functor, ax):
-    x = data[col_name]
-    plt.plot(x, x, c='#000000', linewidth=1, axes=ax)
-    for abv_model in abv_models:
-            add_data_plot_part(abv_model[0], axes[1], col_name, functor, abv_model[2])
-    ax.title.set_text(col_name + ' Deviation')
-    ax.set_xlabel('Reference ' + col_name)
-    ax.set_ylabel('Model ' + col_name + ' at WCF=' + '%.2f'%wcf)                
-
-add_data_plot(col_name_abv, model_col_name_abv, ax_data)
+regression_line = data[col_name_abv]
+plt.plot(regression_line, regression_line, c='#000000', linewidth=1, axes=ax_data)
+for abv_model in abv_models:
+        add_data_plot_part(abv_model[0], axes[1], col_name_abv, model_col_name_abv, abv_model[2])
+ax_data.title.set_text(col_name_abv + ' Deviation')
+ax_data.set_xlabel('Reference ' + col_name_abv)
+ax_data.set_ylabel('Model ' + col_name_abv + ' ' + wcf_caption_part)                
 
 plt.savefig('stats_abv.png')
 plt.show()
