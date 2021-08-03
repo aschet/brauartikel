@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-from numpy.core.fromnumeric import mean
 import numpy as np
 import pandas as pa
 import matplotlib.pyplot as plt
@@ -109,7 +108,7 @@ def cor_terrill_cubic(rii, rif):
 def calc_abv_terrill_cubic(rii, rif):
     return calc_model_abv(rii, rif, cor_terrill_cubic)
 
-cor_models = [
+abv_models = [
     ('Bonham', calc_abv_bonham, '#a9f693'),
     ('Gardner', calc_abv_gardner, '#00c295'),
     ('Gossett', calc_abv_gosett, '#84c5ea'),    
@@ -119,30 +118,30 @@ cor_models = [
     ('Terrill Cubic', calc_abv_terrill_cubic, '#fddb85'),
 ]
 
-def col_name(section, name):
-    return section + ' ' + name
+col_name_abv = 'ABV'
+col_name_wcf = 'WCF'
+col_name_oe = 'OE'
+col_name_ae = 'AE'
+col_name_rii = 'RII'
+col_name_rif = 'RIF'
 
-def col_name_abv(name):
-    return 'ABV ' + name
+def model_col_name_abv(name):
+    return col_name_abv + ' ' + name
 
 data = pa.read_csv('data.csv', delimiter=',')
 
-col_name_rii_dev = 'RII Dev'
-data[col_name_rii_dev] = data.apply(lambda row: row.RII - row.OE, axis=1)
 if filter_outliers == True:
-    rii_dev_threshold = data[col_name_rii_dev].std()
-    print('Filtering outliers over ' + col_name_rii_dev + ': ' + str(rii_dev_threshold))
+    rii_dev_threshold = (data[col_name_oe] - data[col_name_rii]).std()
+    print('Filtering ' + col_name_rii + ' outliers over ' + str(rii_dev_threshold))
     print()
-    data = data[(abs(data[col_name_rii_dev]) <= rii_dev_threshold)]
+    data = data[(abs(data[col_name_oe] - data[col_name_rii]) <= rii_dev_threshold)]
 
-wcf_col_name = 'WCF'
-data['ABV'] = data.apply(lambda row: calc_abv(row.OE, row.AE), axis=1)
-data[wcf_col_name] = data['RII'] / data['OE']
+data[col_name_abv] = calc_abv(data[col_name_oe], data[col_name_ae])
+data[col_name_wcf] = data[col_name_rii] / data[col_name_oe]
+for abv_model in abv_models:
+    data[model_col_name_abv(abv_model[0])] = abv_model[1](data[col_name_rii], data[col_name_rif])
 
-for model in cor_models:
-    data[col_name_abv(model[0])] = data.apply(lambda row: model[1](row.RII, row.RIF), axis=1)
-
-wcf_list = data[wcf_col_name]
+wcf_list = data[col_name_wcf]
 wcf_stats = pa.DataFrame([(wcf_list.min(), wcf_list.max(), wcf_list.mean(), wcf_list.std())], columns = ['WCF Min', 'WCF Max', 'WCF Mean', 'WCF STD'])
 print(wcf_stats)
 print()
@@ -153,9 +152,9 @@ def calc_rsquare(estimations, measureds):
     derr = ((mmean - measureds)**2).sum()    
     return 1 - (see / derr)
 
-def calc_model_stats(name):
-    abv_observed = data[col_name_abv(name)]
-    abv_reference = data['ABV']
+def calc_abv_model_stats(name):
+    abv_observed = data[model_col_name_abv(name)]
+    abv_reference = data[col_name_abv]
     abv_dev = abv_reference - abv_observed
     abv_dev_abs = abv_dev.abs()
     abv_dev_below_25 = abv_dev_abs.le(0.25).sum() / float(len(abv_dev_abs)) * 100.0    
@@ -164,8 +163,8 @@ def calc_model_stats(name):
     return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev_abs.mean(), abv_dev.std(), rsquare, abv_dev_below_25, abv_dev_below_50
 
 stats_list = []
-for model in cor_models:
-    stats_list.append(calc_model_stats(model[0]))
+for abv_model in abv_models:
+    stats_list.append(calc_abv_model_stats(abv_model[0]))
 
 data.to_csv("data_ext.csv")
 
@@ -194,13 +193,13 @@ def add_data_plot_part(model_name, ax, col_name, functor, color):
 def add_data_plot(col_name, functor, ax):
     x = data[col_name]
     plt.plot(x, x, c='#000000', linewidth=1, axes=ax)
-    for model in cor_models:
-            add_data_plot_part(model[0], axes[1], col_name, functor, model[2])
+    for abv_model in abv_models:
+            add_data_plot_part(abv_model[0], axes[1], col_name, functor, abv_model[2])
     ax.title.set_text(col_name + ' Deviation')
     ax.set_xlabel('Reference ' + col_name)
     ax.set_ylabel('Model ' + col_name + ' at WCF=' + '%.2f'%wcf)                
 
-add_data_plot('ABV', col_name_abv, ax_data)
+add_data_plot(col_name_abv, model_col_name_abv, ax_data)
 
 plt.savefig('stats_abv.png')
 plt.show()
