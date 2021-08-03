@@ -108,14 +108,24 @@ def cor_terrill_cubic(rii, rif):
 def calc_abv_terrill_cubic(rii, rif):
     return calc_model_abv(rii, rif, cor_terrill_cubic)
 
+color_palette = [
+    '#a9f693',
+    '#00c295',
+    '#84c5ea',
+    '#2e709f',
+    '#ff0043',
+    '#ff795b',
+    '#fddb85'
+]
+
 abv_models = [
-    ('Bonham', calc_abv_bonham, '#a9f693'),
-    ('Gardner', calc_abv_gardner, '#00c295'),
-    ('Gossett', calc_abv_gosett, '#84c5ea'),    
-    ('Novotny Linear', calc_abv_novotny_linear, '#2e709f'),
-    ('Novotny Quadratic', calc_abv_novotny_quadratic, '#ff0043'),
-    ('Terrill Linear', calc_abv_terrill_linear, '#ff795b'),
-    ('Terrill Cubic', calc_abv_terrill_cubic, '#fddb85'),
+    ('Bonham', calc_abv_bonham, color_palette[0]),
+    ('Gardner', calc_abv_gardner, color_palette[1]),
+    ('Gossett', calc_abv_gosett, color_palette[2]),    
+    ('Novotny Linear', calc_abv_novotny_linear, color_palette[3]),
+    ('Novotny Quadratic', calc_abv_novotny_quadratic, color_palette[4]),
+    ('Terrill Linear', calc_abv_terrill_linear, color_palette[5]),
+    ('Terrill Cubic', calc_abv_terrill_cubic, color_palette[6]),
 ]
 
 col_name_abv = 'ABV'
@@ -160,7 +170,7 @@ def calc_abv_model_stats(name):
     abv_dev_below_25 = abv_dev_abs.le(0.25).sum() / float(len(abv_dev_abs)) * 100.0    
     abv_dev_below_50 = abv_dev_abs.le(0.5).sum() / float(len(abv_dev_abs)) * 100.0
     rsquare = calc_rsquare(abv_observed, abv_reference)
-    return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev_abs.mean(), abv_dev.std(), rsquare, abv_dev_below_25, abv_dev_below_50
+    return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev_abs.mean(), abv_dev_abs.median(), abv_dev.std(), rsquare, abv_dev_below_25, abv_dev_below_50
 
 stats_list = []
 for abv_model in abv_models:
@@ -168,7 +178,7 @@ for abv_model in abv_models:
 
 data.to_csv("data_ext.csv")
 
-stats_columns = ['Name' , 'ABV Min Dev', 'ABV Max Dev', 'ABV Mean Dev', 'ABV Standard Dev', 'ABV R-Squared', 'ABV Dev % Below 0.25', 'ABV Dev % Below 0.5']
+stats_columns = ['Name' , 'ABV Min Dev', 'ABV Max Dev', 'ABV Mean Dev', 'ABV Median Dev', 'ABV Standard Dev', 'ABV R-Squared', 'ABV Dev % Below 0.25', 'ABV Dev % Below 0.5']
 stats_colors = ['#a9f693', '#00c295', '#ff0043', '#ff795b']
 stats = pa.DataFrame(stats_list, columns=stats_columns)
 stats.to_csv("stats_abv.csv")
@@ -179,7 +189,7 @@ fig.suptitle('Refractometer Correlation Model Evaluation')
 ax_stats = axes[0]
 ax_data = axes[1]
 
-stats.plot(x='Name', y=stats_columns[1:-3], kind='bar', color=stats_colors, ax=ax_stats)
+stats.plot(x='Name', y=stats_columns[1:-3], kind='bar', color=color_palette, ax=ax_stats)
 ax_stats.title.set_text('ABV Deviation Statistics')
 ax_stats.set_xlabel('')
 ax_stats.set_ylabel('Model ABV Deviation at WCF=' + '%.2f'%wcf)
