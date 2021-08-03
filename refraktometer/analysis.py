@@ -123,10 +123,7 @@ def col_name(section, name):
     return section + ' ' + name
 
 def col_name_abv(name):
-    return col_name('ABV', name)
-
-def col_name_abv_dev(name):
-    return col_name('ABV Dev', name)
+    return 'ABV ' + name
 
 data = pa.read_csv('data.csv', delimiter=',')
 
@@ -138,16 +135,12 @@ if filter_outliers == True:
     print()
     data = data[(abs(data[col_name_rii_dev]) <= rii_dev_threshold)]
 
-data['ABV'] = data.apply(lambda row: calc_abv(row.OE, row.AE), axis=1)
 wcf_col_name = 'WCF'
+data['ABV'] = data.apply(lambda row: calc_abv(row.OE, row.AE), axis=1)
 data[wcf_col_name] = data['RII'] / data['OE']
 
-def add_cor_model_data(name, functor):
-    data[col_name_abv(name)] = data.apply(lambda row: functor(row.RII, row.RIF), axis=1)
-    data[col_name_abv_dev(name)] = data.apply(lambda row: row[col_name_abv(name)] - row.ABV, axis=1)
-
 for model in cor_models:
-    add_cor_model_data(model[0], model[1])
+    data[col_name_abv(model[0])] = data.apply(lambda row: model[1](row.RII, row.RIF), axis=1)
 
 wcf_list = data[wcf_col_name]
 wcf_stats = pa.DataFrame([(wcf_list.min(), wcf_list.max(), wcf_list.mean(), wcf_list.std())], columns = ['WCF Min', 'WCF Max', 'WCF Mean', 'WCF STD'])
@@ -161,11 +154,13 @@ def calc_rsquare(estimations, measureds):
     return 1 - (see / derr)
 
 def calc_model_stats(name):
-    abv_dev = data[col_name_abv_dev(name)]
+    abv_observed = data[col_name_abv(name)]
+    abv_reference = data['ABV']
+    abv_dev = abv_reference - abv_observed
     abv_dev_abs = abv_dev.abs()
     abv_dev_below_25 = abv_dev_abs.le(0.25).sum() / float(len(abv_dev_abs)) * 100.0    
     abv_dev_below_50 = abv_dev_abs.le(0.5).sum() / float(len(abv_dev_abs)) * 100.0
-    rsquare = calc_rsquare(data[col_name_abv(name)], data['ABV'])
+    rsquare = calc_rsquare(abv_observed, abv_reference)
     return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev_abs.mean(), abv_dev.std(), rsquare, abv_dev_below_25, abv_dev_below_50
 
 stats_list = []
