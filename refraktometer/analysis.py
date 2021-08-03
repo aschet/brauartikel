@@ -177,12 +177,12 @@ stats_list = []
 for abv_model in abv_models:
     stats_list.append(calc_abv_model_stats(abv_model[0]))
 
-data.to_csv("data_ext.csv")
+data.to_csv("data_ext.csv", index=False)
 
 stats_columns = ['Name' , 'Min', 'Max', 'Mean', 'STD', 'R-Squared', '% Below 0.25', '% Below 0.5']
 stats_colors = ['#a9f693', '#00c295', '#ff0043', '#ff795b']
 stats = pa.DataFrame(stats_list, columns=stats_columns)
-stats.to_csv("stats_abvdev.csv")
+stats.to_csv("stats_abvdev.csv", index=False)
 print("ABV Deviation Statistics:")
 print(stats)
 
