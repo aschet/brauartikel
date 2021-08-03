@@ -171,7 +171,7 @@ def calc_abv_model_stats(name):
     abv_dev_below_25 = abv_dev_abs.le(0.25).sum() / float(len(abv_dev_abs)) * 100.0    
     abv_dev_below_50 = abv_dev_abs.le(0.5).sum() / float(len(abv_dev_abs)) * 100.0
     rsquare = calc_rsquare(abv_observed, abv_reference)
-    return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev_abs.median(), abv_dev_abs.mean(), abv_dev.std(), rsquare, abv_dev_below_25, abv_dev_below_50
+    return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev_abs.mean(), abv_dev.std(), rsquare, abv_dev_below_25, abv_dev_below_50
 
 stats_list = []
 for abv_model in abv_models:
@@ -179,7 +179,7 @@ for abv_model in abv_models:
 
 data.to_csv("data_ext.csv")
 
-stats_columns = ['Name' , 'Min', 'Max', 'Median', 'Mean', 'STD', 'R-Squared', '% Below 0.25', '% Below 0.5']
+stats_columns = ['Name' , 'Min', 'Max', 'Mean', 'STD', 'R-Squared', '% Below 0.25', '% Below 0.5']
 stats_colors = ['#a9f693', '#00c295', '#ff0043', '#ff795b']
 stats = pa.DataFrame(stats_list, columns=stats_columns)
 stats.to_csv("stats_abvdev.csv")
@@ -188,6 +188,8 @@ print(stats)
 
 fig, axes = plt.subplots(1, 2, constrained_layout=True)
 fig.suptitle('Refractometer Correlation Model Evaluation')
+fig.set_figwidth(14)
+fig.set_figheight(8)
 ax_stats = axes[0]
 ax_data = axes[1]
 
