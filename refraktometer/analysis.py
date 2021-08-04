@@ -21,6 +21,7 @@ import matplotlib.pyplot as plt
 default_wcf = 1.04
 use_calculated_wcf = False
 filter_outliers = True
+reference_filter = 'PBA-B M'
 plot_ae = False
 plot_abv = True
 
@@ -132,6 +133,7 @@ col_name_oe = 'OE'
 col_name_ae = 'AE'
 col_name_rii = 'RII'
 col_name_rif = 'RIF'
+col_name_reference = 'Reference'
 row_name_square = 'rsquare'
 
 def model_col_name(section, name):
@@ -140,6 +142,9 @@ def model_col_name(section, name):
 data = pa.read_csv('data.csv', delimiter=',')
 data_abv_dev = pa.DataFrame()
 data_ae_dev = pa.DataFrame()
+
+if len(reference_filter) > 0:
+    data = data[data[col_name_reference] == reference_filter] 
 
 if filter_outliers == True:
     rii_dev_threshold = (data[col_name_oe] - data[col_name_rii]).std()
