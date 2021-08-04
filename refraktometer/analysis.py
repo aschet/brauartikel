@@ -132,6 +132,7 @@ col_name_oe = 'OE'
 col_name_ae = 'AE'
 col_name_rii = 'RII'
 col_name_rif = 'RIF'
+col_name_rifc = col_name_rif + 'c'
 col_name_reference = 'Reference'
 row_name_square = 'r2score'
 
@@ -145,20 +146,22 @@ data_ae_dev = pa.DataFrame()
 if len(reference_filter) > 0:
     data = data[data[col_name_reference] == reference_filter] 
 
-if filter_outliers == True:
-    rii_dev_threshold = median_absolute_error(data[col_name_oe], data[col_name_rii])
-    print('Filtering ' + col_name_rii + ' outliers over ' + str(rii_dev_threshold))
-    print()
-    data = data[(abs(data[col_name_oe] - data[col_name_rii]) <= rii_dev_threshold)]
-
 data[col_name_wcf] = data[col_name_rii] / data[col_name_oe]
 data[col_name_abv] = calc_abv_simple(data[col_name_oe], data[col_name_ae])
 
+if use_calculated_wcf == True:
+    wcf = data[col_name_wcf]
+else:
+    wcf = default_wcf
+
+if filter_outliers == True:
+    riic = correct_ri(data[col_name_rii], wcf)
+    riic_dev_threshold = median_absolute_error(data[col_name_oe], riic)
+    print('Filtering ' + col_name_rii + ' outliers over ' + str(riic_dev_threshold))
+    print()
+    data = data[(abs(data[col_name_oe] - riic) <= riic_dev_threshold)]
+
 for model in refrac_models:
-    if use_calculated_wcf == True:
-        wcf = data[col_name_wcf]
-    else:
-        wcf = default_wcf
     model_col_name_ae = model_col_name(col_name_ae, model.name)
     data[model_col_name_ae] = model.calc_ae(data[col_name_rii], data[col_name_rif], wcf)
     data_ae_dev[model.name] = data[col_name_ae] - data[model_col_name_ae]
