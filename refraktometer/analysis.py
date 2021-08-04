@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
+# Refractometer Correlation Model Evaluation
+# Copyright 2021 Thomas Ascher
+# SPDX-License-Identifier: GPL-3.0+
 import numpy as np
 import pandas as pa
 import matplotlib.pyplot as plt
 
-# Refractometer Correlation Model Evaluation
 # greetings, Thomas Ascher
 
-# aat = apparent attenuation in %
-# ae = apparent extract in °P
-# oe = original extract in °P
-# rii = refractive index initial
-# rif = refractive index final
-# sg = specific gravity
-# wcf = wort correction factor
+# ABV = alcohol by volume in %
+# ABW = alcohol bei weight in %
+# AE = apparent extract in °P
+# FG = final gravity in SG
+# OE = original extract in °P
+# RII = initial refractive index in °Bx
+# RIF = final refractive index in °Bx
+# SG = specific gravity
+# WCF = wort correction factor
 
 wcf = 1.04
 filter_outliers = True
