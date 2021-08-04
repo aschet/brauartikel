@@ -45,10 +45,6 @@ def calc_abv(abw, fg):
 def calc_abv_simple(oe, ae):
     return calc_abv(calc_abw(oe, ae), plato_to_sg(ae))
 
-def calc_model_abv(rii, rif, functor):
-    oe, ae = functor(rii, rif)
-    return calc_abv_simple(oe, ae)
-
 # The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
 def cor_bonham(rii, rif):
     oe = correct_ri(rii)
@@ -56,16 +52,10 @@ def cor_bonham(rii, rif):
         0.000000034 * oe**3 + 0.00574 * rif + \
         0.00003344 * rif**2 + 0.000000086 * rif**3)
 
-def calc_abv_bonham(rii, rif):
-    return calc_model_abv(rii, rif, cor_bonham)
-
 # The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
 def cor_gardner(rii, rif):
     oe = correct_ri(rii)
     return oe, 1.53 * rif - 0.59 * oe
-
-def calc_abv_gardner(rii, rif):
-    return calc_model_abv(rii, rif, cor_gardner)
 
 # http://www.ithacoin.com/brewing/Derivation.htm
 def calc_abv_gosett(rii, rif):
@@ -82,9 +72,6 @@ def cor_novotny_linear(rii, rif):
     rifc = correct_ri(rif)
     return oe, sg_to_plato(-0.002349 * oe + 0.006276 * rifc + 1.0)
 
-def calc_abv_novotny_linear(rii, rif):
-    return calc_model_abv(rii, rif, cor_novotny_linear)
-
 # http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html     
 def cor_novotny_quadratic(rii, rif):
     oe = correct_ri(rii)
@@ -95,17 +82,11 @@ def cor_novotny_quadratic(rii, rif):
         2.421 * 10.0**-3 * oe + \
         6.219 * 10.0**-3 * rifc + 1.0)
 
-def calc_abv_novotny_quadratic(rii, rif):
-    return calc_model_abv(rii, rif, cor_novotny_quadratic)
-
 # http://seanterrill.com/2011/04/07/refractometer-fg-results/
 def cor_terrill_linear(rii, rif):
     oe = correct_ri(rii)
     rifc = correct_ri(rif)           
     return oe, sg_to_plato(1.0 - 0.000856829 * oe + 0.00349412 * rifc)
-
-def calc_abv_terrill_linear(rii, rif):
-    return calc_model_abv(rii, rif, cor_terrill_linear)
 
 # http://seanterrill.com/2011/04/07/refractometer-fg-results/
 def cor_terrill_cubic(rii, rif):
@@ -115,11 +96,8 @@ def cor_terrill_cubic(rii, rif):
         0.00000727999 * oe**3 + 0.0117741 * rifc - \
         0.00127169 * rifc**2 + 0.0000632929 * rifc**3)
 
-def calc_abv_terrill_cubic(rii, rif):
-    return calc_model_abv(rii, rif, cor_terrill_cubic)
-
 class RefracModel:
-    def __init__(self, name, cor_model, abv_model):
+    def __init__(self, name, cor_model, abv_model = None):
         self.name = name
         self.cor_model = cor_model
         self.abv_model = abv_model
@@ -129,15 +107,19 @@ class RefracModel:
         return ae
 
     def calc_abv(self, rii, rif):
-        return self.abv_model(rii, rif)
+        if not (self.abv_model is None):
+            return self.abv_model(rii, rif)
+        else:
+            oe, ae = self.cor_model(rii, rif)
+            return calc_abv_simple(oe, ae)
 
 refrac_models = [
-    RefracModel('Terrill Linear', cor_terrill_linear, calc_abv_terrill_linear),
-    RefracModel('Terrill Cubic', cor_terrill_cubic, calc_abv_terrill_cubic),
-    RefracModel('Novotny Linear', cor_novotny_linear, calc_abv_novotny_linear),
-    RefracModel('Novotny Quadratic', cor_novotny_quadratic, calc_abv_novotny_quadratic),
-    RefracModel('Bonham', cor_bonham, calc_abv_bonham),
-    RefracModel('Gardner', cor_gardner, calc_abv_gardner),
+    RefracModel('Terrill Linear', cor_terrill_linear),
+    RefracModel('Terrill Cubic', cor_terrill_cubic),
+    RefracModel('Novotny Linear', cor_novotny_linear),
+    RefracModel('Novotny Quadratic', cor_novotny_quadratic),
+    RefracModel('Bonham', cor_bonham),
+    RefracModel('Gardner', cor_gardner),
     RefracModel('Gossett', cor_bonham, calc_abv_gosett)
 ]
 
