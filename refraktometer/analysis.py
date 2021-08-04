@@ -28,16 +28,20 @@ def sg_to_plato(sg):
 def plato_to_sg(se):
     return 1.0 + (se / (258.6 - ((se / 258.2) * 227.1)))
 
-# Revisiting ABV Calculations, Zymurgy July/August 2019 p. 48
-def calc_abv(oe, ae):
-    og = plato_to_sg(oe)
-    fg = plato_to_sg(ae)
-    return fg * (5118.0 * (og**2 - fg**2) + 16755.0 * (fg - og)) / (8.739 * og**4 \
-        - 57.22 * og**3 + 89.09 * og**2 + 14.95 + og - 105.99)
+# https://www.brewersjournal.info/science-basic-beer-alcohol-extract-determinations/
+def calc_abw(oe, ae):
+    return (0.8052 * (oe - ae)) / (2.0665 - (1.0665 * oe / 100.0))
+
+# https://www.brewersjournal.info/science-basic-beer-alcohol-extract-determinations/
+def calc_abv(abw, fg):
+    return abw * fg / 0.7907
+
+def calc_abv_simple(oe, ae):
+    return calc_abv(calc_abw(oe, ae), plato_to_sg(ae))
 
 def calc_model_abv(rii, rif, functor):
-    oe, fe = functor(rii, rif)
-    return calc_abv(oe, fe)
+    oe, ae = functor(rii, rif)
+    return calc_abv_simple(oe, ae)
 
 # The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
 def cor_bonham(rii, rif):
@@ -62,9 +66,9 @@ def calc_abv_gosett(rii, rif):
     k = 0.445
     c = 100.0 * (rii - rif) / (100.0 - 48.4 * k - 0.582 * rif)
     abw = 48.4 * c / (100 - 0.582 * c)
-    oe, fe = cor_bonham(rii, rif)
-    fg = plato_to_sg(fe)
-    return abw * fg / 0.794
+    oe, ae = cor_bonham(rii, rif)
+    fg = plato_to_sg(ae)
+    return calc_abv(abw, fg)
 
 # http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
 def cor_novotny_linear(rii, rif):
@@ -146,7 +150,7 @@ if filter_outliers == True:
     print()
     data = data[(abs(data[col_name_oe] - data[col_name_rii]) <= rii_dev_threshold)]
 
-data[col_name_abv] = calc_abv(data[col_name_oe], data[col_name_ae])
+data[col_name_abv] = calc_abv_simple(data[col_name_oe], data[col_name_ae])
 data[col_name_wcf] = data[col_name_rii] / data[col_name_oe]
 for abv_model in abv_models:
     data[model_col_name_abv(abv_model[0])] = abv_model[1](data[col_name_rii], data[col_name_rif])
