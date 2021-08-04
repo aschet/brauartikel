@@ -18,6 +18,7 @@ from sklearn.metrics import median_absolute_error, r2_score
 # WCF = wort correction factor
 
 default_wcf = 1.04
+recalc_default_wcf = True
 use_calculated_wcf = False
 filter_outliers = True
 reference_filter = 'PBA-B M'
@@ -97,8 +98,16 @@ def cor_terrill_cubic(rii, rif, wcf):
         0.00000727999 * oe**3 + 0.0117741 * rifc - \
         0.00127169 * rifc**2 + 0.0000632929 * rifc**3)
 
+def print_stats(name, stats, is_deviation):
+    full_name = name
+    if is_deviation == True:
+        full_name += ' Deviation'
+    print(full_name + ' Statistics:')
+    print(stats)
+    print()
+
 class RefracModel:
-    def __init__(self, name, cor_model, abv_model = None):
+    def __init__(self, name, cor_model, abv_model=None):
         self.name = name
         self.cor_model = cor_model
         self.abv_model = abv_model
@@ -132,7 +141,6 @@ col_name_oe = 'OE'
 col_name_ae = 'AE'
 col_name_rii = 'RII'
 col_name_rif = 'RIF'
-col_name_rifc = col_name_rif + 'c'
 col_name_reference = 'Reference'
 row_name_square = 'r2score'
 
@@ -149,38 +157,30 @@ if len(reference_filter) > 0:
 data[col_name_wcf] = data[col_name_rii] / data[col_name_oe]
 data[col_name_abv] = calc_abv_simple(data[col_name_oe], data[col_name_ae])
 
-if use_calculated_wcf == True:
-    wcf = data[col_name_wcf]
-else:
-    wcf = default_wcf
+wcf_stats = data[col_name_wcf].describe()
+if recalc_default_wcf == True:
+    default_wcf = wcf_stats['75%']
+print_stats(col_name_wcf, wcf_stats, False)
+
+if use_calculated_wcf == False:
+    data[col_name_wcf] = default_wcf
 
 if filter_outliers == True:
-    riic = correct_ri(data[col_name_rii], wcf)
-    riic_dev_threshold = median_absolute_error(data[col_name_oe], riic)
-    print('Filtering ' + col_name_rii + ' outliers over ' + str(riic_dev_threshold))
+    riic = correct_ri(data[col_name_rii], data[col_name_wcf])
+    mae = median_absolute_error(data[col_name_oe], riic) + 1.776357e-15
+    print('Filtering ' + col_name_rii + ' outliers over ' + str(mae))
     print()
-    data = data[(abs(data[col_name_oe] - riic) <= riic_dev_threshold)]
+    data = data[ (abs(data[col_name_oe] - riic) <= mae)]
 
 for model in refrac_models:
     model_col_name_ae = model_col_name(col_name_ae, model.name)
-    data[model_col_name_ae] = model.calc_ae(data[col_name_rii], data[col_name_rif], wcf)
+    data[model_col_name_ae] = model.calc_ae(data[col_name_rii], data[col_name_rif], data[col_name_wcf])
     data_ae_dev[model.name] = data[col_name_ae] - data[model_col_name_ae]
     model_col_name_abv = model_col_name(col_name_abv, model.name)
-    data[model_col_name_abv] = model.calc_abv(data[col_name_rii], data[col_name_rif], wcf)   
+    data[model_col_name_abv] = model.calc_abv(data[col_name_rii], data[col_name_rif], data[col_name_wcf])   
     data_abv_dev[model.name] = data[col_name_abv] - data[model_col_name_abv]
-
+ 
 data.to_csv('data_eval.csv', index=False)
-
-def print_stats(name, stats, is_deviation):
-    full_name = name
-    if is_deviation == True:
-        full_name += ' Deviation'
-    print(full_name + ' Statistics:')
-    print(stats)
-    print()
-
-wcf_stats = data[col_name_wcf].describe()
-print_stats(col_name_wcf, wcf_stats, False)
 
 def create_stats(devs, col_name):
     stats = devs.describe()
@@ -206,7 +206,7 @@ def plot_devs(col_name, data_dev, stats_dev):
     if use_calculated_wcf == True:
         dev_caption += 'Auto'
     else:
-        dev_caption += '%.2f'%wcf
+        dev_caption += '%.2f'%default_wcf
     ax_quantils.set_ylabel(dev_caption)
     data_dev.boxplot(model_names, ax=ax_quantils, rot=45, grid=False, showmeans=True)
 
