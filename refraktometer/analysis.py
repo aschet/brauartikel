@@ -5,6 +5,7 @@
 import numpy as np
 import pandas as pa
 import matplotlib.pyplot as plt
+from sklearn.metrics import median_absolute_error, r2_score
 
 # greetings, Thomas Ascher
 
@@ -134,7 +135,7 @@ col_name_ae = 'AE'
 col_name_rii = 'RII'
 col_name_rif = 'RIF'
 col_name_reference = 'Reference'
-row_name_square = 'rsquare'
+row_name_square = 'r2score'
 
 def model_col_name(section, name):
     return section + ' ' + name
@@ -147,7 +148,7 @@ if len(reference_filter) > 0:
     data = data[data[col_name_reference] == reference_filter] 
 
 if filter_outliers == True:
-    rii_dev_threshold = (data[col_name_oe] - data[col_name_rii]).std()
+    rii_dev_threshold = median_absolute_error(data[col_name_oe], data[col_name_rii])
     print('Filtering ' + col_name_rii + ' outliers over ' + str(rii_dev_threshold))
     print()
     data = data[(abs(data[col_name_oe] - data[col_name_rii]) <= rii_dev_threshold)]
@@ -169,20 +170,20 @@ for model in refrac_models:
 
 data.to_csv('data_eval.csv', index=False)
 
-wcf_stats = data[col_name_wcf].describe()
-print('WCF Statistics:')
-print(wcf_stats)
-print()
+def print_stats(name, stats, is_deviation):
+    full_name = name
+    if is_deviation == True:
+        full_name += ' Deviation'
+    print(full_name + ' Statistics:')
+    print(stats)
+    print()
 
-def calc_rsquare(estimations, measureds):
-    see =  ((np.array(measureds) - np.array(estimations))**2).sum()
-    mmean = (np.array(measureds)).sum() / float(len(measureds))
-    derr = ((mmean - measureds)**2).sum()    
-    return 1 - (see / derr)
+wcf_stats = data[col_name_wcf].describe()
+print_stats(col_name_wcf, wcf_stats, False)
 
 def create_stats(devs, col_name):
     stats = devs.describe()
-    stats.loc[row_name_square] = list(map(lambda name: calc_rsquare(data[model_col_name(col_name, name)], data[col_name]), model_names))
+    stats.loc[row_name_square] = list(map(lambda name: r2_score(data[col_name], data[model_col_name(col_name, name)]), model_names))
     return stats
 
 stats_ae_dev = create_stats(data_ae_dev, col_name_ae)
@@ -190,8 +191,8 @@ stats_ae_dev.to_csv('stats_ae_dev.csv', index=True)
 stats_abv_dev = create_stats(data_abv_dev, col_name_abv)
 stats_abv_dev.to_csv('stats_abv_dev.csv', index=True)
 
-print('ABV Deviation Statistics:')
-print(stats_abv_dev)
+print_stats(col_name_ae, stats_ae_dev, True)
+print_stats(col_name_abv, stats_abv_dev, True)
 
 def plot_devs(col_name, data_dev, stats_dev):
     fig = plt.figure(constrained_layout=True, figsize=(14, 8))
@@ -230,9 +231,9 @@ def plot_devs(col_name, data_dev, stats_dev):
 
 if plot_ae:
     fig_ae = plot_devs(col_name_ae, data_ae_dev, stats_ae_dev)
-    fig_ae.savefig('stats_ae_dev.png')
+    fig_ae.savefig('stats_ae_dev.svg')
 if plot_abv:
     fig_abv = plot_devs(col_name_abv, data_abv_dev, stats_abv_dev)
-    fig_abv.savefig('stats_abv_dev.png')
+    fig_abv.savefig('stats_abv_dev.svg')
 if plot_ae == True or plot_abv == True:
     plt.show()
