@@ -22,7 +22,7 @@ recalc_default_wcf = True
 measurement_specific_wcf = False
 filter_outliers = True
 reference_filter = 'PBA-B M'
-plot_ae_dev = True
+plot_ae_dev = False
 plot_abv_dev = True
 
 def correct_ri(ri, wcf):
@@ -160,6 +160,7 @@ data[col_name_abv] = calc_abv_simple(data[col_name_oe], data[col_name_ae])
 wcf_stats = data[col_name_wcf].describe()
 if recalc_default_wcf == True:
     default_wcf = wcf_stats['75%']
+    print('Updating default WCF to ' + str(default_wcf) + '\n')
 print_stats(col_name_wcf, wcf_stats, False)
 
 if measurement_specific_wcf == False:
@@ -168,8 +169,7 @@ if measurement_specific_wcf == False:
 if filter_outliers == True:
     riic = correct_ri(data[col_name_rii], data[col_name_wcf])
     mae = median_absolute_error(data[col_name_oe], riic) + 1.776357e-15
-    print('Filtering ' + col_name_rii + ' outliers over ' + str(mae))
-    print()
+    print('Filtering ' + col_name_rii + ' outliers over ' + str(mae) + '\n')
     data = data[ (abs(data[col_name_oe] - riic) <= mae)]
 
 for model in refrac_models:
