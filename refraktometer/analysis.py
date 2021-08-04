@@ -140,12 +140,15 @@ abv_models = [
     ABVModel('Gossett', calc_abv_gosett)
 ]
 
+abv_model_names = list(map(lambda model: model.name, abv_models))
+
 col_name_abv = 'ABV'
 col_name_wcf = 'WCF'
 col_name_oe = 'OE'
 col_name_ae = 'AE'
 col_name_rii = 'RII'
 col_name_rif = 'RIF'
+row_name_square = 'rsquare'
 
 def model_col_name_abv(name):
     return col_name_abv + ' ' + name
@@ -163,9 +166,11 @@ data[col_name_wcf] = data[col_name_rii] / data[col_name_oe]
 data[col_name_abv] = calc_abv_simple(data[col_name_oe], data[col_name_ae])
 for abv_model in abv_models:
     data[model_col_name_abv(abv_model.name)] = abv_model.calc_abv(data[col_name_rii], data[col_name_rif])
+    data_dev[abv_model.name] = data[col_name_abv] - data[model_col_name_abv(abv_model.name)]
 
-wcf_list = data[col_name_wcf]
-wcf_stats = pa.DataFrame([(wcf_list.min(), wcf_list.max(), wcf_list.mean(), wcf_list.std())], columns = ['Min', 'Max', 'Mean', 'STD'])
+data.to_csv("data_eval.csv", index=False)
+
+wcf_stats = data[col_name_wcf].describe()
 print("WCF Statistics:")
 print(wcf_stats)
 print()
@@ -176,30 +181,11 @@ def calc_rsquare(estimations, measureds):
     derr = ((mmean - measureds)**2).sum()    
     return 1 - (see / derr)
 
-def calc_abv_model_stats(name):
-    abv_observed = data[model_col_name_abv(name)]
-    abv_reference = data[col_name_abv]
-    abv_dev = abv_reference - abv_observed
-    data_dev[name] = abv_dev
-    abv_dev_abs = abv_dev.abs()
-    abv_dev_below_25 = abv_dev_abs.le(0.25).sum() / float(len(abv_dev_abs)) * 100.0    
-    abv_dev_below_50 = abv_dev_abs.le(0.5).sum() / float(len(abv_dev_abs)) * 100.0
-    rsquare = calc_rsquare(abv_observed, abv_reference)
-    return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev.mean(), abv_dev.std(), rsquare, abv_dev_below_25, abv_dev_below_50
-
-stats_list = []
-for abv_model in abv_models:
-    stats_list.append(calc_abv_model_stats(abv_model.name))
-
-data.to_csv("data_eval.csv", index=False)
-
-stats_columns = ['Name' , 'Min', 'Max', 'Mean', 'STD', 'R-Squared', '% Below 0.25', '% Below 0.5']
-stats = pa.DataFrame(stats_list, columns=stats_columns)
-stats.to_csv("stats_abv_dev.csv", index=False)
+stats = data_dev.describe()
+stats.loc[row_name_square] = list(map(lambda name: calc_rsquare(data[model_col_name_abv(name)], data[col_name_abv]), abv_model_names))
+stats.to_csv("stats_abv_dev.csv", index=True)
 print("ABV Deviation Statistics:")
 print(stats)
-
-abv_model_names = list(map(lambda model: model.name, abv_models))
 
 fig = plt.figure(constrained_layout=True, figsize=(14, 8))
 fig.suptitle('Refractometer Correlation Model Evaluation')
@@ -213,7 +199,6 @@ ax_quantils.set_ylabel(dev_caption)
 data_dev.boxplot(abv_model_names, ax=ax_quantils, rot=45, grid=False, showmeans=True)
 
 subfigs[1].suptitle('ABV Deviation Histogram')
-name_indexed_stats = stats.set_index('Name')
 cols = 2
 rows = len(abv_models) // cols + len(abv_models) % cols
 ax_densities = subfigs[1].subplots(rows, cols, sharex=True, sharey=True)
@@ -224,7 +209,7 @@ for i, abv_model in enumerate(abv_models):
         ax_desnity = ax_densities[row][col]
     else:
         ax_desnity = ax_densities[col]
-    rsquare = name_indexed_stats.loc[abv_model.name]['R-Squared']
+    rsquare = stats[abv_model.name][row_name_square]
     ax_desnity.set_title(abv_model.name + ' (R²=' + '%.3f'%rsquare + ')')    
     ax_desnity.set_xlabel(dev_caption)
     data_dev[abv_model_names[i]].plot.hist(density=True, xlim=[-1,1], ax=ax_desnity)
