@@ -18,12 +18,13 @@ import matplotlib.pyplot as plt
 # SG = specific gravity
 # WCF = wort correction factor
 
-wcf = 1.04
+default_wcf = 1.04
+use_calculated_wcf = False
 filter_outliers = True
 plot_ae = False
 plot_abv = True
 
-def correct_ri(ri):
+def correct_ri(ri, wcf):
     return ri / wcf
 
 # https://www.brewersfriend.com/plato-to-sg-conversion-chart
@@ -46,36 +47,36 @@ def calc_abv_simple(oe, ae):
     return calc_abv(calc_abw(oe, ae), plato_to_sg(ae))
 
 # The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
-def cor_bonham(rii, rif):
-    oe = correct_ri(rii)
+def cor_bonham(rii, rif, wcf):
+    oe = correct_ri(rii, wcf)
     return oe, sg_to_plato(1.001843 - 0.002318474 * oe - 0.000007775 * oe**2 - \
         0.000000034 * oe**3 + 0.00574 * rif + \
         0.00003344 * rif**2 + 0.000000086 * rif**3)
 
 # The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
-def cor_gardner(rii, rif):
-    oe = correct_ri(rii)
+def cor_gardner(rii, rif, wcf):
+    oe = correct_ri(rii, wcf)
     return oe, 1.53 * rif - 0.59 * oe
 
 # http://www.ithacoin.com/brewing/Derivation.htm
-def calc_abv_gosett(rii, rif):
+def calc_abv_gosett(rii, rif, wcf):
     k = 0.445
     c = 100.0 * (rii - rif) / (100.0 - 48.4 * k - 0.582 * rif)
     abw = 48.4 * c / (100 - 0.582 * c)
-    oe, ae = cor_bonham(rii, rif)
+    oe, ae = cor_bonham(rii, rif, wcf)
     fg = plato_to_sg(ae)
     return calc_abv(abw, fg)
 
 # http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
-def cor_novotny_linear(rii, rif):
-    oe = correct_ri(rii)
-    rifc = correct_ri(rif)
+def cor_novotny_linear(rii, rif, wcf):
+    oe = correct_ri(rii, wcf)
+    rifc = correct_ri(rif, wcf)
     return oe, sg_to_plato(-0.002349 * oe + 0.006276 * rifc + 1.0)
 
 # http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html     
-def cor_novotny_quadratic(rii, rif):
-    oe = correct_ri(rii)
-    rifc = correct_ri(rif)
+def cor_novotny_quadratic(rii, rif, wcf):
+    oe = correct_ri(rii, wcf)
+    rifc = correct_ri(rif, wcf)
     return oe, sg_to_plato(1.335 * 10.0**-5 * oe**2 - \
         3.239 * 10.0**-5 * oe * rifc + \
         2.916 * 10.0**-5 * rifc**2 - \
@@ -83,15 +84,15 @@ def cor_novotny_quadratic(rii, rif):
         6.219 * 10.0**-3 * rifc + 1.0)
 
 # http://seanterrill.com/2011/04/07/refractometer-fg-results/
-def cor_terrill_linear(rii, rif):
-    oe = correct_ri(rii)
-    rifc = correct_ri(rif)           
+def cor_terrill_linear(rii, rif, wcf):
+    oe = correct_ri(rii, wcf)
+    rifc = correct_ri(rif, wcf)          
     return oe, sg_to_plato(1.0 - 0.000856829 * oe + 0.00349412 * rifc)
 
 # http://seanterrill.com/2011/04/07/refractometer-fg-results/
-def cor_terrill_cubic(rii, rif):
-    oe = correct_ri(rii)
-    rifc = correct_ri(rif)          
+def cor_terrill_cubic(rii, rif, wcf):
+    oe = correct_ri(rii, wcf)
+    rifc = correct_ri(rif, wcf)         
     return oe, sg_to_plato(1.0 - 0.0044993 * oe + 0.000275806 * oe**2 - \
         0.00000727999 * oe**3 + 0.0117741 * rifc - \
         0.00127169 * rifc**2 + 0.0000632929 * rifc**3)
@@ -102,15 +103,15 @@ class RefracModel:
         self.cor_model = cor_model
         self.abv_model = abv_model
 
-    def calc_ae(self, rii, rif):
-        _, ae = self.cor_model(rii, rif)
+    def calc_ae(self, rii, rif, wcf):
+        _, ae = self.cor_model(rii, rif, wcf)
         return ae
 
-    def calc_abv(self, rii, rif):
+    def calc_abv(self, rii, rif, wcf):
         if not (self.abv_model is None):
-            return self.abv_model(rii, rif)
+            return self.abv_model(rii, rif, wcf)
         else:
-            oe, ae = self.cor_model(rii, rif)
+            oe, ae = self.cor_model(rii, rif, wcf)
             return calc_abv_simple(oe, ae)
 
 refrac_models = [
@@ -150,11 +151,15 @@ data[col_name_wcf] = data[col_name_rii] / data[col_name_oe]
 data[col_name_abv] = calc_abv_simple(data[col_name_oe], data[col_name_ae])
 
 for model in refrac_models:
+    if use_calculated_wcf == True:
+        wcf = data[col_name_wcf]
+    else:
+        wcf = default_wcf
     model_col_name_ae = model_col_name(col_name_ae, model.name)
-    data[model_col_name_ae] = model.calc_ae(data[col_name_rii], data[col_name_rif])
+    data[model_col_name_ae] = model.calc_ae(data[col_name_rii], data[col_name_rif], wcf)
     data_ae_dev[model.name] = data[col_name_ae] - data[model_col_name_ae]
     model_col_name_abv = model_col_name(col_name_abv, model.name)
-    data[model_col_name_abv] = model.calc_abv(data[col_name_rii], data[col_name_rif])   
+    data[model_col_name_abv] = model.calc_abv(data[col_name_rii], data[col_name_rif], wcf)   
     data_abv_dev[model.name] = data[col_name_abv] - data[model_col_name_abv]
 
 data.to_csv("data_eval.csv", index=False)
@@ -191,7 +196,11 @@ def plot_devs(col_name, data_dev, stats_dev):
     subfigs[0].suptitle(col_name + ' Deviation Quantils')
     ax_quantils = subfigs[0].subplots(1, 1)
     ax_quantils.axhline(0.0, linestyle='--', c='#000000', linewidth=1)
-    dev_caption = col_name + ' Deviation at WCF=%.2f'%wcf
+    dev_caption = col_name + ' Deviation at WCF='
+    if use_calculated_wcf == True:
+        dev_caption += 'Auto'
+    else:
+        dev_caption += '%.2f'%wcf
     ax_quantils.set_ylabel(dev_caption)
     data_dev.boxplot(model_names, ax=ax_quantils, rot=45, grid=False, showmeans=True)
 
