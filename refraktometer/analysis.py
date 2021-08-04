@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 # sg = specific gravity
 # wcf = wort correction factor
 
-wcf = 1.04
+wcf = 1.0
 filter_outliers = True
 
 def correct_ri(ri):
@@ -195,33 +195,39 @@ stats_abv_dev.to_csv("stats_abv_dev.csv", index=True)
 print("ABV Deviation Statistics:")
 print(stats_abv_dev)
 
-fig = plt.figure(constrained_layout=True, figsize=(14, 8))
-fig.suptitle('Refractometer Correlation Model Evaluation')
-subfigs = fig.subfigures(1, 2)
+def plot_devs(col_name, data_dev, stats_dev):
+    fig = plt.figure(constrained_layout=True, figsize=(14, 8))
+    fig.suptitle('Refractometer Correlation Model Evaluation')
+    subfigs = fig.subfigures(1, 2)
 
-subfigs[0].suptitle('ABV Deviation Quantils')
-ax_quantils = subfigs[0].subplots(1, 1)
-ax_quantils.axhline(0.0, linestyle='--', c='#000000', linewidth=1)
-dev_caption = 'ABV Deviation at WCF=%.2f'%wcf
-ax_quantils.set_ylabel(dev_caption)
-data_abv_dev.boxplot(model_names, ax=ax_quantils, rot=45, grid=False, showmeans=True)
+    subfigs[0].suptitle(col_name + ' Deviation Quantils')
+    ax_quantils = subfigs[0].subplots(1, 1)
+    ax_quantils.axhline(0.0, linestyle='--', c='#000000', linewidth=1)
+    dev_caption = col_name + ' Deviation at WCF=%.2f'%wcf
+    ax_quantils.set_ylabel(dev_caption)
+    data_dev.boxplot(model_names, ax=ax_quantils, rot=45, grid=False, showmeans=True)
 
-subfigs[1].suptitle('ABV Deviation Histogram')
-cols = 2
-rows = len(refrac_models) // cols + len(refrac_models) % cols
-ax_densities = subfigs[1].subplots(rows, cols, sharex=True, sharey=True)
-for i, model in enumerate(refrac_models):
-    row = i // cols
-    col = i % cols
-    if rows > 1:
-        ax_desnity = ax_densities[row][col]
-    else:
-        ax_desnity = ax_densities[col]
-    rsquare = stats_abv_dev[model.name][row_name_square]
-    ax_desnity.set_title(model.name + ' (R²=' + '%.3f'%rsquare + ')')    
-    ax_desnity.set_xlabel(dev_caption)
-    data_abv_dev[model_names[i]].plot.hist(density=True, xlim=[-1,1], ax=ax_desnity)
-    data_abv_dev[model_names[i]].plot.density(ax=ax_desnity)  
+    subfigs[1].suptitle(col_name + ' Deviation Histogram')
+    cols = 2
+    rows = len(refrac_models) // cols + len(refrac_models) % cols
+    ax_densities = subfigs[1].subplots(rows, cols, sharex=True, sharey=True)
+    for i, model in enumerate(refrac_models):
+        row = i // cols
+        col = i % cols
+        if rows > 1:
+            ax_desnity = ax_densities[row][col]
+        else:
+            ax_desnity = ax_densities[col]
+        rsquare = stats_dev[model.name][row_name_square]
+        ax_desnity.set_title(model.name + ' (R²=' + '%.3f'%rsquare + ')')    
+        ax_desnity.set_xlabel(dev_caption)
+        data_dev[model_names[i]].plot.hist(density=True, xlim=[-1,1], ax=ax_desnity)
+        data_dev[model_names[i]].plot.density(ax=ax_desnity)  
+    
+    return fig
 
-plt.savefig('stats_abv_dev.png')
+#fig_ae = plot_devs(col_name_ae, data_ae_dev, stats_ae_dev)
+#fig_ae.savefig('stats_ae_dev.png')
+fig_abv = plot_devs(col_name_abv, data_abv_dev, stats_abv_dev)
+fig_abv.savefig('stats_abv_dev.png')
 plt.show()
