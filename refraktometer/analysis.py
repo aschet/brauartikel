@@ -2,7 +2,7 @@
 # Refractometer Correlation Model Evaluation
 # Copyright 2021 Thomas Ascher
 # SPDX-License-Identifier: GPL-3.0+
-import numpy as np
+
 import pandas as pa
 import matplotlib.pyplot as plt
 from sklearn.metrics import median_absolute_error, r2_score
