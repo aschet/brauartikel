@@ -112,25 +112,30 @@ def cor_terrill_cubic(rii, rif):
 def calc_abv_terrill_cubic(rii, rif):
     return calc_model_abv(rii, rif, cor_terrill_cubic)
 
-class ABVModel:
-    def __init__(self, name, functor):
+class RefracModel:
+    def __init__(self, name, cor_model, abv_model):
         self.name = name
-        self.functor = functor
+        self.cor_model = cor_model
+        self.abv_model = abv_model
+
+    def calc_ae(self, rii, rif):
+        _, ae = self.cor_model(rii, rif)
+        return ae
 
     def calc_abv(self, rii, rif):
-        return self.functor(rii, rif)
+        return self.abv_model(rii, rif)
 
-abv_models = [
-    ABVModel('Terrill Linear', calc_abv_terrill_linear),
-    ABVModel('Terrill Cubic', calc_abv_terrill_cubic),
-    ABVModel('Novotny Linear', calc_abv_novotny_linear),
-    ABVModel('Novotny Quadratic', calc_abv_novotny_quadratic),
-    ABVModel('Bonham', calc_abv_bonham),
-    ABVModel('Gardner', calc_abv_gardner),
-    ABVModel('Gossett', calc_abv_gosett)
+refrac_models = [
+    RefracModel('Terrill Linear', cor_terrill_linear, calc_abv_terrill_linear),
+    RefracModel('Terrill Cubic', cor_terrill_cubic, calc_abv_terrill_cubic),
+    RefracModel('Novotny Linear', cor_novotny_linear, calc_abv_novotny_linear),
+    RefracModel('Novotny Quadratic', cor_novotny_quadratic, calc_abv_novotny_quadratic),
+    RefracModel('Bonham', cor_bonham, calc_abv_bonham),
+    RefracModel('Gardner', cor_gardner, calc_abv_gardner),
+    RefracModel('Gossett', cor_bonham, calc_abv_gosett)
 ]
 
-abv_model_names = list(map(lambda model: model.name, abv_models))
+model_names = list(map(lambda model: model.name, refrac_models))
 
 col_name_abv = 'ABV'
 col_name_wcf = 'WCF'
@@ -140,11 +145,12 @@ col_name_rii = 'RII'
 col_name_rif = 'RIF'
 row_name_square = 'rsquare'
 
-def model_col_name_abv(name):
-    return col_name_abv + ' ' + name
+def model_col_name(section, name):
+    return section + ' ' + name
 
 data = pa.read_csv('data.csv', delimiter=',')
-data_dev = pa.DataFrame()
+data_abv_dev = pa.DataFrame()
+data_ae_dev = pa.DataFrame()
 
 if filter_outliers == True:
     rii_dev_threshold = (data[col_name_oe] - data[col_name_rii]).std()
@@ -154,9 +160,14 @@ if filter_outliers == True:
 
 data[col_name_wcf] = data[col_name_rii] / data[col_name_oe]
 data[col_name_abv] = calc_abv_simple(data[col_name_oe], data[col_name_ae])
-for abv_model in abv_models:
-    data[model_col_name_abv(abv_model.name)] = abv_model.calc_abv(data[col_name_rii], data[col_name_rif])
-    data_dev[abv_model.name] = data[col_name_abv] - data[model_col_name_abv(abv_model.name)]
+
+for model in refrac_models:
+    model_col_name_ae = model_col_name(col_name_ae, model.name)
+    data[model_col_name_ae] = model.calc_ae(data[col_name_rii], data[col_name_rif])
+    data_ae_dev[model.name] = data[col_name_ae] - data[model_col_name_ae]
+    model_col_name_abv = model_col_name(col_name_abv, model.name)
+    data[model_col_name_abv] = model.calc_abv(data[col_name_rii], data[col_name_rif])   
+    data_abv_dev[model.name] = data[col_name_abv] - data[model_col_name_abv]
 
 data.to_csv("data_eval.csv", index=False)
 
@@ -171,11 +182,18 @@ def calc_rsquare(estimations, measureds):
     derr = ((mmean - measureds)**2).sum()    
     return 1 - (see / derr)
 
-stats = data_dev.describe()
-stats.loc[row_name_square] = list(map(lambda name: calc_rsquare(data[model_col_name_abv(name)], data[col_name_abv]), abv_model_names))
-stats.to_csv("stats_abv_dev.csv", index=True)
+def create_stats(devs, col_name):
+    stats = devs.describe()
+    stats.loc[row_name_square] = list(map(lambda name: calc_rsquare(data[model_col_name(col_name, name)], data[col_name]), model_names))
+    return stats
+
+stats_ae_dev = create_stats(data_ae_dev, col_name_ae)
+stats_ae_dev.to_csv("stats_ae_dev.csv", index=True)
+stats_abv_dev = create_stats(data_abv_dev, col_name_abv)
+stats_abv_dev.to_csv("stats_abv_dev.csv", index=True)
+
 print("ABV Deviation Statistics:")
-print(stats)
+print(stats_abv_dev)
 
 fig = plt.figure(constrained_layout=True, figsize=(14, 8))
 fig.suptitle('Refractometer Correlation Model Evaluation')
@@ -186,24 +204,24 @@ ax_quantils = subfigs[0].subplots(1, 1)
 ax_quantils.axhline(0.0, linestyle='--', c='#000000', linewidth=1)
 dev_caption = 'ABV Deviation at WCF=%.2f'%wcf
 ax_quantils.set_ylabel(dev_caption)
-data_dev.boxplot(abv_model_names, ax=ax_quantils, rot=45, grid=False, showmeans=True)
+data_abv_dev.boxplot(model_names, ax=ax_quantils, rot=45, grid=False, showmeans=True)
 
 subfigs[1].suptitle('ABV Deviation Histogram')
 cols = 2
-rows = len(abv_models) // cols + len(abv_models) % cols
+rows = len(refrac_models) // cols + len(refrac_models) % cols
 ax_densities = subfigs[1].subplots(rows, cols, sharex=True, sharey=True)
-for i, abv_model in enumerate(abv_models):
+for i, model in enumerate(refrac_models):
     row = i // cols
     col = i % cols
     if rows > 1:
         ax_desnity = ax_densities[row][col]
     else:
         ax_desnity = ax_densities[col]
-    rsquare = stats[abv_model.name][row_name_square]
-    ax_desnity.set_title(abv_model.name + ' (R²=' + '%.3f'%rsquare + ')')    
+    rsquare = stats_abv_dev[model.name][row_name_square]
+    ax_desnity.set_title(model.name + ' (R²=' + '%.3f'%rsquare + ')')    
     ax_desnity.set_xlabel(dev_caption)
-    data_dev[abv_model_names[i]].plot.hist(density=True, xlim=[-1,1], ax=ax_desnity)
-    data_dev[abv_model_names[i]].plot.density(ax=ax_desnity)  
+    data_abv_dev[model_names[i]].plot.hist(density=True, xlim=[-1,1], ax=ax_desnity)
+    data_abv_dev[model_names[i]].plot.density(ax=ax_desnity)  
 
 plt.savefig('stats_abv_dev.png')
 plt.show()
