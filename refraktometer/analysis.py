@@ -159,8 +159,8 @@ if filter_outliers == True:
     print()
     data = data[(abs(data[col_name_oe] - data[col_name_rii]) <= rii_dev_threshold)]
 
-data[col_name_abv] = calc_abv_simple(data[col_name_oe], data[col_name_ae])
 data[col_name_wcf] = data[col_name_rii] / data[col_name_oe]
+data[col_name_abv] = calc_abv_simple(data[col_name_oe], data[col_name_ae])
 for abv_model in abv_models:
     data[model_col_name_abv(abv_model.name)] = abv_model.calc_abv(data[col_name_rii], data[col_name_rif])
 
