@@ -7,8 +7,6 @@ import pandas as pa
 import matplotlib.pyplot as plt
 from sklearn.metrics import median_absolute_error, r2_score
 
-# greetings, Thomas Ascher
-
 # ABV = alcohol by volume in %
 # ABW = alcohol bei weight in %
 # AE = apparent extract in °P
