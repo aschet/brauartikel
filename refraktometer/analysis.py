@@ -122,14 +122,23 @@ color_palette = [
     '#fddb85'
 ]
 
+class ABVModel:
+    def __init__(self, name, functor, color):
+        self.name = name
+        self.functor = functor
+        self.color = color
+
+    def calc_abv(self, rii, rif):
+        return self.functor(rii, rif)
+
 abv_models = [
-    ('Bonham', calc_abv_bonham, color_palette[0]),
-    ('Gardner', calc_abv_gardner, color_palette[1]),
-    ('Gossett', calc_abv_gosett, color_palette[2]),    
-    ('Novotny Linear', calc_abv_novotny_linear, color_palette[3]),
-    ('Novotny Quadratic', calc_abv_novotny_quadratic, color_palette[4]),
-    ('Terrill Linear', calc_abv_terrill_linear, color_palette[5]),
-    ('Terrill Cubic', calc_abv_terrill_cubic, color_palette[6]),
+    ABVModel('Bonham', calc_abv_bonham, color_palette[0]),
+    ABVModel('Gardner', calc_abv_gardner, color_palette[1]),
+    ABVModel('Gossett', calc_abv_gosett, color_palette[2]),    
+    ABVModel('Novotny Linear', calc_abv_novotny_linear, color_palette[3]),
+    ABVModel('Novotny Quadratic', calc_abv_novotny_quadratic, color_palette[4]),
+    ABVModel('Terrill Linear', calc_abv_terrill_linear, color_palette[5]),
+    ABVModel('Terrill Cubic', calc_abv_terrill_cubic, color_palette[6]),
 ]
 
 col_name_abv = 'ABV'
@@ -153,7 +162,7 @@ if filter_outliers == True:
 data[col_name_abv] = calc_abv_simple(data[col_name_oe], data[col_name_ae])
 data[col_name_wcf] = data[col_name_rii] / data[col_name_oe]
 for abv_model in abv_models:
-    data[model_col_name_abv(abv_model[0])] = abv_model[1](data[col_name_rii], data[col_name_rif])
+    data[model_col_name_abv(abv_model.name)] = abv_model.calc_abv(data[col_name_rii], data[col_name_rif])
 
 wcf_list = data[col_name_wcf]
 wcf_stats = pa.DataFrame([(wcf_list.min(), wcf_list.max(), wcf_list.mean(), wcf_list.std())], columns = ['Min', 'Max', 'Mean', 'STD'])
@@ -179,14 +188,14 @@ def calc_abv_model_stats(name):
 
 stats_list = []
 for abv_model in abv_models:
-    stats_list.append(calc_abv_model_stats(abv_model[0]))
+    stats_list.append(calc_abv_model_stats(abv_model.name))
 
-data.to_csv("data_ext.csv", index=False)
+data.to_csv("data_eval.csv", index=False)
 
 stats_columns = ['Name' , 'Min', 'Max', 'Mean', 'STD', 'R-Squared', '% Below 0.25', '% Below 0.5']
 stats_colors = ['#a9f693', '#00c295', '#ff0043', '#ff795b']
 stats = pa.DataFrame(stats_list, columns=stats_columns)
-stats.to_csv("stats_abvdev.csv", index=False)
+stats.to_csv("stats_abv_dev.csv", index=False)
 print("ABV Deviation Statistics:")
 print(stats)
 
@@ -209,15 +218,14 @@ name_indexed_stats = stats.set_index('Name')
 regression_line = data[col_name_abv]
 plt.plot(regression_line, regression_line, c='#000000', linewidth=1, axes=ax_data)
 for abv_model in abv_models:
-    model_name = abv_model[0]
-    specific_col_name = model_col_name_abv(model_name)
-    rsquare = name_indexed_stats.loc[model_name]['R-Squared']
-    label_content = model_name + ' (R²=' + '%.3f'%rsquare + ')'
-    data.plot.scatter(x=col_name_abv, y=specific_col_name, label=label_content, c=abv_model[2], ax=axes[1])
+    specific_col_name = model_col_name_abv(abv_model.name)
+    rsquare = name_indexed_stats.loc[abv_model.name]['R-Squared']
+    label_content = abv_model.name + ' (R²=' + '%.3f'%rsquare + ')'
+    data.plot.scatter(x=col_name_abv, y=specific_col_name, label=label_content, c=abv_model.color, ax=axes[1])
 
 ax_data.title.set_text(col_name_abv + ' Deviation')
 ax_data.set_xlabel('Reference ' + col_name_abv)
 ax_data.set_ylabel('Model ' + col_name_abv + ' ' + wcf_caption_part)                
 
-plt.savefig('stats_abv.png')
+plt.savefig('stats_abv_dev.png')
 plt.show()
