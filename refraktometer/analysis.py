@@ -19,11 +19,11 @@ from sklearn.metrics import median_absolute_error, r2_score
 
 default_wcf = 1.04
 recalc_default_wcf = True
-use_calculated_wcf = False
+measurement_specific_wcf = False
 filter_outliers = True
 reference_filter = 'PBA-B M'
-plot_ae = False
-plot_abv = True
+plot_ae_dev = True
+plot_abv_dev = True
 
 def correct_ri(ri, wcf):
     return ri / wcf
@@ -162,7 +162,7 @@ if recalc_default_wcf == True:
     default_wcf = wcf_stats['75%']
 print_stats(col_name_wcf, wcf_stats, False)
 
-if use_calculated_wcf == False:
+if measurement_specific_wcf == False:
     data[col_name_wcf] = default_wcf
 
 if filter_outliers == True:
@@ -203,7 +203,7 @@ def plot_devs(col_name, data_dev, stats_dev):
     ax_quantils = subfigs[0].subplots(1, 1)
     ax_quantils.axhline(0.0, linestyle='--', c='#000000', linewidth=1)
     dev_caption = col_name + ' Deviation at WCF='
-    if use_calculated_wcf == True:
+    if measurement_specific_wcf == True:
         dev_caption += 'Auto'
     else:
         dev_caption += '%.2f'%default_wcf
@@ -228,11 +228,11 @@ def plot_devs(col_name, data_dev, stats_dev):
     
     return fig
 
-if plot_ae:
+if plot_ae_dev:
     fig_ae = plot_devs(col_name_ae, data_ae_dev, stats_ae_dev)
     fig_ae.savefig('stats_ae_dev.svg')
-if plot_abv:
+if plot_abv_dev:
     fig_abv = plot_devs(col_name_abv, data_abv_dev, stats_abv_dev)
     fig_abv.savefig('stats_abv_dev.svg')
-if plot_ae == True or plot_abv == True:
+if plot_ae_dev == True or plot_abv_dev == True:
     plt.show()
