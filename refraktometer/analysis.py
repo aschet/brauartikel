@@ -209,8 +209,8 @@ subfigs = fig.subfigures(1, 2)
 subfigs[0].suptitle('ABV Deviation Quantils')
 ax_quantils = subfigs[0].subplots(1, 1)
 ax_quantils.axhline(0.0, linestyle='--', c='#000000', linewidth=1)
-wcf_caption_part = 'at WCF=' + '%.2f'%wcf
-ax_quantils.set_ylabel('Model ABV Deviation ' + wcf_caption_part)
+dev_caption = 'ABV Deviation at WCF=%.2f'%wcf
+ax_quantils.set_ylabel(dev_caption)
 data_dev.boxplot(abv_model_names, ax=ax_quantils, rot=45, grid=False, showmeans=True)
 
 subfigs[1].suptitle('ABV Deviation Density')
@@ -224,7 +224,7 @@ for i, abv_model in enumerate(abv_models):
     ax_desnity = ax_densities[row][col]
     rsquare = name_indexed_stats.loc[abv_model.name]['R-Squared']
     ax_desnity.set_title(abv_model.name + ' (R²=' + '%.3f'%rsquare + ')')    
-    ax_desnity.set_xlabel('Deviation ' + wcf_caption_part)
+    ax_desnity.set_xlabel(dev_caption)
     data_dev[abv_model_names[i]].plot.hist(density=True, xlim=[-1,1], ax=ax_desnity)
     data_dev[abv_model_names[i]].plot.density(ax=ax_desnity)  
 
