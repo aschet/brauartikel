@@ -141,10 +141,6 @@ abv_models = [
     ABVModel('Terrill Cubic', calc_abv_terrill_cubic, color_palette[6]),
 ]
 
-abv_model_names = []
-for abv_model in abv_models:
-    abv_model_names.append(abv_model.name)
-
 col_name_abv = 'ABV'
 col_name_wcf = 'WCF'
 col_name_oe = 'OE'
@@ -199,7 +195,6 @@ for abv_model in abv_models:
 data.to_csv("data_eval.csv", index=False)
 
 stats_columns = ['Name' , 'Min', 'Max', 'Mean', 'STD', 'R-Squared', '% Below 0.25', '% Below 0.5']
-stats_colors = ['#a9f693', '#00c295', '#ff0043', '#ff795b']
 stats = pa.DataFrame(stats_list, columns=stats_columns)
 stats.to_csv("stats_abv_dev.csv", index=False)
 print("ABV Deviation Statistics:")
@@ -210,11 +205,13 @@ fig.suptitle('Refractometer Correlation Model Evaluation')
 fig.set_figwidth(14)
 fig.set_figheight(8)
 ax_stats = axes[0]
+ax_stats.axhline(0.0, linestyle='--', c='#000000', linewidth=1)
 ax_data = axes[1]
 
 wcf_caption_part = 'at WCF=' + '%.2f'%wcf
 
-data_dev.boxplot(abv_model_names, ax=ax_stats, rot=45)
+abv_model_names = list(map(lambda model: model.name, abv_models))
+data_dev.boxplot(abv_model_names, ax=ax_stats, rot=45, grid=False)
 ax_stats.title.set_text('ABV Deviation')
 ax_stats.set_xlabel('')
 ax_stats.set_ylabel('Model ABV Deviation ' + wcf_caption_part)
