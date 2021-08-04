@@ -194,10 +194,9 @@ print_stats(col_name_abv, stats_abv_dev, True)
 
 def plot_devs(col_name, data_dev, stats_dev):
     fig = plt.figure(constrained_layout=True, figsize=(14, 8))
-    fig.suptitle('Refractometer Correlation Model Evaluation')
+    fig.suptitle('Refractometer Correlation Model Evaluation: ' + col_name)
     subfigs = fig.subfigures(1, 2)
 
-    subfigs[0].suptitle(col_name + ' Deviation Quantils')
     ax_quantils = subfigs[0].subplots(1, 1)
     ax_quantils.axhline(0.0, linestyle='--', c='#000000', linewidth=1)
     dev_caption = col_name + ' Deviation at WCF='
@@ -208,7 +207,6 @@ def plot_devs(col_name, data_dev, stats_dev):
     ax_quantils.set_ylabel(dev_caption)
     data_dev.boxplot(model_names, ax=ax_quantils, rot=45, grid=False, showmeans=True)
 
-    subfigs[1].suptitle(col_name + ' Deviation Histogram')
     cols = 2
     rows = len(refrac_models) // cols + len(refrac_models) % cols
     ax_densities = subfigs[1].subplots(rows, cols, sharex=True, sharey=True)
