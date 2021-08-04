@@ -211,7 +211,7 @@ ax_data = axes[1]
 wcf_caption_part = 'at WCF=' + '%.2f'%wcf
 
 abv_model_names = list(map(lambda model: model.name, abv_models))
-data_dev.boxplot(abv_model_names, ax=ax_stats, rot=45, grid=False)
+data_dev.boxplot(abv_model_names, ax=ax_stats, rot=45, grid=False, showmeans=True)
 ax_stats.title.set_text('ABV Deviation')
 ax_stats.set_xlabel('')
 ax_stats.set_ylabel('Model ABV Deviation ' + wcf_caption_part)
