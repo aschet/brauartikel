@@ -123,22 +123,21 @@ color_palette = [
 ]
 
 class ABVModel:
-    def __init__(self, name, functor, color):
+    def __init__(self, name, functor):
         self.name = name
         self.functor = functor
-        self.color = color
 
     def calc_abv(self, rii, rif):
         return self.functor(rii, rif)
 
 abv_models = [
-    ABVModel('Terrill Linear', calc_abv_terrill_linear, color_palette[5]),
-    ABVModel('Terrill Cubic', calc_abv_terrill_cubic, color_palette[6]),
-    ABVModel('Novotny Linear', calc_abv_novotny_linear, color_palette[3]),
-    ABVModel('Novotny Quadratic', calc_abv_novotny_quadratic, color_palette[4]),    
-    ABVModel('Bonham', calc_abv_bonham, color_palette[0]),
-    ABVModel('Gardner', calc_abv_gardner, color_palette[1]),
-    ABVModel('Gossett', calc_abv_gosett, color_palette[2]),    
+    ABVModel('Terrill Linear', calc_abv_terrill_linear),
+    ABVModel('Terrill Cubic', calc_abv_terrill_cubic),
+    ABVModel('Novotny Linear', calc_abv_novotny_linear),
+    ABVModel('Novotny Quadratic', calc_abv_novotny_quadratic),
+    ABVModel('Bonham', calc_abv_bonham),
+    ABVModel('Gardner', calc_abv_gardner),
+    ABVModel('Gossett', calc_abv_gosett)
 ]
 
 col_name_abv = 'ABV'
@@ -213,7 +212,7 @@ dev_caption = 'ABV Deviation at WCF=%.2f'%wcf
 ax_quantils.set_ylabel(dev_caption)
 data_dev.boxplot(abv_model_names, ax=ax_quantils, rot=45, grid=False, showmeans=True)
 
-subfigs[1].suptitle('ABV Deviation Density')
+subfigs[1].suptitle('ABV Deviation Histogram')
 name_indexed_stats = stats.set_index('Name')
 cols = 2
 rows = len(abv_models) // cols + len(abv_models) % cols
@@ -221,7 +220,10 @@ ax_densities = subfigs[1].subplots(rows, cols, sharex=True, sharey=True)
 for i, abv_model in enumerate(abv_models):
     row = i // cols
     col = i % cols
-    ax_desnity = ax_densities[row][col]
+    if rows > 1:
+        ax_desnity = ax_densities[row][col]
+    else:
+        ax_desnity = ax_densities[col]
     rsquare = name_indexed_stats.loc[abv_model.name]['R-Squared']
     ax_desnity.set_title(abv_model.name + ' (R²=' + '%.3f'%rsquare + ')')    
     ax_desnity.set_xlabel(dev_caption)
