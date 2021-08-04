@@ -132,13 +132,13 @@ class ABVModel:
         return self.functor(rii, rif)
 
 abv_models = [
+    ABVModel('Terrill Linear', calc_abv_terrill_linear, color_palette[5]),
+    ABVModel('Terrill Cubic', calc_abv_terrill_cubic, color_palette[6]),
+    ABVModel('Novotny Linear', calc_abv_novotny_linear, color_palette[3]),
+    ABVModel('Novotny Quadratic', calc_abv_novotny_quadratic, color_palette[4]),    
     ABVModel('Bonham', calc_abv_bonham, color_palette[0]),
     ABVModel('Gardner', calc_abv_gardner, color_palette[1]),
     ABVModel('Gossett', calc_abv_gosett, color_palette[2]),    
-    ABVModel('Novotny Linear', calc_abv_novotny_linear, color_palette[3]),
-    ABVModel('Novotny Quadratic', calc_abv_novotny_quadratic, color_palette[4]),
-    ABVModel('Terrill Linear', calc_abv_terrill_linear, color_palette[5]),
-    ABVModel('Terrill Cubic', calc_abv_terrill_cubic, color_palette[6]),
 ]
 
 col_name_abv = 'ABV'
@@ -200,34 +200,33 @@ stats.to_csv("stats_abv_dev.csv", index=False)
 print("ABV Deviation Statistics:")
 print(stats)
 
-fig, axes = plt.subplots(1, 2, constrained_layout=True)
-fig.suptitle('Refractometer Correlation Model Evaluation')
-fig.set_figwidth(14)
-fig.set_figheight(8)
-ax_stats = axes[0]
-ax_stats.axhline(0.0, linestyle='--', c='#000000', linewidth=1)
-ax_data = axes[1]
-
-wcf_caption_part = 'at WCF=' + '%.2f'%wcf
-
 abv_model_names = list(map(lambda model: model.name, abv_models))
-data_dev.boxplot(abv_model_names, ax=ax_stats, rot=45, grid=False, showmeans=True)
-ax_stats.title.set_text('ABV Deviation')
-ax_stats.set_xlabel('')
-ax_stats.set_ylabel('Model ABV Deviation ' + wcf_caption_part)
 
+fig = plt.figure(constrained_layout=True, figsize=(14, 8))
+fig.suptitle('Refractometer Correlation Model Evaluation')
+subfigs = fig.subfigures(1, 2)
+
+subfigs[0].suptitle('ABV Deviation Quantils')
+ax_quantils = subfigs[0].subplots(1, 1)
+ax_quantils.axhline(0.0, linestyle='--', c='#000000', linewidth=1)
+wcf_caption_part = 'at WCF=' + '%.2f'%wcf
+ax_quantils.set_ylabel('Model ABV Deviation ' + wcf_caption_part)
+data_dev.boxplot(abv_model_names, ax=ax_quantils, rot=45, grid=False, showmeans=True)
+
+subfigs[1].suptitle('ABV Deviation Density')
 name_indexed_stats = stats.set_index('Name')
-regression_line = data[col_name_abv]
-plt.plot(regression_line, regression_line, c='#000000', linewidth=1, axes=ax_data)
-for abv_model in abv_models:
-    specific_col_name = model_col_name_abv(abv_model.name)
+cols = 2
+rows = len(abv_models) // cols + len(abv_models) % cols
+ax_densities = subfigs[1].subplots(rows, cols, sharex=True, sharey=True)
+for i, abv_model in enumerate(abv_models):
+    row = i // cols
+    col = i % cols
+    ax_desnity = ax_densities[row][col]
     rsquare = name_indexed_stats.loc[abv_model.name]['R-Squared']
-    label_content = abv_model.name + ' (R²=' + '%.3f'%rsquare + ')'
-    data.plot.scatter(x=col_name_abv, y=specific_col_name, label=label_content, c=abv_model.color, ax=axes[1])
-
-ax_data.title.set_text(col_name_abv)
-ax_data.set_xlabel('Reference ' + col_name_abv)
-ax_data.set_ylabel('Model ' + col_name_abv + ' ' + wcf_caption_part)                
+    ax_desnity.set_title(abv_model.name + ' (R²=' + '%.3f'%rsquare + ')')    
+    ax_desnity.set_xlabel('Deviation ' + wcf_caption_part)
+    data_dev[abv_model_names[i]].plot.hist(density=True, xlim=[-1,1], ax=ax_desnity)
+    data_dev[abv_model_names[i]].plot.density(ax=ax_desnity)  
 
 plt.savefig('stats_abv_dev.png')
 plt.show()
