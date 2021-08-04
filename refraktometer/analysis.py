@@ -112,16 +112,6 @@ def cor_terrill_cubic(rii, rif):
 def calc_abv_terrill_cubic(rii, rif):
     return calc_model_abv(rii, rif, cor_terrill_cubic)
 
-color_palette = [
-    '#a9f693',
-    '#00c295',
-    '#84c5ea',
-    '#2e709f',
-    '#ff0043',
-    '#ff795b',
-    '#fddb85'
-]
-
 class ABVModel:
     def __init__(self, name, functor):
         self.name = name
