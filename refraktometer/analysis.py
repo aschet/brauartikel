@@ -14,8 +14,10 @@ import matplotlib.pyplot as plt
 # sg = specific gravity
 # wcf = wort correction factor
 
-wcf = 1.0
+wcf = 1.04
 filter_outliers = True
+plot_ae = False
+plot_abv = True
 
 def correct_ri(ri):
     return ri / wcf
@@ -226,8 +228,11 @@ def plot_devs(col_name, data_dev, stats_dev):
     
     return fig
 
-#fig_ae = plot_devs(col_name_ae, data_ae_dev, stats_ae_dev)
-#fig_ae.savefig('stats_ae_dev.png')
-fig_abv = plot_devs(col_name_abv, data_abv_dev, stats_abv_dev)
-fig_abv.savefig('stats_abv_dev.png')
-plt.show()
+if plot_ae:
+    fig_ae = plot_devs(col_name_ae, data_ae_dev, stats_ae_dev)
+    fig_ae.savefig('stats_ae_dev.png')
+if plot_abv:
+    fig_abv = plot_devs(col_name_abv, data_abv_dev, stats_abv_dev)
+    fig_abv.savefig('stats_abv_dev.png')
+if plot_ae == True or plot_abv == True:
+    plt.show()
