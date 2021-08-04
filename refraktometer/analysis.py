@@ -167,10 +167,10 @@ for model in refrac_models:
     data[model_col_name_abv] = model.calc_abv(data[col_name_rii], data[col_name_rif], wcf)   
     data_abv_dev[model.name] = data[col_name_abv] - data[model_col_name_abv]
 
-data.to_csv("data_eval.csv", index=False)
+data.to_csv('data_eval.csv', index=False)
 
 wcf_stats = data[col_name_wcf].describe()
-print("WCF Statistics:")
+print('WCF Statistics:')
 print(wcf_stats)
 print()
 
@@ -186,11 +186,11 @@ def create_stats(devs, col_name):
     return stats
 
 stats_ae_dev = create_stats(data_ae_dev, col_name_ae)
-stats_ae_dev.to_csv("stats_ae_dev.csv", index=True)
+stats_ae_dev.to_csv('stats_ae_dev.csv', index=True)
 stats_abv_dev = create_stats(data_abv_dev, col_name_abv)
-stats_abv_dev.to_csv("stats_abv_dev.csv", index=True)
+stats_abv_dev.to_csv('stats_abv_dev.csv', index=True)
 
-print("ABV Deviation Statistics:")
+print('ABV Deviation Statistics:')
 print(stats_abv_dev)
 
 def plot_devs(col_name, data_dev, stats_dev):
