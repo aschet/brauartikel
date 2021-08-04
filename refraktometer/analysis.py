@@ -141,6 +141,10 @@ abv_models = [
     ABVModel('Terrill Cubic', calc_abv_terrill_cubic, color_palette[6]),
 ]
 
+abv_model_names = []
+for abv_model in abv_models:
+    abv_model_names.append(abv_model.name)
+
 col_name_abv = 'ABV'
 col_name_wcf = 'WCF'
 col_name_oe = 'OE'
@@ -152,6 +156,7 @@ def model_col_name_abv(name):
     return col_name_abv + ' ' + name
 
 data = pa.read_csv('data.csv', delimiter=',')
+data_dev = pa.DataFrame()
 
 if filter_outliers == True:
     rii_dev_threshold = (data[col_name_oe] - data[col_name_rii]).std()
@@ -180,11 +185,12 @@ def calc_abv_model_stats(name):
     abv_observed = data[model_col_name_abv(name)]
     abv_reference = data[col_name_abv]
     abv_dev = abv_reference - abv_observed
+    data_dev[name] = abv_dev
     abv_dev_abs = abv_dev.abs()
     abv_dev_below_25 = abv_dev_abs.le(0.25).sum() / float(len(abv_dev_abs)) * 100.0    
     abv_dev_below_50 = abv_dev_abs.le(0.5).sum() / float(len(abv_dev_abs)) * 100.0
     rsquare = calc_rsquare(abv_observed, abv_reference)
-    return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev_abs.mean(), abv_dev.std(), rsquare, abv_dev_below_25, abv_dev_below_50
+    return name, abv_dev_abs.min(), abv_dev_abs.max(), abv_dev.mean(), abv_dev.std(), rsquare, abv_dev_below_25, abv_dev_below_50
 
 stats_list = []
 for abv_model in abv_models:
@@ -208,9 +214,8 @@ ax_data = axes[1]
 
 wcf_caption_part = 'at WCF=' + '%.2f'%wcf
 
-stats.plot(x='Name', y=stats_columns[1:-3], kind='bar', color=color_palette, ax=ax_stats)
-
-ax_stats.title.set_text('ABV Deviation Statistics')
+data_dev.boxplot(abv_model_names, ax=ax_stats, rot=45)
+ax_stats.title.set_text('ABV Deviation')
 ax_stats.set_xlabel('')
 ax_stats.set_ylabel('Model ABV Deviation ' + wcf_caption_part)
 
@@ -223,7 +228,7 @@ for abv_model in abv_models:
     label_content = abv_model.name + ' (R²=' + '%.3f'%rsquare + ')'
     data.plot.scatter(x=col_name_abv, y=specific_col_name, label=label_content, c=abv_model.color, ax=axes[1])
 
-ax_data.title.set_text(col_name_abv + ' Deviation')
+ax_data.title.set_text(col_name_abv)
 ax_data.set_xlabel('Reference ' + col_name_abv)
 ax_data.set_ylabel('Model ' + col_name_abv + ' ' + wcf_caption_part)                
 
