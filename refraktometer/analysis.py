@@ -198,7 +198,7 @@ print_stats(col_name_abv, stats_abv_dev, True)
 
 def plot_devs(col_name, data_dev, stats_dev):
     fig = plt.figure(constrained_layout=True, figsize=(14, 8))
-    fig.suptitle('Refractometer Correlation Model Evaluation: ' + col_name + ' (' + str(data_dev.shape[0]) + ' measurements)')
+    fig.suptitle('Refractometer Correlation Model Evaluation: ' + col_name + ' (' + str(data_dev.shape[0]) + ' Measurements)')
     subfigs = fig.subfigures(1, 2)
 
     ax_quantils = subfigs[0].subplots(1, 1)
@@ -207,7 +207,7 @@ def plot_devs(col_name, data_dev, stats_dev):
     if measurement_specific_wcf == True:
         dev_caption += 'Auto'
     else:
-        dev_caption += '%.3f'%default_wcf
+        dev_caption += '%.2f'%default_wcf
     ax_quantils.set_ylabel(dev_caption)
     data_dev.boxplot(model_names, ax=ax_quantils, rot=45, grid=False, showmeans=True)
 
