@@ -45,12 +45,11 @@ def calc_abw(oe, ae):
     re = calc_re(oe, ae)
     return (oe - re) / (2.0665 - (1.0665 * oe / 100.0))
 
-def calc_abv(abw, sg):
-    return abw * sg / 0.7907
+def calc_abv(abw, fg):
+    return abw * fg / 0.7907
 
 def calc_abv_simple(oe, ae):
-    re = calc_re(oe, ae)
-    return calc_abv(calc_abw(oe, ae), plato_to_sg(re))
+    return calc_abv(calc_abw(oe, ae), plato_to_sg(ae))
 
 # The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
 def cor_bonham(rii, rif, wcf):
@@ -70,8 +69,7 @@ def calc_abv_gosett(rii, rif, wcf):
     c = 100.0 * (rii - rif) / (100.0 - 48.4 * k - 0.582 * rif)
     abw = 48.4 * c / (100 - 0.582 * c)
     _, ae = cor_bonham(rii, rif, wcf)
-    re = calc_re(rii, ae)
-    return calc_abv(abw, plato_to_sg(re))
+    return calc_abv(abw, plato_to_sg(ae))
 
 # http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
 def cor_novotny_linear(rii, rif, wcf):
