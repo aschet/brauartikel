@@ -51,6 +51,10 @@ def calc_abv(abw, fg):
 def calc_abv_simple(oe, ae):
     return calc_abv(calc_abw(oe, ae), plato_to_sg(ae))
 
+def abv_common(cor_model, rii, rif, wcf):
+    oe, ae = cor_model(rii, rif, wcf)
+    return calc_abv_simple(oe, ae)
+
 # The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
 def cor_bonham(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
@@ -64,11 +68,11 @@ def cor_gardner(rii, rif, wcf):
     return oe, 1.53 * rif - 0.59 * oe
 
 # http://www.ithacoin.com/brewing/Derivation.htm
-def calc_abv_gosett(rii, rif, wcf):
+def abv_gosett(cor_model, rii, rif, wcf):
     k = 0.445
     c = 100.0 * (rii - rif) / (100.0 - 48.4 * k - 0.582 * rif)
     abw = 48.4 * c / (100 - 0.582 * c)
-    _, ae = cor_bonham(rii, rif, wcf)
+    _, ae = cor_model(rii, rif, wcf)
     return calc_abv(abw, plato_to_sg(ae))
 
 # http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
@@ -110,7 +114,7 @@ def print_stats(name, stats, is_deviation):
     print()
 
 class RefracModel:
-    def __init__(self, name, cor_model, abv_model=None):
+    def __init__(self, name, cor_model, abv_model):
         self.name = name
         self.cor_model = cor_model
         self.abv_model = abv_model
@@ -120,20 +124,16 @@ class RefracModel:
         return ae
 
     def calc_abv(self, rii, rif, wcf):
-        if not (self.abv_model is None):
-            return self.abv_model(rii, rif, wcf)
-        else:
-            oe, ae = self.cor_model(rii, rif, wcf)
-            return calc_abv_simple(oe, ae)
+        return self.abv_model(self.cor_model, rii, rif, wcf)
 
 refrac_models = [
-    RefracModel('Terrill Linear', cor_terrill_linear),
-    RefracModel('Terrill Cubic', cor_terrill_cubic),
-    RefracModel('Novotny Linear', cor_novotny_linear),
-    RefracModel('Novotny Quadratic', cor_novotny_quadratic),
-    RefracModel('Bonham', cor_bonham),
-    RefracModel('Gardner', cor_gardner),
-    RefracModel('Gossett', cor_bonham, calc_abv_gosett)
+    RefracModel('Terrill Linear', cor_terrill_linear, abv_common),
+    RefracModel('Terrill Cubic', cor_terrill_cubic, abv_common),
+    RefracModel('Novotny Linear', cor_novotny_linear, abv_common),
+    RefracModel('Novotny Quadratic', cor_novotny_quadratic, abv_common),
+    RefracModel('Bonham', cor_bonham, abv_common),
+    RefracModel('Gardner', cor_gardner, abv_common),
+    RefracModel('Gossett', cor_bonham, abv_gosett)
 ]
 
 model_names = list(map(lambda model: model.name, refrac_models))
