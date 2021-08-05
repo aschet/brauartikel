@@ -19,7 +19,7 @@ from sklearn.metrics import median_absolute_error, r2_score
 # WCF = wort correction factor
 
 default_wcf = 1.04
-recalc_default_wcf = True
+recalc_default_wcf = False
 measurement_specific_wcf = False
 filter_outliers = True
 reference_filter = 'PBA-B M'
@@ -33,7 +33,6 @@ def correct_ri(ri, wcf):
 def sg_to_plato(sg):
     return (-1.0 * 616.868) + (1111.14 * sg) - (630.272 * sg**2) + (135.997 * sg**3)
 
-# https://www.brewersfriend.com/plato-to-sg-conversion-chart
 def plato_to_sg(se):
     return 1.0 + (se / (258.6 - ((se / 258.2) * 227.1)))
 
@@ -81,7 +80,6 @@ def cor_novotny_linear(rii, rif, wcf):
     rifc = correct_ri(rif, wcf)
     return oe, sg_to_plato(-0.002349 * oe + 0.006276 * rifc + 1.0)
 
-# http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html     
 def cor_novotny_quadratic(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)
@@ -97,7 +95,6 @@ def cor_terrill_linear(rii, rif, wcf):
     rifc = correct_ri(rif, wcf)          
     return oe, sg_to_plato(1.0 - 0.000856829 * oe + 0.00349412 * rifc)
 
-# http://seanterrill.com/2011/04/07/refractometer-fg-results/
 def cor_terrill_cubic(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)         
@@ -209,7 +206,7 @@ def plot_devs(col_name, data_dev, stats_dev):
     if measurement_specific_wcf == True:
         dev_caption += 'Auto'
     else:
-        dev_caption += '%.2f'%default_wcf
+        dev_caption += '%.3f'%default_wcf
     ax_quantils.set_ylabel(dev_caption)
     data_dev.boxplot(model_names, ax=ax_quantils, rot=45, grid=False, showmeans=True)
 
