@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage{chemformula}
 \usepackage{amsmath,amsfonts,amssymb}
+\usepackage[italic,symbolgreek]{mathastext}
 \usepackage[backend=biber]{biblatex}
 \usepackage[hidelinks,pdfencoding=auto,
   pdfauthor={Thomas Ascher},
@@ -46,39 +47,57 @@
 \autocite{Terrill2011}
 \autocite{Siebel1938}
 \autocite{Weiss2016}
+\autocite{BrewersJournal2017}
+\autocite{Annemueller2015}
+\autocite{Kunze2004}
 
 \newcommand{\rii}{\mathit{R}_i}
 \newcommand{\riic}{\mathit{Rc}_i}
 \newcommand{\rif}{\mathit{R}_f}
 \newcommand{\rifc}{\mathit{Rc}_f}
+\newcommand{\fg}{\mathit{FG}}
+\newcommand{\abv}{\mathit{ABV}}
+\newcommand{\abw}{\mathit{ABW}}
 
-\subsection*{Bonham: Standard Formel (2001)}
+\subsection*{Bonham (2001)}
+
+\begin{align}
+\begin{split}
+\fg &= 1.001843 - 0.002318474 \cdot \riic - 0.000007775 \cdot \riic^2 -
+0.000000034 \cdot \riic^3 \\
+& \quad + 0.00574 \cdot \rif +
+0.00003344 \cdot \rif^2 + 0.000000086 \cdot \rif^3
+\end{split} \label{eq:bonham} 
+\end{align}
+
+\begin{align}
+\begin{split}
+\abv = \frac{(277.8851 - 277.4 \cdot \fg + 0.9956 \cdot \rif + 0.00523 \cdot \rif^2 + 0.000015 \cdot \rif^3) \cdot \fg}{0.79}
+\end{split}
+\end{align}
 
 \begin{equation}
-\mathit{FG}=1.001843 - 0.002318474 \riic - 0.000007775 \riic^2 -
-0.000000034 \riic^3 + 0.00574 \rif +
-0.00003344 \rif^2 + 0.000000086 \rif^3
-\label{eq:bonham} 
+\mathit{AE}=1.53 \cdot \rif - 0.59 \cdot \riic
+\label{eq:gardner} 
 \end{equation}
 
 \begin{equation}
-\mathit{AE}=1.53 \rif - 0.59 \riic
-\label{eq:gardner} 
+\abw = 1.09 \cdot \rif - 1.13 \cdot \mathit{AE}
 \end{equation}
 
 \subsection*{Terrill (2011)}
 
 \begin{equation}
-\mathit{FG}=1 - 0.000856829 \riic + 0.00349412 \rifc
+\fg = 1 - 0.00085683 \cdot \riic + 0.0034941 \cdot \rifc
 \label{eq:terrilllinear} 
 \end{equation}
 
-\begin{equation}
-\mathit{FG}=1 - 0.0044993 \riic + 0.000275806 \riic^2 -
-0.00000727999 \riic^3 + 0.0117741 \rifc -
-0.00127169 \rifc^2 + 0.0000632929 \rifc^3
-\label{eq:terrillcubic} 
-\end{equation}
+\begin{align}
+\begin{split}
+\fg &= 1 - 0.0044993 \cdot \riic + 0.011774 \cdot \rifc + 0.00027581 \cdot \riic^2 - 0.0012717 \cdot \rifc^2 \\
+& \quad  - 0.0000072800 \cdot \riic^3  + 0.000063293 \cdot \rifc^3
+\end{split} \label{eq:terrillcubic} 
+\end{align}
 
 \subsection*{Gossett (2012)}
 
@@ -87,38 +106,39 @@ k = 0.445
 \end{equation}
 
 \begin{equation}
-c = 100 \frac{\rii - \rif}{100 - 48.4 k - 0.582 \rif}
+C = 100 \cdot \frac{\rii - \rif}{100 - 48.4 \cdot k - 0.582 \cdot \rif}
 \end{equation}
 
 \begin{equation}
-\mathit{ABW} = \frac{48.4c}{100 - 0.582 c}
+\abw = \frac{48.4 \cdot C}{100 - 0.582 \cdot C}
 \label{eq:gossett} 
 \end{equation}
 
 \subsection*{Novotný (2017)}
 
 \begin{equation} 
-\mathit{FG}=-0.002349 \riic + 0.006276 \rifc + 1
+\fg = -0.002349 \cdot \riic + 0.006276 \cdot \rifc + 1
 \label{eq:novotnylinear} 
 \end{equation}
 
+\begin{align}
+\begin{split}
+\fg &= 1.335 \cdot 10^{-5} \cdot \riic^2 - 3.239 \cdot 10^{-5} \cdot \riic \cdot \rifc + 2.916 \cdot 10^{-5} \cdot \rifc^2 \\
+& \quad - 2.421 \cdot 10^{-3} \cdot \riic + 6.219 \cdot 10^{-3} \cdot \rifc + 1
+\end{split} \label{eq:novotnyquadratic} 
+\end{align}
+
 \begin{equation} 
-\mathit{FG}=1.335 \cdot 10^{-5} \riic^2 - 3.239 \cdot 10^{5} \riic \rifc +
-2.916 \cdot 10^{-5} \rifc^2 - 2.421 \cdot 10^{-3} \riic +
-6.219 \cdot 10^{-3} \rifc + 1
-\label{eq:novotnyquadratic} 
+\abw = 0.67062 \cdot \riic - 0.66091 \cdot \rifc
 \end{equation}
 
 \begin{equation} 
-\mathit{ABW} = 0.67062 \riic - 0.66091 \rifc
-\end{equation}
-
-\begin{equation} 
-\mathit{RE} = -0.29388 \riic + 1.27582 \rifc
+\mathit{RE} = -0.29388 \cdot \riic + 1.27582 \cdot \rifc
 \end{equation} 
 
-
-
+\begin{equation} 
+\abv = \frac{\fg \cdot \abw}{0.791}
+\end{equation} 
 
 
 \autoref{eq:novotnylinear}

@@ -228,8 +228,8 @@ def plot_devs(col_name, data_dev, stats_dev):
         rsquare = stats_dev[model.name][row_name_square]
         ax_desnity.set_title(model.name + ' (R²=' + '%.3f'%rsquare + ')')    
         ax_desnity.set_xlabel(dev_caption)
-        data_dev[model_names[i]].plot.hist(density=True, xlim=[-1,1], ax=ax_desnity)
-        data_dev[model_names[i]].plot.density(ax=ax_desnity)  
+        data_dev[model.name].plot.hist(density=True, xlim=[-1,1], ax=ax_desnity)
+        data_dev[model.name].plot.density(ax=ax_desnity)  
     
     return fig
 
