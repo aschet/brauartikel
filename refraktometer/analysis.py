@@ -23,7 +23,7 @@ recalc_default_wcf = False
 measurement_specific_wcf = False
 filter_outliers = True
 reference_filter = 'PBA-B M'
-plot_ae_dev = False
+plot_ae_dev = True
 plot_abv_dev = True
 
 def correct_ri(ri, wcf):
@@ -168,9 +168,10 @@ if measurement_specific_wcf == False:
 
 if filter_outliers == True:
     riic = correct_ri(data[col_name_rii], data[col_name_wcf])
-    mae = median_absolute_error(data[col_name_oe], riic) + 1.776357e-15
-    print('Filtering ' + col_name_rii + ' outliers over ' + str(mae) + '\n')
-    data = data[ (abs(data[col_name_oe] - riic) <= mae)]
+    rii_dev = data[col_name_oe] - riic
+    iqr = abs(rii_dev.quantile(0.75) - rii_dev.quantile(0.25)) * 1.5
+    print('Filtering ' + col_name_rii + ' outliers over ' + str(iqr) + '\n')
+    data = data[(abs(data[col_name_oe] - riic) <= iqr)]
 
 for model in refrac_models:
     model_col_name_ae = model_col_name(col_name_ae, model.name)
@@ -197,7 +198,7 @@ print_stats(col_name_abv, stats_abv_dev, True)
 
 def plot_devs(col_name, data_dev, stats_dev):
     fig = plt.figure(constrained_layout=True, figsize=(14, 8))
-    fig.suptitle('Refractometer Correlation Model Evaluation: ' + col_name)
+    fig.suptitle('Refractometer Correlation Model Evaluation: ' + col_name + ' (' + str(data_dev.shape[0]) + ' measurements)')
     subfigs = fig.subfigures(1, 2)
 
     ax_quantils = subfigs[0].subplots(1, 1)
