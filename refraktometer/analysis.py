@@ -21,10 +21,10 @@ from sklearn.metrics import median_absolute_error, r2_score
 default_wcf = 1.04
 recalc_default_wcf = False
 measurement_specific_wcf = False
-filter_outliers = True
+filter_rii_outliers = True
 reference_filter = 'PBA-B M'
 plot_ae_dev = True
-plot_abv_dev = True
+plot_abv_dev = False
 
 def correct_ri(ri, wcf):
     return ri / wcf
@@ -166,7 +166,7 @@ print_stats(col_name_wcf, wcf_stats, False)
 if measurement_specific_wcf == False:
     data[col_name_wcf] = default_wcf
 
-if filter_outliers == True:
+if filter_rii_outliers == True:
     riic = correct_ri(data[col_name_rii], data[col_name_wcf])
     rii_dev = data[col_name_oe] - riic
     iqr = abs(rii_dev.quantile(0.75) - rii_dev.quantile(0.25)) * 1.5
