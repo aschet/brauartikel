@@ -166,12 +166,18 @@ print_stats(col_name_wcf, wcf_stats, False)
 if measurement_specific_wcf == False:
     data[col_name_wcf] = default_wcf
 
+def iqr_filter(values):
+    Q1 = values.quantile(0.25)
+    Q3 = values.quantile(0.75)
+    IQR = Q3 - Q1
+    return abs(Q1 - 1.5 * IQR)
+
 if filter_oe_outliers == True:
     riic = correct_ri(data[col_name_rii], data[col_name_wcf])
     rii_dev = data[col_name_oe] - riic
-    iqr = abs(rii_dev.quantile(0.75) - rii_dev.quantile(0.25)) * 1.5
-    print('Filtering ' + col_name_rii + ' outliers over ' + str(iqr) + '\n')
-    data = data[(abs(data[col_name_oe] - riic) <= iqr)]
+    threshold = iqr_filter(rii_dev)
+    print('Filtering ' + col_name_rii + ' outliers over ' + str(threshold) + '\n')
+    data = data[(abs(data[col_name_oe] - riic) <= threshold)]
 
 for model in refrac_models:
     model_col_name_ae = model_col_name(col_name_ae, model.name)
