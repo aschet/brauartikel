@@ -12,6 +12,7 @@ from sklearn.metrics import median_absolute_error, r2_score
 # AE = apparent extract in °P
 # FG = final gravity in SG
 # OE = original extract in °P
+# RE = real extract in °P
 # RII = initial refractive index in °Bx
 # RIF = final refractive index in °Bx
 # SG = specific gravity
@@ -37,15 +38,19 @@ def plato_to_sg(se):
     return 1.0 + (se / (258.6 - ((se / 258.2) * 227.1)))
 
 # https://www.brewersjournal.info/science-basic-beer-alcohol-extract-determinations/
-def calc_abw(oe, ae):
-    return (0.8052 * (oe - ae)) / (2.0665 - (1.0665 * oe / 100.0))
+def calc_re(oe, ae):
+    return (0.1948 * oe) + (0.8052 * ae)
 
-# https://www.brewersjournal.info/science-basic-beer-alcohol-extract-determinations/
-def calc_abv(abw, fg):
-    return abw * fg / 0.7907
+def calc_abw(oe, ae):
+    re = calc_re(oe, ae)
+    return (oe - re) / (2.0665 - (1.0665 * oe / 100.0))
+
+def calc_abv(abw, sg):
+    return abw * sg / 0.7907
 
 def calc_abv_simple(oe, ae):
-    return calc_abv(calc_abw(oe, ae), plato_to_sg(ae))
+    re = calc_re(oe, ae)
+    return calc_abv(calc_abw(oe, ae), plato_to_sg(re))
 
 # The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
 def cor_bonham(rii, rif, wcf):
@@ -64,9 +69,9 @@ def calc_abv_gosett(rii, rif, wcf):
     k = 0.445
     c = 100.0 * (rii - rif) / (100.0 - 48.4 * k - 0.582 * rif)
     abw = 48.4 * c / (100 - 0.582 * c)
-    oe, ae = cor_bonham(rii, rif, wcf)
-    fg = plato_to_sg(ae)
-    return calc_abv(abw, fg)
+    _, ae = cor_bonham(rii, rif, wcf)
+    re = calc_re(rii, ae)
+    return calc_abv(abw, plato_to_sg(re))
 
 # http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
 def cor_novotny_linear(rii, rif, wcf):
