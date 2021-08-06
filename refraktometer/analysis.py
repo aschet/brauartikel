@@ -5,7 +5,8 @@
 
 import pandas as pa
 import matplotlib.pyplot as plt
-from sklearn.metrics import median_absolute_error, r2_score
+from sklearn.metrics import r2_score
+from scipy.stats import iqr
 
 # ABV = alcohol by volume in %
 # ABW = alcohol bei weight in %
@@ -171,16 +172,10 @@ print_stats(col_name_wcf, wcf_stats, False)
 if measurement_specific_wcf == False:
     data[col_name_wcf] = default_wcf
 
-def iqr_filter(values):
-    Q1 = values.quantile(0.25)
-    Q3 = values.quantile(0.75)
-    IQR = Q3 - Q1
-    return abs(Q1 - 1.5 * IQR)
-
 if filter_oe_outliers == True:
     riic = correct_ri(data[col_name_rii], data[col_name_wcf])
     rii_dev = riic - data[col_name_oe]
-    threshold = iqr_filter(rii_dev)
+    threshold = abs(iqr(rii_dev) * 1.5)
     print('Filtering ' + col_name_rii + ' outliers over ' + str(threshold) + '\n')
     data = data[(abs(riic - data[col_name_oe]) <= threshold)]
 
@@ -238,7 +233,10 @@ def plot_devs(col_name, data_dev, stats_dev):
         ax_desnity.set_title(model.name + ' (R²=' + '%.3f'%rsquare + ')')    
         ax_desnity.set_xlabel(dev_caption)
         data_dev[model.name].plot.hist(density=True, xlim=[-1,1], ax=ax_desnity)
-        data_dev[model.name].plot.density(ax=ax_desnity)  
+        try:
+            data_dev[model.name].plot.density(ax=ax_desnity)
+        except:
+            pass
     
     return fig
 
