@@ -174,18 +174,18 @@ def iqr_filter(values):
 
 if filter_oe_outliers == True:
     riic = correct_ri(data[col_name_rii], data[col_name_wcf])
-    rii_dev = data[col_name_oe] - riic
+    rii_dev = riic - data[col_name_oe]
     threshold = iqr_filter(rii_dev)
     print('Filtering ' + col_name_rii + ' outliers over ' + str(threshold) + '\n')
-    data = data[(abs(data[col_name_oe] - riic) <= threshold)]
+    data = data[(abs(riic - data[col_name_oe]) <= threshold)]
 
 for model in refrac_models:
     model_col_name_ae = model_col_name(col_name_ae, model.name)
     data[model_col_name_ae] = model.calc_ae(data[col_name_rii], data[col_name_rif], data[col_name_wcf])
-    data_ae_dev[model.name] = data[col_name_ae] - data[model_col_name_ae]
+    data_ae_dev[model.name] = data[model_col_name_ae] - data[col_name_ae]
     model_col_name_abv = model_col_name(col_name_abv, model.name)
     data[model_col_name_abv] = model.calc_abv(data[col_name_rii], data[col_name_rif], data[col_name_wcf])   
-    data_abv_dev[model.name] = data[col_name_abv] - data[model_col_name_abv]
+    data_abv_dev[model.name] = data[model_col_name_abv] - data[col_name_abv]
  
 data.to_csv('data_eval.csv', index=False)
 
