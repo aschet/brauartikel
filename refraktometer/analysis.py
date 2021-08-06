@@ -23,6 +23,7 @@ recalc_default_wcf = False
 measurement_specific_wcf = False
 filter_oe_outliers = True
 reference_filter = 'PBA-B M'
+refractometer_filter = 'ORA 32BA'
 plot_ae_dev = False
 plot_abv_dev = True
 
@@ -142,6 +143,7 @@ col_name_ae = 'AE'
 col_name_rii = 'RII'
 col_name_rif = 'RIF'
 col_name_reference = 'Reference'
+col_name_refractometer = 'Refractometer'
 row_name_square = 'r2score'
 
 def model_col_name(section, name):
@@ -153,6 +155,9 @@ data_ae_dev = pa.DataFrame()
 
 if len(reference_filter) > 0:
     data = data[data[col_name_reference] == reference_filter] 
+
+if len(refractometer_filter) > 0:
+    data = data[data[col_name_refractometer] == refractometer_filter]    
 
 data[col_name_wcf] = data[col_name_rii] / data[col_name_oe]
 data[col_name_abv] = calc_abv_simple(data[col_name_oe], data[col_name_ae])
@@ -204,7 +209,9 @@ print_stats(col_name_abv, stats_abv_dev, True)
 
 def plot_devs(col_name, data_dev, stats_dev):
     fig = plt.figure(constrained_layout=True, figsize=(14, 8))
-    fig.suptitle('Refractometer Correlation Model Evaluation: ' + col_name + ' (' + str(data_dev.shape[0]) + ' Measurements)')
+    reference = ', '.join(list(data[col_name_reference].unique()))
+    refractometer = ', '.join(list(data[col_name_refractometer].unique()))
+    fig.suptitle('Refractometer Correlation Model Comparison: ' + col_name + ' (' + reference + ' with ' + refractometer + ', ' + str(data_dev.shape[0]) + ' Measurements)')
     subfigs = fig.subfigures(1, 2)
 
     ax_quantils = subfigs[0].subplots(1, 1)
