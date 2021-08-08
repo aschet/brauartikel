@@ -23,7 +23,7 @@ default_wcf = 1.04
 recalc_default_wcf = False
 measurement_specific_wcf = False
 filter_oe_outliers = True
-reference_filter = 'Easy Dens Gen 2'
+reference_filter = 'PBA-B M'
 refractometer_filter = 'ORA 32BA'
 plot_ae_dev = False
 plot_abv_dev = True
@@ -108,7 +108,7 @@ def cor_terrill_cubic(rii, rif, wcf):
 def cor_sklearn(rii, rif, wcf):
     riic = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)
-    fg = 0.992196 + -0.001626 * riic + 0.005999 * rifc    
+    fg = 0.991845 + -0.001637 * riic + 0.006053 * rifc
     return riic, sg_to_plato(fg)
 
 def print_stats(name, stats, is_deviation):
