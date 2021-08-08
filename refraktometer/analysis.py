@@ -23,7 +23,7 @@ default_wcf = 1.04
 recalc_default_wcf = False
 measurement_specific_wcf = False
 filter_oe_outliers = True
-reference_filter = 'PBA-B M'
+reference_filter = 'Easy Dens Gen 2'
 refractometer_filter = 'ORA 32BA'
 plot_ae_dev = False
 plot_abv_dev = True
@@ -104,6 +104,7 @@ def cor_terrill_cubic(rii, rif, wcf):
         0.00000727999 * oe**3 + 0.0117741 * rifc - \
         0.00127169 * rifc**2 + 0.0000632929 * rifc**3)
 
+# Obtained by ML approach from Terrill and Novotny equations
 def cor_sklearn(rii, rif, wcf):
     riic = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)
