@@ -69,7 +69,7 @@ median_wcf = (measured_data[col_name_rii] / measured_data[col_name_oe]).median()
 measured_data[col_name_rii] = measured_data[col_name_rii] / median_wcf
 measured_data[col_name_rif] = measured_data[col_name_rii] / median_wcf
 measured_data[col_name_fg] = plato_to_sg(measured_data[col_name_ae])
-threshold = median_absolute_error(measured_data[col_name_oe], measured_data[col_name_oe])
+threshold = median_absolute_error(measured_data[col_name_oe], measured_data[col_name_rii])
 measured_data = measured_data[(abs(measured_data[col_name_rii] - measured_data[col_name_oe]) <= threshold)]
 measured_data = measured_data[[col_name_rii, col_name_rif, col_name_fg]]
 

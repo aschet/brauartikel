@@ -108,7 +108,7 @@ def cor_terrill_cubic(rii, rif, wcf):
 def cor_sklearn(rii, rif, wcf):
     riic = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)
-    fg = 0.991845 + -0.001637 * riic + 0.006053 * rifc
+    fg = 0.991469 + -0.001559 * riic + 0.005950 * rifc
     return riic, sg_to_plato(fg)
 
 def print_stats(name, stats, is_deviation):
