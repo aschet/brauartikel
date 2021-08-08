@@ -104,6 +104,13 @@ def cor_terrill_cubic(rii, rif, wcf):
         0.00000727999 * oe**3 + 0.0117741 * rifc - \
         0.00127169 * rifc**2 + 0.0000632929 * rifc**3)
 
+def cor_sklearn(rii, rif, wcf):
+    riic = correct_ri(rii, wcf)
+    rifc = correct_ri(rif, wcf)
+#    fg = 0.991845 + -0.001637 * riic + 0.006053 * rifc
+    fg = 0.992186 + -0.001625 * riic + 0.005999 * rifc
+    return riic, sg_to_plato(fg)
+
 def print_stats(name, stats, is_deviation):
     full_name = name
     if is_deviation == True:
@@ -132,7 +139,8 @@ refrac_models = [
     RefracModel('Novotny Quadratic', cor_novotny_quadratic, abv_common),
     RefracModel('Bonham', cor_bonham, abv_common),
     RefracModel('Gardner', cor_gardner, abv_common),
-    RefracModel('Gossett', cor_bonham, abv_gosett)
+    RefracModel('Gossett', cor_bonham, abv_gosett),
+    RefracModel('sklearn', cor_sklearn, abv_common)    
 ]
 
 model_names = list(map(lambda model: model.name, refrac_models))
