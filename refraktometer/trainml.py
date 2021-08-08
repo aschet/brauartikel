@@ -3,11 +3,15 @@
 # Copyright 2021 Thomas Ascher
 # SPDX-License-Identifier: GPL-3.0+
 
+import numpy as np
 import pandas as pa
 from sklearn.linear_model import LinearRegression
 
 def correct_ri(ri, wcf):
     return ri / wcf
+
+def sg_to_plato(sg):
+    return (-1.0 * 616.868) + (1111.14 * sg) - (630.272 * sg**2) + (135.997 * sg**3)
 
 def plato_to_sg(se):
     return 1.0 + (se / (258.6 - ((se / 258.2) * 227.1)))
@@ -56,6 +60,13 @@ for wcf_part in range(0, 9):
 col_name_rii = 'RII'
 col_name_rif = 'RIF'
 col_name_fg = 'FG'
+col_name_ae = 'AE'
+
+ext_da = pa.read_csv('data.csv', delimiter=',')
+ext_da[col_name_fg] = plato_to_sg(ext_da[col_name_ae])
+ext_da = ext_da[[col_name_rii, col_name_rif, col_name_fg]]
+
+data = np.concatenate((data, ext_da.to_numpy()), axis=0)
 
 df = pa.DataFrame(data, columns=['RII', 'RIF', 'FG'])
 reg_xdata = df[[col_name_rii, col_name_rif]].to_numpy()
