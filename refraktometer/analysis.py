@@ -111,12 +111,6 @@ def cor_sklearn(rii, rif, wcf):
     fg = 0.991469 + -0.001559 * riic + 0.005950 * rifc
     return riic, sg_to_plato(fg)
 
-def abv_sklearn(cor_model, rii, rif, wcf):
-    riic = correct_ri(rii, wcf)
-    rifc = correct_ri(rif, wcf)
-    abv = 0.628976 + 0.777299 * riic + -0.784427 * rifc
-    return abv
-
 def print_stats(name, stats, is_deviation):
     full_name = name
     if is_deviation == True:
@@ -146,7 +140,7 @@ refrac_models = [
     RefracModel('Bonham', cor_bonham, abv_common),
     RefracModel('Gardner', cor_gardner, abv_common),
     RefracModel('Gossett', cor_bonham, abv_gosett),
-    RefracModel('sklearn', cor_sklearn, abv_sklearn)    
+    RefracModel('sklearn', cor_sklearn, abv_common)    
 ]
 
 model_names = list(map(lambda model: model.name, refrac_models))
