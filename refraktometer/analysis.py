@@ -105,7 +105,7 @@ def cor_terrill_cubic(rii, rif, wcf):
         0.00127169 * rifc**2 + 0.0000632929 * rifc**3)
 
 # Obtained by line fit into data generated from Terrill and Novotny equations
-def cor_sklearn(rii, rif, wcf):
+def cor_ascher(rii, rif, wcf):
     riic = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)
     fg = 0.991469 + -0.001559 * riic + 0.005950 * rifc
@@ -140,7 +140,7 @@ refrac_models = [
     RefracModel('Bonham', cor_bonham, abv_common),
     RefracModel('Gardner', cor_gardner, abv_common),
     RefracModel('Gossett', cor_bonham, abv_gosett),
-    RefracModel('sklearn', cor_sklearn, abv_common)    
+    RefracModel('Ascher', cor_ascher, abv_common)    
 ]
 
 model_names = list(map(lambda model: model.name, refrac_models))
