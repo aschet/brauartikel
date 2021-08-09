@@ -11,25 +11,8 @@ from sklearn.metrics import median_absolute_error
 def correct_ri(ri, wcf):
     return ri / wcf
 
-def sg_to_plato(sg):
-    return (-1.0 * 616.868) + (1111.14 * sg) - (630.272 * sg**2) + (135.997 * sg**3)
-
 def plato_to_sg(se):
     return 1.0 + (se / (258.6 - ((se / 258.2) * 227.1)))
-
-# https://www.brewersjournal.info/science-basic-beer-alcohol-extract-determinations/
-def calc_re(oe, ae):
-    return (0.1948 * oe) + (0.8052 * ae)
-
-def calc_abw(oe, ae):
-    re = calc_re(oe, ae)
-    return (oe - re) / (2.0665 - (1.0665 * oe / 100.0))
-
-def calc_abv(abw, fg):
-    return abw * fg / 0.7907
-
-def calc_abv_simple(oe, fg):
-    return calc_abv(calc_abw(oe, sg_to_plato(fg)), fg)
 
 # http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
 def cor_novotny_linear(rii, rif, wcf):
@@ -69,11 +52,9 @@ for wcf_part in range(0, 7):
         for rif in range(rii-1, 4, -1):
             for model in models:
                 riic, rifc, fg =  model(rii, rif, wcf)
-                abv = calc_abv_simple(riic, fg)
                 if fg >= 1.0:
-                    data.append([riic, rifc, fg, abv])
+                    data.append([riic, rifc, fg])
 
-col_name_abv = 'ABV'
 col_name_oe = 'OE'
 col_name_rii = 'RII'
 col_name_rif = 'RIF'
@@ -87,12 +68,11 @@ measured_data[col_name_rif] = correct_ri(measured_data[col_name_rii], median_wcf
 measured_data[col_name_fg] = plato_to_sg(measured_data[col_name_ae])
 threshold = median_absolute_error(measured_data[col_name_oe], measured_data[col_name_rii])
 measured_data = measured_data[(abs(measured_data[col_name_rii] - measured_data[col_name_oe]) <= threshold)]
-measured_data[col_name_abv] = calc_abv_simple(measured_data[col_name_rii], measured_data[col_name_fg])
-measured_data = measured_data[[col_name_rii, col_name_rif, col_name_fg, col_name_abv]]
+measured_data = measured_data[[col_name_rii, col_name_rif, col_name_fg]]
 
 data = np.concatenate((data, measured_data.to_numpy()), axis=0)
 
-df = pa.DataFrame(data, columns=[col_name_rii, col_name_rif, col_name_fg, col_name_abv])
+df = pa.DataFrame(data, columns=[col_name_rii, col_name_rif, col_name_fg])
 
 def print_equation(feature_name, variable_name):
     reg_xdata = df[[col_name_rii, col_name_rif]].to_numpy()
@@ -101,4 +81,3 @@ def print_equation(feature_name, variable_name):
     print(variable_name + ' = ' + '%.6f'%reg.intercept_ + ' + ' + '%.6f'%reg.coef_[0] + ' * riic + ' + '%.6f'%reg.coef_[1] +  ' * rifc')
 
 print_equation(col_name_fg, 'fg')
-print_equation(col_name_abv, 'abv')
