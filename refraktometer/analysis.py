@@ -54,24 +54,26 @@ def calc_abv_simple(oe, ae):
     return calc_abv(calc_abw(oe, calc_re(oe, ae)), p_to_sg(ae))
 
 def abv_common(cor_model, rii, rif, wcf):
-    oe, ae = cor_model(rii, rif, wcf)
-    return calc_abv_simple(oe, ae)
+    oe, ae, fg = cor_model(rii, rif, wcf)
+    return calc_abv(calc_abw(oe, calc_re(oe, ae)), fg)
 
 # Bonham correleation function implemented according to:
 # Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
 # In: Zymurgy 24.1 (2001), S. 43-46.
 def cor_bonham(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
-    return oe, sg_to_p(1.001843 - 0.002318474 * oe - 0.000007775 * oe**2 - \
+    fg = 1.001843 - 0.002318474 * oe - 0.000007775 * oe**2 - \
         0.000000034 * oe**3 + 0.00574 * rif + \
-        0.00003344 * rif**2 + 0.000000086 * rif**3)
+        0.00003344 * rif**2 + 0.000000086 * rif**3
+    return oe, sg_to_p(fg), fg
 
 # Gardner correleation function implemented according to:
 # Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
 # In: Zymurgy 24.1 (2001), S. 43-46.
 def cor_gardner(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
-    return oe, 1.53 * rif - 0.59 * oe
+    ae = 1.53 * rif - 0.59 * oe
+    return oe, ae, p_to_sg(ae)
 
 # Gossett correleation function implemented according to:
 # James M. Gossett. Derivation and Explanation of the Brix-Based Calculator For Estimating
@@ -81,8 +83,8 @@ def abv_gosett(cor_model, rii, rif, wcf):
     k = 0.445
     c = 100.0 * (rii - rif) / (100.0 - 48.4 * k - 0.582 * rif)
     abw = 48.4 * c / (100 - 0.582 * c)
-    _, ae = cor_model(rii, rif, wcf)
-    return calc_abv(abw, p_to_sg(ae))
+    oe, ae, fg = cor_model(rii, rif, wcf)
+    return calc_abv(abw, fg)
 
 # Novotný correleation functions implemented according to:
 # Petr Novotný. Počítáme: Nová korekce refraktometru. 2017.
@@ -90,38 +92,42 @@ def abv_gosett(cor_model, rii, rif, wcf):
 def cor_novotny_linear(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)
-    return oe, sg_to_p(-0.002349 * oe + 0.006276 * rifc + 1.0)
+    fg = -0.002349 * oe + 0.006276 * rifc + 1.0
+    return oe, sg_to_p(fg), fg
 
 def cor_novotny_quadratic(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)
-    return oe, sg_to_p(1.335 * 10.0**-5 * oe**2 - \
+    fg = 1.335 * 10.0**-5 * oe**2 - \
         3.239 * 10.0**-5 * oe * rifc + \
         2.916 * 10.0**-5 * rifc**2 - \
         2.421 * 10.0**-3 * oe + \
-        6.219 * 10.0**-3 * rifc + 1.0)
+        6.219 * 10.0**-3 * rifc + 1.0
+    return oe, sg_to_p(fg), fg
 
 # Terrill correleation functions implemented according to:
 # Sean Terrill. Refractometer FG Results. 2011.
 # URL: http://seanterrill.com/2011/04/07/refractometer-fg-results/
 def cor_terrill_linear(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
-    rifc = correct_ri(rif, wcf)          
-    return oe, sg_to_p(1.0 - 0.000856829 * oe + 0.00349412 * rifc)
+    rifc = correct_ri(rif, wcf)
+    fg = 1.0 - 0.000856829 * oe + 0.00349412 * rifc
+    return oe, sg_to_p(fg), fg
 
 def cor_terrill_cubic(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
-    rifc = correct_ri(rif, wcf)         
-    return oe, sg_to_p(1.0 - 0.0044993 * oe + 0.000275806 * oe**2 - \
+    rifc = correct_ri(rif, wcf)
+    fg = 1.0 - 0.0044993 * oe + 0.000275806 * oe**2 - \
         0.00000727999 * oe**3 + 0.0117741 * rifc - \
-        0.00127169 * rifc**2 + 0.0000632929 * rifc**3)
+        0.00127169 * rifc**2 + 0.0000632929 * rifc**3
+    return oe, sg_to_p(fg), fg
 
 # Obtained by fit into data generated from Terrill and Novotný equations
 def cor_ascher(rii, rif, wcf):
     riic = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)
     fg = 0.991845 + -0.001637 * riic + 0.006053 * rifc
-    return riic, sg_to_p(fg)
+    return riic, sg_to_p(fg), fg
 
 def print_stats(name, stats, is_deviation):
     full_name = name
@@ -138,7 +144,7 @@ class RefracModel:
         self.abv_model = abv_model
 
     def calc_ae(self, rii, rif, wcf):
-        _, ae = self.cor_model(rii, rif, wcf)
+        oe, ae, fg = self.cor_model(rii, rif, wcf)
         return ae
 
     def calc_abv(self, rii, rif, wcf):
