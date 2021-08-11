@@ -53,7 +53,7 @@ def calc_abv(abw, fg):
 def calc_abv_simple(oe, ae):
     return calc_abv(calc_abw(oe, calc_re(oe, ae)), p_to_sg(ae))
 
-# Bonham correleation function implemented according to:
+# Bonham (Standard) correleation function implemented according to:
 # Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
 # In: Zymurgy 24.1 (2001), S. 43-46.
 def cor_bonham(bxi, bxf, wcf):
