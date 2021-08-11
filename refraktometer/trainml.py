@@ -7,8 +7,8 @@ import numpy as np
 import pandas as pa
 from sklearn.linear_model import LinearRegression
 
-def correct_bx(ri, wcf):
-    return ri / wcf
+def correct_bx(bx, wcf):
+    return bx / wcf
 
 # Novotný correleation functions implemented according to:
 # Petr Novotný. Počítáme: Nová korekce refraktometru. 2017.

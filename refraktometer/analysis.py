@@ -28,8 +28,8 @@ refractometer_filter = 'ORA 32BA'
 plot_ae_dev = False
 plot_abv_dev = True
 
-def correct_bx(ri, wcf):
-    return ri / wcf
+def correct_bx(bx, wcf):
+    return bx / wcf
 
 # Alcohol content estimation and Plato/SG conversion implemented according to
 # G. Spedding. "Alcohol and Its Measurement". In: Brewing Materials and Processes. Elsevier,
