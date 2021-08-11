@@ -31,85 +31,97 @@ plot_abv_dev = True
 def correct_ri(ri, wcf):
     return ri / wcf
 
-# https://www.brewersfriend.com/plato-to-sg-conversion-chart
-def sg_to_plato(sg):
-    return (-1.0 * 616.868) + (1111.14 * sg) - (630.272 * sg**2) + (135.997 * sg**3)
+# Alcohol content estimation and Plato/SG conversion implemented according to
+# G. Spedding. "Alcohol and Its Measurement". In: Brewing Materials and Processes. Elsevier,
+# 2016, S. 123-149. DOI: 10.1016/b978-0-12-799954-8.00007-1
 
-def plato_to_sg(se):
-    return 1.0 + (se / (258.6 - ((se / 258.2) * 227.1)))
+def sg_to_p(sg):
+    return sg**2 * -205.347 + 668.72 * sg - 463.37
 
-# https://www.brewersjournal.info/science-basic-beer-alcohol-extract-determinations/
+def p_to_sg(p):
+    return p / (258.6 - (p / 258.2 * 227.1)) + 1.0
+
 def calc_re(oe, ae):
-    return (0.1948 * oe) + (0.8052 * ae)
+    return 0.1948 * oe + 0.8052 * ae
 
-def calc_abw(oe, ae):
-    re = calc_re(oe, ae)
+def calc_abw(oe, re):
     return (oe - re) / (2.0665 - (1.0665 * oe / 100.0))
 
 def calc_abv(abw, fg):
     return abw * fg / 0.7907
 
 def calc_abv_simple(oe, ae):
-    return calc_abv(calc_abw(oe, ae), plato_to_sg(ae))
+    return calc_abv(calc_abw(oe, calc_re(oe, ae)), p_to_sg(ae))
 
 def abv_common(cor_model, rii, rif, wcf):
     oe, ae = cor_model(rii, rif, wcf)
     return calc_abv_simple(oe, ae)
 
-# The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
+# Bonham correleation function implemented according to:
+# Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
+# In: Zymurgy 24.1 (2001), S. 43-46.
 def cor_bonham(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
-    return oe, sg_to_plato(1.001843 - 0.002318474 * oe - 0.000007775 * oe**2 - \
+    return oe, sg_to_p(1.001843 - 0.002318474 * oe - 0.000007775 * oe**2 - \
         0.000000034 * oe**3 + 0.00574 * rif + \
         0.00003344 * rif**2 + 0.000000086 * rif**3)
 
-# The Use of Handheld Refractometers by Homebrewer, Zymurgy January/February 2001 p. 44
+# Gardner correleation function implemented according to:
+# Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
+# In: Zymurgy 24.1 (2001), S. 43-46.
 def cor_gardner(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
     return oe, 1.53 * rif - 0.59 * oe
 
-# http://www.ithacoin.com/brewing/Derivation.htm
+# Gossett correleation function implemented according to:
+# James M. Gossett. Derivation and Explanation of the Brix-Based Calculator For Estimating
+# ABV in Fermenting and Finished Beers. 2012.
+# URL: http://www.ithacoin.com/brewing/Derivation.htm
 def abv_gosett(cor_model, rii, rif, wcf):
     k = 0.445
     c = 100.0 * (rii - rif) / (100.0 - 48.4 * k - 0.582 * rif)
     abw = 48.4 * c / (100 - 0.582 * c)
     _, ae = cor_model(rii, rif, wcf)
-    return calc_abv(abw, plato_to_sg(ae))
+    return calc_abv(abw, p_to_sg(ae))
 
-# http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
+# Novotný correleation functions implemented according to:
+# Petr Novotný. Počítáme: Nová korekce refraktometru. 2017.
+# URL: http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
 def cor_novotny_linear(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)
-    return oe, sg_to_plato(-0.002349 * oe + 0.006276 * rifc + 1.0)
+    return oe, sg_to_p(-0.002349 * oe + 0.006276 * rifc + 1.0)
 
 def cor_novotny_quadratic(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)
-    return oe, sg_to_plato(1.335 * 10.0**-5 * oe**2 - \
+    return oe, sg_to_p(1.335 * 10.0**-5 * oe**2 - \
         3.239 * 10.0**-5 * oe * rifc + \
         2.916 * 10.0**-5 * rifc**2 - \
         2.421 * 10.0**-3 * oe + \
         6.219 * 10.0**-3 * rifc + 1.0)
 
-# http://seanterrill.com/2011/04/07/refractometer-fg-results/
+# Terrill correleation functions implemented according to:
+# Sean Terrill. Refractometer FG Results. 2011.
+# URL: http://seanterrill.com/2011/04/07/refractometer-fg-results/
 def cor_terrill_linear(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)          
-    return oe, sg_to_plato(1.0 - 0.000856829 * oe + 0.00349412 * rifc)
+    return oe, sg_to_p(1.0 - 0.000856829 * oe + 0.00349412 * rifc)
 
 def cor_terrill_cubic(rii, rif, wcf):
     oe = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)         
-    return oe, sg_to_plato(1.0 - 0.0044993 * oe + 0.000275806 * oe**2 - \
+    return oe, sg_to_p(1.0 - 0.0044993 * oe + 0.000275806 * oe**2 - \
         0.00000727999 * oe**3 + 0.0117741 * rifc - \
         0.00127169 * rifc**2 + 0.0000632929 * rifc**3)
 
-# Obtained by line fit into data generated from Terrill and Novotny equations
+# Obtained by fit into data generated from Terrill and Novotný equations
 def cor_ascher(rii, rif, wcf):
     riic = correct_ri(rii, wcf)
     rifc = correct_ri(rif, wcf)
-    fg = 0.991469 + -0.001559 * riic + 0.005950 * rifc
-    return riic, sg_to_plato(fg)
+    fg = 0.991845 + -0.001637 * riic + 0.006053 * rifc
+    return riic, sg_to_p(fg)
 
 def print_stats(name, stats, is_deviation):
     full_name = name
