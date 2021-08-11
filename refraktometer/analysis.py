@@ -22,7 +22,7 @@ from scipy.stats import iqr
 default_wcf = 1.04
 recalc_default_wcf = False
 measurement_specific_wcf = False
-filter_oe_outliers = True
+discard_bxi_outliers = True
 reference_filter = 'PBA-B M'
 refractometer_filter = 'ORA 32BA'
 plot_ae_dev = False
@@ -196,11 +196,11 @@ print_stats(col_name_wcf, wcf_stats, False)
 if measurement_specific_wcf == False:
     data[col_name_wcf] = default_wcf
 
-if filter_oe_outliers == True:
+if discard_bxi_outliers == True:
     bxic = correct_bx(data[col_name_bxi], data[col_name_wcf])
     bxi_dev = bxic - data[col_name_oe]
     threshold = abs(iqr(bxi_dev) * 1.5)
-    print('Filtering ' + col_name_bxi + ' outliers over ' + str(threshold) + '\n')
+    print('Discarding ' + col_name_bxi + ' outliers over ' + str(threshold) + '\n')
     data = data[(abs(bxic - data[col_name_oe]) <= threshold)]
 
 for model in refrac_models:
