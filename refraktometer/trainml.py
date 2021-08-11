@@ -7,21 +7,21 @@ import numpy as np
 import pandas as pa
 from sklearn.linear_model import LinearRegression
 
-def apply_wcf(ri, wcf):
+def correct_bx(ri, wcf):
     return ri / wcf
 
 # Novotný correleation functions implemented according to:
 # Petr Novotný. Počítáme: Nová korekce refraktometru. 2017.
 # URL: http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
 def cor_novotny_linear(bxi, bxf, wcf):
-    oe = apply_wcf(bxi, wcf)
-    bxfc = apply_wcf(bxf, wcf)
+    oe = correct_bx(bxi, wcf)
+    bxfc = correct_bx(bxf, wcf)
     fg = -0.002349 * oe + 0.006276 * bxfc + 1.0
     return oe, bxfc, fg
 
 def cor_novotny_quadratic(bxi, bxf, wcf):
-    oe = apply_wcf(bxi, wcf)
-    bxfc = apply_wcf(bxf, wcf)
+    oe = correct_bx(bxi, wcf)
+    bxfc = correct_bx(bxf, wcf)
     fg = 1.335 * 10.0**-5 * oe**2 - \
         3.239 * 10.0**-5 * oe * bxfc + \
         2.916 * 10.0**-5 * bxfc**2 - \
@@ -33,14 +33,14 @@ def cor_novotny_quadratic(bxi, bxf, wcf):
 # Sean Terrill. Refractometer FG Results. 2011.
 # URL: http://seanterrill.com/2011/04/07/refractometer-fg-results/
 def cor_terrill_linear(bxi, bxf, wcf):
-    oe = apply_wcf(bxi, wcf)
-    bxfc = apply_wcf(bxf, wcf)
+    oe = correct_bx(bxi, wcf)
+    bxfc = correct_bx(bxf, wcf)
     fg = 1.0 - 0.000856829 * oe + 0.00349412 * bxfc
     return oe, bxfc, fg
 
 def cor_terrill_cubic(bxi, bxf, wcf):
-    oe = apply_wcf(bxi, wcf)
-    bxfc = apply_wcf(bxf, wcf)
+    oe = correct_bx(bxi, wcf)
+    bxfc = correct_bx(bxf, wcf)
     fg = 1.0 - 0.0044993 * oe + 0.000275806 * oe**2 - \
         0.00000727999 * oe**3 + 0.0117741 * bxfc - \
         0.00127169 * bxfc**2 + 0.0000632929 * bxfc**3
