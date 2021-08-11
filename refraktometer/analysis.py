@@ -53,10 +53,6 @@ def calc_abv(abw, fg):
 def calc_abv_simple(oe, ae):
     return calc_abv(calc_abw(oe, calc_re(oe, ae)), p_to_sg(ae))
 
-def abv_common(cor_model, rii, rif, wcf):
-    oe, ae, fg = cor_model(rii, rif, wcf)
-    return calc_abv(calc_abw(oe, calc_re(oe, ae)), fg)
-
 # Bonham correleation function implemented according to:
 # Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
 # In: Zymurgy 24.1 (2001), S. 43-46.
@@ -79,12 +75,10 @@ def cor_gardner(rii, rif, wcf):
 # James M. Gossett. Derivation and Explanation of the Brix-Based Calculator For Estimating
 # ABV in Fermenting and Finished Beers. 2012.
 # URL: http://www.ithacoin.com/brewing/Derivation.htm
-def abv_gosett(cor_model, rii, rif, wcf):
+def abw_gosett(rii, rif, wcf):
     k = 0.445
     c = 100.0 * (rii - rif) / (100.0 - 48.4 * k - 0.582 * rif)
-    abw = 48.4 * c / (100 - 0.582 * c)
-    oe, ae, fg = cor_model(rii, rif, wcf)
-    return calc_abv(abw, fg)
+    return 48.4 * c / (100 - 0.582 * c)
 
 # Novotný correleation functions implemented according to:
 # Petr Novotný. Počítáme: Nová korekce refraktometru. 2017.
@@ -138,27 +132,31 @@ def print_stats(name, stats, is_deviation):
     print()
 
 class RefracModel:
-    def __init__(self, name, cor_model, abv_model):
+    def __init__(self, name, cor_model, abw_model = None):
         self.name = name
         self.cor_model = cor_model
-        self.abv_model = abv_model
+        self.abw_model = abw_model
 
     def calc_ae(self, rii, rif, wcf):
         oe, ae, fg = self.cor_model(rii, rif, wcf)
         return ae
 
     def calc_abv(self, rii, rif, wcf):
-        return self.abv_model(self.cor_model, rii, rif, wcf)
+        oe, ae, fg = self.cor_model(rii, rif, wcf)
+        if self.abw_model is None:
+            return calc_abv(calc_abw(oe, calc_re(oe, ae)), fg)
+        else:
+            return calc_abv(self.abw_model(rii, rif, wcf), fg)
 
 refrac_models = [
-    RefracModel('Terrill Linear', cor_terrill_linear, abv_common),
-    RefracModel('Terrill Cubic', cor_terrill_cubic, abv_common),
-    RefracModel('Novotny Linear', cor_novotny_linear, abv_common),
-    RefracModel('Novotny Quadratic', cor_novotny_quadratic, abv_common),
-    RefracModel('Bonham', cor_bonham, abv_common),
-    RefracModel('Gardner', cor_gardner, abv_common),
-    RefracModel('Gossett', cor_bonham, abv_gosett),
-    RefracModel('Ascher', cor_ascher, abv_common)    
+    RefracModel('Terrill Linear', cor_terrill_linear),
+    RefracModel('Terrill Cubic', cor_terrill_cubic),
+    RefracModel('Novotny Linear', cor_novotny_linear),
+    RefracModel('Novotny Quadratic', cor_novotny_quadratic),
+    RefracModel('Bonham', cor_bonham),
+    RefracModel('Gardner', cor_gardner),
+    RefracModel('Gossett', cor_bonham, abw_gosett),
+    RefracModel('Ascher', cor_ascher)
 ]
 
 model_names = list(map(lambda model: model.name, refrac_models))
