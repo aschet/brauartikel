@@ -33,7 +33,7 @@ def correct_bx(bx, wcf):
 
 # Alcohol content estimation and Plato/SG conversion implemented according to
 # G. Spedding. "Alcohol and Its Measurement". In: Brewing Materials and Processes. Elsevier,
-# 2016, S. 123-149. DOI: 10.1016/b978-0-12-799954-8.00007-1
+# 2016, S. 123-149. DOI: 10.1016/b978-0-12-799954-8.00007-1.
 
 def sg_to_p(sg):
     return sg**2 * -205.347 + 668.72 * sg - 463.37
@@ -53,7 +53,7 @@ def calc_abv(abw, fg):
 def calc_abv_simple(oe, ae):
     return calc_abv(calc_abw(oe, calc_re(oe, ae)), p_to_sg(ae))
 
-# Bonham (Standard) correleation function implemented according to:
+# Bonham (Standard) correlation function implemented according to:
 # Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
 # In: Zymurgy 24.1 (2001), S. 43-46.
 def cor_bonham(bxi, bxf, wcf):
@@ -63,7 +63,7 @@ def cor_bonham(bxi, bxf, wcf):
         0.00003344 * bxf**2 + 0.000000086 * bxf**3
     return oe, sg_to_p(fg), fg
 
-# Gardner correleation function implemented according to:
+# Gardner correlation function implemented according to:
 # Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
 # In: Zymurgy 24.1 (2001), S. 43-46.
 def cor_gardner(bxi, bxf, wcf):
@@ -71,7 +71,7 @@ def cor_gardner(bxi, bxf, wcf):
     ae = 1.53 * bxf - 0.59 * oe
     return oe, ae, p_to_sg(ae)
 
-# Gossett correleation function implemented according to:
+# Gossett correlation function implemented according to:
 # James M. Gossett. Derivation and Explanation of the Brix-Based Calculator For Estimating
 # ABV in Fermenting and Finished Beers. 2012.
 # URL: http://www.ithacoin.com/brewing/Derivation.htm
@@ -80,7 +80,7 @@ def abw_gosett(bxi, bxf, wcf):
     c = 100.0 * (bxi - bxf) / (100.0 - 48.4 * k - 0.582 * bxf)
     return 48.4 * c / (100 - 0.582 * c)
 
-# Novotný correleation functions implemented according to:
+# Novotný correlation functions implemented according to:
 # Petr Novotný. Počítáme: Nová korekce refraktometru. 2017.
 # URL: http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
 def cor_novotny_linear(bxi, bxf, wcf):
@@ -99,7 +99,7 @@ def cor_novotny_quadratic(bxi, bxf, wcf):
         6.219 * 10.0**-3 * bxfc + 1.0
     return oe, sg_to_p(fg), fg
 
-# Terrill correleation functions implemented according to:
+# Terrill correlation functions implemented according to:
 # Sean Terrill. Refractometer FG Results. 2011.
 # URL: http://seanterrill.com/2011/04/07/refractometer-fg-results/
 def cor_terrill_linear(bxi, bxf, wcf):

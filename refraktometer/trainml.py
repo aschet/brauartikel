@@ -10,7 +10,7 @@ from sklearn.linear_model import LinearRegression
 def correct_bx(bx, wcf):
     return bx / wcf
 
-# Novotný correleation functions implemented according to:
+# Novotný correlation functions implemented according to:
 # Petr Novotný. Počítáme: Nová korekce refraktometru. 2017.
 # URL: http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
 def cor_novotny_linear(bxi, bxf, wcf):
@@ -29,7 +29,7 @@ def cor_novotny_quadratic(bxi, bxf, wcf):
         6.219 * 10.0**-3 * bxfc + 1.0
     return oe, bxfc, fg
 
-# Terrill correleation functions implemented according to:
+# Terrill correlation functions implemented according to:
 # Sean Terrill. Refractometer FG Results. 2011.
 # URL: http://seanterrill.com/2011/04/07/refractometer-fg-results/
 def cor_terrill_linear(bxi, bxf, wcf):
