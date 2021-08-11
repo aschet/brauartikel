@@ -14,8 +14,8 @@ from scipy.stats import iqr
 # FG = final gravity in SG
 # OE = original extract in °P
 # RE = real extract in °P
-# RII = initial refractive index in °Bx
-# RIF = final refractive index in °Bx
+# BXI = initial refractometer reading in °Bx
+# BXF = final refractometer reading in °Bx
 # SG = specific gravity
 # WCF = wort correction factor
 
@@ -28,7 +28,7 @@ refractometer_filter = 'ORA 32BA'
 plot_ae_dev = False
 plot_abv_dev = True
 
-def correct_ri(ri, wcf):
+def apply_wcf(ri, wcf):
     return ri / wcf
 
 # Alcohol content estimation and Plato/SG conversion implemented according to
@@ -56,72 +56,72 @@ def calc_abv_simple(oe, ae):
 # Bonham correleation function implemented according to:
 # Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
 # In: Zymurgy 24.1 (2001), S. 43-46.
-def cor_bonham(rii, rif, wcf):
-    oe = correct_ri(rii, wcf)
+def cor_bonham(bxi, bxf, wcf):
+    oe = apply_wcf(bxi, wcf)
     fg = 1.001843 - 0.002318474 * oe - 0.000007775 * oe**2 - \
-        0.000000034 * oe**3 + 0.00574 * rif + \
-        0.00003344 * rif**2 + 0.000000086 * rif**3
+        0.000000034 * oe**3 + 0.00574 * bxf + \
+        0.00003344 * bxf**2 + 0.000000086 * bxf**3
     return oe, sg_to_p(fg), fg
 
 # Gardner correleation function implemented according to:
 # Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
 # In: Zymurgy 24.1 (2001), S. 43-46.
-def cor_gardner(rii, rif, wcf):
-    oe = correct_ri(rii, wcf)
-    ae = 1.53 * rif - 0.59 * oe
+def cor_gardner(bxi, bxf, wcf):
+    oe = apply_wcf(bxi, wcf)
+    ae = 1.53 * bxf - 0.59 * oe
     return oe, ae, p_to_sg(ae)
 
 # Gossett correleation function implemented according to:
 # James M. Gossett. Derivation and Explanation of the Brix-Based Calculator For Estimating
 # ABV in Fermenting and Finished Beers. 2012.
 # URL: http://www.ithacoin.com/brewing/Derivation.htm
-def abw_gosett(rii, rif, wcf):
+def abw_gosett(bxi, bxf, wcf):
     k = 0.445
-    c = 100.0 * (rii - rif) / (100.0 - 48.4 * k - 0.582 * rif)
+    c = 100.0 * (bxi - bxf) / (100.0 - 48.4 * k - 0.582 * bxf)
     return 48.4 * c / (100 - 0.582 * c)
 
 # Novotný correleation functions implemented according to:
 # Petr Novotný. Počítáme: Nová korekce refraktometru. 2017.
 # URL: http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
-def cor_novotny_linear(rii, rif, wcf):
-    oe = correct_ri(rii, wcf)
-    rifc = correct_ri(rif, wcf)
-    fg = -0.002349 * oe + 0.006276 * rifc + 1.0
+def cor_novotny_linear(bxi, bxf, wcf):
+    oe = apply_wcf(bxi, wcf)
+    bxfc = apply_wcf(bxf, wcf)
+    fg = -0.002349 * oe + 0.006276 * bxfc + 1.0
     return oe, sg_to_p(fg), fg
 
-def cor_novotny_quadratic(rii, rif, wcf):
-    oe = correct_ri(rii, wcf)
-    rifc = correct_ri(rif, wcf)
+def cor_novotny_quadratic(bxi, bxf, wcf):
+    oe = apply_wcf(bxi, wcf)
+    bxfc = apply_wcf(bxf, wcf)
     fg = 1.335 * 10.0**-5 * oe**2 - \
-        3.239 * 10.0**-5 * oe * rifc + \
-        2.916 * 10.0**-5 * rifc**2 - \
+        3.239 * 10.0**-5 * oe * bxfc + \
+        2.916 * 10.0**-5 * bxfc**2 - \
         2.421 * 10.0**-3 * oe + \
-        6.219 * 10.0**-3 * rifc + 1.0
+        6.219 * 10.0**-3 * bxfc + 1.0
     return oe, sg_to_p(fg), fg
 
 # Terrill correleation functions implemented according to:
 # Sean Terrill. Refractometer FG Results. 2011.
 # URL: http://seanterrill.com/2011/04/07/refractometer-fg-results/
-def cor_terrill_linear(rii, rif, wcf):
-    oe = correct_ri(rii, wcf)
-    rifc = correct_ri(rif, wcf)
-    fg = 1.0 - 0.000856829 * oe + 0.00349412 * rifc
+def cor_terrill_linear(bxi, bxf, wcf):
+    oe = apply_wcf(bxi, wcf)
+    bxfc = apply_wcf(bxf, wcf)
+    fg = 1.0 - 0.000856829 * oe + 0.00349412 * bxfc
     return oe, sg_to_p(fg), fg
 
-def cor_terrill_cubic(rii, rif, wcf):
-    oe = correct_ri(rii, wcf)
-    rifc = correct_ri(rif, wcf)
+def cor_terrill_cubic(bxi, bxf, wcf):
+    oe = apply_wcf(bxi, wcf)
+    bxfc = apply_wcf(bxf, wcf)
     fg = 1.0 - 0.0044993 * oe + 0.000275806 * oe**2 - \
-        0.00000727999 * oe**3 + 0.0117741 * rifc - \
-        0.00127169 * rifc**2 + 0.0000632929 * rifc**3
+        0.00000727999 * oe**3 + 0.0117741 * bxfc - \
+        0.00127169 * bxfc**2 + 0.0000632929 * bxfc**3
     return oe, sg_to_p(fg), fg
 
 # Obtained by fit into data generated from Terrill and Novotný equations
-def cor_ascher(rii, rif, wcf):
-    riic = correct_ri(rii, wcf)
-    rifc = correct_ri(rif, wcf)
-    fg = 0.991845 + -0.001637 * riic + 0.006053 * rifc
-    return riic, sg_to_p(fg), fg
+def cor_ascher(bxi, bxf, wcf):
+    bxic = apply_wcf(bxi, wcf)
+    bxfc = apply_wcf(bxf, wcf)
+    fg = 0.991845 + -0.001637 * bxic + 0.006053 * bxfc
+    return bxic, sg_to_p(fg), fg
 
 def print_stats(name, stats, is_deviation):
     full_name = name
@@ -137,16 +137,16 @@ class RefracModel:
         self.cor_model = cor_model
         self.abw_model = abw_model
 
-    def calc_ae(self, rii, rif, wcf):
-        oe, ae, fg = self.cor_model(rii, rif, wcf)
+    def calc_ae(self, bxi, bxf, wcf):
+        oe, ae, fg = self.cor_model(bxi, bxf, wcf)
         return ae
 
-    def calc_abv(self, rii, rif, wcf):
-        oe, ae, fg = self.cor_model(rii, rif, wcf)
+    def calc_abv(self, bxi, bxf, wcf):
+        oe, ae, fg = self.cor_model(bxi, bxf, wcf)
         if self.abw_model is None:
             return calc_abv(calc_abw(oe, calc_re(oe, ae)), fg)
         else:
-            return calc_abv(self.abw_model(rii, rif, wcf), fg)
+            return calc_abv(self.abw_model(bxi, bxf, wcf), fg)
 
 refrac_models = [
     RefracModel('Terrill Linear', cor_terrill_linear),
@@ -165,8 +165,8 @@ col_name_abv = 'ABV'
 col_name_wcf = 'WCF'
 col_name_oe = 'OE'
 col_name_ae = 'AE'
-col_name_rii = 'RII'
-col_name_rif = 'RIF'
+col_name_bxi = 'BXI'
+col_name_bxf = 'BXF'
 col_name_reference = 'Reference'
 col_name_refractometer = 'Refractometer'
 row_name_square = 'r2score'
@@ -184,7 +184,7 @@ if len(reference_filter) > 0:
 if len(refractometer_filter) > 0:
     data = data[data[col_name_refractometer] == refractometer_filter]    
 
-data[col_name_wcf] = data[col_name_rii] / data[col_name_oe]
+data[col_name_wcf] = data[col_name_bxi] / data[col_name_oe]
 data[col_name_abv] = calc_abv_simple(data[col_name_oe], data[col_name_ae])
 
 wcf_stats = data[col_name_wcf].describe()
@@ -197,18 +197,18 @@ if measurement_specific_wcf == False:
     data[col_name_wcf] = default_wcf
 
 if filter_oe_outliers == True:
-    riic = correct_ri(data[col_name_rii], data[col_name_wcf])
-    rii_dev = riic - data[col_name_oe]
-    threshold = abs(iqr(rii_dev) * 1.5)
-    print('Filtering ' + col_name_rii + ' outliers over ' + str(threshold) + '\n')
-    data = data[(abs(riic - data[col_name_oe]) <= threshold)]
+    bxic = apply_wcf(data[col_name_bxi], data[col_name_wcf])
+    bxi_dev = bxic - data[col_name_oe]
+    threshold = abs(iqr(bxi_dev) * 1.5)
+    print('Filtering ' + col_name_bxi + ' outliers over ' + str(threshold) + '\n')
+    data = data[(abs(bxic - data[col_name_oe]) <= threshold)]
 
 for model in refrac_models:
     model_col_name_ae = model_col_name(col_name_ae, model.name)
-    data[model_col_name_ae] = model.calc_ae(data[col_name_rii], data[col_name_rif], data[col_name_wcf])
+    data[model_col_name_ae] = model.calc_ae(data[col_name_bxi], data[col_name_bxf], data[col_name_wcf])
     data_ae_dev[model.name] = data[model_col_name_ae] - data[col_name_ae]
     model_col_name_abv = model_col_name(col_name_abv, model.name)
-    data[model_col_name_abv] = model.calc_abv(data[col_name_rii], data[col_name_rif], data[col_name_wcf])   
+    data[model_col_name_abv] = model.calc_abv(data[col_name_bxi], data[col_name_bxf], data[col_name_wcf])   
     data_abv_dev[model.name] = data[model_col_name_abv] - data[col_name_abv]
  
 data.to_csv('data_eval.csv', index=False)
