@@ -89,7 +89,7 @@ def cor_from_abw(abw, bxi, wcf):
     return oe, ae, p_to_sg(ae)
 
 # Gossett does use the Bonham correlation to determine the fg for abv calculation.
-# To have a matching ae for the calculation is is derived from the abw equation instead.  
+# To have a matching ae for the calculation is derived from the abw equation instead.  
 def cor_gossett(bxi, bxf, wcf):
     return cor_from_abw(abw_gosett(bxi, bxf, wcf), bxi, wcf)
 
