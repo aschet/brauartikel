@@ -9,7 +9,7 @@ from sklearn.metrics import r2_score
 from scipy.stats import iqr
 
 # ABV = alcohol by volume in %
-# ABW = alcohol bei weight in %
+# ABW = alcohol by weight in %
 # AE = apparent extract in °P
 # FG = final gravity in SG
 # OE = original extract in °P
@@ -56,6 +56,7 @@ def calc_abv_simple(oe, ae):
 # Bonham (Standard) correlation function implemented according to:
 # Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
 # In: Zymurgy 24.1 (2001), S. 43-46.
+
 def cor_bonham(bxi, bxf, wcf):
     oe = correct_bx(bxi, wcf)
     fg = 1.001843 - 0.002318474 * oe - 0.000007775 * oe**2 - \
@@ -66,6 +67,7 @@ def cor_bonham(bxi, bxf, wcf):
 # Gardner correlation function implemented according to:
 # Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
 # In: Zymurgy 24.1 (2001), S. 43-46.
+
 def cor_gardner(bxi, bxf, wcf):
     oe = correct_bx(bxi, wcf)
     ae = 1.53 * bxf - 0.59 * oe
@@ -75,14 +77,26 @@ def cor_gardner(bxi, bxf, wcf):
 # James M. Gossett. Derivation and Explanation of the Brix-Based Calculator For Estimating
 # ABV in Fermenting and Finished Beers. 2012.
 # URL: http://www.ithacoin.com/brewing/Derivation.htm
+
 def abw_gosett(bxi, bxf, wcf):
     k = 0.445
     c = 100.0 * (bxi - bxf) / (100.0 - 48.4 * k - 0.582 * bxf)
     return 48.4 * c / (100 - 0.582 * c)
 
+def cor_from_abw(abw, bxi, wcf):
+    oe = correct_bx(bxi, wcf)
+    ae = oe - (abw * (2.0665 - 1.0665 * oe / 100.0)) / 0.8052
+    return oe, ae, p_to_sg(ae)
+
+# Gossett does use the Bonham correlation to determine the fg for abv calculation.
+# To have a matching ae for the calculation is is derived from the abw equation instead.  
+def cor_gossett(bxi, bxf, wcf):
+    return cor_from_abw(abw_gosett(bxi, bxf, wcf), bxi, wcf)
+
 # Novotný correlation functions implemented according to:
 # Petr Novotný. Počítáme: Nová korekce refraktometru. 2017.
 # URL: http://www.diversity.beer/2017/01/pocitame-nova-korekce-refraktometru.html
+
 def cor_novotny_linear(bxi, bxf, wcf):
     oe = correct_bx(bxi, wcf)
     bxfc = correct_bx(bxf, wcf)
@@ -102,6 +116,7 @@ def cor_novotny_quadratic(bxi, bxf, wcf):
 # Terrill correlation functions implemented according to:
 # Sean Terrill. Refractometer FG Results. 2011.
 # URL: http://seanterrill.com/2011/04/07/refractometer-fg-results/
+
 def cor_terrill_linear(bxi, bxf, wcf):
     oe = correct_bx(bxi, wcf)
     bxfc = correct_bx(bxf, wcf)
@@ -155,7 +170,7 @@ refrac_models = [
     RefracModel('Novotny Quadratic', cor_novotny_quadratic),
     RefracModel('Bonham', cor_bonham),
     RefracModel('Gardner', cor_gardner),
-    RefracModel('Gossett', cor_bonham, abw_gosett),
+    RefracModel('Gossett', cor_gossett, abw_gosett),
     RefracModel('Ascher', cor_ascher)
 ]
 
