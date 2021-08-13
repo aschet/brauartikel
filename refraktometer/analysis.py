@@ -11,11 +11,11 @@ from scipy.stats import iqr
 # ABV = alcohol by volume in %
 # ABW = alcohol by weight in %
 # AE = apparent extract in °P
+# BXF = final refractometer reading in °Bx
+# BXI = initial refractometer reading in °Bx
 # FG = final gravity in SG
 # OE = original extract in °P
 # RE = real extract in °P
-# BXI = initial refractometer reading in °Bx
-# BXF = final refractometer reading in °Bx
 # SG = specific gravity
 # WCF = wort correction factor
 
