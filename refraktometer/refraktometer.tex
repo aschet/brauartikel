@@ -285,8 +285,6 @@ gleicher RI für verschiedene Probenzusammensetzung.
 Temperatur abhängig, 20°C
 \autocite{Gossett2012}
 
-Referenzimplementierung \url{https://aschet.github.io/refractometer/}
-
 \subsection*{Gardner (2000)}
 
 % equations derived by Roberts & Stewart: 1
@@ -485,10 +483,6 @@ P = -205,347 \cdot \sg^2 + 668,72 \cdot \sg - 463,37
 \end{equation}
 
 \begin{equation}
-\abw = \frac{0,8052 \cdot (\oex - \aex)}{2,0665 - 1,0665 \cdot \oex / 100}
-\end{equation}
-
-\begin{equation}
 \abv = \frac{\abw \cdot \fg}{0,7907}
 \end{equation}
 
@@ -501,7 +495,7 @@ P = -205,347 \cdot \sg^2 + 668,72 \cdot \sg - 463,37
 \setlength{\jot}{2mm}
 
 \begin{equation}
-\rdf = \left(100 \cdot \frac{\oex - \rex}{\oex} \right) \cdot \left(\frac{1}{1 - 0,005161 \cdot \rex} \right)
+\rdf = 100 \cdot \frac{\oex - \rex}{\oex} \cdot \frac{1}{1 - 0,005161 \cdot \rex}
 \end{equation}
 
 \autocite{Speers2015}
@@ -519,15 +513,19 @@ bxi = 12
 bxf = 6
 wcf = 1.04
 
+Referenzimplementierung \url{https://aschet.github.io/refractometer/}
+
+
 \begin{align*}
 \bxi &= 12 \\
 \bxf &= 6 \\
-\wcf &= 1.04 \\
+\wcf &= 1,04 \\
 \oex = \bxic = \frac{12}{1.04} &= 11,54 \\
-\bxfc = \frac{12}{1.04} &= 5,77 \\
+\bxfc = \frac{6}{1.04} &= 5,77 \\
 \fg = 1 - 0,00085683 \cdot 11,54 + 0,0034941 \cdot 5,77 &= 1,010 \\
 \aex = -205,347 \cdot 1,010^2 + 668,72 \cdot 1,010 - 463,37 &= 2,63 \\
-\abw = \frac{0,8052 \cdot (11,54 - 2,63)}{2,0665 - 1,0665 \cdot 11,54 / 100} &= 3,69 \\
+\rex = 0,1948 \cdot 11,54 + 0,8052 \cdot 2,63 &= 4,37 \\
+\abw = \frac{11,54 - 4,37}{2,0665 - 1,0665 \cdot 11,54 / 100} &= 3,69 \\
 \abv = \frac{3,69 \cdot 1,010}{0,7907} &= 4,71
 \end{align*}
 
