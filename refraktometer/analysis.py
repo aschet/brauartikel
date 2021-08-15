@@ -131,13 +131,6 @@ def cor_terrill_cubic(bxi, bxf, wcf):
         0.00127169 * bxfc**2 + 0.0000632929 * bxfc**3
     return oe, sg_to_p(fg), fg
 
-# Obtained by fit into data generated from Terrill and Novotný equations
-def cor_ascher(bxi, bxf, wcf):
-    bxic = correct_bx(bxi, wcf)
-    bxfc = correct_bx(bxf, wcf)
-    fg = 0.991845 + -0.001637 * bxic + 0.006053 * bxfc
-    return bxic, sg_to_p(fg), fg
-
 def print_stats(name, stats, is_deviation):
     full_name = name
     if is_deviation == True:
@@ -171,7 +164,6 @@ refrac_models = [
     RefracModel('Bonham', cor_bonham),
     RefracModel('Gardner', cor_gardner),
     RefracModel('Gossett', cor_gossett, abw_gosett),
-    RefracModel('Ascher', cor_ascher)
 ]
 
 model_names = list(map(lambda model: model.name, refrac_models))
