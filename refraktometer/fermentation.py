@@ -5,7 +5,7 @@
 
 import pandas as pa
 import matplotlib.pyplot as plt
-
+from sklearn.metrics import r2_score
 
 # BXF = final refractometer reading in °Bx
 # BXI = initial refractometer reading in °Bx
@@ -130,13 +130,13 @@ class RefracModel:
         return ae
 
 refrac_models = [
+    RefracModel('Gardner', cor_gardner),
+    RefracModel('Bonham', cor_bonham),
     RefracModel('Terrill Linear', cor_terrill_linear),
     RefracModel('Terrill Cubic', cor_terrill_cubic),
-    RefracModel('Novotny Linear', cor_novotny_linear),
-    RefracModel('Novotny Quadratic', cor_novotny_quadratic),
-    RefracModel('Bonham', cor_bonham),
-    RefracModel('Gardner', cor_gardner),
-    RefracModel('Gossett', cor_gossett)
+    RefracModel('Gossett', cor_gossett),
+    RefracModel('Novotný Linear', cor_novotny_linear),
+    RefracModel('Novotný Quadratic', cor_novotny_quadratic)
 ]
 
 model_names = list(map(lambda model: model.name, refrac_models))
@@ -167,14 +167,16 @@ print("Final deviation:")
 print(data_dev.iloc[-1])
 print()
 print("Deviation statistics:")
-print(data_dev.describe())
+stats = data_dev.describe()
+stats.loc['rscore'] = list(map(lambda name: r2_score(data_graph[col_name_hydrometer], data_graph[name]), model_names))
+print(stats)
 
 fig = plt.figure(constrained_layout=True, figsize=(5, 5))
 #fig.suptitle('Novotny Dataset: Active Fermentation with OE of 17 °P')
 ax = fig.subplots(1, 1)
 ax.set_xlabel('Measurement')
 ax.set_ylabel('Aparent Extract (°P)')
-ax.plot(data_graph[col_name_measurement], data_graph[col_name_hydrometer], label=col_name_hydrometer)
+ax.plot(data_graph[col_name_measurement], data_graph[col_name_hydrometer], label=col_name_hydrometer, marker='.')
 for model in refrac_models:
     ax.plot(data_graph[col_name_measurement], data_graph[model.name], linestyle=':', label=model.name)
 ax.legend(loc='best')
