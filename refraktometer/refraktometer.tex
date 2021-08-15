@@ -15,7 +15,7 @@
 \usepackage[hidelinks,pdfencoding=auto,
   pdfauthor={Thomas Ascher},
   pdfusetitle,
-  pdfkeywords={Bier,Kegging,Zapfanlage}]{hyperref}
+  pdfkeywords={Bier,Refraktometer,Alkoholmessung,Terrill,Novotný}]{hyperref}
 \usepackage{microtype}
 
 \addto\extrasngerman{
@@ -44,6 +44,8 @@
 \newcommand{\aex}{\mathit{AE}}
 \newcommand{\rex}{\mathit{RE}}
 \newcommand{\wcf}{\mathit{WCF}}
+\newcommand{\adf}{\mathit{ADF}}
+\newcommand{\rdf}{\mathit{RDF}}
 
 
 \begin{document}
@@ -471,7 +473,7 @@ ing first laid down the foundation for brewing calculations
 \end{equation}
 
 \begin{equation}
-P = \sg^2 - 205,347 + 668,72 \cdot \sg - 463,37
+P = -205,347 \cdot \sg^2 + 668,72 \cdot \sg - 463,37
 \end{equation}
 
 \begin{equation}
@@ -483,15 +485,51 @@ P = \sg^2 - 205,347 + 668,72 \cdot \sg - 463,37
 \end{equation}
 
 \begin{equation}
+\abw = \frac{0,8052 \cdot (\oex - \aex)}{2,0665 - 1,0665 \cdot \oex / 100}
+\end{equation}
+
+\begin{equation}
 \abv = \frac{\abw \cdot \fg}{0,7907}
 \end{equation}
+
+\autocite{Spedding2016}
+
+\begin{equation}
+\adf = 100 \cdot \frac{\oex - \aex}{\oex}
+\end{equation}
+
+\setlength{\jot}{2mm}
+
+\begin{equation}
+\rdf = \left(100 \cdot \frac{\oex - \rex}{\oex} \right) \cdot \left(\frac{1}{1 - 0,005161 \cdot \rex} \right)
+\end{equation}
+
+\autocite{Speers2015}
 
 Lincoln equations
 \autocite{Spedding2016}
 
 Method \href{https://www.asbcnet.org}{American Society of Brewing Chemists (ASBC)} \href{https://www.mebak.org}{Mitteleuropäische Brautechnische Analysenkommission (MEBAK)}
 
+\section*{Berechnungsbeispiel}
 
+Linear
+
+bxi = 12
+bxf = 6
+wcf = 1.04
+
+\begin{align*}
+\bxi &= 12 \\
+\bxf &= 6 \\
+\wcf &= 1.04 \\
+\oex = \bxic = \frac{12}{1.04} &= 11,54 \\
+\bxfc = \frac{12}{1.04} &= 5,77 \\
+\fg = 1 - 0,00085683 \cdot 11,54 + 0,0034941 \cdot 5,77 &= 1,010 \\
+\aex = -205,347 \cdot 1,010^2 + 668,72 \cdot 1,010 - 463,37 &= 2,63 \\
+\abw = \frac{0,8052 \cdot (11,54 - 2,63)}{2,0665 - 1,0665 \cdot 11,54 / 100} &= 3,69 \\
+\abv = \frac{3,69 \cdot 1,010}{0,7907} &= 4,71
+\end{align*}
 
 \section*{Zusammenfassung}
 
