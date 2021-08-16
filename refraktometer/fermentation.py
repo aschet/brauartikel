@@ -150,7 +150,7 @@ col_name_hydrometer = 'Hydrometer'
 def model_col_name(section, name):
     return section + ' ' + name
 
-data = pa.read_csv('data_fermentation.csv', delimiter=',')
+data = pa.read_csv('fermentation_data.csv', delimiter=',')
 data_dev = pa.DataFrame()
 data_graph = pa.DataFrame()
 
@@ -161,7 +161,7 @@ for model in refrac_models:
     data_graph[model.name] = model.calc_ae(data[col_name_bxi], data[col_name_bxf], default_wcf)
     data_dev[model.name] = data_graph[model.name] - data[col_name_ae]
 
-data_graph.to_csv('data_fermentation_graph.csv', index=False)
+data_graph.to_csv('fermentation_graph.csv', index=False)
 
 print("Final deviation:")
 print(data_dev.iloc[-1])
@@ -181,5 +181,5 @@ for model in refrac_models:
     ax.plot(data_graph[col_name_measurement], data_graph[model.name], linestyle=':', label=model.name)
 ax.legend(loc='best')
 
-plt.savefig("data_fermentation_graph.pdf", format="pdf")
+plt.savefig("fermentation_graph.pdf", format="pdf")
 plt.show()
