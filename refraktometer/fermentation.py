@@ -163,7 +163,7 @@ for model in refrac_models:
 
 data_graph.to_csv('fermentation_graph.csv', index=False)
 
-data_table = pa.DataFrame(columns=['Korrelation', 'Endabw.', 'Mittlere Abw.', 'Standardabw.', 'R²'])
+data_table = pa.DataFrame(columns=['Korrelation', 'Endabw. (°P)', 'Mittlere Abw. (°P)', 'Standardabw. (°P)', 'R²'])
 
 for model in refrac_models:
     last = data_dev.iloc[-1][model.name]
