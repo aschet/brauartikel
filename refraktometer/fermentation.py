@@ -133,10 +133,10 @@ refrac_models = [
     RefracModel('Gardner', cor_gardner),
     RefracModel('Bonham', cor_bonham),
     RefracModel('Terrill Linear', cor_terrill_linear),
-    RefracModel('Terrill Cubic', cor_terrill_cubic),
+    RefracModel('Terrill Kubisch', cor_terrill_cubic),
     RefracModel('Gossett', cor_gossett),
     RefracModel('Novotný Linear', cor_novotny_linear),
-    RefracModel('Novotný Quadratic', cor_novotny_quadratic)
+    RefracModel('Novotný Quadratisch', cor_novotny_quadratic)
 ]
 
 model_names = list(map(lambda model: model.name, refrac_models))
@@ -145,7 +145,7 @@ col_name_ae = 'AE'
 col_name_bxi = 'BXI'
 col_name_bxf = 'BXF'
 col_name_measurement = 'Measurement'
-col_name_hydrometer = 'Hydrometer'
+col_name_hydrometer = 'Aräometer'
 
 def model_col_name(section, name):
     return section + ' ' + name
@@ -174,8 +174,8 @@ print(stats)
 fig = plt.figure(constrained_layout=True, figsize=(5, 5))
 #fig.suptitle('Novotny Dataset: Active Fermentation with OE of 17 °P')
 ax = fig.subplots(1, 1)
-ax.set_xlabel('Measurement')
-ax.set_ylabel('Aparent Extract (°P)')
+ax.set_xlabel('Messung')
+ax.set_ylabel('Scheinbarer Restextrakt (°P)')
 ax.plot(data_graph[col_name_measurement], data_graph[col_name_hydrometer], label=col_name_hydrometer, marker='.')
 for model in refrac_models:
     ax.plot(data_graph[col_name_measurement], data_graph[model.name], linestyle=':', label=model.name)
