@@ -173,7 +173,7 @@ for model in refrac_models:
     r2 = r2_score(data_graph[col_name_hydrometer], data_graph[model.name])
     data_table.loc[len(data_table)] = [ model.name, data_dev.iloc[-1][model.name], mean, std, r2 ]
 
-data_table.to_latex('fermentation_table.tex', index=False, float_format='%.3f')
+data_table.to_latex('fermentation_table.tex', index=False, float_format='%.3f', decimal=',')
 
 print(data_table)
 
