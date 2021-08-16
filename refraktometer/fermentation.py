@@ -177,8 +177,6 @@ data_table.to_latex('fermentation_table.tex', index=False, float_format='%.3f')
 
 print(data_table)
 
-exit(0)
-
 fig = plt.figure(constrained_layout=True, figsize=(5, 5))
 
 ax = fig.subplots(1, 1)
