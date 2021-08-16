@@ -163,16 +163,24 @@ for model in refrac_models:
 
 data_graph.to_csv('fermentation_graph.csv', index=False)
 
-print("Final deviation:")
-print(data_dev.iloc[-1])
-print()
-print("Deviation statistics:")
-stats = data_dev.describe()
-stats.loc['rscore'] = list(map(lambda name: r2_score(data_graph[col_name_hydrometer], data_graph[name]), model_names))
-print(stats)
+data_table = pa.DataFrame(columns=['Korrelation', 'Letzte Abw.', 'Mittlere Abw.', 'Standardabw.', 'R²'])
+
+for model in refrac_models:
+    last = data_dev.iloc[-1][model.name]
+    dev = data_dev[model.name]
+    mean = dev.mean()
+    std = dev.std()
+    r2 = r2_score(data_graph[col_name_hydrometer], data_graph[model.name])
+    data_table.loc[len(data_table)] = [ model.name, data_dev.iloc[-1][model.name], mean, std, r2 ]
+
+data_table.to_latex('fermentation_table.tex', index=False, float_format='%.3f')
+
+print(data_table)
+
+exit(0)
 
 fig = plt.figure(constrained_layout=True, figsize=(5, 5))
-#fig.suptitle('Novotny Dataset: Active Fermentation with OE of 17 °P')
+
 ax = fig.subplots(1, 1)
 ax.set_xlabel('Messung')
 ax.set_ylabel('Scheinbarer Restextrakt (°P)')
@@ -182,4 +190,3 @@ for model in refrac_models:
 ax.legend(loc='best')
 
 plt.savefig("fermentation_graph.pdf", format="pdf")
-plt.show()
