@@ -144,7 +144,7 @@ model_names = list(map(lambda model: model.name, refrac_models))
 col_name_ae = 'AE'
 col_name_bxi = 'BXI'
 col_name_bxf = 'BXF'
-col_name_measurement = 'Measurement'
+col_name_measurement = 'Messung'
 col_name_hydrometer = 'Aräometer'
 
 def model_col_name(section, name):
@@ -161,8 +161,6 @@ for model in refrac_models:
     data_graph[model.name] = model.calc_ae(data[col_name_bxi], data[col_name_bxf], default_wcf)
     data_dev[model.name] = data_graph[model.name] - data[col_name_ae]
 
-data_graph.to_csv('fermentation_graph.csv', index=False)
-
 data_table = pa.DataFrame(columns=['Korrelation', 'Endabw. (°P)', 'Mittlere Abw. (°P)', 'Standardabw. (°P)', 'R²'])
 
 for model in refrac_models:
@@ -175,12 +173,10 @@ for model in refrac_models:
 
 data_table.to_latex('fermentation_table.tex', index=False, float_format='%.3f', decimal=',')
 
-print(data_table)
-
 fig = plt.figure(constrained_layout=True, figsize=(5, 5))
 
 ax = fig.subplots(1, 1)
-ax.set_xlabel('Messung')
+ax.set_xlabel(col_name_measurement)
 ax.set_ylabel('Scheinbarer Restextrakt (°P)')
 ax.plot(data_graph[col_name_measurement], data_graph[col_name_hydrometer], label=col_name_hydrometer, marker='.')
 for model in refrac_models:
