@@ -21,10 +21,12 @@
 
 \addto\extrasngerman{
 \def\figureautorefname{Abb.}
+\def\tableautorefname{Tab.}
 }
 
 \addto\captionsngerman{
 \renewcommand{\figurename}{Abb.}
+\renewcommand{\tablename}{Tab.}
 }
 
 \title{Alkoholmessung mit dem Refraktometer}
@@ -90,7 +92,7 @@ die optische Dichte ist, desto größer ist auch der Brechungsindex.
 
 Refraktion ist temperaturabhängig. Messungen sind daher je nach
 Anwendungsgebiet bei einer festgelegten Temperatur durchzuführen.
-Das sind im Normalfall 20 °C. Selbst kostengünstige Handrefraktometer
+Das sind im Normalfall 20~°C. Selbst kostengünstige Handrefraktometer
 besitzen deshalb einen Kompensationsmechanismus (Automatical Temperature
 Compensation, ATC) in Form eines Bimetallsteifens. Dieser 
 verschiebt je nach Temperatureinwirkung zur Korrektur selbstständig
@@ -103,45 +105,33 @@ technischen Prozesse. Deshalb wird dieser je nach Anwendungsgebiet
 und Probe auf die gewünschte Messgröße kalibriert. Zur Messung
 der relativen Dichte von Saccharose/Wasser-Lösungen im Bereich der
 Wein- und Saftherstellung ist diese zum Beispiel Grad Brix (°Bx), wobei
-ein 1 °Bx einem 1 g Saccharose auf 99 g entspricht. Die Relation
-zwischen Brechungsindex zu Brix ist durch die ICUMSA Tabellen normiert.
+ein °Bx einem Gramm Saccharose auf 99 Gramm Wasser entspricht. Die
+Umrechnung zwischen Brechungsindex und Brix ist durch die ICUMSA
+Tabellen normiert.
 \autocite{Bonham2001,Terrill2013}
 
-digitalrefrakto
-\autocite{AKRSSOGH2021}
-
-maß wie licht abgebremst wird durch probe,
-misst brechungsindex, optisches messen, licht durch probe, abgelenkt
-prisma auf linse projiziert auf Fadennetz mit Skala, ansicht in Okular
-Farblichen farbloser Bereich
-auf verschiedene anwendungen kalibrierte skala, z.b. Brix.
-1Bx = 1g Saccharose (Haushaltszucker) auf 99g Wasser. ähnlich zu plato
-gleich behandelt
-digital refraktometer -> licht intefferenz, verschiedene skalen, messbereich
-ATC -> bimetall streifen, ATC nicht für Würze geeignet, falsche Korrektur
-nicht für jede Substanz geeiget, ATC 10-30°C
-\autocite{Terrill2013}
-
-
-
-ATC mechanismus
-
-
-
-
-Refi misst index Lichtbrechung
-mehr alk -> höhere RI
-Dichte Temperatur abhängig, 20°C
-\autocite{Gossett2012}
-
-Licht wechselt Richtung, wenn optisch weniger dichtes zu dichteres Medium
-RI maß für Brechung
-
-\autocite{Spedding2016}
-
-Lich brechung Refraktion
-zweite dichter adteilung des Sichtsfeldes in Hell Dunkel Critical Ray,
-\autocite{Gamer1959}
+In den Shops für Heimbraubedarf werden im wesentlichen Refraktometer in
+zwei verschiedenen Bauformen angeboten: analoge Handgeräte
+und kompakte digitale Tischgeräte wie das für die Weinherstellung
+gedachte Milwaukee MA885 (\autoref{fig:refactotype},
+\autoref{table:refactospec}). Beide Bauformen setzten Prismen zur
+Lichtbrechung ein. Handrefraktometer funktionieren
+nach dem Durchlichtprinzip. Vereinfacht dargestellt scheint dabei Licht
+von einer externen Quelle durch eine Probe, wird über Prismen gebrochen
+und durch weitere optische Komponenten und eine Skala bis hin zu einem
+Okular geleitet. Unterschiedliche kritische Winkel erzeugen dabei eine
+andere Teilung des Sichtfelds, anhand der der Messwert abgelesen werden
+kann (\autoref{fig:refractoscale}). Im Unterschied dazu besitzen
+digitale Refraktometer eine interne Lichtquelle und erfassen die
+Messung über einen CCD-Sensor. Darüber hinaus muss das Licht für
+die Brechung die Probe nicht durchqueren. \autocite{AKRSSOGH2021,Gamer1959,Terrill2013}
+ 
+\begin{figure}[h]
+\centering
+\includegraphics[width=4.8cm]{images/types.jpg}
+\caption{Typische Refraktometer im Heimbraubereich}
+\label{fig:refactotype}
+\end{figure}
 
 \begin{figure}[h]
 \centering
@@ -150,35 +140,24 @@ zweite dichter adteilung des Sichtsfeldes in Hell Dunkel Critical Ray,
 \label{fig:refractoscale}
 \end{figure}
 
-
-\section*{Gerätetypen}
-
-digitalrefraktometer
-\autocite{AKRSSOGH2021}
-
-Handrefraktometer € 40 0-32Brix AT 10-30 °C , 0.2 Brix Genauigkeit +/- 0,2
-Milwaukee MA885 Wine Refractometer € 185
-Zertifikat für Messmittelfähigkeit. 0 - 50 Auflösung 0.1
-ATC 10 bis 40, Genauigkeit 0.2
-
-
-SG skala ungenau
-\autocite{Terrill2011}
-
-\begin{figure}[h]
+\begin{table}[h]
 \centering
-\includegraphics[width=4.8cm]{images/types.jpg}
-\caption{Verschiedene Gerätetypen}
-\label{fig:refactotype}
-\end{figure}
+\begin{tabular}{lrr}
+\toprule
+Parameter &  Handrefraktometer &  Milwaukee MA885 \\
+\midrule
+Preis & € 40 & € 185 \\
+Messbereich & 0--32 °Bx & 0--50 °Bx \\
+Auflösung & 0,2 °Bx & 0,1 °Bx \\
+Genauigkeit & 0,2 °Bx & 0,1 °Bx \\
+ATC & 10--30 °C & 10--40 °C \\
+Kalibrierzertifikat & nein & ja \\
+\bottomrule
+\end{tabular}
 
-analog refractometer performed as well as the bench-top, digital refractometer
-problems develop that limit precision.  For example, some dark and turbid samples will give rather fuzzy lines of demarcation when one tries to read the analog scale.  Often this fuzziness gets worse with time as the sample sits on the glass slide, presumably as solids settle or gas bubbles form.  The fuzziness of the demarcation line serves as a kind of warning to the user. 
-mehrfache Messung bei digitalen
-\autocite{Gossett2012a}
-
-
-
+\caption{Spezifikation typischer Refraktometer im Heimbraubereich}
+\label{table:refactospec}
+\end{table}
 
 \section*{Exkurs Aräometer}
 
@@ -264,6 +243,14 @@ genitäten ergeben.
 
 \section*{Kalibrierung und Justierung}
 
+digital refraktometer -> licht intefferenz, verschiedene skalen, messbereich
+ATC -> bimetall streifen, ATC nicht für Würze geeignet, falsche Korrektur
+nicht für jede Substanz 
+\autocite{Terrill2013}
+
+SG skala ungenau
+\autocite{Terrill2011}
+
 ATC verursacht fehler weil auf Zucker geeicht
 \autocite{Terrill2010}
 
@@ -337,6 +324,12 @@ Kreuzkontaminierung durch schlecht gereinigte
 
 Schwebstoffe und Gas entfernen, gute Beleuchtung
 \autocite{Gamer1959}
+
+analog refractometer performed as well as the bench-top, digital refractometer
+problems develop that limit precision.  For example, some dark and turbid samples will give rather fuzzy lines of demarcation when one tries to read the analog scale.  Often this fuzziness gets worse with time as the sample sits on the glass slide, presumably as solids settle or gas bubbles form.  The fuzziness of the demarcation line serves as a kind of warning to the user. 
+mehrfache Messung bei digitalen
+\autocite{Gossett2012a}
+
 
 \section*{Korrelationsmodelle zur Schätzung des scheinbaren Restextrakts}
 
@@ -519,7 +512,7 @@ Die Standardformel dagegen liefert entlang des gesamten Gärverlaufs gleichmäß
 \label{fig:novotnygraph}
 \end{figure}
 
-\begin{table}[ht]
+\begin{table}[h]
 \centering
 \input{fermentation_table.tex}
 \caption{Abweichungen bei Gärverlauf mit Stammwürze von 17 °P}
