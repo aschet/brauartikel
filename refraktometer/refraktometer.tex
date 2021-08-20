@@ -11,6 +11,8 @@
 \usepackage{graphicx}
 \usepackage{chemformula}
 \usepackage{amsmath,amsfonts,amssymb}
+\usepackage{textcomp}
+\usepackage{gensymb}
 \usepackage[italic,symbolgreek]{mathastext}
 \usepackage[backend=biber]{biblatex}
 \usepackage[hidelinks,pdfencoding=auto,
@@ -22,6 +24,7 @@
 \addto\extrasngerman{
 \def\figureautorefname{Abb.}
 \def\tableautorefname{Tab.}
+\def\equationautorefname{Gl.}
 }
 
 \addto\captionsngerman{
@@ -36,6 +39,7 @@
 \addbibresource{refraktometer.bib}
 
 \newcommand{\bxi}{\mathit{Bx}_i}
+\newcommand{\bxitext}{$\smash{\bxi}$}
 \newcommand{\bxic}{\mathit{OE}}
 \newcommand{\bxf}{\mathit{Bx}_f}
 \newcommand{\bxfc}{\mathit{Bc}_f}
@@ -47,6 +51,7 @@
 \newcommand{\aex}{\mathit{AE}}
 \newcommand{\rex}{\mathit{RE}}
 \newcommand{\wcf}{\mathit{WCF}}
+\newcommand{\wcftext}{$\smash{\wcf}$}
 \newcommand{\adf}{\mathit{ADF}}
 \newcommand{\rdf}{\mathit{RDF}}
 
@@ -245,6 +250,8 @@ genitäten ergeben.
 
 \section*{Kalibrierung und Justierung}
 
+
+
 digital refraktometer -> licht intefferenz, verschiedene skalen, messbereich
 ATC -> bimetall streifen, ATC nicht für Würze geeignet, falsche Korrektur
 nicht für jede Substanz 
@@ -275,37 +282,35 @@ Ein, zweipunkt, mehrpunkt
 schlechte chinestischer herstellung
 \autocite{Troester2012}
 
-\section*{Würze-Korrekturfaktor}
+\section*{Würze-Korrekturfaktor und Stammwürze}
+
+Auch wenn sich die Einheiten Grad Brix und Grad Plato beide auf
+wässrige Saccharoselösungen beziehen, ein auf Grad Brix
+kalibriertes Refraktometer sollte bei gleicher Stammwürze einen
+höheren Messwert liefern als ein Aräometer. Der Grund hierfür ist,
+dass Würze noch weitere gelöste Bestandteile enthält, die sich auf den
+Brechungsindex auswirken. Messwerte müssen dementsprechend durch einen
+Korrekturfaktor (Wort Correction Factor, \wcftext) angepasst
+werden. Zur Ermittlung der Stammwürze in Grad Plato ist daher 
+der Messwert des Refraktometers der Stammwürze (\bxitext) gemäß
+\autoref{eq:applywcf} durch den \wcftext\,zu dividieren.
+\autocite{Bonham2001,Roberts1950,Terrill2013}
+
+\begin{equation}
+\bxic\:[\degree P] = \frac{\bxi}{\wcf}
+\label{eq:applywcf} 
+\end{equation}
+
+Der \wcftext\,ist stark von der Würzezusammensetzung Abhängig und
+sollte deshalb im Optimalfall pro Rezept mit Hilfe einer Aräometermessung
+gemäß \autoref{eq:calcwcf} bestimmt werden. Ein gängiger Wertebereich
+für diesen ist 1,02 bis 1,06. Der etablierte Durchschnittswert
+entspricht 1,04.  \autocite{Bonham2001,BSHB2010,Roberts1950,Terrill2013}
 
 \begin{equation}
 \wcf = \frac{\bxi}{\oex}
+\label{eq:calcwcf} 
 \end{equation}
-
-\begin{equation}
-\bxic = \frac{\bxi}{\wcf}
-\end{equation}
-
-1.04 nicht konstant, Proteine, Säuren und Salze Einwirkung
-darauf.
-\autocite{Roberts1950}
-
-WCF = refrakto / hydro, 1.02-1.06, 1.04 guter Durchschnitt. Abhängig von Würze
-Mehr adjunkte kleinerer Faktor
-\autocite{Terrill2013}
-
-Dichte Lösung Zucker nicht dichte Würze
-RI 15 \% Maltose 1,3362, Succrose 1,3557 15.3, 
-WCF = refrakto Bx  / Hydro in P
-\autocite{Bonham2001}
-
-\autocite{Weiss2016} 1.03
-
-\autocite{BSHB2010} Eventuell Hopfenöle
-
-andere Temperatur verursacht verzerrung
-ASBC refractometry protocols, Kurfenanpassung pro würze
-\autocite{Bonham2001}
-
 
 \section*{Messung durchführen}
 
@@ -382,6 +387,8 @@ Quelle nicht bekannt, auch wenn korrekt insignifikante verbesserung
 0,00003344 \cdot \bxf^2 + 0,000000086 \cdot \bxf^3
 \end{split} \label{eq:bonham} 
 \end{align}
+
+\autoref{eq:bonham}
 
 \subsection*{Terrill (2011)}
 
