@@ -48,7 +48,6 @@
 \newcommand{\adf}{\mathit{ADF}}
 \newcommand{\rdf}{\mathit{RDF}}
 
-
 \begin{document}
 \maketitle
 
@@ -65,24 +64,51 @@ in das Jahr 1843 zurück \autocite{Gamer1959}.
 Auch wenn das Refraktometer den Ruf besitzt, weniger genaue Messergebnisse
 zu liefern als andere labortechnische Instrumente, liegen dessen
 Vorteile klar auf der Hand: kurze Messzeiten bei geringem Probevolumen
-und überschaubarer Bedienungskomplexität \autocite{Bettner1969, Terrill2011}. Im Gegensatz zu den beim Aräometer üblichen 100 Millilitern pro Probe
-werden nur wenige Milliliter benötigt, die sich dementsprechend auch
-schneller auf Messtempertur kühlen lassen.
+und überschaubarer Bedienungskomplexität. Im Gegensatz zu den beim
+Aräometer üblichen 100 Millilitern pro Probe werden nur wenig
+Milliliter benötigt, die sich dementsprechend auch schneller nach dem
+Hopfenkochen auf Messtempertur abkühlen lassen. \autocite{Bettner1969, Terrill2011}
 
 Wie nun Messungen mit einem Refraktometer während des Brau- und
 Gärprozesses durchzuführen sind und sich darauf basierend der
 Alkoholgehalt als Näherungswert berechnen lässt, wird
 Rahmen dieses Artikels erörtert.
 
-\section*{Messprinzip}
+\section*{Messprinzip und Gerätetypen}
 
-The International Commission for Uniform Methods of Sugar Analysis  Ltd. (ICUMSA) -> Umrechnung.
+Wenn Licht auf eine Grenzfläche zwischen unterschiedlich optisch
+dichten Medien (verschiedene Brechungsindexe) trifft,
+kommt es zur Lichtbrechung und Reflexion. Dieser physikalische Effekt
+wird in einem Refraktometer als Brechungsindex quantifiziert.
+Maßgeblich zur Messwertbestimmung ist hierfür der materialabhängige
+kritische Einfallswinkel, ab dem keine Brechung mehr stattfindet,
+sondern das Licht in seiner Gesamtheit reflektiert wird.
+Der Brechungsindex \(\mathit{nD}\) ist als Verhältnis zwischen der
+Geschwindigkeit von Licht im Vakuum und einem Medium definiert. Je höher
+die optische Dichte ist, desto größer ist auch der Brechungsindex.
+\autocite{AKRSSOGH2021,Bonham2001,Gamer1959}
 
-Je dichter Flüssigkeit, desto langsamer licht durch,, Prisma misst, , dichter stärkere Brechung.  R = Verhältnis von licht im
-Vakuum zu licht in der Flüssigkeit.
-Kalibriert auf bestimmte Lösung bei bestimmter Temperatur,
-Brix 20 °C
-\autocite{Bonham2001}
+Refraktion ist temperaturabhängig. Messungen sind daher je nach
+Anwendungsgebiet bei einer festgelegten Temperatur durchzuführen.
+Das sind im Normalfall 20 °C. Selbst kostengünstige Handrefraktometer
+besitzen deshalb einen Kompensationsmechanismus (Automatical Temperature
+Compensation, ATC) in Form eines Bimetallsteifens. Dieser 
+verschiebt je nach Temperatureinwirkung zur Korrektur selbstständig
+die Messskala des Geräts. Hierbei ist zu beachten, dass diese Form der
+ATC nur für den kalibrierten Probentyp des Geräts ausgelegt ist.
+\autocite{Depalma2017,Distillique2020,Gossett2012,Terrill2013}
+
+Der Brechungsindex ist mitunter keine geeignete Messgröße für alle
+technischen Prozesse. Deshalb wird dieser je nach Anwendungsgebiet
+und Probe auf die gewünschte Messgröße kalibriert. Zur Messung
+der relativen Dichte von Saccharose/Wasser-Lösungen im Bereich der
+Wein- und Saftherstellung ist diese zum Beispiel Grad Brix (°Bx), wobei
+ein 1 °Bx einem 1 g Saccharose auf 99 g entspricht. Die Relation
+zwischen Brechungsindex zu Brix ist durch die ICUMSA Tabellen normiert.
+\autocite{Bonham2001,Terrill2013}
+
+digitalrefrakto
+\autocite{AKRSSOGH2021}
 
 maß wie licht abgebremst wird durch probe,
 misst brechungsindex, optisches messen, licht durch probe, abgelenkt
@@ -96,19 +122,12 @@ ATC -> bimetall streifen, ATC nicht für Würze geeignet, falsche Korrektur
 nicht für jede Substanz geeiget, ATC 10-30°C
 \autocite{Terrill2013}
 
-ATC verursacht fehler weil auf Zucker geeicht
-\autocite{Terrill2010}
 
-SG skala ungenau
-\autocite{Terrill2011}
 
-andere Temperatur verursacht verzerrung
-ASBC refractometry protocols, Kurfenanpassung pro würze
-\autocite{Bonham2001}
+ATC mechanismus
 
-ATC nicht
-für alle Probe geeignet. -> sugar Water
-\autocite{Depalma2017}
+
+
 
 Refi misst index Lichtbrechung
 mehr alk -> höhere RI
@@ -127,17 +146,24 @@ zweite dichter adteilung des Sichtsfeldes in Hell Dunkel Critical Ray,
 \begin{figure}[h]
 \centering
 \includegraphics[width=4.8cm]{images/scale.jpg}
-\caption{Durchsicht Handrefraktometer}
+\caption{Durchsicht durch ein Handrefraktometer}
 \label{fig:refractoscale}
 \end{figure}
 
 
 \section*{Gerätetypen}
 
+digitalrefraktometer
+\autocite{AKRSSOGH2021}
+
 Handrefraktometer € 40 0-32Brix AT 10-30 °C , 0.2 Brix Genauigkeit +/- 0,2
 Milwaukee MA885 Wine Refractometer € 185
 Zertifikat für Messmittelfähigkeit. 0 - 50 Auflösung 0.1
 ATC 10 bis 40, Genauigkeit 0.2
+
+
+SG skala ungenau
+\autocite{Terrill2011}
 
 \begin{figure}[h]
 \centering
@@ -154,7 +180,7 @@ mehrfache Messung bei digitalen
 
 
 
-\section*{Exkurs Hydrometer}
+\section*{Exkurs Aräometer}
 
 Auftrieb, = gewicht der verdrängten flüssigkeit, sinkt weiter
 ein bei weniger dichten Würze.
@@ -234,7 +260,12 @@ rationsunterschiede durch Verdunstung oder generell Probleme durch Inhomo-
 genitäten ergeben.
 \autocite{Narziss2009}
 
+\autocite{Distillique2020} Meniskus lesen einsinken
+
 \section*{Kalibrierung und Justierung}
+
+ATC verursacht fehler weil auf Zucker geeicht
+\autocite{Terrill2010}
 
 2 punkt 20°C, 0 Stellung jeden Tag, Wasser 0° Bx, Referenzlösung herstellen,
 mit kalibrierter Feinwaage
@@ -279,6 +310,13 @@ WCF = refrakto Bx  / Hydro in P
 \autocite{Bonham2001}
 
 \autocite{Weiss2016} 1.03
+
+\autocite{BSHB2010} Eventuell Hopfenöle
+
+andere Temperatur verursacht verzerrung
+ASBC refractometry protocols, Kurfenanpassung pro würze
+\autocite{Bonham2001}
+
 
 \section*{Messung durchführen}
 
