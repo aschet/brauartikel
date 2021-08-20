@@ -11,6 +11,7 @@
 \usepackage{graphicx}
 \usepackage{chemformula}
 \usepackage{amsmath,amsfonts,amssymb}
+\usepackage{icomma}
 \usepackage{textcomp}
 \usepackage{gensymb}
 \usepackage[italic,symbolgreek]{mathastext}
@@ -157,7 +158,7 @@ Auflösung [°Bx] & 0,2 & 0,1 \\
 Genauigkeit [°Bx] & 0,2 & 0,1 \\
 ATC [°C] & 10--30 & 10--40 \\
 Maßeinheiten & °Bx, SG & °Bx, °Oe, °KWM \\
-Kalibrierzertifikat & nein & ja \\
+Kalibrierschein & nein & ja \\
 \bottomrule
 \end{tabular}
 
@@ -308,7 +309,7 @@ für diesen ist 1,02 bis 1,06. Der etablierte Durchschnittswert
 entspricht 1,04.  \autocite{Bonham2001,BSHB2010,Roberts1950,Terrill2013}
 
 \begin{equation}
-\wcf = \frac{\bxi}{\oex}
+\wcf = \frac{\bxi}{\oex} \approx 1,04
 \label{eq:calcwcf} 
 \end{equation}
 
@@ -360,7 +361,7 @@ ausreichend genau für den Heimbereich
 \autocite{Bonham2001}
 
 \begin{equation}
-\mathit{AE}=1,53 \cdot \bxf - 0,59 \cdot \bxic
+\mathit{AE}\:[\degree P]=1,53 \cdot \bxf - 0,59 \cdot \bxic
 \label{eq:gardner} 
 \end{equation}
 
@@ -381,7 +382,7 @@ Quelle nicht bekannt, auch wenn korrekt insignifikante verbesserung
 
 \begin{align}
 \begin{split}
-\fg &= 1,001843 - 0,002318474 \cdot \bxic - 0,000007775 \cdot \bxic^2 -
+\fg\:[SG] &= 1,001843 - 0,002318474 \cdot \bxic - 0,000007775 \cdot \bxic^2 -
 0,000000034 \cdot \bxic^3 \\
 & \quad + 0,00574 \cdot \bxf +
 0,00003344 \cdot \bxf^2 + 0,000000086 \cdot \bxf^3
@@ -416,13 +417,13 @@ new linear 0.03, 0.4, 1.0, 84 \%
 
 
 \begin{equation}
-\fg = 1 - 0,00085683 \cdot \bxic + 0,0034941 \cdot \bxfc
+\fg\:[SG] = 1 - 0,00085683 \cdot \bxic + 0,0034941 \cdot \bxfc
 \label{eq:terrilllinear} 
 \end{equation}
 
 \begin{align}
 \begin{split}
-\fg &= 1 - 0,0044993 \cdot \bxic + 0,011774 \cdot \bxfc + 0,00027581 \cdot \bxic^2 - 0,0012717 \cdot \bxfc^2 \\
+\fg\:[SG] &= 1 - 0,0044993 \cdot \bxic + 0,011774 \cdot \bxfc + 0,00027581 \cdot \bxic^2 - 0,0012717 \cdot \bxfc^2 \\
 & \quad  - 0,0000072800 \cdot \bxic^3  + 0,000063293 \cdot \bxfc^3
 \end{split} \label{eq:terrillcubic} 
 \end{align}
@@ -451,7 +452,7 @@ C = 100 \cdot \frac{\bxi - \bxf}{100 - 48,4 \cdot 0,445 - 0,582 \cdot \bxf}
 \end{equation}
 
 \begin{equation}
-\abw = \frac{48,4 \cdot C}{100 - 0,582 \cdot C}
+\abw\:[\%\:w/w] = \frac{48,4 \cdot C}{100 - 0,582 \cdot C}
 \label{eq:gossett} 
 \end{equation}
 
@@ -464,7 +465,7 @@ model std dev 0.2 \%ABV. beo 0.1 brix auflösung
 \autocite{Gossett2012c}
 
 \begin{equation}
-\aex = \bxic - \frac{\abw \cdot (2,0665 - 1,0665 \cdot \bxic / 100)}{0,8052}
+\aex\:[\degree P] = \bxic - \frac{\abw \cdot (2,0665 - 1,0665 \cdot \bxic / 100)}{0,8052}
 \end{equation}
 
 \subsection*{Novotný (2017)}
@@ -485,18 +486,16 @@ Vergleichwerte
 
 
 \begin{equation} 
-\fg = -0,002349 \cdot \bxic + 0,006276 \cdot \bxfc + 1
+\fg\:[SG] = -0,002349 \cdot \bxic + 0,006276 \cdot \bxfc + 1
 \label{eq:novotnylinear} 
 \end{equation}
 
 \begin{align}
 \begin{split}
-\fg &= 1,335 \cdot 10^{-5} \cdot \bxic^2 - 3,239 \cdot 10^{-5} \cdot \bxic \cdot \bxfc + 2,916 \cdot 10^{-5} \cdot \bxfc^2 \\
+\fg\:[SG] &= 1,335 \cdot 10^{-5} \cdot \bxic^2 - 3,239 \cdot 10^{-5} \cdot \bxic \cdot \bxfc + 2,916 \cdot 10^{-5} \cdot \bxfc^2 \\
 & \quad - 2,421 \cdot 10^{-3} \cdot \bxic + 6,219 \cdot 10^{-3} \cdot \bxfc + 1
 \end{split} \label{eq:novotnyquadratic} 
 \end{align}
-
-\autoref{eq:novotnylinear}
 
 \subsection*{Welche Korrelationsfunktion?}
 
@@ -540,35 +539,35 @@ noted that an arithmetic relationship exists between them through which Carl Bal
 ing first laid down the foundation for brewing calculations
 
 \begin{equation}
-\sg = \frac{P}{258,6 - \mathit{P} / 258,2 \cdot 227,1} + 1
+\sg = \frac{\degree P}{258,6 - \mathit{P} / 258,2 \cdot 227,1} + 1
 \end{equation}
 
 \begin{equation}
-P = -205,347 \cdot \sg^2 + 668,72 \cdot \sg - 463,37
+\degree P = -205,347 \cdot \sg^2 + 668,72 \cdot \sg - 463,37
 \end{equation}
 
 \begin{equation}
-\rex = 0,1948 \cdot \oex + 0,8052 \cdot \aex
+\rex\:[\degree P] = 0,1948 \cdot \oex + 0,8052 \cdot \aex
 \end{equation}
 
 \begin{equation}
-\abw = \frac{\oex - \rex}{2,0665 - 1.0665 \cdot \oex / 100}
+\abw\:[\%\:w/w] = \frac{\oex - \rex}{2,0665 - 1.0665 \cdot \oex / 100}
 \end{equation}
 
 \begin{equation}
-\abv = \frac{\abw \cdot \fg}{0,7907}
+\abv\:[\%\:v/v] = \frac{\abw \cdot \fg}{0,7907}
 \end{equation}
 
 \autocite{Spedding2016}
 
 \begin{equation}
-\adf = 100 \cdot \frac{\oex - \aex}{\oex}
+\adf\:[\%]= 100 \cdot \frac{\oex - \aex}{\oex}
 \end{equation}
 
 \setlength{\jot}{2mm}
 
 \begin{equation}
-\rdf = 100 \cdot \frac{\oex - \rex}{\oex} \cdot \frac{1}{1 - 0,005161 \cdot \rex}
+\rdf\:[\%] = 100 \cdot \frac{\oex - \rex}{\oex} \cdot \frac{1}{1 - 0,005161 \cdot \rex}
 \end{equation}
 
 \autocite{Speers2015}
@@ -590,16 +589,16 @@ Referenzimplementierung \url{https://aschet.github.io/refractometer/}
 
 
 \begin{align*}
-\bxi &= 12 \\
-\bxf &= 6 \\
+\bxi\:[\degree Bx] &= 12 \\
+\bxf\:[\degree Bx] &= 6 \\
 \wcf &= 1,04 \\
-\bxic = \frac{12}{1.04} &= 11,54 \\
-\bxfc = \frac{6}{1.04} &= 5,77 \\
-\fg = 1 - 0,00085683 \cdot 11,54 + 0,0034941 \cdot 5,77 &= 1,010 \\
-\aex = -205,347 \cdot 1,010^2 + 668,72 \cdot 1,010 - 463,37 &= 2,63 \\
-\rex = 0,1948 \cdot 11,54 + 0,8052 \cdot 2,63 &= 4,37 \\
-\abw = \frac{11,54 - 4,37}{2,0665 - 1,0665 \cdot 11,54 / 100} &= 3,69 \\
-\abv = \frac{3,69 \cdot 1,010}{0,7907} &= 4,71
+\bxic\:[\degree P] = \frac{12}{1,04} &= 11,54 \\
+\bxfc = \frac{6}{1,04} &= 5,77 \\
+\fg\:[SG] = 1 - 0,00085683 \cdot 11,54 + 0,0034941 \cdot 5,77 &= 1,010 \\
+\aex\:[\degree P] = -205,347 \cdot 1,010^2 + 668,72 \cdot 1,010 - 463,37 &= 2,63 \\
+\rex\:[\degree P] = 0,1948 \cdot 11,54 + 0,8052 \cdot 2,63 &= 4,37 \\
+\abw\:[\%\:w/w] = \frac{11,54 - 4,37}{2,0665 - 1,0665 \cdot 11,54 / 100} &= 3,69 \\
+\abv\:[\%\:v/v] = \frac{3,69 \cdot 1,010}{0,7907} &= 4,71
 \end{align*}
 
 \section*{Zusammenfassung}
