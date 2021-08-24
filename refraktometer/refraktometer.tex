@@ -34,20 +34,23 @@
 }
 
 \title{Alkoholmessung mit dem Refraktometer}
-\author{Thomas Ascher}
+\author{Thomas Ascher <thomas.ascher@gmx.at>}
 \date{14. August 2021, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
 
 \addbibresource{refraktometer.bib}
 
-\newcommand{\bxi}{\mathit{Bx}_i}
+\newcommand{\bxi}{\mathit{R}_i}
 \newcommand{\bxitext}{$\smash{\bxi}$}
-\newcommand{\bxic}{\mathit{OE}}
-\newcommand{\bxf}{\mathit{Bx}_f}
-\newcommand{\bxfc}{\mathit{Bc}_f}
+\newcommand{\bxic}{\mathit{Rc}_i}
+\newcommand{\bxf}{\mathit{R}_f}
+\newcommand{\bxfc}{\mathit{Rc}_f}
 \newcommand{\sg}{\mathit{SG}}
+\newcommand{\sgtext}{$\smash{\sg}$}
 \newcommand{\fg}{\mathit{FG}}
 \newcommand{\abv}{\mathit{ABV}}
+\newcommand{\abvtext}{$\smash{\abv}$}
 \newcommand{\abw}{\mathit{ABW}}
+\newcommand{\abwtext}{$\smash{\abw}$}
 \newcommand{\oex}{\mathit{OE}}
 \newcommand{\aex}{\mathit{AE}}
 \newcommand{\rex}{\mathit{RE}}
@@ -64,7 +67,8 @@
 Mittlerweile stehen dem Heimbrauumfeld eine breite Auswahl von Instrumenten
 mit verschiedenen Messprinzipien zur Verfügung, die es ermöglichen, den
 Alkoholgehalt eines selbst gebrauten Biers abzuschätzen oder den
-Gärverlauf zu beobachten. Das ist neben der klassischen Bierspindel (Aräometer) unter anderem das Refraktometer. Die Refraktometrie ist
+Gärverlauf zu beobachten. Das ist neben der klassischen Bierspindel
+unter anderem das Refraktometer. Die Refraktometrie ist
 definitiv kein Neuankömmling im Bereich der Bieranalyse. Versuche,
 auf Basis dieses Messprinzips den Alkoholgehalt zu bestimmen, reichen bis
 in das Jahr 1843 zurück \autocite{Gamer1959}.
@@ -73,7 +77,7 @@ Auch wenn das Refraktometer den Ruf besitzt, weniger genaue Messergebnisse
 zu liefern als andere labortechnische Instrumente, liegen dessen
 Vorteile klar auf der Hand: kurze Messzeiten bei geringem Probevolumen
 und überschaubarer Bedienungskomplexität. Im Gegensatz zu den beim
-Aräometer üblichen 100 Millilitern pro Probe werden nur wenig
+Bierspindel üblichen 100 Millilitern pro Probe werden nur wenig
 Milliliter benötigt, die sich dementsprechend auch schneller nach dem
 Hopfenkochen auf Messtempertur abkühlen lassen. \autocite{Bettner1969, Terrill2011}
 
@@ -111,7 +115,7 @@ technischen Prozesse. Deshalb wird dieser je nach Anwendungsgebiet
 und Probe auf die gewünschte Messgröße kalibriert. Zur Messung
 der relativen Dichte von Saccharose/Wasser-Lösungen im Bereich der
 Wein- und Saftherstellung ist diese zum Beispiel Grad Brix (°Bx), wobei
-ein °Bx einem Gramm Saccharose auf 99 Gramm Wasser entspricht. Die
+ein Grad Brix einem Gramm Saccharose auf 99 Gramm Wasser entspricht. Die
 Umrechnung zwischen Brechungsindex und Grad Brix ist durch die ICUMSA
 Tabellen normiert.
 \autocite{Bonham2001,Terrill2013}
@@ -139,13 +143,6 @@ die Brechung die Probe nicht durchqueren. \autocite{AKRSSOGH2021,Gamer1959,Terri
 \label{fig:refactotype}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=4.8cm]{images/scale.jpg}
-\caption{Durchsicht durch ein Handrefraktometer}
-\label{fig:refractoscale}
-\end{figure}
-
 \begin{table}[h]
 \centering
 \begin{tabular}{lrr}
@@ -161,12 +158,28 @@ Maßeinheiten & °Bx, SG & °Bx, °Oe, °KWM \\
 Kalibrierschein & nein & ja \\
 \bottomrule
 \end{tabular}
-
 \caption{Spezifikation typischer Refraktometer im Heimbraubereich}
 \label{table:refactospec}
 \end{table}
 
-\section*{Exkurs Aräometer}
+\begin{figure}[h]
+\centering
+\includegraphics[width=4.8cm]{images/scale.jpg}
+\caption{Durchsicht durch ein Handrefraktometer}
+\label{fig:refractoscale}
+\end{figure}
+
+\section*{Exkurs Bierspindel}
+
+Nachdem sich die Messabläufe und Berechnungswege zur Bestimmung des
+Alkoholgehalts zwischen Refraktometer und Bierspindel großteils
+decken, besteht die Notwendigkeit den Umgang mit der Bierspindel
+näher zu erläutern. 
+
+Mit der Bierspindel bzw. auch Saccharometer oder Aräometer wird
+die relative Dichte (Specifiv Gravity, \sgtext) einer Flüssigkeit
+nach dem Prinzip des Auftriebs bestimmt. Die spezifische Dichte
+bezieht sich hierbei auf Wasser. Nachdem 
 
 
 Auftrieb, = gewicht der verdrängten flüssigkeit, sinkt weiter
@@ -249,8 +262,46 @@ genitäten ergeben.
 
 \autocite{Distillique2020} Meniskus lesen einsinken
 
-\section*{Kalibrierung und Justierung}
+\section*{Würze-Korrekturfaktor und Stammwürze}
 
+Auch wenn sich die Einheiten Grad Brix und Grad Plato beide auf
+wässrige Saccharoselösungen beziehen, ein auf Grad Brix
+kalibriertes Refraktometer sollte bei gleicher Stammwürze einen
+höheren Messwert liefern als ein Aräometer. Der Grund hierfür ist,
+dass Würze noch weitere gelöste Bestandteile enthält, die sich auf den
+Brechungsindex auswirken. Messwerte müssen dementsprechend durch einen
+Korrekturfaktor (Wort Correction Factor, \wcftext) angepasst
+werden. Zur Ermittlung der Stammwürze in Grad Plato ist daher 
+der Messwert des Refraktometers der Stammwürze (\bxitext) gemäß
+\autoref{eq:applywcf} durch den \wcftext\,zu dividieren.
+\autocite{Bonham2001,Roberts1950,Terrill2013}
+
+\begin{equation}
+\oex \:[\degree P] = \bxic = \frac{\bxi}{\wcf}
+\label{eq:applywcf} 
+\end{equation}
+
+Der \wcftext\,ist stark von der Würzezusammensetzung Abhängig und
+sollte deshalb im Optimalfall pro Rezept mit Hilfe einer Aräometermessung
+gemäß \autoref{eq:calcwcf} bestimmt werden. Ein gängiger Wertebereich
+für diesen ist 1,02 bis 1,06. Der etablierte Durchschnittswert
+entspricht 1,04.  \autocite{Bonham2001,BSHB2010,Roberts1950,Terrill2013}
+
+\begin{equation}
+\wcf = \frac{\bxi}{\oex} \approx 1,04
+\label{eq:calcwcf} 
+\end{equation}
+
+\section*{Kalibrierung und Justage}
+
+Um Sicherzustellen, dass ein Messgerät 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=4.8cm]{images/adjust.jpg}
+\caption{Justierung eines Handrefraktometers}
+\label{fig:refactoadjust}
+\end{figure}
 
 
 digital refraktometer -> licht intefferenz, verschiedene skalen, messbereich
@@ -283,37 +334,7 @@ Ein, zweipunkt, mehrpunkt
 schlechte chinestischer herstellung
 \autocite{Troester2012}
 
-\section*{Würze-Korrekturfaktor und Stammwürze}
-
-Auch wenn sich die Einheiten Grad Brix und Grad Plato beide auf
-wässrige Saccharoselösungen beziehen, ein auf Grad Brix
-kalibriertes Refraktometer sollte bei gleicher Stammwürze einen
-höheren Messwert liefern als ein Aräometer. Der Grund hierfür ist,
-dass Würze noch weitere gelöste Bestandteile enthält, die sich auf den
-Brechungsindex auswirken. Messwerte müssen dementsprechend durch einen
-Korrekturfaktor (Wort Correction Factor, \wcftext) angepasst
-werden. Zur Ermittlung der Stammwürze in Grad Plato ist daher 
-der Messwert des Refraktometers der Stammwürze (\bxitext) gemäß
-\autoref{eq:applywcf} durch den \wcftext\,zu dividieren.
-\autocite{Bonham2001,Roberts1950,Terrill2013}
-
-\begin{equation}
-\bxic\:[\degree P] = \frac{\bxi}{\wcf}
-\label{eq:applywcf} 
-\end{equation}
-
-Der \wcftext\,ist stark von der Würzezusammensetzung Abhängig und
-sollte deshalb im Optimalfall pro Rezept mit Hilfe einer Aräometermessung
-gemäß \autoref{eq:calcwcf} bestimmt werden. Ein gängiger Wertebereich
-für diesen ist 1,02 bis 1,06. Der etablierte Durchschnittswert
-entspricht 1,04.  \autocite{Bonham2001,BSHB2010,Roberts1950,Terrill2013}
-
-\begin{equation}
-\wcf = \frac{\bxi}{\oex} \approx 1,04
-\label{eq:calcwcf} 
-\end{equation}
-
-\section*{Messung durchführen}
+\section*{Messung}
 
 einige Tropfen auf Refi, nicht heiß tropfen lassen, verschlossen auskühlen
 \autocite{Terrill2013}
@@ -338,47 +359,76 @@ problems develop that limit precision.  For example, some dark and turbid sample
 mehrfache Messung bei digitalen
 \autocite{Gossett2012a}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=4.8cm]{images/measure.jpg}
+\caption{Durchführung der Messung}
+\label{fig:refactomeasure}
+\end{figure}
 
-\section*{Korrelationsmodelle zur Schätzung des scheinbaren Restextrakts}
 
-Faktoren Anpassen
-\autocite{Gamer1959}
 
-durch alkoholfehler misst nicht AE, dnerer RI, Korrelation notwendig.
-\autocite{Terrill2010a}
+\section*{Korrelationsmodelle}
 
-linearer zusammenhang zwischen Vergärungsgrad und Alkoholgehalt,
-gleicher RI für verschiedene Probenzusammensetzung.
-\autocite{Terrill2010}
+Der während der Gärung gebildete Ethanol verfälscht nicht nur
+die Extraktmessung mit der Bierspindel sondern beeinflusst auch
+den Brechungsindex. Es besteht daher die Notwendigkeit einen
+Refraktometermesswert für die Berechnung des Alkoholgehalts in eine
+andere Messgröße zu transformieren. Die entsprechende Messgröße ist
+im Normalfall der scheinbare Restextrakt, so wie er mit einer
+Bierspindel gemessen würde. Die Umrechnung erfolgt durch eine
+Korrelationsfunktion. Insgesamt wurden mindestens fünf
+Korrelationsmodelle im Heimbrauumfeld für diesen Zweck veröffentlicht,
+die ihre jeweiligen Stärken und Schwächen besitzen. Ein grundlegendes
+Problem bei der Entwicklung eines solchen Modells ist,
+dass verschiedene Zusammensetzungen einer vergorene
+Probe den gleichen Brechungsindex aufweisen können. \autocite{Terrill2010a,Terrill2010}
 
-Temperatur abhängig, 20°C
-\autocite{Gossett2012}
+ % TODO: parameter Ri, Rf
 
-\subsection*{Gardner (2000)}
+\subsection*{Gardner}
 
-% equations derived by Roberts & Stewart: 1
-ausreichend genau für den Heimbereich
-\autocite{Bonham2001}
+Das lineare Gardner Modell zu Berechnung des scheinbaren Restextrakts
+(\autoref{eq:gardner}) wurde im Jahr 2000 in der Zeitschrift
+„The New Brewer“ veröffentlicht und von existierenden Gleichungen
+abgeleitet. Bonham beschreibt dieses Modell als ausreichend
+für die private Anwendung, weißt aber darauf hin, dass bereits
+genauere Näherungsverfahren zu diesem Zeitpunkt existiert
+hätten. Neben der Gleichung zur Bestimmung des scheinbaren
+Restextrakts hat Gardner auch eine Gleichung zur Bestimmung
+des Alkoholgehalts in Gewichtsprozent (Alcohol by Weight, \abwtext, \autoref{eq:gardnerabw}).
+Im Heimbraubereich scheint dieses Modell keine große Verbreitung
+erfahren zu haben. \autocite{Bonham2001}
 
 \begin{equation}
 \mathit{AE}\:[\degree P]=1,53 \cdot \bxf - 0,59 \cdot \bxic
 \label{eq:gardner} 
 \end{equation}
 
-\subsection*{Bonham (2001)}
+\begin{align}
+\begin{split}
+\abw\:[\%\:w/w] &= (277,8851 - 277,4 \cdot \fg + 0,9956 \bxf + 0,00523 \cdot \bxf^2 + 0,000015 \cdot \bxf^3) \\
+& \quad \cdot \fg / 0,79
+\end{split} \label{eq:gardnerabw} 
+\end{align}
 
-Standard \autocite{Terrill2010a}
+\subsection*{Bonham}
 
-Laut Gossett Bonham formel falsch angewendet Bx korrigiert.
-Gemessen 10 Biere bei Stammwürze von 9 - 24 und bei Standard Formel Abweichungen
-beim AE festgestellt von 0.1 - 2.2 Plato, keine Abweichung bei
-58\% RDF (71\% ADF), mean = 1.3 °Plato
-\autocite{Terrill2010a}
+Das von Bonham im Jahr 2001 im Zymurgy Magazin der American Homebrewers
+Association veröffentlichte Korrelationsmodell ist auch als
+Standardformel bekannt. Als Grundlage dienten bereits existierende
+Gleichungen, die an die üblichen Maßeinheiten der amerikanischen
+Heimbrauerszene angepasst wurden. Bis zur Ablösung durch die Terrill
+Formel im Jahr 2011 war dieses Modell weit verbreitet. Heute
+wird es noch vereinzelt wie zum Beispiel von 
+„\href{https://braureka.de/berechnungen/refraktometer-korrektur/}{BräuReKa!}“
+und „\href{https://www.maischemalzundmehr.de/index.php?inhaltmitte=toolsrefraktorechner}{Maische, Malz und Mehr}“ für
+Messungen während der Gärung empfohlen. \autocite{Bonham2001,Terrill2010a}
 
-Quelle nicht bekannt, auch wenn korrekt insignifikante verbesserung
-\autocite{Terrill2011}
-
-\autocite{Bonham2001}
+Das Bonham Modell besteht aus einer Gleichung zur Bestimmung der
+spezifischen Dichte des scheinbaren Restextrakts (\autoref{eq:bonham})
+und einer Gleichung zur Bestimmung des Alkoholgehalts in Volumenprozent
+(Alcohol by Volume, \abvtext, \autoref{eq:bonhamabv}).
 
 \begin{align}
 \begin{split}
@@ -389,32 +439,22 @@ Quelle nicht bekannt, auch wenn korrekt insignifikante verbesserung
 \end{split} \label{eq:bonham} 
 \end{align}
 
-\autoref{eq:bonham}
+\begin{align}
+\begin{split}
+\abv\:[\%\:v/v] &= 1,001843 - 0,002318474 \cdot \bxic - 0,000007775 \cdot \bxic^2 -
+0,000000034 \cdot \bxic^3 \\
+& \quad + 0,00574 \cdot \bxf +
+0,00003344 \cdot \bxf^2 + 0,000000086 \cdot \bxf^3
+\end{split} \label{eq:bonhamabv} 
+\end{align}
 
-\subsection*{Terrill (2011)}
+\subsection*{Terrill}
 
-12 Biere, 8 kommzerielle Brauereien evaluiert, 88 \% des AE liegt innerhalb
-von 0.5 °P
-\autocite{Terrill2013}
-
-OE: 9 - 24, AE: 1.8 - 5.6, ADF - 73 \% to 91 \%, 60 Messungen,
-\autocite{Terrill2010}
-
-
-Bonham Formel quelle nicht bekannt
-50 \% RDF (61 \% ADF) Proben gemessen wurden aber verworfen, weil
-Genauigkeit verschlechtert.
-Abweichungen bein linearen besser als vereinfachte Kubische
-ADFs from 73 \% to 91 \% Ergebnisse
-\autocite{Terrill2011}
-
-mean, std, max, <0.5°P
-old: -0.4, 0.6, -2.1, 41 \%
-new cubic: 0.2, 0.3, 1.2, 85 \%
-new linear 0.03, 0.4, 1.0, 84 \%
-
-\autocite{Terrill2011}
-
+Bei Vergleichsmessungen zwischen Bierspindel und einem Handrefraktometer
+in Verbindung mit der Bonham Gleichung hat Terrill im Jahr 2010 eine
+mittlere Abweichungen der Messwerte von 1,3 Grad Plato festgestellt und darauf hin mit der Entwicklung eines eigenen Korrelationsmodell begonnen welches
+in linearer (\autoref{eq:terrilllinear}) und vereinfachter kubischer Form
+(\autoref{eq:terrillcubic}) veröffentlicht wurde. \autocite{Terrill2010a}
 
 \begin{equation}
 \fg\:[SG] = 1 - 0,00085683 \cdot \bxic + 0,0034941 \cdot \bxfc
@@ -428,32 +468,60 @@ new linear 0.03, 0.4, 1.0, 84 \%
 \end{split} \label{eq:terrillcubic} 
 \end{align}
 
-\subsection*{Gossett (2012)}
+Insgesamt dienten Vergleichsmessungen von 12 Bieren mit Stammwürzen
+von 9 bis 24 Grad Plato, scheinbaren Restextrakten von 1,8 bis
+5,6 Grad Plato und scheinbaren Vergärungsgraden von 73 bis 91~\%
+als ursprüngliche Datenbasis. Auch kommerzielle Brauereien haben weitere Messwerte erfasst. Mittlerweile verfügt Terrill  über mindestens
+60 Vergleichswerte. Messungen mit geringeren Vergärungsgraden wurden
+ausgeschlossen, da diese die Genauigkeit des Modells verschlechtert
+hätten.
+\autocite{Terrill2010a,Terrill2010,Terrill2011,Terrill2013}
 
-Während die anderen
+\autoref{table:terrillcomp} zeigt den von Terrill veröffentlichte
+Ergebnis zwischen den Modell von Bonham und seinem Eigenen. Bei
+endvergorenen Proben liefert das Bonham Modell eine wesentlich
+schlechtere Näherung. Hierbei ist allerdings zu beachten, dass
+Terrill die ursprüngliche Quelle des Bonhams Modells nicht kannte
+und deshalb fälschlicherweise auch den zweiten Messwert um
+den Würze-Korrekturfaktor angepasst hat. Dieser Fehler soll sich
+aber nicht signifikant auf das Ergebnis auswirken.
+\autocite{Terrill2010a,Terrill2010,Terrill2011}
 
-unzufrieden mit indirekter Messwert mit Umrechnung von
-unbekannter Genauigkeit.
-Auswirkung von Alkoholgehalt auf den Brix Messung.
-Stochiometrisches Modell. 12 Biere im Vergleich mit
-Hydrometer. Kochen Verdünnung.
-\autocite{Gossett2012}
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+Korrelation &  Mittlere Abw. [°P] &  Standardabw. [°P] & Max. Abw. [°P] & Abw. < 0,5 °P [\%] \\
+\midrule
+Bonham & -0,4 & 0,6 & -2,1 & 41 \\
+Terrill Kubisch & 0,2 & 0,3 & 1,2 & 85 \\
+Terrill Linear & 0,03 & 0,4 & 1,0 & 84 \\
+\bottomrule
+\end{tabular}
+\caption{Vergleich zwischen Bonham und Terrill Modell}
+\label{table:terrillcomp}
+\end{table}
 
-0.445 Brix (20°C) per \% ABW, 
-Standardabweichung bei 0.1 Brix Genauigkeit  \%ABV of 0.115/0.353 = 0.33
-und Ausschluss systematischer Messfehler.
-\autocite{Gossett2012a}
+\subsection*{Gossett}
 
-Formeln
-\autocite{Gossett2012b}
+Von den bisher beschriebenen Korrelationsmodelle wird ein indirekter
+Messwert in einen anderen indirekten Messwert transformiert. Gossett
+war unzufrieden mit diesem Vorgehen und hat im Jahr 2012 daher ein
+stöchiometrisches Modell (\autoref{eq:gossett}, \autoref{eq:gossettabw})
+entwickelt, welches direkt den Alkohol in Gewichtsprozent von
+berechnet. Er hat hierzu die Auswirkungen der Ethanolkonzentration
+auf die Messwerten eines Refraktometers analysiert. Ein Gewichtsprozent
+verfälscht diesen bei 20~°C um 0,445 Grad Brix. 
+\autocite{Gossett2012,Gossett2012a,Gossett2012b}
 
 \begin{equation}
 C = 100 \cdot \frac{\bxi - \bxf}{100 - 48,4 \cdot 0,445 - 0,582 \cdot \bxf}
+\label{eq:gossett} 
 \end{equation}
 
 \begin{equation}
 \abw\:[\%\:w/w] = \frac{48,4 \cdot C}{100 - 0,582 \cdot C}
-\label{eq:gossett} 
+\label{eq:gossettabw} 
 \end{equation}
 
 
@@ -469,6 +537,8 @@ model std dev 0.2 \%ABV. beo 0.1 brix auflösung
 \end{equation}
 
 \subsection*{Novotný (2017)}
+
+\autocite{Savel2009}
 
 ABW, RE Formeln
 
@@ -498,6 +568,8 @@ Vergleichwerte
 \end{align}
 
 \subsection*{Welche Korrelationsfunktion?}
+
+\autocite{Wolf2015}
 
 Novotný
 \href{https://brewfather.app}{Brewfather}
@@ -576,8 +648,6 @@ Lincoln equations
 \autocite{Spedding2016}
 
 Method \href{https://www.asbcnet.org}{American Society of Brewing Chemists (ASBC)} \href{https://www.mebak.org}{Mitteleuropäische Brautechnische Analysenkommission (MEBAK)}
-
-\section*{Berechnungsbeispiel}
 
 Linear
 
