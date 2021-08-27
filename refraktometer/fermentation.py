@@ -53,6 +53,14 @@ def cor_bonham(bxi, bxf, wcf):
         0.00003344 * bxf**2 + 0.000000086 * bxf**3
     return oe, sg_to_p(fg), fg
 
+def cor_bonham_incorrect(bxi, bxf, wcf):
+    oe = correct_bx(bxi, wcf)
+    bxfc = correct_bx(bxf, wcf)
+    fg = 1.001843 - 0.002318474 * oe - 0.000007775 * oe**2 - \
+        0.000000034 * oe**3 + 0.00574 * bxfc + \
+        0.00003344 * bxfc**2 + 0.000000086 * bxfc**3
+    return oe, sg_to_p(fg), fg
+
 # Gardner correlation function implemented according to:
 # Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
 # In: Zymurgy 24.1 (2001), S. 43-46.
@@ -130,13 +138,14 @@ class RefracModel:
         return ae
 
 refrac_models = [
-    RefracModel('Gardner', cor_gardner),
     RefracModel('Bonham', cor_bonham),
-    RefracModel('Terrill Linear', cor_terrill_linear),
-    RefracModel('Terrill Kubisch', cor_terrill_cubic),
+    RefracModel('Bonham Inkorrekt', cor_bonham_incorrect),
+    RefracModel('Gardner', cor_gardner),
     RefracModel('Gossett', cor_gossett),
     RefracModel('Novotný Linear', cor_novotny_linear),
-    RefracModel('Novotný Quadratisch', cor_novotny_quadratic)
+    RefracModel('Novotný Quadratisch', cor_novotny_quadratic),
+    RefracModel('Terrill Kubisch', cor_terrill_cubic),
+    RefracModel('Terrill Linear', cor_terrill_linear)
 ]
 
 model_names = list(map(lambda model: model.name, refrac_models))

@@ -42,8 +42,11 @@
 \newcommand{\bxi}{\mathit{R}_i}
 \newcommand{\bxitext}{$\smash{\bxi}$}
 \newcommand{\bxic}{\mathit{Rc}_i}
+\newcommand{\bxictext}{$\smash{\bxic}$}
 \newcommand{\bxf}{\mathit{R}_f}
+\newcommand{\bxftext}{$\smash{\bxf}$}
 \newcommand{\bxfc}{\mathit{Rc}_f}
+\newcommand{\bxfctext}{$\smash{\bxfc}$}
 \newcommand{\sg}{\mathit{SG}}
 \newcommand{\sgtext}{$\smash{\sg}$}
 \newcommand{\fg}{\mathit{FG}}
@@ -54,6 +57,7 @@
 \newcommand{\oex}{\mathit{OE}}
 \newcommand{\aex}{\mathit{AE}}
 \newcommand{\rex}{\mathit{RE}}
+\newcommand{\rextext}{$\smash{\rex}$}
 \newcommand{\wcf}{\mathit{WCF}}
 \newcommand{\wcftext}{$\smash{\wcf}$}
 \newcommand{\adf}{\mathit{ADF}}
@@ -262,30 +266,47 @@ genitäten ergeben.
 
 \autocite{Distillique2020} Meniskus lesen einsinken
 
+\begin{equation}
+\sg = \frac{\degree P}{258,6 - \mathit{P} / 258,2 \cdot 227,1} + 1
+\label{eq:calcptosg}
+\end{equation}
+
+\begin{equation}
+\degree P = -205,347 \cdot \sg^2 + 668,72 \cdot \sg - 463,37
+\label{eq:calcsgtop}
+\end{equation}
+
+Lincoln equations
+\autocite{Spedding2016}
+
+
 \section*{Würze-Korrekturfaktor und Stammwürze}
 
-Auch wenn sich die Einheiten Grad Brix und Grad Plato beide auf
-wässrige Saccharoselösungen beziehen, ein auf Grad Brix
+Auch wenn sich die Einheiten °Bx und °P beide auf
+wässrige Saccharoselösungen beziehen, ein auf °Bx
 kalibriertes Refraktometer sollte bei gleicher Stammwürze einen
-höheren Messwert liefern als ein Aräometer. Der Grund hierfür ist,
-dass Würze noch weitere gelöste Bestandteile enthält, die sich auf den
-Brechungsindex auswirken. Messwerte müssen dementsprechend durch einen
+höheren Messwert liefern als eine Bierspindel. Der Grund hierfür ist,
+dass Würze noch weitere Bestandteile enthält, die sich auf den
+Brechungsindex auswirken. Das sind unter anderem Säuren, Salze,
+Proteine und Hopfenöle. Messwerte müssen dementsprechend durch einen
 Korrekturfaktor (Wort Correction Factor, \wcftext) angepasst
-werden. Zur Ermittlung der Stammwürze in Grad Plato ist daher 
+werden. Zur Ermittlung der Stammwürze in °P ist daher 
 der Messwert des Refraktometers der Stammwürze (\bxitext) gemäß
 \autoref{eq:applywcf} durch den \wcftext\,zu dividieren.
-\autocite{Bonham2001,Roberts1950,Terrill2013}
+\autocite{Bonham2001,BSHB2010,Roberts1950,Terrill2013}
 
 \begin{equation}
 \oex \:[\degree P] = \bxic = \frac{\bxi}{\wcf}
 \label{eq:applywcf} 
 \end{equation}
 
-Der \wcftext\,ist stark von der Würzezusammensetzung Abhängig und
-sollte deshalb im Optimalfall pro Rezept mit Hilfe einer Aräometermessung
-gemäß \autoref{eq:calcwcf} bestimmt werden. Ein gängiger Wertebereich
-für diesen ist 1,02 bis 1,06. Der etablierte Durchschnittswert
-entspricht 1,04.  \autocite{Bonham2001,BSHB2010,Roberts1950,Terrill2013}
+Der \wcftext\,ist stark von der Würzezusammensetzung abhängig und
+sollte deshalb pro unterschiedlicher Schüttung mit Hilfe einer
+Extraktmessung durch ein anderes Messgerät gemäß \autoref{eq:calcwcf}
+bestimmt werden. Ein gängiger Wertebereich für diesen ist 1,02 bis 1,06.
+Der etablierte Durchschnittswert entspricht 1,04. Dieser sollte jedoch
+nicht als Konstante betrachtet werden.
+\autocite{Bonham2001,Roberts1950,Terrill2013}
 
 \begin{equation}
 \wcf = \frac{\bxi}{\oex} \approx 1,04
@@ -384,7 +405,12 @@ Problem bei der Entwicklung eines solchen Modells ist,
 dass verschiedene Zusammensetzungen einer vergorene
 Probe den gleichen Brechungsindex aufweisen können. \autocite{Terrill2010a,Terrill2010}
 
- % TODO: parameter Ri, Rf
+Zur Berechnung der folgenden Korrellationsfunktionen ist eine
+Probe der Stammwürze (\bxitext) und eine während oder nach der
+Gärung entnommene Probe (\bxftext) mit dem Refraktometer zu
+messen. Je nach Funktion sind unveränderte (\bxitext, \bxftext)
+oder um den Würze-Korrekturfaktor veränderte (\bxictext, \bxfctext) 
+Messwerte einzusetzen.
 
 \subsection*{Gardner}
 
@@ -407,8 +433,7 @@ erfahren zu haben. \autocite{Bonham2001}
 
 \begin{align}
 \begin{split}
-\abw\:[\%\:w/w] &= (277,8851 - 277,4 \cdot \fg + 0,9956 \bxf + 0,00523 \cdot \bxf^2 + 0,000015 \cdot \bxf^3) \\
-& \quad \cdot \fg / 0,79
+\abw\:[\%\:w/w] &= 1,09 \cdot \bxf - 1,13 \cdot \aex
 \end{split} \label{eq:gardnerabw} 
 \end{align}
 
@@ -421,12 +446,10 @@ Gleichungen, die an die üblichen Maßeinheiten der amerikanischen
 Heimbrauerszene angepasst wurden. Bis zur Ablösung durch die Terrill
 Formel im Jahr 2011 war dieses Modell weit verbreitet. Heute
 wird es noch vereinzelt wie zum Beispiel von 
-„\href{https://braureka.de/berechnungen/refraktometer-korrektur/}{BräuReKa!}“
-und „\href{https://www.maischemalzundmehr.de/index.php?inhaltmitte=toolsrefraktorechner}{Maische, Malz und Mehr}“ für
-Messungen während der Gärung empfohlen. \autocite{Bonham2001,Terrill2010a}
+„\href{https://www.maischemalzundmehr.de/index.php?inhaltmitte=toolsrefraktorechner}{Maische, Malz und Mehr}“ für Messungen während der Gärung empfohlen. \autocite{Bonham2001,Terrill2010a}
 
 Das Bonham Modell besteht aus einer Gleichung zur Bestimmung der
-spezifischen Dichte des scheinbaren Restextrakts (\autoref{eq:bonham})
+spezifischen Dichte eines vergorenen Bieres (\autoref{eq:bonham})
 und einer Gleichung zur Bestimmung des Alkoholgehalts in Volumenprozent
 (Alcohol by Volume, \abvtext, \autoref{eq:bonhamabv}).
 
@@ -441,10 +464,8 @@ und einer Gleichung zur Bestimmung des Alkoholgehalts in Volumenprozent
 
 \begin{align}
 \begin{split}
-\abv\:[\%\:v/v] &= 1,001843 - 0,002318474 \cdot \bxic - 0,000007775 \cdot \bxic^2 -
-0,000000034 \cdot \bxic^3 \\
-& \quad + 0,00574 \cdot \bxf +
-0,00003344 \cdot \bxf^2 + 0,000000086 \cdot \bxf^3
+\abv\:[\%\:v/v] &= (277,8851 - 277,4 \cdot \fg + 0,9956 \cdot \bxf + 0,00523 \cdot \bxf^2 + 0,000015 \cdot \bxf^3) \\
+& \quad \cdot \fg / 0,79
 \end{split} \label{eq:bonhamabv} 
 \end{align}
 
@@ -511,7 +532,7 @@ stöchiometrisches Modell (\autoref{eq:gossett}, \autoref{eq:gossettabw})
 entwickelt, welches direkt den Alkohol in Gewichtsprozent von
 berechnet. Er hat hierzu die Auswirkungen der Ethanolkonzentration
 auf die Messwerten eines Refraktometers analysiert. Ein Gewichtsprozent
-verfälscht diesen bei 20~°C um 0,445 Grad Brix. 
+verfälscht diesen bei 20~°C um 0,445~°Bx. 
 \autocite{Gossett2012,Gossett2012a,Gossett2012b}
 
 \begin{equation}
@@ -524,36 +545,31 @@ C = 100 \cdot \frac{\bxi - \bxf}{100 - 48,4 \cdot 0,445 - 0,582 \cdot \bxf}
 \label{eq:gossettabw} 
 \end{equation}
 
-
-Bonham zur FG Bestimmung.
-
-12 Biere Mittlere Abweichung 0.1 ABV, Standardabweichung 0.4 ABV
-model std dev 0.2 \%ABV. beo 0.1 brix auflösung
-
-\autocite{Gossett2012c}
+Mit dem Gossett Modell lässt sich direkt keine spezifische Dichte
+zur Berechnung von \autoref{eq:calcabv} bestimmen. Gossett wendet
+hierzu \autoref{eq:bonham} an. Durch Umformung von
+\autoref{eq:calcre} und \autoref{eq:calcabw} und Transformation gemäß
+\autoref{eq:calcsgtop} ist aber eine Berechnung aus dem
+durch \autoref{eq:gossettabw} erhaltenen Alkoholgehalt möglich.
 
 \begin{equation}
 \aex\:[\degree P] = \bxic - \frac{\abw \cdot (2,0665 - 1,0665 \cdot \bxic / 100)}{0,8052}
 \end{equation}
 
-\subsection*{Novotný (2017)}
+\subsection*{Novotný}
 
-\autocite{Savel2009}
-
-ABW, RE Formeln
-
-Verglichen mit Terrill Formel 65-80 \% Vergärungsgrad genau,
-
-Petr Kosin
-
-3 Biere bei 11,6, 17, 22,9 OE, genauigkeit innerhlb von
-0.26 °P, bei Hydrometer 0.15 °P abezogen wegen CO2
-2 Tage besseres ergebnis als Terrill
-\autocite{Novotny2017}
-
-Vergleichwerte
-\autocite{Novotny2017a}
-
+Um das Jahr 2017 hat sich Novotný mit bestehenden Berechnungsvorschriften
+im Heimbraubereich beschäftigt und nach Verbesserungsmöglichkeiten
+gesucht. Darunter auch die Terrill Formel, da diese bekannt dafür
+ist während der Anfangszeit einer Gärung keine guten Korrelationswerte
+zu liefern. Basieren auf einer durch die Budweiser Brauerei beauftragte Forschungsarbeit zur Bewertung von Refraktometern als Messmittel
+hat Novotný eine lineare (\autoref{eq:novotnylinear}) und eine quadratische
+(\autoref{eq:applywcf}) Gleichung zur Berechnung der spezifischen
+Dichte veröffentlicht. Darüber hinaus auch noch Formeln zur
+Berechnung des wirklichen Restextrakts (Real Extract,
+\rextext, \autoref{eq:novotnyre}) und des Alkoholgehalts
+in Gewichtsprozent (\autoref{eq:applywcf}) auf Basis von Refraktometerwerten
+und möglichst genauen Näherungsverfahren. \autocite{Novotny2017a,Novotny2017,Savel2009}
 
 \begin{equation} 
 \fg\:[SG] = -0,002349 \cdot \bxic + 0,006276 \cdot \bxfc + 1
@@ -567,23 +583,41 @@ Vergleichwerte
 \end{split} \label{eq:novotnyquadratic} 
 \end{align}
 
-\subsection*{Welche Korrelationsfunktion?}
+\begin{equation}
+\rex\:[\degree P] = -0,29388 \cdot \bxic + 1.27582 \cdot \bxfc
+\label{eq:novotnyre}
+\end{equation}
 
-\autocite{Wolf2015}
+\begin{equation}
+\abw\:[\%\:w/w] = 0,67062 \cdot \bxic - 0,66091 \cdot \bxfc
+\label{eq:novotnyabw}
+\end{equation}
 
-Novotný
-\href{https://brewfather.app}{Brewfather}
-\href{https://www.brewersfriend.com/refractometer-calculator}{Brewer's Friend}
+Das Novotný Modell wurde während der Gärung an drei Testsuden mit jeweils
+bei 11,6~°P, 17~°P und 20~°P Stammwürze und an den Budweiser
+Ergebnissen verifiziert. Laut den Erhobenen Daten liefert das Terrill
+Modell im Vergleich während der ersten Tage der Gärung hohe
+Abweichungen und auch eine geringfügig höhere Endabweichung.
+\autocite{Novotny2017a,Novotny2017}
 
-Terrill
-„\href{https://braureka.de/berechnungen/refraktometer-korrektur/}{BräuReKa!}“
-\href{https://www.maischemalzundmehr.de/index.php?inhaltmitte=toolsrefraktorechner}{Maische, Malz und Mehr} + Bonham
-\href{https://mashcamp.shop/brauberechnungen}{MashCamp}
+Eine Implementierung der Novotný Formel findet sich in den Braurechnern
+„\href{https://brewfather.app}{Brewfather}“ und
+„\href{https://www.brewersfriend.com/refractometer-calculator}{Brewer's Friend}“.
 
-\href{http://www.brewrecipedeveloper.de}{Brew Recipe Developer}
+\subsection*{Welches Korrelationsmodell?}
 
-Die Standardformel dagegen liefert entlang des gesamten Gärverlaufs gleichmäßig gute Werte, weicht aber in endvergorenen oder nahezu endvergorenen Proben weiter von den wahren Werten ab als die Terrill-Formel. D
-\autocite{Weiss2016}
+Von den präsentierten Korrelationsmodellen scheinen nur die Modelle von Bonham,
+Terrill und Novotný eine größere Verbreitung im Heimbraubereich erfahren
+zu haben, wobei das Modell von Terrill selbst heute nach wie vor
+als Quasi-Standard gilt. Ohne eine Vergleich auf Basis von Messdaten lässt
+sich jedoch keine klare Empfehlung für ein bestimmtes aussprechen. Die
+Problematik hierbei besteht, dass kaum Datensätze mit Vergleichswerten
+zwischen Refraktometern und Bierspindeln oder genaueren Messgeräten
+veröffentlicht wurden. Einer dieser Datensätze stammt von einem vom hobbybrauer.de Forum initiierten Gemeinschaftsexperiments und ein
+anderer sind die Messdaten einer aktiven Gärung von Novotnýs 17~°P Testsud.
+\autocite{Novotny2017a,Wolf2015}
+
+
 
 \begin{figure}[h]
 \centering
@@ -610,24 +644,20 @@ of the wort (terms defined in Table 7.1). To help solve for these various terms,
 noted that an arithmetic relationship exists between them through which Carl Ball-
 ing first laid down the foundation for brewing calculations
 
-\begin{equation}
-\sg = \frac{\degree P}{258,6 - \mathit{P} / 258,2 \cdot 227,1} + 1
-\end{equation}
-
-\begin{equation}
-\degree P = -205,347 \cdot \sg^2 + 668,72 \cdot \sg - 463,37
-\end{equation}
 
 \begin{equation}
 \rex\:[\degree P] = 0,1948 \cdot \oex + 0,8052 \cdot \aex
+\label{eq:calcre} 
 \end{equation}
 
 \begin{equation}
 \abw\:[\%\:w/w] = \frac{\oex - \rex}{2,0665 - 1.0665 \cdot \oex / 100}
+\label{eq:calcabw}
 \end{equation}
 
 \begin{equation}
 \abv\:[\%\:v/v] = \frac{\abw \cdot \fg}{0,7907}
+\label{eq:calcabv}
 \end{equation}
 
 \autocite{Spedding2016}
@@ -649,7 +679,7 @@ Lincoln equations
 
 Method \href{https://www.asbcnet.org}{American Society of Brewing Chemists (ASBC)} \href{https://www.mebak.org}{Mitteleuropäische Brautechnische Analysenkommission (MEBAK)}
 
-Linear
+Novotný
 
 bxi = 12
 bxf = 6
@@ -664,11 +694,11 @@ Referenzimplementierung \url{https://aschet.github.io/refractometer/}
 \wcf &= 1,04 \\
 \bxic\:[\degree P] = \frac{12}{1,04} &= 11,54 \\
 \bxfc = \frac{6}{1,04} &= 5,77 \\
-\fg\:[SG] = 1 - 0,00085683 \cdot 11,54 + 0,0034941 \cdot 5,77 &= 1,010 \\
-\aex\:[\degree P] = -205,347 \cdot 1,010^2 + 668,72 \cdot 1,010 - 463,37 &= 2,63 \\
-\rex\:[\degree P] = 0,1948 \cdot 11,54 + 0,8052 \cdot 2,63 &= 4,37 \\
-\abw\:[\%\:w/w] = \frac{11,54 - 4,37}{2,0665 - 1,0665 \cdot 11,54 / 100} &= 3,69 \\
-\abv\:[\%\:v/v] = \frac{3,69 \cdot 1,010}{0,7907} &= 4,71
+\fg\:[SG] = -0,002349 \cdot 11,54 + 0,006276 \cdot 5,77 + 1 &= 1,009 \\
+\aex\:[\degree P] = -205,347 \cdot 1,009^2 + 668,72 \cdot 1,009 - 463,37 &= 2,34 \\
+\rex\:[\degree P] = 0,1948 \cdot 11,54 + 0,8052 \cdot 2,34 &= 4,13 \\
+\abw\:[\%\:w/w] = \frac{11,54 - 4,13}{2,0665 - 1,0665 \cdot 11,54 / 100} &= 3,81 \\
+\abv\:[\%\:v/v] = \frac{3,81 \cdot 1,009}{0,7907} &= 4,87
 \end{align*}
 
 \section*{Zusammenfassung}
