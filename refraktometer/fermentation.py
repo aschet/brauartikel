@@ -7,14 +7,6 @@ import pandas as pa
 import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
 
-# BXF = final refractometer reading in °Bx
-# BXI = initial refractometer reading in °Bx
-# FG = final gravity in SG
-# OE = original extract in °P
-# RE = real extract in °P
-# SG = specific gravity
-# WCF = wort correction factor
-
 default_wcf = 1.0
 
 def correct_bx(bx, wcf):
@@ -150,34 +142,34 @@ col_name_hydrometer = 'Bierspindel'
 def model_col_name(section, name):
     return section + ' ' + name
 
-data = pa.read_csv('fermentation_data.csv', delimiter=',')
-data_dev = pa.DataFrame()
-data_graph = pa.DataFrame()
+data_ferm = pa.read_csv('fermentation_data.csv', delimiter=',')
+data_ferm_dev = pa.DataFrame()
+data_ferm_graph = pa.DataFrame()
 
-data_graph[col_name_measurement] = list(range(1, data.shape[0] + 1))
-data_graph[col_name_hydrometer] = data[col_name_ae]
-
-for model in refrac_models:
-    data_graph[model.name] = model.calc_ae(data[col_name_bxi], data[col_name_bxf], default_wcf)
-    data_dev[model.name] = data_graph[model.name] - data[col_name_ae]
-
-data_table = pa.DataFrame(columns=['Modell', 'Endabw. [g/100g]', 'Mittlere Abw. [g/100g]', 'Standardabw. [g/100g]', 'R²'])
+data_ferm_graph[col_name_measurement] = list(range(1, data_ferm.shape[0] + 1))
+data_ferm_graph[col_name_hydrometer] = data_ferm[col_name_ae]
 
 for model in refrac_models:
-    last = data_dev.iloc[-1][model.name]
-    dev = data_dev[model.name]
+    data_ferm_graph[model.name] = model.calc_ae(data_ferm[col_name_bxi], data_ferm[col_name_bxf], default_wcf)
+    data_ferm_dev[model.name] = data_ferm_graph[model.name] - data_ferm[col_name_ae]
+
+data_ferm_table = pa.DataFrame(columns=['Modell', 'Endabw. [g/100g]', 'Mittlere Abw. [g/100g]', 'Standardabw. [g/100g]', 'R²'])
+
+for model in refrac_models:
+    last = data_ferm_dev.iloc[-1][model.name]
+    dev = data_ferm_dev[model.name]
     mean = dev.mean()
     std = dev.std()
-    r2 = r2_score(data_graph[col_name_hydrometer], data_graph[model.name])
-    data_table.loc[len(data_table)] = [ model.name, data_dev.iloc[-1][model.name], mean, std, r2 ]
+    r2 = r2_score(data_ferm_graph[col_name_hydrometer], data_ferm_graph[model.name])
+    data_ferm_table.loc[len(data_ferm_table)] = [ model.name, data_ferm_dev.iloc[-1][model.name], mean, std, r2 ]
 
-data_table.to_latex('fermentation_table.tex', index=False, float_format='%.3f', decimal=',')
+data_ferm_table.to_latex('fermentation_table.tex', index=False, float_format='%.3f', decimal=',')
 
-fig = plt.figure(constrained_layout=True, figsize=(8, 12))
+fig_ferm = plt.figure(constrained_layout=True, figsize=(8, 12))
 plot_cols = 2
 plot_rows = len(refrac_models) // plot_cols + len(refrac_models) % plot_cols
 
-axes = fig.subplots(plot_rows, plot_cols, sharex=True, sharey=True)
+axes = fig_ferm.subplots(plot_rows, plot_cols, sharex=True, sharey=True)
 for i, model in enumerate(refrac_models):
     plot_row = i // plot_cols
     plot_col = i % plot_cols
@@ -186,14 +178,11 @@ for i, model in enumerate(refrac_models):
     else:
         ax = axes[plot_col]
     ax.set_ylim([2,18])
-    ax.plot(data_graph[col_name_measurement], data_graph[col_name_hydrometer], label=col_name_hydrometer)
-    ax.scatter(data_graph[col_name_measurement], data_graph[model.name], label=model.name, marker='.')
-    ax.set_title(model.name)
+    ax.plot(data_ferm_graph[col_name_measurement], data_ferm_graph[col_name_hydrometer], label=col_name_hydrometer)
+    ax.scatter(data_ferm_graph[col_name_measurement], data_ferm_graph[model.name], label=model.name, marker='.')
+    r2 = r2_score(data_ferm_graph[col_name_hydrometer], data_ferm_graph[model.name])
+    ax.set_title(model.name + ' (R²=' + '%.3f'%r2 + ')')
     ax.legend(loc='best')  
     ax.set_ylabel('Scheinb. Restex. [g/100g]')
 
-
-
-
-plt.savefig("fermentation_graph.pdf", format="pdf")
-plt.show()
+fig_ferm.savefig("fermentation_graph.pdf", format="pdf")
