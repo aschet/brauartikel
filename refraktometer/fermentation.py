@@ -173,14 +173,27 @@ for model in refrac_models:
 
 data_table.to_latex('fermentation_table.tex', index=False, float_format='%.3f', decimal=',')
 
-fig = plt.figure(constrained_layout=True, figsize=(5, 5))
+fig = plt.figure(constrained_layout=True, figsize=(8, 12))
+plot_cols = 2
+plot_rows = len(refrac_models) // plot_cols + len(refrac_models) % plot_cols
 
-ax = fig.subplots(1, 1)
-ax.set_xlabel(col_name_measurement)
-ax.set_ylabel('Scheinbarer Restextrakt [g/100g]')
-ax.plot(data_graph[col_name_measurement], data_graph[col_name_hydrometer], label=col_name_hydrometer, marker='.')
-for model in refrac_models:
-    ax.plot(data_graph[col_name_measurement], data_graph[model.name], linestyle=':', label=model.name)
-ax.legend(loc='best')
+axes = fig.subplots(plot_rows, plot_cols, sharex=True, sharey=True)
+for i, model in enumerate(refrac_models):
+    plot_row = i // plot_cols
+    plot_col = i % plot_cols
+    if plot_rows > 1:
+        ax = axes[plot_row][plot_col]
+    else:
+        ax = axes[plot_col]
+    ax.set_ylim([2,18])
+    ax.plot(data_graph[col_name_measurement], data_graph[col_name_hydrometer], label=col_name_hydrometer)
+    ax.scatter(data_graph[col_name_measurement], data_graph[model.name], label=model.name, marker='.')
+    ax.set_title(model.name)
+    ax.legend(loc='best')  
+    ax.set_ylabel('Scheinb. Restex. [g/100g]')
+
+
+
 
 plt.savefig("fermentation_graph.pdf", format="pdf")
+plt.show()
