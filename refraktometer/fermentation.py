@@ -53,14 +53,6 @@ def cor_bonham(bxi, bxf, wcf):
         0.00003344 * bxf**2 + 0.000000086 * bxf**3
     return oe, sg_to_p(fg), fg
 
-def cor_bonham_incorrect(bxi, bxf, wcf):
-    oe = correct_bx(bxi, wcf)
-    bxfc = correct_bx(bxf, wcf)
-    fg = 1.001843 - 0.002318474 * oe - 0.000007775 * oe**2 - \
-        0.000000034 * oe**3 + 0.00574 * bxfc + \
-        0.00003344 * bxfc**2 + 0.000000086 * bxfc**3
-    return oe, sg_to_p(fg), fg
-
 # Gardner correlation function implemented according to:
 # Louis K. Bonham. "The Use of Handheld Refractometers by Homebrewers".
 # In: Zymurgy 24.1 (2001), S. 43-46.
@@ -139,7 +131,6 @@ class RefracModel:
 
 refrac_models = [
     RefracModel('Bonham', cor_bonham),
-    RefracModel('Bonham Inkorrekt', cor_bonham_incorrect),
     RefracModel('Gardner', cor_gardner),
     RefracModel('Gossett', cor_gossett),
     RefracModel('Novotný Linear', cor_novotny_linear),
@@ -154,7 +145,7 @@ col_name_ae = 'AE'
 col_name_bxi = 'BXI'
 col_name_bxf = 'BXF'
 col_name_measurement = 'Messung'
-col_name_hydrometer = 'Aräometer'
+col_name_hydrometer = 'Bierspindel'
 
 def model_col_name(section, name):
     return section + ' ' + name
@@ -170,7 +161,7 @@ for model in refrac_models:
     data_graph[model.name] = model.calc_ae(data[col_name_bxi], data[col_name_bxf], default_wcf)
     data_dev[model.name] = data_graph[model.name] - data[col_name_ae]
 
-data_table = pa.DataFrame(columns=['Korrelation', 'Endabw. [°P]', 'Mittlere Abw. [°P]', 'Standardabw. [°P]', 'R²'])
+data_table = pa.DataFrame(columns=['Modell', 'Endabw. [g/100g]', 'Mittlere Abw. [g/100g]', 'Standardabw. [g/100g]', 'R²'])
 
 for model in refrac_models:
     last = data_dev.iloc[-1][model.name]
@@ -186,7 +177,7 @@ fig = plt.figure(constrained_layout=True, figsize=(5, 5))
 
 ax = fig.subplots(1, 1)
 ax.set_xlabel(col_name_measurement)
-ax.set_ylabel('Scheinbarer Restextrakt [°P]')
+ax.set_ylabel('Scheinbarer Restextrakt [g/100g]')
 ax.plot(data_graph[col_name_measurement], data_graph[col_name_hydrometer], label=col_name_hydrometer, marker='.')
 for model in refrac_models:
     ax.plot(data_graph[col_name_measurement], data_graph[model.name], linestyle=':', label=model.name)

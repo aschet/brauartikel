@@ -49,7 +49,7 @@
 \newcommand{\bxfctext}{$\smash{\bxfc}$}
 \newcommand{\sg}{\mathit{SG}}
 \newcommand{\sgtext}{$\smash{\sg}$}
-\newcommand{\fg}{\mathit{FG}}
+\newcommand{\fg}{\mathit{SG}}
 \newcommand{\abv}{\mathit{ABV}}
 \newcommand{\abvtext}{$\smash{\abv}$}
 \newcommand{\abw}{\mathit{ABW}}
@@ -267,12 +267,12 @@ genitäten ergeben.
 \autocite{Distillique2020} Meniskus lesen einsinken
 
 \begin{equation}
-\sg = \frac{\degree P}{258,6 - \mathit{P} / 258,2 \cdot 227,1} + 1
+\sg\:[g/ml] = \frac{\degree P}{258,6 - \mathit{P} / 258,2 \cdot 227,1} + 1
 \label{eq:calcptosg}
 \end{equation}
 
 \begin{equation}
-\degree P = -205,347 \cdot \sg^2 + 668,72 \cdot \sg - 463,37
+\degree P\:[g/100g] = -205,347 \cdot \sg^2 + 668,72 \cdot \sg - 463,37
 \label{eq:calcsgtop}
 \end{equation}
 
@@ -427,7 +427,7 @@ Im Heimbraubereich scheint dieses Modell keine große Verbreitung
 erfahren zu haben. \autocite{Bonham2001}
 
 \begin{equation}
-\mathit{AE}\:[\degree P]=1,53 \cdot \bxf - 0,59 \cdot \bxic
+\mathit{AE}\:[g/100g]=1,53 \cdot \bxf - 0,59 \cdot \bxic
 \label{eq:gardner} 
 \end{equation}
 
@@ -455,7 +455,7 @@ und einer Gleichung zur Bestimmung des Alkoholgehalts in Volumenprozent
 
 \begin{align}
 \begin{split}
-\fg\:[SG] &= 1,001843 - 0,002318474 \cdot \bxic - 0,000007775 \cdot \bxic^2 -
+\fg\:[g/ml] &= 1,001843 - 0,002318474 \cdot \bxic - 0,000007775 \cdot \bxic^2 -
 0,000000034 \cdot \bxic^3 \\
 & \quad + 0,00574 \cdot \bxf +
 0,00003344 \cdot \bxf^2 + 0,000000086 \cdot \bxf^3
@@ -478,13 +478,13 @@ in linearer (\autoref{eq:terrilllinear}) und vereinfachter kubischer Form
 (\autoref{eq:terrillcubic}) veröffentlicht wurde. \autocite{Terrill2010a}
 
 \begin{equation}
-\fg\:[SG] = 1 - 0,00085683 \cdot \bxic + 0,0034941 \cdot \bxfc
+\fg\:[g/ml] = 1 - 0,00085683 \cdot \bxic + 0,0034941 \cdot \bxfc
 \label{eq:terrilllinear} 
 \end{equation}
 
 \begin{align}
 \begin{split}
-\fg\:[SG] &= 1 - 0,0044993 \cdot \bxic + 0,011774 \cdot \bxfc + 0,00027581 \cdot \bxic^2 - 0,0012717 \cdot \bxfc^2 \\
+\fg\:[g/ml] &= 1 - 0,0044993 \cdot \bxic + 0,011774 \cdot \bxfc + 0,00027581 \cdot \bxic^2 - 0,0012717 \cdot \bxfc^2 \\
 & \quad  - 0,0000072800 \cdot \bxic^3  + 0,000063293 \cdot \bxfc^3
 \end{split} \label{eq:terrillcubic} 
 \end{align}
@@ -553,7 +553,7 @@ hierzu \autoref{eq:bonham} an. Durch Umformung von
 durch \autoref{eq:gossettabw} erhaltenen Alkoholgehalt möglich.
 
 \begin{equation}
-\aex\:[\degree P] = \bxic - \frac{\abw \cdot (2,0665 - 1,0665 \cdot \bxic / 100)}{0,8052}
+\aex\:[g/100g] = \bxic - \frac{\abw \cdot (2,0665 - 1,0665 \cdot \bxic / 100)}{0,8052}
 \end{equation}
 
 \subsection*{Novotný}
@@ -572,19 +572,19 @@ in Gewichtsprozent (\autoref{eq:applywcf}) auf Basis von Refraktometerwerten
 und möglichst genauen Näherungsverfahren. \autocite{Novotny2017a,Novotny2017,Savel2009}
 
 \begin{equation} 
-\fg\:[SG] = -0,002349 \cdot \bxic + 0,006276 \cdot \bxfc + 1
+\fg\:[g/ml] = -0,002349 \cdot \bxic + 0,006276 \cdot \bxfc + 1
 \label{eq:novotnylinear} 
 \end{equation}
 
 \begin{align}
 \begin{split}
-\fg\:[SG] &= 1,335 \cdot 10^{-5} \cdot \bxic^2 - 3,239 \cdot 10^{-5} \cdot \bxic \cdot \bxfc + 2,916 \cdot 10^{-5} \cdot \bxfc^2 \\
+\fg\:[g/ml] &= 1,335 \cdot 10^{-5} \cdot \bxic^2 - 3,239 \cdot 10^{-5} \cdot \bxic \cdot \bxfc + 2,916 \cdot 10^{-5} \cdot \bxfc^2 \\
 & \quad - 2,421 \cdot 10^{-3} \cdot \bxic + 6,219 \cdot 10^{-3} \cdot \bxfc + 1
 \end{split} \label{eq:novotnyquadratic} 
 \end{align}
 
 \begin{equation}
-\rex\:[\degree P] = -0,29388 \cdot \bxic + 1.27582 \cdot \bxfc
+\rex\:[g/100g] = -0,29388 \cdot \bxic + 1.27582 \cdot \bxfc
 \label{eq:novotnyre}
 \end{equation}
 
@@ -646,7 +646,7 @@ ing first laid down the foundation for brewing calculations
 
 
 \begin{equation}
-\rex\:[\degree P] = 0,1948 \cdot \oex + 0,8052 \cdot \aex
+\rex\:[g/100g] = 0,1948 \cdot \oex + 0,8052 \cdot \aex
 \label{eq:calcre} 
 \end{equation}
 
@@ -693,13 +693,15 @@ Referenzimplementierung \url{https://aschet.github.io/refractometer/}
 \bxf\:[\degree Bx] &= 6 \\
 \wcf &= 1,04 \\
 \bxic\:[\degree P] = \frac{12}{1,04} &= 11,54 \\
-\bxfc = \frac{6}{1,04} &= 5,77 \\
-\fg\:[SG] = -0,002349 \cdot 11,54 + 0,006276 \cdot 5,77 + 1 &= 1,009 \\
-\aex\:[\degree P] = -205,347 \cdot 1,009^2 + 668,72 \cdot 1,009 - 463,37 &= 2,34 \\
-\rex\:[\degree P] = 0,1948 \cdot 11,54 + 0,8052 \cdot 2,34 &= 4,13 \\
+\bxfc\:[g/100g] = \frac{6}{1,04} &= 5,77 \\
+\fg\:[g/ml] = -0,002349 \cdot 11,54 + 0,006276 \cdot 5,77 + 1 &= 1,009 \\
+\aex\:[g/100g] = -205,347 \cdot 1,009^2 + 668,72 \cdot 1,009 - 463,37 &= 2,34 \\
+\rex\:[g/100g] = 0,1948 \cdot 11,54 + 0,8052 \cdot 2,34 &= 4,13 \\
 \abw\:[\%\:w/w] = \frac{11,54 - 4,13}{2,0665 - 1,0665 \cdot 11,54 / 100} &= 3,81 \\
 \abv\:[\%\:v/v] = \frac{3,81 \cdot 1,009}{0,7907} &= 4,87
 \end{align*}
+
+\autocite{MEBAK2013}
 
 \section*{Zusammenfassung}
 
