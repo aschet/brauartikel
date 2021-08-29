@@ -23,8 +23,8 @@ default_wcf = 1.04
 recalc_default_wcf = False
 measurement_specific_wcf = False
 discard_bxi_outliers = True
-reference_filter = 'PBA-B M'
-refractometer_filter = 'ORA 32BA'
+reference_filter = ''
+refractometer_filter = ''
 plot_ae_dev = False
 plot_abv_dev = True
 
@@ -170,6 +170,8 @@ model_names = list(map(lambda model: model.name, refrac_models))
 
 col_name_abv = 'ABV'
 col_name_wcf = 'WCF'
+col_name_og = 'OG'
+col_name_fg = 'FG'
 col_name_oe = 'OE'
 col_name_ae = 'AE'
 col_name_bxi = 'BXI'
@@ -184,6 +186,12 @@ def model_col_name(section, name):
 data = pa.read_csv('data.csv', delimiter=',')
 data_abv_dev = pa.DataFrame()
 data_ae_dev = pa.DataFrame()
+
+if col_name_og in data.columns:
+    data[col_name_oe] = sg_to_p(data[col_name_og])
+
+if col_name_fg in data.columns:
+    data[col_name_ae] = sg_to_p(data[col_name_fg])
 
 if len(reference_filter) > 0:
     data = data[data[col_name_reference] == reference_filter] 
