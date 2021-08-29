@@ -126,13 +126,14 @@ refrac_models = [
     RefracModel('Gardner', cor_gardner),
     RefracModel('Gossett', cor_gossett),
     RefracModel('Novotný Linear', cor_novotny_linear),
-    RefracModel('Novotný Quadratisch', cor_novotny_quadratic),
+    RefracModel('Novotný Quad.', cor_novotny_quadratic),
     RefracModel('Terrill Kubisch', cor_terrill_cubic),
     RefracModel('Terrill Linear', cor_terrill_linear)
 ]
 
 model_names = list(map(lambda model: model.name, refrac_models))
 
+col_name_fg = 'FG'
 col_name_ae = 'AE'
 col_name_bxi = 'BXI'
 col_name_bxf = 'BXF'
@@ -153,22 +154,23 @@ for model in refrac_models:
     data_ferm_graph[model.name] = model.calc_ae(data_ferm[col_name_bxi], data_ferm[col_name_bxf], default_wcf)
     data_ferm_dev[model.name] = data_ferm_graph[model.name] - data_ferm[col_name_ae]
 
-data_ferm_table = pa.DataFrame(columns=['Modell', 'Endabw. [g/100g]', 'Mittlere Abw. [g/100g]', 'Standardabw. [g/100g]', 'R²'])
+data_ferm_table = pa.DataFrame(columns=['Modell', 'Endabw. [g/100g]', 'Max. Abw.', 'Mittlere Abw.', 'Standardabw.'])
 
 for model in refrac_models:
     last = data_ferm_dev.iloc[-1][model.name]
     dev = data_ferm_dev[model.name]
+    dev_abs = dev.abs()
+    max = dev[dev_abs.idxmax()]
     mean = dev.mean()
     std = dev.std()
-    r2 = r2_score(data_ferm_graph[col_name_hydrometer], data_ferm_graph[model.name])
-    data_ferm_table.loc[len(data_ferm_table)] = [ model.name, data_ferm_dev.iloc[-1][model.name], mean, std, r2 ]
+    data_ferm_table.loc[len(data_ferm_table)] = [ model.name, data_ferm_dev.iloc[-1][model.name], max, mean, std ]
 
 data_ferm_table.to_latex('fermentation_table.tex', index=False, float_format='%.3f', decimal=',')
 
-fig_ferm = plt.figure(constrained_layout=True, figsize=(8, 12))
 plot_cols = 2
 plot_rows = len(refrac_models) // plot_cols + len(refrac_models) % plot_cols
 
+fig_ferm = plt.figure(constrained_layout=True, figsize=(8, 12))
 axes = fig_ferm.subplots(plot_rows, plot_cols, sharex=True, sharey=True)
 for i, model in enumerate(refrac_models):
     plot_row = i // plot_cols
@@ -185,4 +187,52 @@ for i, model in enumerate(refrac_models):
     ax.legend(loc='best')  
     ax.set_ylabel('Scheinb. Restex. [g/100g]')
 
-fig_ferm.savefig("fermentation_graph.pdf", format="pdf")
+fig_ferm.savefig('fermentation_graph.pdf', format='pdf')
+
+default_wcf = 0.99
+
+data_ae = pa.read_csv('data_hbf.csv', delimiter=',')
+data_ae_abs = pa.DataFrame()
+data_ae_dev = pa.DataFrame()
+
+if col_name_fg in data_ae.columns:
+    data_ae[col_name_ae] = sg_to_p(data_ae[col_name_fg])
+
+data_ae_abs[col_name_hydrometer] = data_ae[col_name_ae]
+for model in refrac_models:
+    data_ae_abs[model.name] = model.calc_ae(data_ae[col_name_bxi], data_ae[col_name_bxf], default_wcf)
+    data_ae_dev[model.name] = data_ae_abs[model.name] - data_ae[col_name_ae]
+
+data_ae_table = pa.DataFrame(columns=['Modell', 'Max. Abw. [g/100g]', 'Mittlere Abw.', 'Standardabw.', '< 0,1 [%]', '< 0,2', '< 0,5'])
+
+for model in refrac_models:
+    dev = data_ae_dev[model.name]
+    dev_abs = dev.abs()
+    max = dev[dev_abs.idxmax()]
+    mean = dev.mean()
+    std = dev.std()
+    below_point_one = abv_err_below = dev_abs.le(0.1).sum() / len(dev_abs) * 100.0
+    below_point_two = abv_err_below = dev_abs.le(0.2).sum() / len(dev_abs) * 100.0
+    below_point_five = abv_err_below = dev_abs.le(0.5).sum() / len(dev_abs) * 100.0
+    data_ae_table.loc[len(data_ae_table)] = [ model.name, max, mean, std, below_point_one, below_point_two, below_point_five ]
+
+data_ae_table.to_latex('ae_table.tex', index=False, float_format='%.3f', decimal=',')
+
+fig_ae = plt.figure(constrained_layout=True, figsize=(8, 12))
+axes = fig_ae.subplots(plot_rows, plot_cols, sharex=True, sharey=True)
+for i, model in enumerate(refrac_models):
+    plot_row = i // plot_cols
+    plot_col = i % plot_cols
+    if plot_rows > 1:
+        ax = axes[plot_row][plot_col]
+    else:
+        ax = axes[plot_col]
+    data_ae_dev[model.name].plot.hist(density=True, xlim=[-1.5,1.5], bins=15, ax=ax)
+    data_ae_dev[model.name].plot.density(ax=ax)
+    r2 = r2_score(data_ae_abs[col_name_hydrometer], data_ae_abs[model.name])
+    ax.set_title(model.name + ' (R²=' + '%.3f'%r2 + ')')
+    ax.set_xlabel('Abw. scheinbarer Restextrakt [g/100g]')
+
+fig_ae.savefig('ae_graph.pdf', format='pdf')
+
+#plt.show()
