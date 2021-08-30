@@ -189,9 +189,9 @@ for i, model in enumerate(refrac_models):
 
 fig_ferm.savefig('fermentation_graph.pdf', format='pdf')
 
-default_wcf = 0.99
+default_wcf = 1.0
 
-data_ae = pa.read_csv('data_hbf.csv', delimiter=',')
+data_ae = pa.read_csv('data_merged.csv', delimiter=',')
 data_ae_abs = pa.DataFrame()
 data_ae_dev = pa.DataFrame()
 
@@ -203,7 +203,7 @@ for model in refrac_models:
     data_ae_abs[model.name] = model.calc_ae(data_ae[col_name_bxi], data_ae[col_name_bxf], default_wcf)
     data_ae_dev[model.name] = data_ae_abs[model.name] - data_ae[col_name_ae]
 
-data_ae_table = pa.DataFrame(columns=['Modell', 'Max. Abw. [g/100g]', 'Mittlere Abw.', 'Standardabw.', '< 0,1 [%]', '< 0,2', '< 0,5'])
+data_ae_table = pa.DataFrame(columns=['Korrelation', 'Max. Abw. [g/100g]', 'Mittlere Abw.', 'Standardabw.', '< 0,25 [%]', '< 0,5', '< 1,0'])
 
 for model in refrac_models:
     dev = data_ae_dev[model.name]
@@ -211,9 +211,9 @@ for model in refrac_models:
     max = dev[dev_abs.idxmax()]
     mean = dev.mean()
     std = dev.std()
-    below_point_one = abv_err_below = dev_abs.le(0.1).sum() / len(dev_abs) * 100.0
-    below_point_two = abv_err_below = dev_abs.le(0.2).sum() / len(dev_abs) * 100.0
-    below_point_five = abv_err_below = dev_abs.le(0.5).sum() / len(dev_abs) * 100.0
+    below_point_one = abv_err_below = dev_abs.le(0.25).sum() / len(dev_abs) * 100.0
+    below_point_two = abv_err_below = dev_abs.le(0.5).sum() / len(dev_abs) * 100.0
+    below_point_five = abv_err_below = dev_abs.le(1.0).sum() / len(dev_abs) * 100.0
     data_ae_table.loc[len(data_ae_table)] = [ model.name, max, mean, std, below_point_one, below_point_two, below_point_five ]
 
 data_ae_table.to_latex('ae_table.tex', index=False, float_format='%.3f', decimal=',')
