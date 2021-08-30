@@ -27,7 +27,7 @@ discard_bxi_outliers = True
 reference_filter = ''
 refractometer_filter = ''
 plot_ae_dev = True
-plot_abv_dev = False
+plot_abv_dev = True
 
 def correct_bx(bx, wcf):
     return bx / wcf
@@ -132,6 +132,17 @@ def cor_terrill_cubic(bxi, bxf, wcf):
         0.00127169 * bxfc**2 + 0.0000632929 * bxfc**3
     return oe, sg_to_p(fg), fg
 
+# Sean Terrill's website issues. 2020.
+# URL: https://www.reddit.com/r/Homebrewing/comments/bs3af9/sean_terrills_website_issues
+def cor_novotrill_helper(bxi, bxf, wcf):
+    oe, ae, fg = cor_novotny_linear(bxi, bxf, wcf)
+    return fg
+
+def cor_novotrill(bxi, bxf, wcf):
+    oe, ae, fg = cor_terrill_linear(bxi, bxf, wcf)
+    fg = np.where(fg < 1.014, fg, cor_novotrill_helper(bxi, bxf, wcf))
+    return oe, sg_to_p(fg), fg
+
 def print_stats(name, stats, is_deviation):
     full_name = name
     if is_deviation == True:
@@ -162,6 +173,7 @@ refrac_models = [
     RefracModel('Terrill Cubic', cor_terrill_cubic),
     RefracModel('Novotny Linear', cor_novotny_linear),
     RefracModel('Novotny Quadratic', cor_novotny_quadratic),
+    RefracModel('Terrill+Novotný', cor_novotrill),
     RefracModel('Bonham', cor_bonham),
     RefracModel('Gardner', cor_gardner),
     RefracModel('Gossett', cor_gossett, abw_gosett),

@@ -113,6 +113,17 @@ def cor_terrill_cubic(bxi, bxf, wcf):
         0.00127169 * bxfc**2 + 0.0000632929 * bxfc**3
     return oe, sg_to_p(fg), fg
 
+# Sean Terrill's website issues. 2020.
+# URL: https://www.reddit.com/r/Homebrewing/comments/bs3af9/sean_terrills_website_issues
+def cor_novotrill_helper(bxi, bxf, wcf):
+    oe, ae, fg = cor_novotny_linear(bxi, bxf, wcf)
+    return fg
+
+def cor_novotrill(bxi, bxf, wcf):
+    oe, ae, fg = cor_terrill_linear(bxi, bxf, wcf)
+    fg = np.where(fg < 1.014, fg, cor_novotrill_helper(bxi, bxf, wcf))
+    return oe, sg_to_p(fg), fg
+
 class RefracModel:
     def __init__(self, name, cor_model):
         self.name = name
@@ -129,7 +140,8 @@ refrac_models = [
     RefracModel('Novotný Linear', cor_novotny_linear),
     RefracModel('Novotný Quad.', cor_novotny_quadratic),
     RefracModel('Terrill Kubisch', cor_terrill_cubic),
-    RefracModel('Terrill Linear', cor_terrill_linear)
+    RefracModel('Terrill Linear', cor_terrill_linear),
+    RefracModel('Terrill+Novotný', cor_novotrill)
 ]
 
 model_names = list(map(lambda model: model.name, refrac_models))
