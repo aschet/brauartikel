@@ -134,6 +134,7 @@ refrac_models = [
 
 model_names = list(map(lambda model: model.name, refrac_models))
 
+col_name_wcf = 'WCF'
 col_name_fg = 'FG'
 col_name_ae = 'AE'
 col_name_bxi = 'BXI'
@@ -190,17 +191,18 @@ for i, model in enumerate(refrac_models):
 
 fig_ferm.savefig('fermentation_graph.pdf', format='pdf')
 
-default_wcf = 1.03
+default_wcf = 1.04
 
-data_ae = pa.read_csv('data_merged.csv', delimiter=',')
+data_ae = pa.read_csv('data.csv', delimiter=',')
 data_ae_abs = pa.DataFrame()
 data_ae_dev = pa.DataFrame()
 
 data_ae[col_name_ae] = np.where(np.isnan(data_ae[col_name_ae]), sg_to_p(data_ae[col_name_fg]), data_ae[col_name_ae])
+data_ae[col_name_wcf] = np.where(np.isnan(data_ae[col_name_wcf]), default_wcf, data_ae[col_name_wcf])
 
 data_ae_abs[col_name_hydrometer] = data_ae[col_name_ae]
 for model in refrac_models:
-    data_ae_abs[model.name] = model.calc_ae(data_ae[col_name_bxi], data_ae[col_name_bxf], default_wcf)
+    data_ae_abs[model.name] = model.calc_ae(data_ae[col_name_bxi], data_ae[col_name_bxf], data_ae[col_name_wcf])
     data_ae_dev[model.name] = data_ae_abs[model.name] - data_ae[col_name_ae]
 
 data_ae_table = pa.DataFrame(columns=['Korrelation', 'Max. Abw. [g/100g]', 'Mittlere Abw.', 'Standardabw.', '< 0,25 [%]', '< 0,5', '< 1,0'])

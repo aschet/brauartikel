@@ -3,6 +3,7 @@
 # Copyright 2021 Thomas Ascher
 # SPDX-License-Identifier: GPL-3.0+
 
+import numpy as np
 import pandas as pa
 import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
@@ -20,13 +21,13 @@ from scipy.stats import iqr
 # WCF = wort correction factor
 
 default_wcf = 1.04
-recalc_default_wcf = False
+recalc_default_wcf = True
 measurement_specific_wcf = False
 discard_bxi_outliers = True
 reference_filter = ''
 refractometer_filter = ''
-plot_ae_dev = False
-plot_abv_dev = True
+plot_ae_dev = True
+plot_abv_dev = False
 
 def correct_bx(bx, wcf):
     return bx / wcf
@@ -187,11 +188,9 @@ data = pa.read_csv('data.csv', delimiter=',')
 data_abv_dev = pa.DataFrame()
 data_ae_dev = pa.DataFrame()
 
-if col_name_og in data.columns:
-    data[col_name_oe] = sg_to_p(data[col_name_og])
-
-if col_name_fg in data.columns:
-    data[col_name_ae] = sg_to_p(data[col_name_fg])
+data[col_name_oe] = np.where(np.isnan(data[col_name_oe]), sg_to_p(data[col_name_og]), data[col_name_oe])
+data[col_name_oe] = np.where(np.isnan(data[col_name_oe]), data[col_name_bxi] * default_wcf, data[col_name_oe])
+data[col_name_ae] = np.where(np.isnan(data[col_name_ae]), sg_to_p(data[col_name_fg]), data[col_name_ae])
 
 if len(reference_filter) > 0:
     data = data[data[col_name_reference] == reference_filter] 
@@ -243,9 +242,7 @@ print_stats(col_name_abv, stats_abv_dev, True)
 
 def plot_devs(col_name, data_dev, stats_dev):
     fig = plt.figure(constrained_layout=True, figsize=(14, 8))
-    reference = ', '.join(list(data[col_name_reference].unique()))
-    refractometer = ', '.join(list(data[col_name_refractometer].unique()))
-    fig.suptitle('Refractometer Correlation Model Comparison: ' + col_name + ' (' + reference + ' with ' + refractometer + ', ' + str(data_dev.shape[0]) + ' Measurements)')
+    fig.suptitle('Refractometer Correlation Model Comparison (' + str(data_dev.shape[0]) + ' Measurements)')
     subfigs = fig.subfigures(1, 2)
 
     ax_quantils = subfigs[0].subplots(1, 1)
@@ -271,7 +268,7 @@ def plot_devs(col_name, data_dev, stats_dev):
         rsquare = stats_dev[model.name][row_name_square]
         ax_desnity.set_title(model.name + ' (R²=' + '%.3f'%rsquare + ')')    
         ax_desnity.set_xlabel(dev_caption)
-        data_dev[model.name].plot.hist(density=True, xlim=[-1,1], ax=ax_desnity)
+        data_dev[model.name].plot.hist(density=True, xlim=[-1.5,1.5], bins=15, ax=ax_desnity)
         try:
             data_dev[model.name].plot.density(ax=ax_desnity)
         except:
