@@ -154,7 +154,7 @@ for model in refrac_models:
     data_ferm_graph[model.name] = model.calc_ae(data_ferm[col_name_bxi], data_ferm[col_name_bxf], default_wcf)
     data_ferm_dev[model.name] = data_ferm_graph[model.name] - data_ferm[col_name_ae]
 
-data_ferm_table = pa.DataFrame(columns=['Modell', 'Endabw. [g/100g]', 'Max. Abw.', 'Mittlere Abw.', 'Standardabw.'])
+data_ferm_table = pa.DataFrame(columns=['Korrelation', 'Endabw. [g/100g]', 'Max. Abw.', 'Mittlere Abw.', 'Standardabw.'])
 
 for model in refrac_models:
     last = data_ferm_dev.iloc[-1][model.name]

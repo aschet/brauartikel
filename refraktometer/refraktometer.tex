@@ -536,13 +536,13 @@ aber nicht signifikant auf das Ergebnis auswirken.
 
 \begin{table}[h]
 \centering
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrrr}
 \toprule
-Korrelation &  Mittlere Abw. [g/100g] &  Standardabw. & Max. Abw. & Abw. < 0,5 [\%] \\
+Korrelation &  Max. Abw. [g/100g] & Mittlere Abw. & Standardabw. & < 0,25 [\%] & < 0,50 & < 1,00 \\
 \midrule
-Bonham & -0,4 & 0,6 & -2,1 & 41 \\
-Terrill Kubisch & 0,2 & 0,3 & 1,2 & 85 \\
-Terrill Linear & 0,03 & 0,4 & 1,0 & 84 \\
+Bonham & -2,1 & -0,4 & 0,6 & 18 & 41 & 90 \\
+Terrill Kubisch & 1,2 & 0,2 & 0,3 & 56 & 85 & 97 \\
+Terrill Linear & 1,0 & 0,03 & 0,4 & 63 & 84 & 99 \\
 \bottomrule
 \end{tabular}
 \caption{Vergleich zwischen Bonham und Terrill Modell}
@@ -645,6 +645,7 @@ anderer sind die Messdaten einer aktiven Gärung von Novotnýs 17~°P Testsud.
 
 \autocite{Katman2019}
 
+\autocite{h22lude2020}
 
 \begin{figure}[h]
 \centering
@@ -674,7 +675,7 @@ anderer sind die Messdaten einer aktiven Gärung von Novotnýs 17~°P Testsud.
 \label{table:hbftable}
 \end{table}
 
-\section*{Berechnung des Alkoholgehalts}
+\section*{Berechnung des Alkoholgehalts und weiterer Kennzahlen}
 
 Aus konsumierter Zuckermenge und der Balling Formel lässt sich
 
@@ -707,7 +708,7 @@ ing first laid down the foundation for brewing calculations
 \adf\:[\%]= 100 \cdot \frac{\oex - \aex}{\oex}
 \end{equation}
 
-\setlength{\jot}{2mm}
+%\setlength{\jot}{2mm}
 
 \begin{equation}
 \rdf\:[\%] = 100 \cdot \frac{\oex - \rex}{\oex} \cdot \frac{1}{1 - 0,005161 \cdot \rex}
@@ -727,6 +728,13 @@ bxf = 6
 wcf = 1.04
 
 Referenzimplementierung \url{https://aschet.github.io/refractometer/}
+
+\autoref{eq:applywcf}
+\autoref{eq:novotnylinear}
+\autoref{eq:calcsgtop}
+\autoref{eq:calcre}
+\autoref{eq:calcabw}
+\autoref{eq:calcabv}
 
 
 \begin{align*}
