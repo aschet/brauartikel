@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# Refractometer Correlation Model Evaluation: Active Fermentation
 # Copyright 2021 Thomas Ascher
 # SPDX-License-Identifier: GPL-3.0+
 
@@ -7,8 +6,6 @@ import pandas as pa
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
-
-default_wcf = 1.0
 
 def correct_bx(bx, wcf):
     return bx / wcf
@@ -115,14 +112,13 @@ def cor_terrill_cubic(bxi, bxf, wcf):
 
 # Sean Terrill's website issues. 2020.
 # URL: https://www.reddit.com/r/Homebrewing/comments/bs3af9/sean_terrills_website_issues
-def cor_novotrill_helper(bxi, bxf, wcf):
-    oe, ae, fg = cor_novotny_linear(bxi, bxf, wcf)
-    return fg
 
 def cor_novotrill(bxi, bxf, wcf):
-    oe, ae, fg = cor_terrill_linear(bxi, bxf, wcf)
-    fg = np.where(fg < 1.014, fg, cor_novotrill_helper(bxi, bxf, wcf))
-    return oe, sg_to_p(fg), fg
+    oe1, ae1, fg1 = cor_terrill_linear(bxi, bxf, wcf)
+    oe2, ae2, fg2 = cor_novotny_linear(bxi, bxf, wcf)
+    fg_mean = (fg1 + fg2) / 2.0
+    fg = np.where(fg_mean < 1.014, fg1, fg2)
+    return oe1, sg_to_p(fg), fg
 
 class RefracModel:
     def __init__(self, name, cor_model):
@@ -157,7 +153,7 @@ col_name_hydrometer = 'Bierspindel'
 def model_col_name(section, name):
     return section + ' ' + name
 
-data_ferm = pa.read_csv('fermentation_data.csv', delimiter=',')
+data_ferm = pa.read_csv('data_fermentation.csv', delimiter=',')
 data_ferm_dev = pa.DataFrame()
 data_ferm_graph = pa.DataFrame()
 
@@ -165,7 +161,7 @@ data_ferm_graph[col_name_measurement] = list(range(1, data_ferm.shape[0] + 1))
 data_ferm_graph[col_name_hydrometer] = data_ferm[col_name_ae]
 
 for model in refrac_models:
-    data_ferm_graph[model.name] = model.calc_ae(data_ferm[col_name_bxi], data_ferm[col_name_bxf], default_wcf)
+    data_ferm_graph[model.name] = model.calc_ae(data_ferm[col_name_bxi], data_ferm[col_name_bxf], data_ferm[col_name_wcf])
     data_ferm_dev[model.name] = data_ferm_graph[model.name] - data_ferm[col_name_ae]
 
 data_ferm_table = pa.DataFrame(columns=['Korrelation', 'Endabw. [g/100g]', 'Max. Abw.', 'Mittlere Abw.', 'Standardabw.'])
@@ -179,7 +175,7 @@ for model in refrac_models:
     std = dev.std()
     data_ferm_table.loc[len(data_ferm_table)] = [ model.name, data_ferm_dev.iloc[-1][model.name], max, mean, std ]
 
-data_ferm_table.to_latex('fermentation_table.tex', index=False, float_format='%.3f', decimal=',')
+data_ferm_table.to_latex('table_fermentation.tex', index=False, float_format='%.3f', decimal=',')
 
 plot_cols = 2
 plot_rows = len(refrac_models) // plot_cols + len(refrac_models) % plot_cols
@@ -201,7 +197,7 @@ for i, model in enumerate(refrac_models):
     ax.legend(loc='best')  
     ax.set_ylabel('Scheinb. Restex. [g/100g]')
 
-fig_ferm.savefig('fermentation_graph.pdf', format='pdf')
+fig_ferm.savefig('graph_fermentation.pdf', format='pdf')
 
 default_wcf = 1.04
 
@@ -230,7 +226,7 @@ for model in refrac_models:
     below_point_five = abv_err_below = dev_abs.le(1.0).sum() / len(dev_abs) * 100.0
     data_ae_table.loc[len(data_ae_table)] = [ model.name, max, mean, std, below_point_one, below_point_two, below_point_five ]
 
-data_ae_table.to_latex('ae_table.tex', index=False, float_format='%.3f', decimal=',')
+data_ae_table.to_latex('table_ae.tex', index=False, float_format='%.3f', decimal=',')
 
 fig_ae = plt.figure(constrained_layout=True, figsize=(8, 12))
 axes = fig_ae.subplots(plot_rows, plot_cols, sharex=True, sharey=True)
@@ -247,6 +243,6 @@ for i, model in enumerate(refrac_models):
     ax.set_title(model.name + ' (R²=' + '%.3f'%r2 + ')')
     ax.set_xlabel('Abw. scheinbarer Restextrakt [g/100g]')
 
-fig_ae.savefig('ae_graph.pdf', format='pdf')
+fig_ae.savefig('graph_ae.pdf', format='pdf')
 
-plt.show()
+#plt.show()

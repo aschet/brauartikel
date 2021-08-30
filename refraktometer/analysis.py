@@ -134,14 +134,13 @@ def cor_terrill_cubic(bxi, bxf, wcf):
 
 # Sean Terrill's website issues. 2020.
 # URL: https://www.reddit.com/r/Homebrewing/comments/bs3af9/sean_terrills_website_issues
-def cor_novotrill_helper(bxi, bxf, wcf):
-    oe, ae, fg = cor_novotny_linear(bxi, bxf, wcf)
-    return fg
 
 def cor_novotrill(bxi, bxf, wcf):
-    oe, ae, fg = cor_terrill_linear(bxi, bxf, wcf)
-    fg = np.where(fg < 1.014, fg, cor_novotrill_helper(bxi, bxf, wcf))
-    return oe, sg_to_p(fg), fg
+    oe1, ae1, fg1 = cor_terrill_linear(bxi, bxf, wcf)
+    oe2, ae2, fg2 = cor_novotny_linear(bxi, bxf, wcf)
+    fg_mean = (fg1 + fg2) / 2.0
+    fg = np.where(fg_mean < 1.014, fg1, fg2)
+    return oe1, sg_to_p(fg), fg
 
 def print_stats(name, stats, is_deviation):
     full_name = name
