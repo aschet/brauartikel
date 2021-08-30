@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: GPL-3.0+
 
 import pandas as pa
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
 
@@ -189,14 +190,13 @@ for i, model in enumerate(refrac_models):
 
 fig_ferm.savefig('fermentation_graph.pdf', format='pdf')
 
-default_wcf = 1.0
+default_wcf = 1.03
 
 data_ae = pa.read_csv('data_merged.csv', delimiter=',')
 data_ae_abs = pa.DataFrame()
 data_ae_dev = pa.DataFrame()
 
-if col_name_fg in data_ae.columns:
-    data_ae[col_name_ae] = sg_to_p(data_ae[col_name_fg])
+data_ae[col_name_ae] = np.where(np.isnan(data_ae[col_name_ae]), sg_to_p(data_ae[col_name_fg]), data_ae[col_name_ae])
 
 data_ae_abs[col_name_hydrometer] = data_ae[col_name_ae]
 for model in refrac_models:
@@ -235,4 +235,4 @@ for i, model in enumerate(refrac_models):
 
 fig_ae.savefig('ae_graph.pdf', format='pdf')
 
-#plt.show()
+plt.show()
