@@ -206,7 +206,7 @@ data_ae_abs = pa.DataFrame()
 data_ae_dev = pa.DataFrame()
 
 data_ae[col_name_ae] = np.where(np.isnan(data_ae[col_name_ae]), sg_to_p(data_ae[col_name_fg]), data_ae[col_name_ae])
-data_ae[col_name_wcf] = np.where(np.isnan(data_ae[col_name_wcf]), default_wcf, data_ae[col_name_wcf])
+data_ae[col_name_wcf] = default_wcf
 
 data_ae_abs[col_name_hydrometer] = data_ae[col_name_ae]
 for model in refrac_models:
