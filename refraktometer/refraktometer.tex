@@ -50,7 +50,6 @@
 \newcommand{\bxfctext}{$\smash{\bxfc}$}
 \newcommand{\sg}{\mathit{SG}}
 \newcommand{\sgtext}{$\smash{\sg}$}
-\newcommand{\fg}{\mathit{SG}}
 \newcommand{\abv}{\mathit{ABV}}
 \newcommand{\abvtext}{$\smash{\abv}$}
 \newcommand{\abw}{\mathit{ABW}}
@@ -64,7 +63,9 @@
 \newcommand{\wcf}{\mathit{WCF}}
 \newcommand{\wcftext}{$\smash{\wcf}$}
 \newcommand{\adf}{\mathit{ADF}}
+\newcommand{\adftext}{$\smash{\adf}$}
 \newcommand{\rdf}{\mathit{RDF}}
+\newcommand{\rdftext}{$\smash{\rdf}$}
 
 \begin{document}
 \maketitle
@@ -336,7 +337,7 @@ Einpunkt-Kalibrierung bei Raumtemperatur mit destilliertem
 Wasser. Das Refraktometer solle dabei die Raumtemperatur
 angenommen haben und gereinigt sein. Zur Kalibrierung ist
 eine Messung mit destilliertes Wasser als Probe durchzuführen.
-Der angezeigte Messwert sollte dabei 0~°Bx betragen
+Der abgelesene Messwert sollte dabei 0~°Bx betragen
 (\autoref{fig:refractoscale}).
 Wird ein Abweichung festgestellt kann ein Handrefraktometer durch
 drehen an der Einstellschraube justiert werden (\autoref{fig:refactoadjust}),
@@ -415,7 +416,7 @@ Korrelationsmodelle im Heimbrauumfeld für diesen Zweck veröffentlicht,
 die ihre jeweiligen Stärken und Schwächen besitzen. Ein grundlegendes
 Problem bei der Entwicklung eines solchen Modells ist,
 dass verschiedene Zusammensetzungen einer vergorene
-Probe den gleichen Brechungsindex aufweisen können. \autocite{Terrill2010a,Terrill2010}
+Probe den gleichen Brechungsindex aufweisen können. \autocite{Distillique2020,Terrill2010a,Terrill2010}
 
 Zur Berechnung der folgenden Korrellationsfunktionen ist eine
 Probe der Stammwürze (\bxitext) und eine während oder nach der
@@ -467,7 +468,7 @@ und einer Gleichung zur Bestimmung des Alkoholgehalts in Volumenprozent
 
 \begin{align}
 \begin{split}
-\fg\:[g/ml] &= 1,001843 - 0,002318474 \cdot \bxic - 0,000007775 \cdot \bxic^2 -
+\sg\:[g/ml] &= 1,001843 - 0,002318474 \cdot \bxic - 0,000007775 \cdot \bxic^2 -
 0,000000034 \cdot \bxic^3 \\
 & \quad + 0,00574 \cdot \bxf +
 0,00003344 \cdot \bxf^2 + 0,000000086 \cdot \bxf^3
@@ -476,8 +477,8 @@ und einer Gleichung zur Bestimmung des Alkoholgehalts in Volumenprozent
 
 \begin{align}
 \begin{split}
-\abv\:[\%\:v/v] &= (277,8851 - 277,4 \cdot \fg + 0,9956 \cdot \bxf + 0,00523 \cdot \bxf^2 + 0,000015 \cdot \bxf^3) \\
-& \quad \cdot \fg / 0,79
+\abv\:[\%\:v/v] &= (277,8851 - 277,4 \cdot \sg + 0,9956 \cdot \bxf + 0,00523 \cdot \bxf^2 + 0,000015 \cdot \bxf^3) \\
+& \quad \cdot \sg / 0,79
 \end{split} \label{eq:bonhamabv} 
 \end{align}
 
@@ -490,13 +491,13 @@ in linearer (\autoref{eq:terrilllinear}) und vereinfachter kubischer Form
 (\autoref{eq:terrillcubic}) veröffentlicht wurde. \autocite{Terrill2010a}
 
 \begin{equation}
-\fg\:[g/ml] = 1 - 0,00085683 \cdot \bxic + 0,0034941 \cdot \bxfc
+\sg\:[g/ml] = 1 - 0,00085683 \cdot \bxic + 0,0034941 \cdot \bxfc
 \label{eq:terrilllinear} 
 \end{equation}
 
 \begin{align}
 \begin{split}
-\fg\:[g/ml] &= 1 - 0,0044993 \cdot \bxic + 0,011774 \cdot \bxfc + 0,00027581 \cdot \bxic^2 - 0,0012717 \cdot \bxfc^2 \\
+\sg\:[g/ml] &= 1 - 0,0044993 \cdot \bxic + 0,011774 \cdot \bxfc + 0,00027581 \cdot \bxic^2 - 0,0012717 \cdot \bxfc^2 \\
 & \quad  - 0,0000072800 \cdot \bxic^3  + 0,000063293 \cdot \bxfc^3
 \end{split} \label{eq:terrillcubic} 
 \end{align}
@@ -508,7 +509,7 @@ als ursprüngliche Datenbasis. Auch kommerzielle Brauereien haben
 laut Terrill weitere Messwerte erfasst. Messungen mit geringeren
 Vergärungsgraden wurden ausgeschlossen, da diese die Genauigkeit des
 Modells verschlechtert hätten.
-\autocite{Terrill2010a,Terrill2010,Terrill2011,Terrill2013}
+\autocite{Terrill2010a,Terrill2011,Terrill2010,Terrill2013}
 
 \autoref{table:terrillcomp} zeigt den von Terrill veröffentlichte
 Ergebnis zwischen den Modell von Bonham und seinem Eigenen. Bei
@@ -518,7 +519,7 @@ Terrill die ursprüngliche Quelle des Bonhams Modells nicht kannte
 und deshalb fälschlicherweise auch den zweiten Messwert um
 den Würze-Korrekturfaktor angepasst hat. Dieser Fehler soll sich
 aber nicht signifikant auf das Ergebnis auswirken.
-\autocite{Terrill2010a,Terrill2010,Terrill2011}
+\autocite{Terrill2010a,Terrill2011,Terrill2010}
 
 \begin{table}[h]
 \centering
@@ -583,13 +584,13 @@ des Alkoholgehalts in Gewichtsprozent (\autoref{eq:applywcf}) auf Basis
 von Refraktometerwerten und möglichst genauen Näherungsverfahren. \autocite{Novotny2017a,Novotny2017,Savel2009}
 
 \begin{equation} 
-\fg\:[g/ml] = -0,002349 \cdot \bxic + 0,006276 \cdot \bxfc + 1
+\sg\:[g/ml] = -0,002349 \cdot \bxic + 0,006276 \cdot \bxfc + 1
 \label{eq:novotnylinear} 
 \end{equation}
 
 \begin{align}
 \begin{split}
-\fg\:[g/ml] &= 1,335 \cdot 10^{-5} \cdot \bxic^2 - 3,239 \cdot 10^{-5} \cdot \bxic \cdot \bxfc + 2,916 \cdot 10^{-5} \cdot \bxfc^2 \\
+\sg\:[g/ml] &= 1,335 \cdot 10^{-5} \cdot \bxic^2 - 3,239 \cdot 10^{-5} \cdot \bxic \cdot \bxfc + 2,916 \cdot 10^{-5} \cdot \bxfc^2 \\
 & \quad - 2,421 \cdot 10^{-3} \cdot \bxic + 6,219 \cdot 10^{-3} \cdot \bxfc + 1
 \end{split} \label{eq:novotnyquadratic} 
 \end{align}
@@ -699,7 +700,9 @@ initiierten Gemeinschaftsexperiments und von Novotný veröffentlicht.
 \label{table:hbftable}
 \end{table}
 
-\section*{Berechnung des Alkoholgehalts und weiterer Kennzahlen}
+\section*{Bestimmung des Alkoholgehalts und weiterer Kennzahlen}
+
+
 
 0.3 \% Toleranz in den USA
 RE = maß des verbleibenden Zuckers + Protein und Sonstige
@@ -727,7 +730,7 @@ ing first laid down the foundation for brewing calculations
 \end{equation}
 
 \begin{equation}
-\abv\:[\%\:v/v] = \frac{\abw \cdot \fg}{0,7907}
+\abv\:[\%\:v/v] = \frac{\abw \cdot \sg}{0,7907}
 \label{eq:calcabv}
 \end{equation}
 
@@ -737,24 +740,14 @@ ing first laid down the foundation for brewing calculations
 \adf\:[\%]= 100 \cdot \frac{\oex - \aex}{\oex}
 \end{equation}
 
-%\setlength{\jot}{2mm}
-
 \begin{equation}
 \rdf\:[\%] = 100 \cdot \frac{\oex - \rex}{\oex} \cdot \frac{1}{1 - 0,005161 \cdot \rex}
 \end{equation}
 
 \autocite{Speers2015}
 
-Lincoln equations
-\autocite{Spedding2016}
+American Society of Brewing Chemists (ASBC)
 
-Method \href{https://www.asbcnet.org}{American Society of Brewing Chemists (ASBC)} \href{https://www.mebak.org}{Mitteleuropäische Brautechnische Analysenkommission (MEBAK)}
-
-Novotný
-
-bxi = 12
-bxf = 6
-wcf = 1.04
 
 Referenzimplementierung \url{https://aschet.github.io/refractometer/}
 
@@ -772,7 +765,7 @@ Referenzimplementierung \url{https://aschet.github.io/refractometer/}
 \wcf &= 1,04 \\
 \bxic\:[\degree P] = \frac{12}{1,04} &= 11,54 \\
 \bxfc\:[g/100g] = \frac{6}{1,04} &= 5,77 \\
-\fg\:[g/ml] = -0,002349 \cdot 11,54 + 0,006276 \cdot 5,77 + 1 &= 1,009 \\
+\sg\:[g/ml] = -0,002349 \cdot 11,54 + 0,006276 \cdot 5,77 + 1 &= 1,009 \\
 \aex\:[g/100g] = -205,347 \cdot 1,009^2 + 668,72 \cdot 1,009 - 463,37 &= 2,34 \\
 \rex\:[g/100g] = 0,1948 \cdot 11,54 + 0,8052 \cdot 2,34 &= 4,13 \\
 \abw\:[\%\:w/w] = \frac{11,54 - 4,13}{2,0665 - 1,0665 \cdot 11,54 / 100} &= 3,81 \\
