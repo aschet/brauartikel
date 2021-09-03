@@ -56,7 +56,9 @@
 \newcommand{\abw}{\mathit{ABW}}
 \newcommand{\abwtext}{$\smash{\abw}$}
 \newcommand{\oex}{\mathit{OE}}
+\newcommand{\oextext}{$\smash{\oex}$}
 \newcommand{\aex}{\mathit{AE}}
+\newcommand{\aextext}{$\smash{\aex}$}
 \newcommand{\rex}{\mathit{RE}}
 \newcommand{\rextext}{$\smash{\rex}$}
 \newcommand{\wcf}{\mathit{WCF}}
@@ -192,21 +194,26 @@ Flüssigkeit eingetauchter Körper Auftrieb in dem Maß der Gewichtskraft
 der dabei verdrängten Flüssigkeit erfährt. Je geringer die Dichte einer
 Flüssigkeit dabei ist, desto weite sinkt ein Körper ein. Hierbei ist zu
 beachten, dass die Dichte temperaturabhängig ist. Daher wird für die
-spezifische Dichte eine Referenztemperatur angegeben, im Normalfall 20~°C.
-Bei Abweichungen von dieser Referenz ist eine Messwertkorrektur durchzuführen.
-Messwerte der Skala müssen je nach Aräometer über oder unter dem
-gebildeten Flüssigkeitsmeniskus abgelesen werden.
+spezifische Dichte eine Referenztemperatur angegeben. Für die
+in diesem Artikel beschriebenen Angaben und Berechnungen entspricht
+diese 20~°C. Bei Abweichungen von dieser Referenz ist eine
+Messwertkorrektur durchzuführen. Messwerte der Skala müssen je nach
+Aräometer über oder unter dem gebildeten Flüssigkeitsmeniskus abgelesen
+werden.
 \autocite{Kunze2004,Narziss2009,Spedding2016}
 
-% TODO Plato
-Mit  Im Gegensatz zu Europa wird im amerikanischen Raum meist die spezifische
-Dichte von Würze in Bezug auf Wasser gemessen. 
-g Extrakt / 100g Bier = Plato.
-
-Die Umrechnung zwischen Masseanteil in Grad Plato und der Massendichte
+In den USA führen Amerikanischen Heimbrauer:innen Spindelmessungen zumeist
+mit einem mit einem Hydrometer durch um die relative Dichte von Würze in
+Bezug auf Wasser festzustellen. Die Skala einer Bierspindel ist hingegen
+auf Grad Plato kalibriert. Grad Plato (°P) ist das Maß für die vor der
+Gärung gemessene Stammwürze eines Bieres (Original Extract, \oextext),
+wobei ein °P einem g Extrakt auf 100~g Bier entspricht. Mit Extrakt sind
+vor allem die Bestandteile gemeint, die während des Maischeprozesses aus
+dem Malz gelöst werden.
+Die Umrechnung zwischen Masseanteil in °P und der Massendichte
 erfolgt auf Basis der Plato Tabellen über die Lincoln Gleichungen
-(\autoref{eq:calcptosg}, \autoref{eq:calcsgtop}) oder vergleichbare
-Berechnungsverfahren.
+(\autoref{eq:calcptosg}, \autoref{eq:calcsgtop}) oder vergleichbaren
+Näherungsverfahren.
 \autocite{Kunze2004,Spedding2016}
 
 \begin{equation}
@@ -219,43 +226,45 @@ Berechnungsverfahren.
 \label{eq:calcsgtop}
 \end{equation}
 
-Alkoholfehler Messabweichung.
-AE = änderung der Dichte, verfälscht durch Alkohol
-Messfehler durch Solids + Gase
-co2 in Lösung beeinflusst den Messwert um circa 0.3 P
-\autocite{Kunze2004}
-\autocite{Spedding2016}
-\autocite{Novotny2017}
+Während und nach der Gärung kann der scheinbare Restextrakt
+(Apparent Extract, \aextext) gemessen werden. Scheinbar
+deshalb, weil der während der Gärung gebildete Alkohol die
+Dichte der Flüssigkeit verändert und somit den Messwert
+verfälscht. Der wirkliche Restextrakt (Real Extract, \rextext)
+entspricht nämlich einem höheren Betrag. Das ebenfalls
+in Gärproben oder in Jungbieren enthaltene \ch{CO2} hat
+ebenfalls einen Einfluss auf den Messwert. Es erhöht
+diesen um circa 0,3~°P.
+\autocite{Kunze2004,Novotny2017,Spedding2016}
 
+Für genaue Messergebnisse sollten Spindeln mit einem möglichst
+geringem Messbereich eingesetzt werden. In Heimbraushops sind
+zum Beispiel Saccharometer mit einem Messbereich von 7~°P
+und einer Graduierung von 0,1~°P. Der geringe Messbereich
+ermöglicht eine einfachere Ablesung und eine feinere Graduierung.
+Für Hydrometer empfiehlt die Mitteleuropäische Brautechnische
+Analysenkommission (MEBAK) Messgeräte die der DIN 12791-1 Norm
+entsprechen. Darüber hinaus sollten folgende Vorschriften
+eingehalten werden \autocite{Kunze2004,MEBAK2013,Narziss2009,Wolf2015}:
 
-Präzisions Geräte DIN 12791-1 
-Die Genauigkeit der Saccharometeranzeige ist nur bei geeichten
-Spindeln, die am besten in bestimmte Messbereiche eingeteilt sind (0–5, 5–10,
-10–15, 15–20\%), zufriedenstellend.
-Bei genauen Messungen, wie sie z. B. bei Sudhausabnahmen erforderlich
-sind, muss eine Extraktbestimmung im Laboratorium, mittels Pyknometer oder
-Biegeschwinger vorgenommen werden. Die zur Aufnahme der Würzeprobe die-
-nenden Gefäße müssen trocken sein.
-\autocite{MEBAK2013}
-\autocite{Narziss2009}
-
-
-Probe gut durchmischen. kein Wasser am Hydrometer trocken
-sein, nicht zu tief eintauchen um Würze Anhaftung zu vermeiden
-Saccharometer trocken sein
-ungefähr Temperatur haben wie die zu messende Flüssigkeit;
-Messgefäß rein und mit der zu spindelnden Flüssigkeit vorgespült
-das Messgefäß muss in der Waage stehen
-Messgefäß muss so weit sein, dass das Saccharometer, ohne zu großen
-Spielraum, bequem Platz findet;
-vor dem Ablesen mehrmals rasch eingetaucht und
-wieder herausgezogen, um anhaftende Gasblasen zu entfernen;
-Abkühlen der Würze wird durch Abdecken eine Verdunstung vermieden;
-Flüssigkeit durch mehrmaliges
-Stürzen zu mischen.
-
-\autocite{Kunze2004}
-\autocite{Narziss2009}
+\begin{itemize}
+\item Eine Probe sollte auf die ungefähre Temperatur des
+Messgeräts gekühlt oder erwärmt werden. Um eine Verdunstung
+Während der Kühlung zu vermeiden ist diese währenddessen
+abzudecken.
+\item Proben sind vor der Messung gut zu durchmischen.
+\item Während oder nach der Gärung entnommene Proben sind
+durch mehrmaliges Schütteln zu entgasen. Am Messgerät
+anhaftende Gasblasen lassen sich sind durch schnelles eintauchen
+in und herausziehen aus der zu messenden Probe entfernen.
+\item Messgerät und Messgefäß sollten trocken und rein sein
+und in der Waage stehen.
+\item Das Messgefäß sollte die Bierspindel oder das Hydrometer
+ohne großen Spielraum aufnehmen können.
+\item Beim Ablesen des Messwerts ist die gegebenenfalls aufgedruckte
+Leserichtung der Spindel zu berücksichtigen und danach die
+Temperaturkorrektur auf 20~°C durchzuführen.
+\end{itemize}
 
 \section*{Messung}
 
@@ -476,7 +485,7 @@ und einer Gleichung zur Bestimmung des Alkoholgehalts in Volumenprozent
 
 Bei Vergleichsmessungen zwischen Bierspindel und einem Handrefraktometer
 in Verbindung mit der Bonham Gleichung hat Terrill im Jahr 2010 eine
-mittlere Abweichungen der Messwerte von 1,3 Grad Plato festgestellt und darauf hin mit der Entwicklung eines eigenen Korrelationsmodell begonnen welches
+mittlere Abweichungen der Messwerte von 1,3~g/100g festgestellt und darauf hin mit der Entwicklung eines eigenen Korrelationsmodell begonnen welches
 in linearer (\autoref{eq:terrilllinear}) und vereinfachter kubischer Form
 (\autoref{eq:terrillcubic}) veröffentlicht wurde. \autocite{Terrill2010a}
 
@@ -493,12 +502,12 @@ in linearer (\autoref{eq:terrilllinear}) und vereinfachter kubischer Form
 \end{align}
 
 Insgesamt dienten Vergleichsmessungen von 12 Bieren mit Stammwürzen
-von 9 bis 24 Grad Plato, scheinbaren Restextrakten von 1,8 bis
-5,6 Grad Plato und scheinbaren Vergärungsgraden von 73 bis 91~\%
-als ursprüngliche Datenbasis. Auch kommerzielle Brauereien haben weitere Messwerte erfasst. Mittlerweile verfügt Terrill  über mindestens
-60 Vergleichswerte. Messungen mit geringeren Vergärungsgraden wurden
-ausgeschlossen, da diese die Genauigkeit des Modells verschlechtert
-hätten.
+von 9 bis 24~°P, scheinbaren Restextrakten von 1,8 bis
+5,6~g/100g und scheinbaren Vergärungsgraden von 73 bis 91~\%
+als ursprüngliche Datenbasis. Auch kommerzielle Brauereien haben
+laut Terrill weitere Messwerte erfasst. Messungen mit geringeren
+Vergärungsgraden wurden ausgeschlossen, da diese die Genauigkeit des
+Modells verschlechtert hätten.
 \autocite{Terrill2010a,Terrill2010,Terrill2011,Terrill2013}
 
 \autoref{table:terrillcomp} zeigt den von Terrill veröffentlichte
@@ -569,10 +578,9 @@ zu liefern. Basieren auf einer durch die Budweiser Brauerei beauftragte Forschun
 hat Novotný eine lineare (\autoref{eq:novotnylinear}) und eine quadratische
 (\autoref{eq:applywcf}) Gleichung zur Berechnung der spezifischen
 Dichte veröffentlicht. Darüber hinaus auch noch Formeln zur
-Berechnung des wirklichen Restextrakts (Real Extract,
-\rextext, \autoref{eq:novotnyre}) und des Alkoholgehalts
-in Gewichtsprozent (\autoref{eq:applywcf}) auf Basis von Refraktometerwerten
-und möglichst genauen Näherungsverfahren. \autocite{Novotny2017a,Novotny2017,Savel2009}
+Berechnung des wirklichen Restextrakts (\autoref{eq:novotnyre}) und
+des Alkoholgehalts in Gewichtsprozent (\autoref{eq:applywcf}) auf Basis
+von Refraktometerwerten und möglichst genauen Näherungsverfahren. \autocite{Novotny2017a,Novotny2017,Savel2009}
 
 \begin{equation} 
 \fg\:[g/ml] = -0,002349 \cdot \bxic + 0,006276 \cdot \bxfc + 1
@@ -607,53 +615,61 @@ Eine Implementierung der Novotný Formel findet sich in den Braurechnern
 „\href{https://brewfather.app}{Brewfather}“ und
 „\href{https://www.brewersfriend.com/refractometer-calculator}{Brewer's Friend}“.
 
-\subsection*{Welches Korrelationsmodell?}
+\subsection*{Terrill+Novotný}
 
-Von den präsentierten Korrelationsmodellen scheinen nur die Modelle von Bonham,
-Terrill und Novotný eine größere Verbreitung im Heimbraubereich erfahren
-zu haben, wobei das Modell von Terrill selbst heute nach wie vor
-als Quasi-Standard gilt. Ohne eine Vergleich auf Basis von Messdaten lässt
-sich jedoch keine klare Empfehlung für ein bestimmtes aussprechen. Die
-Problematik hierbei besteht, dass kaum Datensätze mit Vergleichswerten
-zwischen Refraktometern und Bierspindeln oder genaueren Messgeräten
-veröffentlicht wurden. Einer dieser Datensätze stammt von einem vom hobbybrauer.de Forum initiierten Gemeinschaftsexperiments und ein
-anderer sind die Messdaten einer aktiven Gärung von Novotnýs 17~°P Testsud.
-\autocite{Novotny2017a,Wolf2015}
+Von den vorgestellten Korrelationsmodellen scheinen nur die
+Modelle von Bonham, Terrill und Novotný eine größere Verbreitung im Heimbraubereich erfahren zu haben, wobei das Modell von Terrill selbst
+heute nach wie vor als Quasi-Standard gilt. Neuere Braurechner
+wie Brewfather setzten jedoch auf das Novotný Modell. Dementsprechend
+findet sich auf Diskussionsplattformen öfters die Fragestellung, ob nun
+entweder die Terrill oder die Novotný Formel herangezogen werden
+soll. Im Rahmen einer solchen Diskussion im Jahr 2020 hat Terrill
+basierend auf seinem aus mittlerweile 40 Messungen bestehenden Datensatz
+einen Vergleich (\autoref{table:terrillnovotnycomp}) veröffentlicht.
+Nach Ansicht von Terrill ist sein Modell auf Genauigkeit bei endvergorenen
+Proben optimiert, das Novotný Modell hingegen auf den gesamten
+Messbereich einer Gärung. Darüber hinaus wurde während dieser Diskussion
+auf Basis von Terrills Datensatz ebenfalls festgestellt, dass das
+Terrill Modell bei einem scheinbaren Restextrakt kleiner als 3,8~g/100g 
+geringere Abweichungen erzeugt. Bei einem Höheren jedoch das Modell von
+Novotný. Um geringere Abweichungen zu erzielen wäre es daher denkbar mit
+beiden Modellen eine Vorabschätzung des scheinbaren Restextrakt
+durchzuführen und anhand dieser Abschätzung das besser geeignete Modell zu
+wählen. \autocite{h22lude2020}
 
-\autocite{Katman2019}
+\begin{table}[h]
+\centering
+\begin{tabular}{lrr}
+\toprule
+Korrelation &  Mittlere Abw. [g/100g] &  Standardabw. \\
+\midrule
+Novotný Linear & -3,6 & 5,1 \\
+Novotný Quad. & 4,8 & 5,3  \\
+Terrill Kubisch & 0,3 & 3,3 \\
+Terrill Linear & -0,8 & 3,6 \\
+\bottomrule
+\end{tabular}
+\caption{Vergleich zwischen Terrill und Novotný Modell}
+\label{table:terrillnovotnycomp}
+\end{table}
 
-And at the end of the day I think that's all we can really conclude. For my own data (40 batches) the results look like:
+\subsection*{Modellvergleich}
 
-    Terrill Linear: Mean Dev -0.0003, Std Dev 0.0014
+Vereinfacht dargestellt bietet das Terrill Modell eine sehr gute Näherung
+nach aber nicht während der Gärung. Beim Bonham und Novotný Modell
+hingegen ist es umgekehrt, wobei Novotný bei einem scheinbaren
+Restextrakt größer als 3,7~g/100g geringere Abweichungen erzeugt als
+Terrill. Für die anderen zwei Modelle liegen keine öffentlichen
+Statistiken vor. Es wäre daher interessant alle Modelle an
+Vergleichsmessungen zwischen zwischen Refraktometer und Bierspindel
+oder genaueren Messgeräten zu evaluieren. Datensätze mit einigen
+Messdaten wurden im HomebrewTalk, von einem vom hobbybrauer.de Forum
+initiierten Gemeinschaftsexperiments und von Novotný veröffentlicht.
+\autocite{Katman2019,Novotny2017a,Wolf2015}
 
-    Terrill Cubic: Mean Dev 0.0001, Std Dev 0.0013
-
-    Novotny Linear: Mean Dev -0.0015, Std Dev 0.0020
-
-    Novotny Cubic: Mean Dev -0.0019, Std Dev 0.0021
 
 
 
-FG 1.0050-1.0145 (30 batches):
-
-    Terrill Linear: Mean Dev -0.0005, Std Dev 0.0014
-
-    Terrill Cubic: Mean Dev 0.0001, Std Dev 0.0010
-
-    Novotny Linear: Mean Dev -0.0022, Std Dev 0.0020
-
-    Novotny Cubic: Mean Dev -0.0027, Std Dev 0.0019
-
-FG 1.0150-1.0240 (10 batches):
-
-    Terrill Linear: Mean Dev 0.0002, Std Dev 0.0014
-
-    Terrill Cubic: Mean Dev 0.0001, Std Dev 0.0018
-
-    Novotny Linear: Mean Dev 0.0001, Std Dev 0.0009
-
-    Novotny Cubic: Mean Dev -0.0002, Std Dev 0.0010
-\autocite{h22lude2020}
 
 \begin{figure}[h]
 \centering
