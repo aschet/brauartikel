@@ -175,7 +175,7 @@ for model in refrac_models:
     std = dev.std()
     data_ferm_table.loc[len(data_ferm_table)] = [ model.name, data_ferm_dev.iloc[-1][model.name], max, mean, std ]
 
-data_ferm_table.to_latex('table_fermentation.tex', index=False, float_format='%.3f', decimal=',')
+data_ferm_table.to_latex('table_fermentation.tex', index=False, float_format='%.1f', decimal=',')
 
 plot_cols = 2
 plot_rows = len(refrac_models) // plot_cols + len(refrac_models) % plot_cols
@@ -191,7 +191,7 @@ for i, model in enumerate(refrac_models):
         ax = axes[plot_col]
     ax.set_ylim([2,18])
     ax.plot(data_ferm_graph[col_name_measurement], data_ferm_graph[col_name_hydrometer], label=col_name_hydrometer)
-    ax.scatter(data_ferm_graph[col_name_measurement], data_ferm_graph[model.name], label=model.name, marker='.')
+    ax.plot(data_ferm_graph[col_name_measurement], data_ferm_graph[model.name], label=model.name)
     r2 = r2_score(data_ferm_graph[col_name_hydrometer], data_ferm_graph[model.name])
     ax.set_title(model.name + ' (R²=' + '%.3f'%r2 + ')')
     ax.legend(loc='best')  
@@ -226,7 +226,7 @@ for model in refrac_models:
     below_point_five = abv_err_below = dev_abs.le(1.0).sum() / len(dev_abs) * 100.0
     data_ae_table.loc[len(data_ae_table)] = [ model.name, max, mean, std, below_point_one, below_point_two, below_point_five ]
 
-data_ae_table.to_latex('table_ae.tex', index=False, float_format='%.3f', decimal=',')
+data_ae_table.to_latex('table_ae.tex', index=False, float_format='%.1f', decimal=',')
 
 fig_ae = plt.figure(constrained_layout=True, figsize=(8, 12))
 axes = fig_ae.subplots(plot_rows, plot_cols, sharex=True, sharey=True)
