@@ -84,15 +84,12 @@ def abw_gosett(bxi, bxf, wcf):
     c = 100.0 * (bxi - bxf) / (100.0 - 48.4 * k - 0.582 * bxf)
     return 48.4 * c / (100 - 0.582 * c)
 
-def cor_from_abw(abw, bxi, wcf):
-    oe = correct_bx(bxi, wcf)
-    ae = oe - (abw * (2.0665 - 1.0665 * oe / 100.0)) / 0.8052
-    return oe, ae, p_to_sg(ae)
-
 # The Gossett correlation is for abw and not fg. For abv calculation Gossett utilizes the
 # Bonham correlation. Here the fg is derived from the abw equation instead.
 def cor_gossett(bxi, bxf, wcf):
-    return cor_from_abw(abw_gosett(bxi, bxf, wcf), bxi, wcf)
+    abw = abw_gosett(bxi, bxf, wcf)
+    ae = bxi - (abw * (2.0665 - 1.0665 * bxi / 100.0)) / 0.8052
+    return bxi, ae, p_to_sg(ae)
 
 # Novotný correlation functions implemented according to:
 # Petr Novotný. Počítáme: Nová korekce refraktometru. 2017.
@@ -224,7 +221,7 @@ if measurement_specific_wcf == False:
 if discard_bxi_outliers == True:
     bxic = correct_bx(data[col_name_bxi], data[col_name_wcf])
     bxi_dev = bxic - data[col_name_oe]
-    threshold = abs(iqr(bxi_dev) * 1.5)
+    threshold = abs(iqr(bxi_dev) * 3.0)
     print('Discarding ' + col_name_bxi + ' outliers over ' + str(threshold) + '\n')
     data = data[(abs(bxic - data[col_name_oe]) <= threshold)]
 

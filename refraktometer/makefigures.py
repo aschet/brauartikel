@@ -6,6 +6,7 @@ import pandas as pa
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
+from scipy.stats import iqr
 
 def correct_bx(bx, wcf):
     return bx / wcf
@@ -62,15 +63,12 @@ def abw_gosett(bxi, bxf, wcf):
     c = 100.0 * (bxi - bxf) / (100.0 - 48.4 * k - 0.582 * bxf)
     return 48.4 * c / (100 - 0.582 * c)
 
-def cor_from_abw(abw, bxi, wcf):
-    oe = correct_bx(bxi, wcf)
-    ae = oe - (abw * (2.0665 - 1.0665 * oe / 100.0)) / 0.8052
-    return oe, ae, p_to_sg(ae)
-
 # The Gossett correlation is for abw and not fg. For abv calculation Gossett utilizes the
 # Bonham correlation. Here the fg is derived from the abw equation instead.
 def cor_gossett(bxi, bxf, wcf):
-    return cor_from_abw(abw_gosett(bxi, bxf, wcf), bxi, wcf)
+    abw = abw_gosett(bxi, bxf, wcf)
+    ae = bxi - (abw * (2.0665 - 1.0665 * bxi / 100.0)) / 0.8052
+    return bxi, ae, p_to_sg(ae)
 
 # Novotný correlation functions implemented according to:
 # Petr Novotný. Počítáme: Nová korekce refraktometru. 2017.
@@ -213,6 +211,14 @@ for model in refrac_models:
     data_ae_abs[model.name] = model.calc_ae(data_ae[col_name_bxi], data_ae[col_name_bxf], data_ae[col_name_wcf])
     data_ae_dev[model.name] = data_ae_abs[model.name] - data_ae[col_name_ae]
 
+filter_outliers = False
+if filter_outliers == True:
+    row_criteria = data_ae_dev.abs().max(axis=1)
+    threshold = iqr(row_criteria) * 3
+    filter = row_criteria <= threshold
+    data_ae_abs = data_ae_abs.where(filter).dropna()
+    data_ae_dev = data_ae_dev.where(filter).dropna()
+
 data_ae_table = pa.DataFrame(columns=['Korrelation', 'Max. Abw. [g/100g]', 'Mittlere Abw.', 'Standardabw.', '< 0,25 [%]', '< 0,5', '< 1,0'])
 
 for model in refrac_models:
@@ -221,9 +227,9 @@ for model in refrac_models:
     max = dev[dev_abs.idxmax()]
     mean = dev.mean()
     std = dev.std()
-    below_point_one = abv_err_below = dev_abs.le(0.25).sum() / len(dev_abs) * 100.0
-    below_point_two = abv_err_below = dev_abs.le(0.5).sum() / len(dev_abs) * 100.0
-    below_point_five = abv_err_below = dev_abs.le(1.0).sum() / len(dev_abs) * 100.0
+    below_point_one = dev_abs.le(0.25).sum() / len(dev_abs) * 100.0
+    below_point_two = dev_abs.le(0.5).sum() / len(dev_abs) * 100.0
+    below_point_five = dev_abs.le(1.0).sum() / len(dev_abs) * 100.0
     data_ae_table.loc[len(data_ae_table)] = [ model.name, max, mean, std, below_point_one, below_point_two, below_point_five ]
 
 data_ae_table.to_latex('table_ae.tex', index=False, float_format='%.1f', decimal=',')
