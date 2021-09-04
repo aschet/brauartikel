@@ -204,14 +204,14 @@ data_ae_abs = pa.DataFrame()
 data_ae_dev = pa.DataFrame()
 
 data_ae[col_name_ae] = np.where(np.isnan(data_ae[col_name_ae]), sg_to_p(data_ae[col_name_fg]), data_ae[col_name_ae])
-data_ae[col_name_wcf] = default_wcf
+data_ae[col_name_wcf] = np.where(np.isnan(data_ae[col_name_wcf]), default_wcf, data_ae[col_name_wcf])
 
 data_ae_abs[col_name_hydrometer] = data_ae[col_name_ae]
 for model in refrac_models:
     data_ae_abs[model.name] = model.calc_ae(data_ae[col_name_bxi], data_ae[col_name_bxf], data_ae[col_name_wcf])
     data_ae_dev[model.name] = data_ae_abs[model.name] - data_ae[col_name_ae]
 
-filter_outliers = False
+filter_outliers = True
 if filter_outliers == True:
     row_criteria = data_ae_dev.abs().max(axis=1)
     threshold = iqr(row_criteria) * 3
@@ -251,4 +251,4 @@ for i, model in enumerate(refrac_models):
 
 fig_ae.savefig('graph_ae.pdf', format='pdf')
 
-#plt.show()
+plt.show()
