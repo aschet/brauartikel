@@ -283,7 +283,7 @@ müssen, bis ein Großteil der darin enthaltenen Hefe sedimentiert
 ist. Zur Entfernung von \ch{CO2} kann die Probe innerhalb eines
 Behälters mehrmals geschüttelt werden. Inzwischen ist der Behälter
 kurz zu öffnen, damit das Gas entweichen kann. Heiße Würze
-sollte niemals direkt auf ein Refraktometer aufgetragen werden,
+sollte nicht direkt auf ein Refraktometer aufgetragen werden,
 da es hierbei zu Verdampfungen kommt und somit zu einer
 Konzentrationsänderung. Proben sollten daher,
 bis diese die Raumtemperatur angenommen haben, in einem abgedeckten
@@ -404,8 +404,8 @@ werden.
 \section*{Korrelationsmodelle und scheinbarer Restextrakt}
 
 Der während der Gärung gebildete Ethanol verfälscht nicht nur
-die Extraktmessung mit der Bierspindel sondern beeinflusst auch
-den Brechungsindex. Es besteht daher die Notwendigkeit einen
+die Extraktmessung mit der Bierspindel, sondern beeinflusst auch
+den Brechungsindex. Es besteht daher die Notwendigkeit, einen
 Refraktometermesswert für die Berechnung des Alkoholgehalts in eine
 andere Messgröße zu transformieren. Die entsprechende Messgröße ist
 im Normalfall der scheinbare Restextrakt, so wie er mit einer
@@ -414,15 +414,15 @@ Korrelationsfunktion. Insgesamt wurden mindestens fünf
 Korrelationsmodelle im Heimbrauumfeld für diesen Zweck veröffentlicht,
 die ihre jeweiligen Stärken und Schwächen besitzen. Ein grundlegendes
 Problem bei der Entwicklung eines solchen Modells ist,
-dass verschiedene Zusammensetzungen einer vergorene
+dass verschiedene Zusammensetzungen einer vergorenen
 Probe den gleichen Brechungsindex aufweisen können. \autocite{Distillique2020,Terrill2010a,Terrill2010}
 
 Zur Berechnung der folgenden Korrellationsfunktionen ist eine
-Probe der Stammwürze (\bxitext) und eine während oder nach der
-Gärung entnommene Probe (\bxftext) mit dem Refraktometer zu
-messen. Je nach Funktion sind unveränderte (\bxitext, \bxftext)
-oder um den Würze-Korrekturfaktor veränderte (\bxictext, \bxfctext) 
-Messwerte einzusetzen.
+Probe der Anstellwürze vor der Gärung (\bxitext) und eine während
+oder nach der Gärung entnommene Probe (\bxftext) mit einem Refraktometer
+zu messen. Je nach Funktion sind unveränderte (\bxitext, \bxftext)
+oder um den Würze-Korrekturfaktor angepasste Messwerte
+(\bxictext, \bxfctext) einzusetzen.
 
 \subsection*{Gardner}
 
@@ -434,7 +434,7 @@ für die private Anwendung, weißt aber darauf hin, dass bereits
 genauere Näherungsverfahren zu diesem Zeitpunkt existiert
 hätten. Neben der Gleichung zur Bestimmung des scheinbaren
 Restextrakts hat Gardner auch eine Gleichung zur Bestimmung
-des Alkoholgehalts in Gewichtsprozent (Alcohol by Weight, \abwtext, \autoref{eq:gardnerabw}).
+des Alkoholgehalts in Gewichtsprozent (Alcohol by Weight, \abwtext, \autoref{eq:gardnerabw}) aufgestellt.
 Im Heimbraubereich scheint dieses Modell keine große Verbreitung
 erfahren zu haben. \autocite{Bonham2001}
 
@@ -454,9 +454,9 @@ erfahren zu haben. \autocite{Bonham2001}
 Das von Bonham im Jahr 2001 im Zymurgy Magazin der American Homebrewers
 Association veröffentlichte Korrelationsmodell ist auch als
 Standardformel bekannt. Als Grundlage dienten bereits existierende
-Gleichungen, die an die üblichen Maßeinheiten der amerikanischen
-Heimbrauerszene angepasst wurden. Bis zur Ablösung durch die Terrill
-Formel im Jahr 2011 war dieses Modell weit verbreitet. Heute
+Gleichungen, die an die üblichen Messgrößen der amerikanischen
+Heimbrauszene angepasst wurden. Bis zur Ablösung durch die Terrill
+Formel ab dem Jahr 2011 war dieses Modell weit verbreitet. Heute
 wird es noch vereinzelt wie zum Beispiel von 
 „\href{https://www.maischemalzundmehr.de/index.php?inhaltmitte=toolsrefraktorechner}{Maische, Malz und Mehr}“ für Messungen während der Gärung empfohlen. \autocite{Bonham2001,Terrill2010a}
 
@@ -700,7 +700,7 @@ initiierten Gemeinschaftsexperiments und von Novotný veröffentlicht.
 
 Der durch die Balling Formel formulierte Zusammenhang zwischen
 scheinbarem Restextrakt, wirklichem Restextrakt, Stammwürze
-und Alkoholgehalt kann dazu verwendete werden um aus der
+und Alkoholgehalt kann dazu verwendete werden, um aus der
 Menge des während einer Gärung durch die Hefe konsumierten
 Extrakts den daraus resultierenden Alkoholgehalt ohne aufwendigere
 analytischer Verfahren als Näherungswert zu berechnen. Dafür muss
@@ -708,7 +708,7 @@ eine Messung der Stammwürze vor der Gärung und eine Messung des
 scheinbaren Restextrakts während oder nach der Gärung durchgeführt
 werden. \autocite{MEBAK2013,Spedding2016}
 
-Bei Messungen mit dem Refraktometer ist dabei die
+Bei Messungen mit einem Refraktometer ist dabei die
 gemessene Stammwürze durch den Würze-Korrekturfaktor und
 der gemessene scheinbare Restextrakt durch eine Korrelationsfunktion
 zu korrigieren. Für die weitere Berechnung muss zuerst
@@ -716,9 +716,7 @@ der wirkliche Restextrakt als Näherungswert bestimmt werden.
 Dies erfolgt anhand von \autoref{eq:calcre} auf Basis
 der mit \autoref{eq:applywcf} ermittelten Stammwürze und
 je nach Korrelationsmodell mit \autoref{eq:calcsgtop}
-ermitteltem scheinbarem Restextrakt. Mit einer Bierspindel
-erhobene Messwerte benötigen nach der Temperaturkorrektur
-keine weitere Anpassung.
+ermitteltem scheinbaren Restextrakt.
 
 \begin{equation}
 \rex\:[g/100g] = 0,1948 \cdot \oex + 0,8052 \cdot \aex
@@ -727,10 +725,10 @@ keine weitere Anpassung.
 
 Durch einsetzten der Stammwürze und des wirklichen Restextrakts
 in \autoref{eq:calcabw} wird dann der Alkoholgehalt als
-Gewichtsanteil berechnet. Um den auf Bierflaschen abgedruckten
-Volumensanteil zu erhalten ist neben dem berechneten Ergebnis
-die durch die gewählte Korrellationfunktion ermittelte
-spezifische Dichte in \autoref{eq:calcabv} einzusetzen.
+Gewichtsanteil berechnet. Um den Volumensanteil zu erhalten, ist
+neben dem berechneten Ergebnis die durch die gewählte
+Korrellationfunktion ermittelte spezifische Dichte
+in \autoref{eq:calcabv} einzusetzen.
 
 \begin{equation}
 \abw\:[\%\:w/w] = \frac{\oex - \rex}{2,0665 - 1.0665 \cdot \oex / 100}
@@ -742,15 +740,15 @@ spezifische Dichte in \autoref{eq:calcabv} einzusetzen.
 \label{eq:calcabv}
 \end{equation}
 
-Eine weitere Kennzahl die aus den durchgeführten Messungen berechnet
-werden kann ist der Vergärungsgrad. Dieser gibt an, zu welchem
-Anteil die Stammwürze während der Gärung konsumiert wurde.
+Eine weitere Kennzahl, die aus den durchgeführten Messungen berechnet
+werden kann, ist der Vergärungsgrad. Dieser gibt an, zu welchem
+Anteil der ursprüngliche Extrakt während der Gärung konsumiert wurde.
 Für den scheinbaren Restextrakt wird der scheinbare Vergärungsgrad
 (Apparent Degree of Fermentation, \adftext) gemäß \autoref{eq:calcadf}
 ermittelt. Der wirkliche Vergärdungsgrad (Real Degree of Fermentation,
 \rdftext) ist nach Methode der American Society of Brewing Chemists
 (ASBC) durch \autoref{eq:calcrdf} zu berechnen. Alternativ kann als
-Näherung der Scheinbare Vergärungsgrad auf mit dem Ballingschen
+Näherung der scheinbare Vergärungsgrad mit dem Ballingschen
 Umrechnungsaktor 0,81 multipliziert werden.
 \autocite{MEBAK2013,Spedding2016,Speers2015}
 
@@ -795,18 +793,18 @@ zu berechnen. Unter Anwendung von \autoref{eq:applywcf},
 sich folgender Berechnungsweg:
 
 \begin{align*}
-\bxic\:[\degree P] = 12 / 1,04 &= 11,54 \\
-\bxfc\:[g/100g] = 6 / 1,04 &= 5,77 \\
-\sg\:[g/ml] = 1 - 0,00085683 \cdot 11,54 + 0,0034941 \cdot 5,77 &= 1,010 \\
-\aex\:[g/100g] = -205,347 \cdot 1,010^2 + 668,72 \cdot 1,010 - 463,37 &= 2,63 \\
-\rex\:[g/100g] = 0,1948 \cdot 11,54 + 0,8052 \cdot 2,63 &= 4,37 \\
-\abw\:[\%\:w/w] = \frac{11,54 - 4,37}{2,0665 - 1,0665 \cdot 11,54 / 100} &= 3,69 \\
-\abv\:[\%\:v/v] = \frac{3,81 \cdot 1,009}{0,7907} &= 4,71
+\bxic\:[\degree P] &= 12 / 1,04 = 11,54 \\
+\bxfc\:[g/100g] &= 6 / 1,04 = 5,77 \\
+\sg\:[g/ml] &= 1 - 0,00085683 \cdot 11,54 + 0,0034941 \cdot 5,77 = 1,010 \\
+\aex\:[g/100g] &= -205,347 \cdot 1,010^2 + 668,72 \cdot 1,010 - 463,37 = 2,63 \\
+\rex\:[g/100g] &= 0,1948 \cdot 11,54 + 0,8052 \cdot 2,63 = 4,37 \\
+\abw\:[\%\:w/w] &= \frac{11,54 - 4,37}{2,0665 - 1,0665 \cdot 11,54 / 100} = 3,69 \\
+\abv\:[\%\:v/v] &= \frac{3,69 \cdot 1,010}{0,7907} = 4,71
 \end{align*}
 
 \section*{Zusammenfassung}
 
-Die revanten Eckpunkte dieses Artikels sind:
+Die relevanten Eckpunkte dieses Artikels sind:
 
 \begin{itemize}
 \item Refraktometer messen auf Basis der Brechung des Lichts. Im
@@ -817,7 +815,7 @@ werden. Bei Messungen vor der Gärung (Stammwürze) ist der
 Würze-Korrekturfaktor anzuwenden. Messungen nach
 der Gärung unterliegen einer Verfälschung aufgrund des gebildeten
 Alkohols. Zur Korrektur wird ein Messwert mithilfe einer
-Korrelationsfunktion angepasst.
+Korrelationsfunktion transformiert.
 \item Vor einer Messung sollte eine Kalibrierung und Justierung
 mit destilliertem Wasser bei Raumtemperatur erfolgen.
 \item Proben sind für die Messung aufzubereiten. Heiße Würze
