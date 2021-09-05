@@ -36,7 +36,7 @@
 
 \title{Alkoholmessung mit Refraktometern}
 \author{Thomas Ascher <thomas.ascher@gmx.at>}
-\date{4. September 2021, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
+\date{5. September 2021, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
 
 \addbibresource{refraktometer.bib}
 
@@ -675,13 +675,38 @@ ist daher nur bedingt aussagekräftig.
 
 Der Vergleich der Messdaten endvergorener Proben in \autoref{fig:aegraph}
 und \autoref{table:aetable} erfolgt anhand aller genannten Datensätze, wobei
-von Novotný nur der letzte Messwert übernommen wurde.Für die Messdaten vom HomebrewTalk Forum lässt sich ein durchschnittlicher Würze-Korrekturfaktor
-von $\wcf = 0,99$ berechnen. Für die Messdaten des hobbybrauer.de Forums
-wird $\wcf = 1,04$ angenommen. 
+von Novotný nur der letzte Messwert zu übernehmen ist, um keine
+unnötigen Abweichungen beim Terrill Modell zu verursachen.
+Für die Messdaten vom HomebrewTalk Forum lässt sich ein durchschnittlicher Würze-Korrekturfaktor
+von $\wcf = 0,99$ berechnen. Die Umrechnung von spezifischer Dichte
+zu scheinbarem Restextrakt erfolgt über \autoref{eq:calcsgtop}.
+Für die Messdaten des hobbybrauer.de Forums wird $\wcf = 1,04$ angenommen. 
+Ohne eine weitere Vorverarbeitung der Messdaten erzeugen die meisten
+Korrelationsmodelle eine hohe maximale Abweichung (bis zu 4,7~g/100g).
+Es ist unklar ob es sich dabei um Messfehler handelt. Zur Behandlung
+solcher statistischer
+Ausreißer wurde eine Höchstgrenze für Abweichungen von 1,88~g/100g
+basierend auf dem dreifachen Interquartilsabstand der maximalen
+absoluten Abweichungen definiert. Diese Schranke entfernt 4 von
+47 Messungen. \autoref{fig:aegraph} zeigt die Verteilung der Abweichungen
+nach der Filterung. Gemäß der Statistik von \autoref{table:aetable}
+verursacht der kombinierte Terill+Novotný Ansatz die geringsten
+Abweichungen. Insgesamt ist aber anzumerken, dass eine geringfügige
+Änderung des \wcftext\, die Ergebnisse zugunsten anderer Modelle verschiebt.
 
-4,7g/100g
+\begin{table}[H]
+\centering
+\input{table_fermentation.tex}
+\caption{Abweichung des scheinbaren Restextrakts bei Gärverlauf mit Stammwürze von 17 °P}
+\label{table:novotnytable}
+\end{table}
 
-dreifacher Interquartilsabstand 4 von 47 1,88~g/100g
+\begin{table}[H]
+\centering
+\input{table_ae.tex}
+\caption{Abweichung des scheinbaren Restextrakts bei endvergorener Probe}
+\label{table:aetable}
+\end{table}
 
 \begin{figure}[H]
 \centering
@@ -697,20 +722,6 @@ dreifacher Interquartilsabstand 4 von 47 1,88~g/100g
 \label{fig:aegraph}
 \end{figure}
 
-
-\begin{table}[h]
-\centering
-\input{table_fermentation.tex}
-\caption{Abweichung des scheinbaren Restextrakts bei Gärverlauf mit Stammwürze von 17 °P}
-\label{table:novotnytable}
-\end{table}
-
-\begin{table}[h]
-\centering
-\input{table_ae.tex}
-\caption{Abweichung des scheinbaren Restextrakts bei endvergorener Probe}
-\label{table:aetable}
-\end{table}
 
 \section*{Bestimmung des Alkoholgehalts und weiterer Kennzahlen}
 
