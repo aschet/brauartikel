@@ -215,6 +215,7 @@ filter_outliers = True
 if filter_outliers == True:
     row_criteria = data_ae_dev.abs().max(axis=1)
     threshold = iqr(row_criteria) * 3
+    print('Filter threshold is %.2f'% threshold)
     filter = row_criteria <= threshold
     data_ae_abs = data_ae_abs.where(filter).dropna()
     data_ae_dev = data_ae_dev.where(filter).dropna()
@@ -248,6 +249,7 @@ for i, model in enumerate(refrac_models):
     r2 = r2_score(data_ae_abs[col_name_hydrometer], data_ae_abs[model.name])
     ax.set_title(model.name + ' (R²=' + '%.3f'%r2 + ')')
     ax.set_xlabel('Abw. scheinbarer Restextrakt [g/100g]')
+    ax.set_ylabel('Dichte')
 
 fig_ae.savefig('graph_ae.pdf', format='pdf')
 

@@ -483,11 +483,11 @@ und einer Gleichung zur Bestimmung des Alkoholgehalts in Volumenprozent
 
 \subsection*{Terrill}
 
-Bei Vergleichsmessungen zwischen Bierspindel und einem Handrefraktometer
+Bei Vergleichsmessungen zwischen einem Hydrometer und einem Handrefraktometer
 in Verbindung mit der Bonham Gleichung hat Terrill im Jahr 2010 eine
-mittlere Abweichungen der Messwerte von 1,3~g/100g festgestellt und darauf hin mit der Entwicklung eines eigenen Korrelationsmodell begonnen welches
-in linearer (\autoref{eq:terrilllinear}) und vereinfachter kubischer Form
-(\autoref{eq:terrillcubic}) veröffentlicht wurde. \autocite{Terrill2010a}
+mittlere Abweichungen der Messwerte von 1,3~g/100g festgestellt und darauf hin mit der Entwicklung eines eigenen Korrelationsmodell begonnen, welches
+er in linearer (\autoref{eq:terrilllinear}) und vereinfachter kubischer Form
+(\autoref{eq:terrillcubic}) veröffentlicht hat. \autocite{Terrill2010a}
 
 \begin{equation}
 \sg\:[g/ml] = 1 - 0,00085683 \cdot \bxic + 0,0034941 \cdot \bxfc
@@ -510,10 +510,10 @@ Vergärungsgraden wurden ausgeschlossen, da diese die Genauigkeit des
 Modells verschlechtert hätten.
 \autocite{Terrill2010a,Terrill2011,Terrill2010,Terrill2013}
 
-\autoref{table:terrillcomp} zeigt den von Terrill veröffentlichte
-Ergebnis zwischen den Modell von Bonham und seinem Eigenen. Bei
-endvergorenen Proben liefert das Bonham Modell eine wesentlich
-schlechtere Näherung. Hierbei ist allerdings zu beachten, dass
+\autoref{table:terrillcomp} zeigt den von Terrill veröffentlichten
+Vergleich zwischen dem Modell von Bonham und seinem Eigenen. Bei
+endvergorenen Proben erzeugt das Bonham Modell höhere
+Abweichungen. Hierbei ist allerdings zu beachten, dass
 Terrill die ursprüngliche Quelle des Bonhams Modells nicht kannte
 und deshalb fälschlicherweise auch den zweiten Messwert um
 den Würze-Korrekturfaktor angepasst hat. Dieser Fehler soll sich
@@ -537,7 +537,7 @@ Terrill Linear & 1,0 & 0,03 & 0,4 & 63 & 84 & 99 \\
 
 \subsection*{Gossett}
 
-Von den bisher beschriebenen Korrelationsmodelle wird ein indirekter
+Von den bereits beschriebenen Korrelationsmodellen wird ein indirekter
 Messwert in einen anderen indirekten Messwert transformiert. Gossett
 war unzufrieden mit diesem Vorgehen und hat im Jahr 2012 daher ein
 stöchiometrisches Modell (\autoref{eq:gossett}, \autoref{eq:gossettabw})
@@ -560,9 +560,8 @@ C = 100 \cdot \frac{\bxi - \bxf}{100 - 48,4 \cdot 0,445 - 0,582 \cdot \bxf}
 Mit dem Gossett Modell lässt sich direkt keine spezifische Dichte
 zur Berechnung von \autoref{eq:calcabv} bestimmen. Gossett wendet
 hierzu \autoref{eq:bonham} an. Durch Umformung von
-\autoref{eq:calcre} und \autoref{eq:calcabw} und Transformation gemäß
-\autoref{eq:calcsgtop} ist aber eine Berechnung aus dem
-durch \autoref{eq:gossettabw} erhaltenen Alkoholgehalt möglich.
+\autoref{eq:calcre} und \autoref{eq:calcabw} ist aber eine Berechnung
+aus dem durch \autoref{eq:gossettabw} erhaltenen Alkoholgehalt möglich.
 
 \begin{equation}
 \aex\:[g/100g] = \bxi - \frac{\abw \cdot (2,0665 - 1,0665 \cdot \bxi / 100)}{0,8052}
@@ -573,8 +572,8 @@ durch \autoref{eq:gossettabw} erhaltenen Alkoholgehalt möglich.
 Um das Jahr 2017 hat sich Novotný mit bestehenden Berechnungsvorschriften
 im Heimbraubereich beschäftigt und nach Verbesserungsmöglichkeiten
 gesucht. Darunter auch die Terrill Formel, da diese bekannt dafür
-ist während der Anfangszeit einer Gärung keine guten Korrelationswerte
-zu liefern. Basieren auf einer durch die Budweiser Brauerei beauftragte Forschungsarbeit zur Bewertung von Refraktometern als Messmittel
+ist, während der Anfangszeit einer Gärung hohe Abweichungen
+zu verursachen. Basierend auf einer durch die Brauerei Budweis beauftragte Forschungsarbeit zur Bewertung von Refraktometern als Messmittel
 hat Novotný eine lineare (\autoref{eq:novotnylinear}) und eine quadratische
 (\autoref{eq:applywcf}) Gleichung zur Berechnung der spezifischen
 Dichte veröffentlicht. Darüber hinaus auch noch Formeln zur
@@ -607,33 +606,31 @@ von Refraktometerwerten und möglichst genauen Näherungsverfahren. \autocite{No
 Das Novotný Modell wurde während der Gärung an drei Testsuden mit jeweils
 bei 11,6~°P, 17~°P und 20~°P Stammwürze und an den Budweiser
 Ergebnissen verifiziert. Laut den Erhobenen Daten liefert das Terrill
-Modell im Vergleich während der ersten Tage der Gärung hohe
+Modell im Vergleich während der ersten Tage der Gärung höhere
 Abweichungen und auch eine geringfügig höhere Endabweichung.
 \autocite{Novotny2017a,Novotny2017}
-
-Eine Implementierung der Novotný Formel findet sich in den Braurechnern
-„\href{https://brewfather.app}{Brewfather}“ und
-„\href{https://www.brewersfriend.com/refractometer-calculator}{Brewer's Friend}“.
 
 \subsection*{Terrill+Novotný}
 
 Von den vorgestellten Korrelationsmodellen scheinen nur die
-Modelle von Bonham, Terrill und Novotný eine größere Verbreitung im Heimbraubereich erfahren zu haben, wobei das Modell von Terrill selbst
+Modelle von Bonham, Terrill und Novotný eine weitere Verbreitung im Heimbraubereich erfahren zu haben, wobei das Modell von Terrill selbst
 heute nach wie vor als Quasi-Standard gilt. Neuere Braurechner
-wie Brewfather setzten jedoch auf das Novotný Modell. Dementsprechend
-findet sich auf Diskussionsplattformen öfters die Fragestellung, ob nun
+wie zum Beispiel „\href{https://brewfather.app}{Brewfather}“
+oder „\href{https://www.brewersfriend.com/refractometer-calculator}
+{Brewer's Friend}“ implementieren jedoch das Novotný Modell.
+Dementsprechend findet sich auf Diskussionsplattformen öfters die Fragestellung, ob nun
 entweder die Terrill oder die Novotný Formel herangezogen werden
 soll. Im Rahmen einer solchen Diskussion im Jahr 2020 hat Terrill
 basierend auf seinem aus mittlerweile 40 Messungen bestehenden Datensatz
-einen Vergleich (\autoref{table:terrillnovotnycomp}) veröffentlicht.
+einen Vergleich (\autoref{table:terrillnovotnycomp}) hierzu veröffentlicht.
 Nach Ansicht von Terrill ist sein Modell auf Genauigkeit bei endvergorenen
 Proben optimiert, das Novotný Modell hingegen auf den gesamten
 Messbereich einer Gärung. Darüber hinaus wurde während dieser Diskussion
 auf Basis von Terrills Datensatz ebenfalls festgestellt, dass das
 Terrill Modell bei einem scheinbaren Restextrakt kleiner als 3,8~g/100g 
-geringere Abweichungen erzeugt. Bei einem Höheren jedoch das Modell von
+geringere Abweichungen erzeugt, bei einem Höheren jedoch das Modell von
 Novotný. Um geringere Abweichungen zu erzielen wäre es daher denkbar mit
-beiden Modellen eine Vorabschätzung des scheinbaren Restextrakt
+beiden Modellen eine Vorabschätzung des scheinbaren Restextrakts
 durchzuführen und anhand dieser Abschätzung das besser geeignete Modell zu
 wählen. \autocite{h22lude2020}
 
