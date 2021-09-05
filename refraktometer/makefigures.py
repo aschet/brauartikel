@@ -119,8 +119,9 @@ def cor_novotrill(bxi, bxf, wcf):
     return oe1, sg_to_p(fg), fg
 
 class RefracModel:
-    def __init__(self, name, cor_model):
+    def __init__(self, name, short_name, cor_model):
         self.name = name
+        self.short_name = short_name
         self.cor_model = cor_model
 
     def calc_ae(self, bxi, bxf, wcf):
@@ -128,17 +129,17 @@ class RefracModel:
         return ae
 
 refrac_models = [
-    RefracModel('Bonham', cor_bonham),
-    RefracModel('Gardner', cor_gardner),
-    RefracModel('Gossett', cor_gossett),
-    RefracModel('Novotný Linear', cor_novotny_linear),
-    RefracModel('Novotný Quad.', cor_novotny_quadratic),
-    RefracModel('Terrill Kubisch', cor_terrill_cubic),
-    RefracModel('Terrill Linear', cor_terrill_linear),
-    RefracModel('Terrill+Novotný', cor_novotrill)
+    RefracModel('Bonham', 'BO', cor_bonham),
+    RefracModel('Gardner', 'GA', cor_gardner),
+    RefracModel('Gossett', 'GO', cor_gossett),
+    RefracModel('Novotný Linear', 'NL', cor_novotny_linear),
+    RefracModel('Novotný Quadratisch', 'NQ', cor_novotny_quadratic),        
+    RefracModel('Terrill Kubisch', 'TK', cor_terrill_cubic),
+    RefracModel('Terrill Linear', 'TL', cor_terrill_linear),
+    RefracModel('Terrill+Novotný', 'TN', cor_novotrill)
 ]
 
-model_names = list(map(lambda model: model.name, refrac_models))
+#model_short_names = list(map(lambda model: model.short_name, refrac_models))
 
 col_name_wcf = 'WCF'
 col_name_fg = 'FG'
@@ -147,9 +148,20 @@ col_name_bxi = 'BXI'
 col_name_bxf = 'BXF'
 col_name_measurement = 'Messung'
 col_name_hydrometer = 'Bierspindel'
+col_name_statistic = 'Statistik'
 
-def model_col_name(section, name):
-    return section + ' ' + name
+stats_caps = ['Max. Abweichung [g/100g]', 'Mittlere Abweichung [g/100g]', 'Standardabweichung [g/100g] ',
+'Abweichungen < 0,25 g/100g [%]', 'Abweichungen < 0,50 g/100g [%]', 'Abweichungen < 1,00 g/100g [%]']
+
+def calc_stats(devs):
+    devs_abs = devs.abs()
+    max = dev[devs_abs.idxmax()]
+    mean = devs.mean()
+    std = devs.std()
+    below_point_one = devs_abs.le(0.25).sum() / len(devs_abs) * 100.0
+    below_point_two = devs_abs.le(0.5).sum() / len(devs_abs) * 100.0
+    below_point_five = devs_abs.le(1.0).sum() / len(devs_abs) * 100.0
+    return [ max, mean, std, below_point_one, below_point_two, below_point_five ]   
 
 data_ferm = pa.read_csv('data_fermentation.csv', delimiter=',')
 data_ferm_dev = pa.DataFrame()
@@ -162,16 +174,13 @@ for model in refrac_models:
     data_ferm_graph[model.name] = model.calc_ae(data_ferm[col_name_bxi], data_ferm[col_name_bxf], data_ferm[col_name_wcf])
     data_ferm_dev[model.name] = data_ferm_graph[model.name] - data_ferm[col_name_ae]
 
-data_ferm_table = pa.DataFrame(columns=['Korrelation', 'Endabw. [g/100g]', 'Max. Abw.', 'Mittlere Abw.', 'Standardabw.'])
+data_ferm_table = pa.DataFrame()
+data_ferm_table[col_name_statistic] = ['Endabweichung [g/100g]'] + stats_caps
 
 for model in refrac_models:
     last = data_ferm_dev.iloc[-1][model.name]
     dev = data_ferm_dev[model.name]
-    dev_abs = dev.abs()
-    max = dev[dev_abs.idxmax()]
-    mean = dev.mean()
-    std = dev.std()
-    data_ferm_table.loc[len(data_ferm_table)] = [ model.name, data_ferm_dev.iloc[-1][model.name], max, mean, std ]
+    data_ferm_table[model.short_name] = [ last ] + calc_stats(dev)
 
 data_ferm_table.to_latex('table_fermentation.tex', index=False, float_format='%.1f', decimal=',')
 
@@ -220,18 +229,12 @@ if filter_outliers == True:
     data_ae_abs = data_ae_abs.where(filter).dropna()
     data_ae_dev = data_ae_dev.where(filter).dropna()
 
-data_ae_table = pa.DataFrame(columns=['Korrelation', 'Max. Abw. [g/100g]', 'Mittlere Abw.', 'Standardabw.', '< 0,25 [%]', '< 0,5', '< 1,0'])
+data_ae_table = pa.DataFrame()
+data_ae_table[col_name_statistic] = stats_caps
 
 for model in refrac_models:
     dev = data_ae_dev[model.name]
-    dev_abs = dev.abs()
-    max = dev[dev_abs.idxmax()]
-    mean = dev.mean()
-    std = dev.std()
-    below_point_one = dev_abs.le(0.25).sum() / len(dev_abs) * 100.0
-    below_point_two = dev_abs.le(0.5).sum() / len(dev_abs) * 100.0
-    below_point_five = dev_abs.le(1.0).sum() / len(dev_abs) * 100.0
-    data_ae_table.loc[len(data_ae_table)] = [ model.name, max, mean, std, below_point_one, below_point_two, below_point_five ]
+    data_ae_table[model.short_name] = calc_stats(dev)
 
 data_ae_table.to_latex('table_ae.tex', index=False, float_format='%.1f', decimal=',')
 
@@ -253,4 +256,4 @@ for i, model in enumerate(refrac_models):
 
 fig_ae.savefig('graph_ae.pdf', format='pdf')
 
-plt.show()
+#plt.show()

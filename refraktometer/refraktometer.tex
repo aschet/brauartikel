@@ -424,7 +424,7 @@ zu messen. Je nach Funktion sind unveränderte (\bxitext, \bxftext)
 oder um den Würze-Korrekturfaktor angepasste Messwerte
 (\bxictext, \bxfctext) einzusetzen.
 
-\subsection*{Gardner}
+\subsection*{Gardner (GA)}
 
 Das lineare Gardner Modell zu Berechnung des scheinbaren Restextrakts
 (\autoref{eq:gardner}) wurde im Jahr 2000 in der Zeitschrift
@@ -449,7 +449,7 @@ erfahren zu haben. \autocite{Bonham2001}
 \end{split} \label{eq:gardnerabw} 
 \end{align}
 
-\subsection*{Bonham}
+\subsection*{Bonham (BO)}
 
 Das von Bonham im Jahr 2001 im Zymurgy Magazin der American Homebrewers
 Association veröffentlichte Korrelationsmodell ist auch als
@@ -481,7 +481,7 @@ und einer Gleichung zur Bestimmung des Alkoholgehalts in Volumenprozent
 \end{split} \label{eq:bonhamabv} 
 \end{align}
 
-\subsection*{Terrill}
+\subsection*{Terrill (TK, TL)}
 
 Bei Vergleichsmessungen zwischen einem Hydrometer und einem Handrefraktometer
 in Verbindung mit der Bonham Gleichung hat Terrill im Jahr 2010 eine
@@ -522,20 +522,23 @@ aber nicht signifikant auf das Ergebnis auswirken.
 
 \begin{table}[h]
 \centering
-\begin{tabular}{lrrrrrr}
+\begin{tabular}{lrrr}
 \toprule
-Korrelation &  Max. Abw. [g/100g] & Mittlere Abw. & Standardabw. & < 0,25 [\%] & < 0,50 & < 1,00 \\
+Statistik & BO & TK & TL \\
 \midrule
-Bonham & -2,1 & -0,4 & 0,6 & 18 & 41 & 90 \\
-Terrill Kubisch & 1,2 & 0,2 & 0,3 & 56 & 85 & 97 \\
-Terrill Linear & 1,0 & 0,03 & 0,4 & 63 & 84 & 99 \\
+Max. Abweichung [g/100g] & -2,1 & 1,2 & 1,0 \\
+Mittlere Abweichung [g/100g] & -0,4 & 0,2 & 0,03 \\
+Standardabweichung [g/100g] & 0,6 & 0,3 & 0,4 \\
+Abweichungen < 0,25 g/100g [\%] & 18 & 56 & 63 \\
+Abweichungen < 0,50 g/100g [\%] & 41 & 85 & 84 \\
+Abweichungen < 1,00 g/100g [\%] & 90 & 97 & 99 \\
 \bottomrule
 \end{tabular}
 \caption{Vergleich zwischen Bonham und Terrill Modell}
 \label{table:terrillcomp}
 \end{table}
 
-\subsection*{Gossett}
+\subsection*{Gossett (GO)}
 
 Von den bereits beschriebenen Korrelationsmodellen wird ein indirekter
 Messwert in einen anderen indirekten Messwert transformiert. Gossett
@@ -568,7 +571,7 @@ aus dem durch \autoref{eq:gossettabw} erhaltenen Alkoholgehalt möglich.
 \label{eq:gossettcor}
 \end{equation}
 
-\subsection*{Novotný}
+\subsection*{Novotný (NL, NQ)}
 
 Um das Jahr 2017 hat sich Novotný mit bestehenden Berechnungsvorschriften
 im Heimbraubereich beschäftigt und nach Verbesserungsmöglichkeiten
@@ -611,7 +614,7 @@ Modell im Vergleich während der ersten Tage der Gärung höhere
 Abweichungen und auch eine geringfügig höhere Endabweichung.
 \autocite{Novotny2017a,Novotny2017}
 
-\subsection*{Terrill+Novotný}
+\subsection*{Terrill+Novotný (TN)}
 
 Von den vorgestellten Korrelationsmodellen scheinen nur die
 Modelle von Bonham, Terrill und Novotný eine weitere Verbreitung im Heimbraubereich erfahren zu haben, wobei das Modell von Terrill selbst
@@ -637,14 +640,12 @@ wählen. \autocite{h22lude2020}
 
 \begin{table}[h]
 \centering
-\begin{tabular}{lrr}
+\begin{tabular}{lrrrr}
 \toprule
-Korrelation &  Mittlere Abw. [g/100g] &  Standardabw. \\
+Statistik & NL & NQ & TK & TL \\
 \midrule
-Novotný Linear & -3,6 & 5,1 \\
-Novotný Quad. & 4,8 & 5,3  \\
-Terrill Kubisch & 0,3 & 3,3 \\
-Terrill Linear & -0,8 & 3,6 \\
+Mittlere Abweichung [g/100g] & -3,6 & 4,8 & 0,3 & -0,8 \\
+Standardabweichung [g/100g] & 5,1 & 5,3 & 3,3 & 3,6 \\
 \bottomrule
 \end{tabular}
 \caption{Vergleich zwischen Terrill und Novotný Modell}
@@ -694,34 +695,33 @@ verursacht der kombinierte Terill+Novotný Ansatz die geringsten
 Abweichungen. Insgesamt ist aber anzumerken, dass eine geringfügige
 Änderung des \wcftext\, die Ergebnisse zugunsten anderer Modelle verschiebt.
 
-\begin{table}[H]
-\centering
-\input{table_fermentation.tex}
-\caption{Abweichung des scheinbaren Restextrakts bei Gärverlauf mit Stammwürze von 17 °P}
-\label{table:novotnytable}
-\end{table}
-
-\begin{table}[H]
-\centering
-\input{table_ae.tex}
-\caption{Abweichung des scheinbaren Restextrakts bei endvergorener Probe}
-\label{table:aetable}
-\end{table}
-
 \begin{figure}[H]
 \centering
 \includegraphics[width=14cm]{graph_fermentation.pdf}
-\caption{Gärverlauf mit Stammwürze von 17 °P}
+\caption{Scheinbarer Restextrakt bei Gärverlauf}
 \label{fig:novotnygraph}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=14cm]{graph_ae.pdf}
-\caption{Histogramm der Abweichung des scheinbaren Restextrakts bei endvergorener Probe}
+\caption{Histogramme der Abweichungen des scheinbaren Restextrakts bei endvergorener Probe}
 \label{fig:aegraph}
 \end{figure}
 
+\begin{table}[H]
+\centering
+\input{table_fermentation.tex}
+\caption{Abweichungen des scheinbaren Restextrakts bei Gärverlauf}
+\label{table:novotnytable}
+\end{table}
+
+\begin{table}[H]
+\centering
+\input{table_ae.tex}
+\caption{Abweichungen des scheinbaren Restextrakts bei endvergorener Probe}
+\label{table:aetable}
+\end{table}
 
 \section*{Bestimmung des Alkoholgehalts und weiterer Kennzahlen}
 
