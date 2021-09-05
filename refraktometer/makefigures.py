@@ -139,8 +139,6 @@ refrac_models = [
     RefracModel('Terrill+Novotný', 'TN', cor_novotrill)
 ]
 
-#model_short_names = list(map(lambda model: model.short_name, refrac_models))
-
 col_name_wcf = 'WCF'
 col_name_fg = 'FG'
 col_name_ae = 'AE'
@@ -150,8 +148,8 @@ col_name_measurement = 'Messung'
 col_name_hydrometer = 'Bierspindel'
 col_name_statistic = 'Statistik'
 
-stats_caps = ['Max. Abweichung [g/100g]', 'Mittlere Abweichung [g/100g]', 'Standardabweichung [g/100g] ',
-'Abweichungen < 0,25 g/100g [%]', 'Abweichungen < 0,50 g/100g [%]', 'Abweichungen < 1,00 g/100g [%]']
+stats_caps = ['Max. Abw. [g/100g]', 'Mittlere Abw. [g/100g]', 'Standardabw. [g/100g] ',
+'Abw. < 0,25 g/100g [%]', 'Abw. < 0,50 g/100g [%]', 'Abw. < 1,00 g/100g [%]']
 
 def calc_stats(devs):
     devs_abs = devs.abs()
@@ -175,7 +173,7 @@ for model in refrac_models:
     data_ferm_dev[model.name] = data_ferm_graph[model.name] - data_ferm[col_name_ae]
 
 data_ferm_table = pa.DataFrame()
-data_ferm_table[col_name_statistic] = ['Endabweichung [g/100g]'] + stats_caps
+data_ferm_table[col_name_statistic] = ['Endabw. [g/100g]'] + stats_caps
 
 for model in refrac_models:
     last = data_ferm_dev.iloc[-1][model.name]
