@@ -220,6 +220,8 @@ if filter_outliers == True:
     data_ae_abs = data_ae_abs.where(filter).dropna()
     data_ae_dev = data_ae_dev.where(filter).dropna()
 
+print(data_ae_dev)
+
 data_ae_table = pa.DataFrame(columns=['Korrelation', 'Max. Abw. [g/100g]', 'Mittlere Abw.', 'Standardabw.', '< 0,25 [%]', '< 0,5', '< 1,0'])
 
 for model in refrac_models:
@@ -253,4 +255,4 @@ for i, model in enumerate(refrac_models):
 
 fig_ae.savefig('graph_ae.pdf', format='pdf')
 
-plt.show()
+#plt.show()

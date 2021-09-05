@@ -565,6 +565,7 @@ aus dem durch \autoref{eq:gossettabw} erhaltenen Alkoholgehalt möglich.
 
 \begin{equation}
 \aex\:[g/100g] = \bxi - \frac{\abw \cdot (2,0665 - 1,0665 \cdot \bxi / 100)}{0,8052}
+\label{eq:gossettcor}
 \end{equation}
 
 \subsection*{Novotný}
@@ -652,17 +653,35 @@ Terrill Linear & -0,8 & 3,6 \\
 
 \subsection*{Modellvergleich}
 
-Vereinfacht dargestellt bietet das Terrill Modell eine sehr gute Näherung
-nach aber nicht während der Gärung. Beim Bonham und Novotný Modell
-hingegen ist es umgekehrt, wobei Novotný bei einem scheinbaren
-Restextrakt größer als 3,7~g/100g geringere Abweichungen erzeugt als
-Terrill. Für die anderen zwei Modelle liegen keine öffentlichen
-Statistiken vor. Es wäre daher interessant alle Modelle an
-Vergleichsmessungen zwischen zwischen Refraktometer und Bierspindel
-oder genaueren Messgeräten zu evaluieren. Datensätze mit einigen
-Messdaten wurden im HomebrewTalk, von einem vom hobbybrauer.de Forum
-initiierten Gemeinschaftsexperiments und von Novotný veröffentlicht.
-\autocite{Katman2019,Novotny2017a,Wolf2015}
+Vereinfacht dargestellt erzeugt das Terrill Modell eine sehr geringe
+Abweichung nach, aber nicht während der Gärung. Bonham und Novotný
+liefern über den gesamten Gärverlauf eine vertretbare Korrelation,
+wobei Novotný bei einem scheinbaren Restextrakt größer als 3,7~g/100g
+geringere Abweichungen erzeugt als Terrill. Für die anderen zwei Modelle
+liegen keine öffentlichen Vergleiche vor. Es wäre daher interessant
+alle Modelle an einer Messreihe zu evaluieren. Datensätze mit einigen
+Messwerten wurden im HomebrewTalk Forum, von einem vom hobbybrauer.de Forum
+initiierten Gemeinschaftsexperiments und von Novotný veröffentlicht
+\autocite{Novotny2017a,Katman2019,Wolf2015}.
+
+\autoref{fig:novotnygraph} und \autoref{table:novotnytable} zeigen die
+Auswertung der von Novotný veröffentlichten Messdaten zu einem
+Gärverlauf bei 17~°P Stammwürze ($\wcf = 1,0$). Alle Modelle außer dem
+Terrill Modell erzeugen vertretbare Abweichungen über den gesamten
+Gärverlauf. Die geringsten Endabweichungen sind beim Novotný und Terrill
+Modell zu finden. Das Gossett Modell korreliert keinen scheinbaren Restextrakt.
+Dieser wurde über \autoref{eq:gossettcor} berechnet. Ein Vergleich
+ist daher nur bedingt aussagekräftig.
+
+Der Vergleich der Messdaten endvergorener Proben in \autoref{fig:aegraph}
+und \autoref{table:aetable} erfolgt anhand aller genannten Datensätze, wobei
+von Novotný nur der letzte Messwert übernommen wurde.Für die Messdaten vom HomebrewTalk Forum lässt sich ein durchschnittlicher Würze-Korrekturfaktor
+von $\wcf = 0,99$ berechnen. Für die Messdaten des hobbybrauer.de Forums
+wird $\wcf = 1,04$ angenommen. 
+
+4,7g/100g
+
+dreifacher Interquartilsabstand 4 von 47 1,88~g/100g
 
 \begin{figure}[H]
 \centering
@@ -675,7 +694,7 @@ initiierten Gemeinschaftsexperiments und von Novotný veröffentlicht.
 \centering
 \includegraphics[width=14cm]{graph_ae.pdf}
 \caption{Histogramm der Abweichung des scheinbaren Restextrakts bei endvergorener Probe}
-\label{fig:hbfgraph}
+\label{fig:aegraph}
 \end{figure}
 
 
@@ -690,7 +709,7 @@ initiierten Gemeinschaftsexperiments und von Novotný veröffentlicht.
 \centering
 \input{table_ae.tex}
 \caption{Abweichung des scheinbaren Restextrakts bei endvergorener Probe}
-\label{table:hbftable}
+\label{table:aetable}
 \end{table}
 
 \section*{Bestimmung des Alkoholgehalts und weiterer Kennzahlen}
