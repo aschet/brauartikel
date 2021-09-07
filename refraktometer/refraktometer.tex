@@ -36,7 +36,7 @@
 
 \title{Alkoholmessung mit Refraktometern}
 \author{Thomas Ascher <thomas.ascher@gmx.at>}
-\date{6. September 2021, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
+\date{7. September 2021, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
 
 \addbibresource{refraktometer.bib}
 
@@ -141,7 +141,7 @@ Okular geleitet. Unterschiedliche kritische Winkel erzeugen dabei eine
 andere Teilung des Sichtfelds, anhand der der Messwert abgelesen werden
 kann (\autoref{fig:refractoscale}). Im Unterschied dazu besitzen
 digitale Refraktometer eine interne Lichtquelle und erfassen die
-Messung über einen CCD-Sensor. Licht muss für die Brechung die Probe
+Messung über einen CCD-Sensor. Das Licht muss dabei für die Brechung die Probe
 nicht durchqueren. \autocite{AKRSSOGH2021,Gamer1959,Terrill2013}
  
 \begin{figure}[h]
@@ -336,7 +336,7 @@ Einpunkt-Kalibrierung bei Raumtemperatur mit destilliertem
 Wasser. Ein Refraktometer solle dabei die Raumtemperatur
 angenommen haben und gereinigt sein. Zur Kalibrierung ist
 eine Messung mit destilliertem Wasser als Probe durchzuführen.
-Der abgelesene Messwert sollte dabei 0~°Bx betragen
+Der abgelesene Messwert muss 0~°Bx betragen
 (\autoref{fig:refractoscale}).
 Wird eine Abweichung festgestellt, kann ein Handrefraktometer durch
 Drehen an der Einstellschraube justiert werden (\autoref{fig:refactoadjust}),
@@ -373,9 +373,9 @@ durch Aufstellen einer Geradengleichung korrigieren.
 Während sich die Einheit °Bx auf den Zuckeranteil in wässrigen Saccharoselösungen bezieht, beschreibt °P den Extraktgehalt. Ein
 auf °Bx kalibriertes Refraktometer
 sollte daher bei gleicher Stammwürze einen
-höheren Messwert anzeigen als eine Bierspindel. Der Grund hierfür ist,
-dass Extrakt noch weitere Bestandteile enthält, die sich auf den
-Brechungsindex auswirken. Das sind unter anderem Säuren, Salze,
+höheren Messwert anzeigen als eine Bierspindel. Der Grund dafür ist,
+dass Extrakt neben verschiedenen Zuckern noch weitere Bestandteile enthält, die
+sich auf den Brechungsindex auswirken. Das sind unter anderem Säuren, Salze,
 Proteine und Hopfenöle. Messwerte müssen dementsprechend durch einen
 Korrekturfaktor (Wort Correction Factor, \wcftext) angepasst
 werden. Zur Ermittlung der Stammwürze in °P ist daher 
@@ -388,10 +388,12 @@ der Messwert des Refraktometers der Stammwürze (\bxitext) gemäß
 \label{eq:applywcf} 
 \end{equation}
 
-Der \wcftext\,ist stark von der Würzezusammensetzung abhängig und
+Der \wcftext\,ist stark von der Würzezusammensetzung und zum Teil
+auch vom eingesetzten Messgerät abhängig und
 sollte deshalb pro unterschiedlicher Schüttung mithilfe einer
 Extraktmessung durch ein anderes Messgerät gemäß \autoref{eq:calcwcf}
-bestimmt werden. Der etablierte Durchschnittswert entspricht 1,04.
+bestimmt werden. Der etablierte Durchschnittswert für den
+\wcftext\, entspricht 1,04.
 Dieser sollte jedoch nicht als allgemeingültige Konstante betrachtet
 werden.
 \autocite{Bonham2001,Roberts1950,Terrill2013}
@@ -430,8 +432,8 @@ Das lineare Gardner Modell zu Berechnung des scheinbaren Restextrakts
 (\autoref{eq:gardner}) wurde im Jahr 2000 in der Zeitschrift
 „The New Brewer“ veröffentlicht und von existierenden Gleichungen
 abgeleitet. Bonham beschreibt dieses Modell als ausreichend
-für die private Anwendung, weißt aber darauf hin, dass bereits
-genauere Näherungsverfahren zu diesem Zeitpunkt existiert
+genau für die private Anwendung, weißt aber darauf hin, dass bereits
+bessere Näherungsverfahren zu diesem Zeitpunkt existiert
 hätten. Neben der Gleichung zur Bestimmung des scheinbaren
 Restextrakts hat Gardner auch eine Gleichung zur Bestimmung
 des Alkoholgehalts in Gewichtsprozent (Alcohol by Weight, \abwtext, \autoref{eq:gardnerabw}) aufgestellt.
@@ -514,8 +516,8 @@ Modells verschlechtert hätten.
 Vergleich zwischen dem Modell von Bonham und seinem Eigenen. Bei
 endvergorenen Proben erzeugt das Bonham Modell höhere
 Abweichungen. Hierbei ist allerdings zu beachten, dass
-Terrill die ursprüngliche Quelle des Bonhams Modells nicht bekannt war
-und deshalb fälschlicherweise auch den zweiten Messwert um
+Terrill die ursprüngliche Quelle des Bonham Modells nicht bekannt war
+und deshalb fälschlicherweise auch den Messwert nach der Gärung um
 den Würze-Korrekturfaktor angepasst hat. Dieser Fehler soll sich
 aber nicht signifikant auf das Vergleichsergebnis auswirken.
 \autocite{Terrill2010a,Terrill2011,Terrill2010}
@@ -540,8 +542,8 @@ Abw. < 1,00 g/100g [\%] & 90 & 97 & 99 \\
 
 \subsection*{Gossett (GO)}
 
-Von den vorherigen Korrelationsmodellen wird ein indirekter
-Messwert in einen anderen indirekten Messwert transformiert. Gossett
+Von den zuvor beschriebenen Korrelationsmodellen wird ein indirekter
+Messwert in einen anderen transformiert. Gossett
 war unzufrieden mit diesem Vorgehen und hat im Jahr 2012 daher ein
 stöchiometrisches Modell (\autoref{eq:gossett}, \autoref{eq:gossettabw})
 entwickelt, welches direkt den Alkohol in Gewichtsprozent auf Basis
@@ -609,7 +611,7 @@ des Alkoholgehalts in Gewichtsprozent (\autoref{eq:applywcf}). \autocite{Novotny
 
 Das Novotný Modell wurde während der Gärung an drei Testsuden mit jeweils
 bei 11,6~°P, 17~°P und 20~°P Stammwürze und an den Budweiser
-Ergebnissen verifiziert. Laut den Erhobenen Daten liefert das Terrill
+Ergebnissen verifiziert. Laut den erhobenen Daten liefert das Terrill
 Modell im Vergleich während der ersten Tage der Gärung höhere
 Abweichungen und auch eine geringfügig höhere Endabweichung.
 \autocite{Novotny2017a,Novotny2017}
@@ -629,12 +631,12 @@ basierend auf seinem aus mittlerweile 40 Messungen bestehenden Datensatz
 einen Vergleich (\autoref{table:terrillnovotnycomp}) hierzu veröffentlicht.
 Nach Ansicht von Terrill ist sein Modell auf Genauigkeit bei endvergorenen
 Proben optimiert, das Novotný Modell hingegen auf den gesamten
-Messbereich einer Gärung. Darüber hinaus wurde während dieser Diskussion
+Messbereich eines Gärverlaufs. Darüber hinaus wurde während dieser Diskussion
 auf Basis von Terrills Datensatz ebenfalls festgestellt, dass das
 Terrill Modell bei einem scheinbaren Restextrakt kleiner als 3,8~g/100g 
 (1,014~g/ml) geringere Abweichungen erzeugt, bei einem Höheren jedoch
-das Modell von Novotný. Um geringere Abweichungen zu erzielen wäre es
-daher denkbar mit beiden Modellen eine Vorabschätzung des scheinbaren Restextrakts durchzuführen und anhand dieser Abschätzung das besser
+das Modell von Novotný. Um geringere Abweichungen zu erzielen, wäre es
+daher denkbar, mit beiden Modellen eine Vorabschätzung des scheinbaren Restextrakts durchzuführen und anhand dieser Abschätzung das besser
 geeignete Modell zu wählen. Für den folgenden Vergleich wird der
 Mittelwert beider Korrelationen herangezogen. \autocite{h22lude2020}
 
