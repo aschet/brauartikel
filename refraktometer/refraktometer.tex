@@ -16,7 +16,8 @@
 \usepackage{gensymb}
 \usepackage[italic,symbolgreek]{mathastext}
 \usepackage{float}
-\usepackage[backend=biber]{biblatex}
+\usepackage[style=apa,backend=biber]{biblatex}
+\DeclareLanguageMapping{ngerman}{ngerman-apa}
 \usepackage[hidelinks,pdfencoding=auto,
   pdfauthor={Thomas Ascher},
   pdfusetitle,
@@ -79,7 +80,7 @@ Gärverlauf zu beobachten. Das ist neben der klassischen Bierspindel
 unter anderem das Handrefraktometer. Die Refraktometrie ist
 kein Neuankömmling im Bereich der Bieranalyse. Versuche,
 auf Basis dieses Messprinzips den Alkoholgehalt zu bestimmen, reichen bis
-in das Jahr 1843 zurück \autocite{Gamer1959}.
+in das Jahr 1843 zurück \parencite[102]{Gamer1959}.
 
 Auch wenn Refraktometer den Ruf besitzen, weniger genaue Messergebnisse
 zu liefern als andere labortechnische Instrumente, liegen deren
@@ -87,7 +88,7 @@ Vorteile klar auf der Hand: kurze Messzeiten bei geringem Probevolumen
 und überschaubarer Bedienungskomplexität. Im Gegensatz zu den bei der
 Bierspindel üblichen 100 Millilitern pro Probe werden nur wenig
 Milliliter benötigt, die sich dementsprechend auch schneller nach dem
-Hopfenkochen auf Messtempertur abkühlen lassen. \autocite{Bettner1969, Terrill2011}
+Hopfenkochen auf Messtempertur abkühlen lassen. \parencites[171\psq]{Bettner1969}{Terrill2011}
 
 Wie nun Messungen mit einem Refraktometer während des Brau- und
 Gärprozesses durchzuführen sind und sich darauf basierend der
@@ -106,7 +107,7 @@ sondern das Licht in seiner Gesamtheit reflektiert wird.
 Der Brechungsindex \(\mathit{nD}\) ist als Verhältnis zwischen der
 Geschwindigkeit von Licht im Vakuum und einem Medium definiert. Je höher
 die optische Dichte ist, desto größer ist auch der Brechungsindex.
-\autocite{AKRSSOGH2021,Bonham2001,Gamer1959}
+\parencites{AKRSSOGH2021}[43]{Bonham2001}[102\psq]{Gamer1959}
 
 Refraktion ist temperaturabhängig. Messungen sind daher je nach
 Anwendungsgebiet bei einer festgelegten Temperatur durchzuführen.
@@ -116,17 +117,17 @@ Compensation, ATC) in Form eines Bimetallsteifens. Dieser
 verschiebt je nach Temperatureinwirkung zur Korrektur selbstständig
 die Messskala des Geräts. Hierbei ist zu beachten, dass diese Form der
 ATC nur für den kalibrierten Probentyp des Geräts ausgelegt ist.
-\autocite{Depalma2017,Distillique2020,Gossett2012,Terrill2013}
+\parencites{Depalma2017}{Distillique2020}{Gossett2012}[50]{Terrill2013}
 
 Der Brechungsindex ist mitunter keine geeignete Messgröße für alle
 technischen Prozesse. Deshalb wird dieser je nach Anwendungsgebiet
 und Probe auf die gewünschte Messgröße kalibriert. Zur Messung
 der relativen Dichte von Saccharose/Wasser-Lösungen im Bereich der
 Wein- und Saftherstellung ist diese zum Beispiel Grad Brix (°Bx), wobei
-ein °Bx einem Gramm Saccharose auf 99 Gramm Wasser entspricht. Die
-Umrechnung zwischen Brechungsindex und Grad Brix ist durch die ICUMSA
+ein °Bx einem Gramm Saccharose auf 99 Gramm Wasser entspricht.
+\parencites[43]{Bonham2001}[50]{Terrill2013} Die Umrechnung zwischen
+Brechungsindex und Grad Brix ist durch die ICUMSA
 Tabellen normiert.
-\autocite{Bonham2001,Terrill2013}
 
 In den Shops für Heimbraubedarf werden im wesentlichen Refraktometer in
 zwei verschiedenen Bauformen angeboten: analoge Handgeräte
@@ -142,12 +143,12 @@ andere Teilung des Sichtfelds, anhand der der Messwert abgelesen werden
 kann (\autoref{fig:refractoscale}). Im Unterschied dazu besitzen
 digitale Refraktometer eine interne Lichtquelle und erfassen die
 Messung über einen CCD-Sensor. Das Licht muss dabei für die Brechung die Probe
-nicht durchqueren. \autocite{AKRSSOGH2021,Gamer1959,Terrill2013}
+nicht durchqueren. \parencites{AKRSSOGH2021}[102\psq]{Gamer1959}[50]{Terrill2013}
  
 \begin{figure}[h]
 \centering
 \includegraphics[width=4.8cm]{images/types.jpg}
-\caption{Typische Refraktometer im Heimbraubereich}
+\caption{Typische Refraktometer im Heimbraubereich (Ascher, 2021)}
 \label{fig:refactotype}
 \end{figure}
 
@@ -166,14 +167,14 @@ Maßeinheiten & °Bx, SG & °Bx, °Oe, °KWM \\
 Kalibrierschein & nein & ja \\
 \bottomrule
 \end{tabular}
-\caption{Spezifikation typischer Refraktometer im Heimbraubereich}
+\caption{Spezifikation typischer Refraktometer im Heimbraubereich  (Ascher, 2021)}
 \label{table:refactospec}
 \end{table}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=4.8cm]{images/scale.jpg}
-\caption{Durchsicht durch ein Handrefraktometer}
+\caption{Durchsicht durch ein Handrefraktometer (Ascher, 2021)}
 \label{fig:refractoscale}
 \end{figure}
 
@@ -193,7 +194,7 @@ spezifische Dichte (Specific Gravity, \sgtext) einer Flüssigkeit auf
 Basis des Archimedischen Prinzips messen. Das heißt, dass ein in
 Flüssigkeit eingetauchter Körper Auftrieb in dem Maß der Gewichtskraft
 der dabei verdrängten Flüssigkeit erfährt. Je geringer die Dichte einer
-Flüssigkeit dabei ist, desto weite sinkt ein Körper ein. Hierbei ist zu
+Flüssigkeit dabei ist, desto weiter sinkt ein Körper ein. Hierbei ist zu
 beachten, dass die Dichte temperaturabhängig ist. Daher wird für die
 spezifische Dichte eine Referenztemperatur angegeben. Für die
 in diesem Artikel beschriebenen Angaben und Berechnungen entspricht
@@ -201,7 +202,7 @@ diese 20~°C. Bei Abweichungen von dieser Referenz ist eine
 Messwertkorrektur durchzuführen. Messwerte müssen von der Skala je nach
 Aräometer über oder unter dem gebildeten Flüssigkeitsmeniskus abgelesen
 werden.
-\autocite{Kunze2004,Narziss2009,Spedding2016}
+\parencites[324\psqq]{Kunze2004}[647\psq]{Narziss2009}[131]{Spedding2016}
 
 In den USA führen Heimbrauer:innen Spindelmessungen zumeist
 mit einem Hydrometer durch um die relative Dichte von Würze in
@@ -215,7 +216,8 @@ Massenanteil in °P und der Massendichte
 erfolgt auf Basis der Plato Tabellen über die Lincoln Gleichungen
 (\autoref{eq:calcptosg}, \autoref{eq:calcsgtop}) oder vergleichbaren
 Näherungsverfahren.
-\autocite{Kunze2004,Spedding2016}
+\parencites[648]{Kunze2004}[126,140\psq]{Spedding2016}
+% TODO
 
 \begin{equation}
 \sg\:[g/ml] = \frac{\degree P}{258,6 - \mathit{P} / 258,2 \cdot 227,1} + 1
@@ -236,7 +238,7 @@ entspricht nämlich einem höheren Betrag. Das ebenfalls
 in Gärproben oder in Jungbieren enthaltene \ch{CO2} hat
 ebenfalls einen Einfluss auf den Messwert. Es erhöht
 diesen um circa 0,3~°P.
-\autocite{Kunze2004,Novotny2017,Spedding2016}
+\parencites[53]{Novotny2017}[125]{Spedding2016}
 
 Für genaue Messergebnisse sollten Spindeln mit einem möglichst
 geringen Messbereich eingesetzt werden. In Heimbraushops sind
@@ -246,7 +248,7 @@ ermöglicht eine einfachere Ablesung und eine feinere Graduierung.
 Für Hydrometer empfiehlt die Mitteleuropäische Brautechnische
 Analysenkommission (MEBAK) Messgeräte die der DIN 12791-1 Norm
 entsprechen. Darüber hinaus sollten folgende Vorgehensweisen
-eingehalten werden \autocite{Kunze2004,MEBAK2013,Narziss2009,Wolf2015}:
+eingehalten werden \parencites[143]{MEBAK2013}[647\psq]{Narziss2009}{Wolf2015}:
 
 \begin{itemize}
 \item Eine Probe ist auf die ungefähre Temperatur des
@@ -274,7 +276,7 @@ gereinigt werden, um eine Messwertverfälschung durch Rückstände vorheriger
 Proben zu verhindern. Neben Kontaminierungen ist die Temperatureinwirkung
 einer der häufigsten Quellen für Messfehler. Das eingesetzte Refraktometer
 sollte daher auf Raumtemperatur erwärmt sein. Danach ist eine 
-Einpunkt-Kalibrierung durchzuführen. \autocite{Depalma2017}
+Einpunkt-Kalibrierung durchzuführen. \parencite{Depalma2017}
 
 Proben bedürfen einer Aufbereitung. Darin enthaltene Schwebestoffe und
 Gase sind zu entfernen. Das heißt, dass
@@ -287,7 +289,7 @@ sollte nicht direkt auf ein Refraktometer aufgetragen werden,
 da es hierbei zu Verdampfungen kommt und somit zu einer
 Konzentrationsänderung. Proben sind daher,
 bis diese die Raumtemperatur angenommen haben, in einem abgedeckten
-Behälter aufzubewahren. \autocite{Gamer1959,MEBAK2013,Terrill2013}
+Behälter aufzubewahren. \parencites[105]{Gamer1959}[140\psq,150\psq]{MEBAK2013}[51\psq]{Terrill2013}
 
 Für die eigentliche Messung sind mittels Pipette einige Tropfen
 der Probe auf den Probenaufnahmebereich aufzutragen
@@ -302,12 +304,12 @@ dem Einschalten durch Drücken der Taste „Read“ ausgelöst. Der
 Messwert ist danach vom Display abzulesen. Bei digitalen
 Refraktometern ist zu beachten, dass durch externe Lichtquellen
 verursachte Interferenzen die Messung beeinflussen können.
-\autocite{Gossett2012a,Terrill2013}
+\parencites{Gossett2012a}[50\psqq]{Terrill2013}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=4.8cm]{images/measure.jpg}
-\caption{Durchführung einer Messung}
+\caption{Durchführung einer Messung (Ascher, 2021)}
 \label{fig:refactomeasure}
 \end{figure}
 
@@ -329,7 +331,7 @@ Nullpunkt gesetzt. Die Erfassung von mehreren Messpunkten erlaubt
 die Korrektur von linearen oder nicht linearen Abweichungen
 über den Messbereich. Ab zwei Messpunkten kann eine Ausgleichsgerade
 bestimmt und ab drei Messpunkten eine Polynomfunktion eingepasst
-werden. \autocite{Earl2015}
+werden. \parencite{Earl2015}
 
 Vor jeder Messserie empfiehlt sich die Durchführung einer
 Einpunkt-Kalibrierung bei Raumtemperatur mit destilliertem
@@ -342,21 +344,23 @@ Wird eine Abweichung festgestellt, kann ein Handrefraktometer durch
 Drehen an der Einstellschraube justiert werden (\autoref{fig:refactoadjust}),
 bis die Anzeige 0~°Bx beträgt. Beim MA885 erfolgt die
 Justierung durch Drücken der Taste „Zero“.
-\autocite{Bonham2001,Depalma2017,Terrill2013}
+\parencites[44]{Bonham2001}{Depalma2017}[50\psq]{Terrill2013}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=4.8cm]{images/adjust.jpg}
-\caption{Justierung eines Handrefraktometers}
+\caption{Justierung eines Handrefraktometers (Ascher, 2021)}
 \label{fig:refactoadjust}
 \end{figure}
 
 Messgeräte sollten nach der Herstellung einer ausreichenden
 Qualitätssicherung unterlaufen. Bei günstigen Handrefraktometern
-muss dies nicht zwangsweise der Fall sein. Zur Feststellung,
+muss dies nicht zwangsweise der Fall sein \parencite{Troester2012}.
+Zur Feststellung,
 ob die integrierte Messskala eine zufriedenstellende Abdeckung
 des Messbereichs bietet, lässt sich eine Zweipunkt-Kalibrierung
-durchführen. Da der Preis eines Kalibrierstandards im Normalfall
+durchführen \parencites{Earl2015}[50\psq]{Terrill2013}. Da der Preis
+eines Kalibrierstandards im Normalfall
 deutlich über den Anschaffungskosten des Messgeräts
 liegen, kann stattdessen eine Referenzlösung mit Haushaltszucker,
 destilliertem Wasser und einer Feinwaage hergestellt werden. Zuerst
@@ -366,7 +370,6 @@ für den oberen Bereich der Messskala herzustellen. Eine Lösung
 für 32~°Bx entspricht dabei 32~g Zucker auf 68~g Wasser.
 Die festgestellte Abweichung lässt sich nicht justieren aber
 durch Aufstellen einer Geradengleichung korrigieren.
-\autocite{Earl2015,Terrill2013,Troester2012}
 
 \section*{Würze-Korrekturfaktor und Stammwürze}
 
@@ -381,7 +384,7 @@ Korrekturfaktor (Wort Correction Factor, \wcftext) angepasst
 werden. Zur Ermittlung der Stammwürze in °P ist daher 
 der Messwert des Refraktometers der Stammwürze (\bxitext) gemäß
 \autoref{eq:applywcf} durch den \wcftext\,zu dividieren.
-\autocite{Bonham2001,BSHB2010,Roberts1950,Terrill2013}
+\parencites[43]{Bonham2001}{BSHB2010}[119]{Roberts1950}[51]{Terrill2013}
 
 \begin{equation}
 \oex \:[\degree P] = \bxic = \frac{\bxi}{\wcf}
@@ -393,10 +396,9 @@ auch vom eingesetzten Messgerät abhängig und
 sollte deshalb pro unterschiedlicher Schüttung mithilfe einer
 Extraktmessung durch ein anderes Messgerät gemäß \autoref{eq:calcwcf}
 bestimmt werden. Der etablierte Durchschnittswert für den
-\wcftext\, entspricht 1,04.
-Dieser sollte jedoch nicht als allgemeingültige Konstante betrachtet
-werden.
-\autocite{Bonham2001,Roberts1950,Terrill2013}
+\wcftext\, entspricht 1,04 und bezieht sich auf die Messdifferenz
+zu einem Pyknometer.
+\parencites[44]{Bonham2001}[119]{Roberts1950}[51]{Terrill2013}
 
 \begin{equation}
 \wcf = \frac{\bxi}{\oex} \approx 1,04
@@ -405,7 +407,7 @@ werden.
 
 \section*{Korrelationsmodelle und scheinbarer Restextrakt}
 
-Der während der Gärung gebildete Ethanol verfälscht nicht nur
+Das während der Gärung gebildete Ethanol verfälscht nicht nur
 die Extraktmessung mit der Bierspindel, sondern beeinflusst auch
 den Brechungsindex. Es besteht daher die Notwendigkeit, einen
 Refraktometermesswert für die Berechnung des Alkoholgehalts in eine
@@ -417,7 +419,7 @@ Korrelationsmodelle im Heimbrauumfeld für diesen Zweck veröffentlicht,
 die ihre jeweiligen Stärken und Schwächen besitzen. Ein grundlegendes
 Problem bei der Entwicklung eines solchen Modells ist,
 dass verschiedene Zusammensetzungen einer vergorenen
-Probe den gleichen Brechungsindex aufweisen können. \autocite{Distillique2020,Terrill2010a,Terrill2010}
+Probe den gleichen Brechungsindex aufweisen können. \parencites{Distillique2020}{Terrill2010a}{Terrill2010}
 
 Zur Berechnung der folgenden Korrellationsfunktionen ist eine
 Probe der Anstellwürze vor der Gärung (\bxitext) und eine während
@@ -426,7 +428,7 @@ zu messen. Je nach Funktion sind unveränderte (\bxitext, \bxftext)
 oder um den Würze-Korrekturfaktor angepasste Messwerte
 (\bxictext, \bxfctext) einzusetzen.
 
-\subsection*{Gardner (GA)}
+\subsection*{Gardner}
 
 Das lineare Gardner Modell zu Berechnung des scheinbaren Restextrakts
 (\autoref{eq:gardner}) wurde im Jahr 2000 in der Zeitschrift
@@ -436,9 +438,9 @@ genau für die private Anwendung, weißt aber darauf hin, dass bereits
 bessere Näherungsverfahren zu diesem Zeitpunkt existiert
 hätten. Neben der Gleichung zur Bestimmung des scheinbaren
 Restextrakts hat Gardner auch eine Gleichung zur Bestimmung
-des Alkoholgehalts in Gewichtsprozent (Alcohol by Weight, \abwtext, \autoref{eq:gardnerabw}) aufgestellt.
+des Alkoholgehalts in Gewichtsprozent (Alcohol by Weight, \abwtext, \autoref{eq:gardnerabw}) aufgestellt. \parencite[44]{Bonham2001}
 Im Heimbraubereich scheint dieses Modell keine große Verbreitung
-erfahren zu haben. \autocite{Bonham2001}
+erfahren zu haben.
 
 \begin{equation}
 \mathit{AE}\:[g/100g]=1,53 \cdot \bxf - 0,59 \cdot \bxic
@@ -460,7 +462,7 @@ Gleichungen, die an die üblichen Messgrößen der amerikanischen
 Heimbrauszene angepasst wurden. Bis zur Ablösung durch die Terrill
 Formel ab dem Jahr 2011 war dieses Modell weit verbreitet. Heute
 wird es noch vereinzelt wie zum Beispiel von 
-„\href{https://www.maischemalzundmehr.de/index.php?inhaltmitte=toolsrefraktorechner}{Maische, Malz und Mehr}“ für Messungen während der Gärung empfohlen. \autocite{Bonham2001,Terrill2010a}
+„\href{https://www.maischemalzundmehr.de/index.php?inhaltmitte=toolsrefraktorechner}{Maische, Malz und Mehr}“ für Messungen während der Gärung empfohlen. \parencites[44]{Bonham2001}{Terrill2010a}
 
 Das Bonham Modell besteht aus einer Gleichung zur Bestimmung der
 spezifischen Dichte eines vergorenen Bieres (\autoref{eq:bonham})
@@ -489,7 +491,7 @@ Bei Vergleichsmessungen zwischen einem Hydrometer und einem Handrefraktometer
 in Verbindung mit der Bonham Gleichung hat Terrill im Jahr 2010 eine
 mittlere Abweichungen der Messwerte von 1,3~g/100g festgestellt und darauf hin mit der Entwicklung eines eigenen Korrelationsmodell begonnen, welches
 er in linearer (\autoref{eq:terrilllinear}) und vereinfachter kubischer Form
-(\autoref{eq:terrillcubic}) veröffentlicht hat. \autocite{Terrill2010a}
+(\autoref{eq:terrillcubic}) veröffentlicht hat. \parencite{Terrill2010a}
 
 \begin{equation}
 \sg\:[g/ml] = 1 - 0,00085683 \cdot \bxic + 0,0034941 \cdot \bxfc
@@ -506,11 +508,10 @@ er in linearer (\autoref{eq:terrilllinear}) und vereinfachter kubischer Form
 Insgesamt dienten Vergleichsmessungen von 12 Bieren mit Stammwürzen
 von 9 bis 24~°P, scheinbaren Restextrakten von 1,8 bis
 5,6~g/100g und scheinbaren Vergärungsgraden von 73 bis 91~\%
-als ursprüngliche Datenbasis. Auch kommerzielle Brauereien haben
-laut Terrill weitere Messwerte erfasst. Messungen mit geringeren
+als ursprüngliche Datenbasis. Messungen mit geringeren
 Vergärungsgraden wurden ausgeschlossen, da diese die Genauigkeit des
 Modells verschlechtert hätten.
-\autocite{Terrill2010a,Terrill2011,Terrill2010,Terrill2013}
+\parencite{Terrill2010a,Terrill2011,Terrill2010}
 
 \autoref{table:terrillcomp} zeigt den von Terrill veröffentlichten
 Vergleich zwischen dem Modell von Bonham und seinem Eigenen. Bei
@@ -520,7 +521,7 @@ Terrill die ursprüngliche Quelle des Bonham Modells nicht bekannt war
 und deshalb fälschlicherweise auch den Messwert nach der Gärung um
 den Würze-Korrekturfaktor angepasst hat. Dieser Fehler soll sich
 aber nicht signifikant auf das Vergleichsergebnis auswirken.
-\autocite{Terrill2010a,Terrill2011,Terrill2010}
+\parencite{Terrill2010a,Terrill2011,Terrill2010}
 
 \begin{table}[h]
 \centering
@@ -536,7 +537,7 @@ Abw. < 0,50 g/100g [\%] & 41 & 85 & 84 \\
 Abw. < 1,00 g/100g [\%] & 90 & 97 & 99 \\
 \bottomrule
 \end{tabular}
-\caption{Vergleich zwischen Bonham und Terrill Modell}
+\caption{Vergleich zwischen Bonham und Terrill Modell \parencite{Terrill2011}}
 \label{table:terrillcomp}
 \end{table}
 
@@ -551,7 +552,7 @@ von Refraktometermesswerten berechnet. Er hat hierzu die Auswirkungen
 der Ethanolkonzentration
 auf die Messwerten eines Refraktometers analysiert. Ein Gewichtsprozent
 verfälscht diesen bei 20~°C um 0,445~°Bx. 
-\autocite{Gossett2012,Gossett2012a,Gossett2012b}
+\parencite{Gossett2012,Gossett2012a,Gossett2012b}
 
 \begin{equation}
 C = 100 \cdot \frac{\bxi - \bxf}{100 - 48,4 \cdot 0,445 - 0,582 \cdot \bxf}
@@ -580,12 +581,13 @@ Um das Jahr 2017 hat sich Novotný mit bestehenden Berechnungsvorschriften
 im Heimbraubereich beschäftigt und nach Verbesserungsmöglichkeiten
 gesucht. Darunter auch die Terrill Formel, da diese bekannt dafür
 ist, während der Anfangszeit einer Gärung hohe Abweichungen
-zu verursachen. Basierend auf einer durch die Brauerei Budweis beauftragte Forschungsarbeit zur Bewertung von Refraktometern als Messmittel
+zu verursachen. Basierend auf einer durch die Brauerei Budweis beauftragte Forschungsarbeit zur Bewertung von Refraktometern
+\parencite{Savel2009} als Messmittel
 hat Novotný eine lineare (\autoref{eq:novotnylinear}) und eine quadratische
 (\autoref{eq:applywcf}) Gleichung zur Berechnung der spezifischen
 Dichte veröffentlicht. Darüber hinaus auch noch Formeln zur
 Berechnung des wirklichen Restextrakts (\autoref{eq:novotnyre}) und
-des Alkoholgehalts in Gewichtsprozent (\autoref{eq:applywcf}). \autocite{Novotny2017a,Novotny2017,Savel2009}
+des Alkoholgehalts in Gewichtsprozent (\autoref{eq:applywcf}). \parencite{Novotny2017a,Novotny2017}
 
 \begin{equation} 
 \sg\:[g/ml] = -0,002349 \cdot \bxic + 0,006276 \cdot \bxfc + 1
@@ -614,9 +616,9 @@ bei 11,6~°P, 17~°P und 20~°P Stammwürze und an den Budweiser
 Ergebnissen verifiziert. Laut den erhobenen Daten liefert das Terrill
 Modell im Vergleich während der ersten Tage der Gärung höhere
 Abweichungen und auch eine geringfügig höhere Endabweichung.
-\autocite{Novotny2017a,Novotny2017}
+\parencites{Novotny2017a}{Novotny2017}
 
-\subsection*{Terrill+Novotný (TN)}
+\subsection*{Terrill \& Novotný (TN)}
 
 Von den vorgestellten Korrelationsmodellen scheinen nur die
 Modelle von Bonham, Terrill und Novotný eine weitere Verbreitung im Heimbraubereich erfahren zu haben, wobei das Modell von Terrill selbst
@@ -640,7 +642,7 @@ das Modell von Novotný (\autoref{table:terrillnovotnycomp},
 erzielen, wäre es
 daher denkbar, mit beiden Modellen eine Vorabschätzung des scheinbaren Restextrakts durchzuführen und anhand dieser Abschätzung das besser
 geeignete Modell zu wählen. Für den folgenden Vergleich wird der
-Mittelwert beider Korrelationen herangezogen. \autocite{h22lude2020}
+Mittelwert beider Korrelationen herangezogen. \parencite{h22lude2020}
 
 \begin{table}[h]
 \centering
@@ -652,7 +654,7 @@ Mittlere Abw. [g/100g] & -0,4 & -0,5 & 0,0 & -0,1 \\
 Standardabw. [g/100g] & 0,5 & 0,5 & 0,3 & 0,4 \\
 \bottomrule
 \end{tabular}
-\caption{Vergleich zwischen Terrill und Novotný Modell}
+\caption{Vergleich zwischen Novotný und Terrill Modell \parencite{h22lude2020}}
 \label{table:terrillnovotnycomp}
 \end{table}
 
@@ -666,7 +668,7 @@ Mittlere Abw. [g/100g] & -0,6 & -0,7 & 0,0 & -0,1 \\
 Standardabw. [g/100g] & 0,5 & 0,5 & 0,3 & 0,4 \\
 \bottomrule
 \end{tabular}
-\caption{Vergleich zwischen Terrill und Novotný Modell, scheinb. Restex. 1,3 bis 3,7~g/100g}
+\caption{Vergleich zwischen Novotný und Terrill Modell, scheinb. Restex. 1,3 bis 3,7~g/100g \parencite{h22lude2020}}
 \label{table:terrillnovotnycomplg}
 \end{table}
 
@@ -680,7 +682,7 @@ Mittlere Abw. [g/100g] & 0,0 & -0,1 & 0,0 & 0,1 \\
 Standardabw. [g/100g] & 0,2 & 0,3 & 0,5 & 0,4 \\
 \bottomrule
 \end{tabular}
-\caption{Vergleich zwischen Terrill und Novotný Modell, scheinb. Restex. 3,8 bis 6,1~g/100g}
+\caption{Vergleich zwischen Novotný und Terrill Modell, scheinb. Restex. 3,8 bis 6,1~g/100g \parencite{h22lude2020}}
 \label{table:terrillnovotnycomphg}
 \end{table}
 
@@ -695,16 +697,16 @@ liegen keine öffentlichen Vergleiche vor. Es wäre daher interessant
 alle Modelle an einer Messreihe zu evaluieren. Datensätze mit einigen
 Messwerten wurden im HomebrewTalk Forum, von einem vom hobbybrauer.de Forum
 initiierten Gemeinschaftsexperiment und von Novotný veröffentlicht
-\autocite{Novotny2017a,Katman2019,Wolf2015}.
+\parencites{Novotny2017a}{Katman2019}{Wolf2015}.
 
 \autoref{fig:novotnygraph} und \autoref{table:novotnytable} zeigen die
 Auswertung der von Novotný veröffentlichten Messdaten zu einem
 Gärverlauf bei 17~°P Stammwürze ($\wcf = 1,0$). Alle Modelle außer dem
 Terrill Modell erzeugen vertretbare Abweichungen über den gesamten
 Gärverlauf. Die geringsten Endabweichungen sind beim Novotný und Terrill
-Modell zu finden. Das Gossett Modell korreliert keinen scheinbaren Restextrakt.
-Dieser wurde über \autoref{eq:gossettcor} berechnet. Ein Vergleich
-ist daher nur bedingt aussagekräftig.
+Modell zu finden. Das Gossett Modell korreliert den Alkoholgehalt.
+Der scheinbare Restextrakt wurde deshalb durch \autoref{eq:gossettcor}
+berechnet. Ein Vergleich ist daher nur bedingt aussagekräftig.
 
 Der Vergleich der Messdaten endvergorener Proben in \autoref{fig:aegraph}
 und \autoref{table:aetable} erfolgt anhand aller genannten Datensätze, wobei
@@ -722,35 +724,35 @@ basierend auf dem dreifachen Interquartilsabstand der maximalen
 absoluten Abweichungen definiert. Diese Schranke entfernt 4 von
 47 Messungen. \autoref{fig:aegraph} zeigt die Verteilung der Abweichungen
 nach der Filterung. Gemäß der Statistik von \autoref{table:aetable}
-verursacht der kombinierte Terill+Novotný Ansatz die geringsten
+verursacht der kombinierte Terill \& Novotný Ansatz die geringsten
 Abweichungen. Insgesamt ist aber anzumerken, dass eine geringfügige
 Änderung des \wcftext\, die Ergebnisse zugunsten anderer Modelle verschiebt.
 
 \begin{table}[H]
 \centering
 \input{table_fermentation.tex}
-\caption{Abweichungen des scheinbaren Restextrakts bei Gärverlauf}
+\caption{Abweichungen des scheinbaren Restextrakts bei Gärverlauf (Ascher, 2021)}
 \label{table:novotnytable}
 \end{table}
 
 \begin{table}[H]
 \centering
 \input{table_ae.tex}
-\caption{Abweichungen des scheinbaren Restextrakts bei endvergorener Probe}
+\caption{Abweichungen des scheinbaren Restextrakts bei endvergorener Probe  (Ascher, 2021)}
 \label{table:aetable}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=14cm]{graph_fermentation.pdf}
-\caption{Scheinbarer Restextrakt bei Gärverlauf}
+\caption{Scheinbarer Restextrakt bei Gärverlauf (Ascher, 2021)}
 \label{fig:novotnygraph}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=14cm]{graph_ae.pdf}
-\caption{Histogramme der Abweichungen des scheinbaren Restextrakts bei endvergorener Probe}
+\caption{Histogramme der Abweichungen des scheinbaren Restextrakts bei endvergorener Probe (Ascher, 2021)}
 \label{fig:aegraph}
 \end{figure}
 
@@ -764,7 +766,7 @@ Extrakts den daraus resultierenden Alkoholgehalt ohne aufwendigere
 analytischer Verfahren als Näherungswert zu berechnen. Dafür muss
 eine Messung der Stammwürze vor der Gärung und eine Messung des
 scheinbaren Restextrakts während oder nach der Gärung durchgeführt
-werden. \autocite{MEBAK2013,Spedding2016}
+werden. \parencites{MEBAK2013}{Spedding2016}
 
 Bei Messungen mit einem Refraktometer ist dabei die
 gemessene Stammwürze durch den Würze-Korrekturfaktor und
@@ -808,7 +810,7 @@ ermittelt. Der wirkliche Vergärdungsgrad (Real Degree of Fermentation,
 (ASBC) durch \autoref{eq:calcrdf} zu berechnen. Alternativ kann als
 Näherung der scheinbare Vergärungsgrad mit dem Ballingschen
 Umrechnungsaktor 0,81 multipliziert werden.
-\autocite{MEBAK2013,Spedding2016,Speers2015}
+\parencites{MEBAK2013}{Spedding2016}{Speers2015}
 
 \begin{equation}
 \adf\:[\%]= 100 \cdot \frac{\oex - \aex}{\oex}
@@ -823,7 +825,7 @@ Umrechnungsaktor 0,81 multipliziert werden.
 Die auf den Etiketten von Bierflaschen abgedruckten Nährwertangaben sind
 zwar nur in Verbindung mit chemisch analytischen Verfahren feststellbar,
 lassen sich aber mithilfe von \autoref{eq:calckj} und \autoref{eq:calckcal}
-für eine Schnellanalyse abschätzen. \autocite{MEBAK2013} 
+für eine Schnellanalyse abschätzen. \parencite[161]{MEBAK2013} 
 
 \begin{equation}
 kJ/100ml = \sg \cdot (14 \cdot \rex + 29 \cdot \abw)

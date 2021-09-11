@@ -136,7 +136,7 @@ refrac_models = [
     RefracModel('Novotný Quadratisch', 'NQ', cor_novotny_quadratic),        
     RefracModel('Terrill Kubisch', 'TK', cor_terrill_cubic),
     RefracModel('Terrill Linear', 'TL', cor_terrill_linear),
-    RefracModel('Terrill+Novotný', 'TN', cor_novotrill)
+    RefracModel('Terrill & Novotný', 'TN', cor_novotrill)
 ]
 
 col_name_wcf = 'WCF'
