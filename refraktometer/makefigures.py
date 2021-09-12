@@ -204,7 +204,7 @@ for i, model in enumerate(refrac_models):
 
 fig_ferm.savefig('graph_fermentation.pdf', format='pdf')
 
-default_wcf = 1.04
+default_wcf = 1.03
 
 data_ae = pa.read_csv('data.csv', delimiter=',')
 data_ae_abs = pa.DataFrame()
@@ -226,6 +226,8 @@ if filter_outliers == True:
     filter = row_criteria <= threshold
     data_ae_abs = data_ae_abs.where(filter).dropna()
     data_ae_dev = data_ae_dev.where(filter).dropna()
+
+print(data_ae_dev.describe())
 
 data_ae_table = pa.DataFrame()
 data_ae_table[col_name_statistic] = stats_caps
