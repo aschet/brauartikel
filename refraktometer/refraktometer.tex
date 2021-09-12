@@ -204,6 +204,15 @@ Aräometer über oder unter dem gebildeten Flüssigkeitsmeniskus abgelesen
 werden.
 \parencites[324\psqq]{Kunze2004}[647\psq]{Narziss2009}[131]{Spedding2016}
 
+Für verschiedene Abschnitte im Brauprozess existieren spezialisierte
+Spindelausführungen. Das sind die universelle auf 20~°C kalibrierte
+Sudhausspindel, die zum Läutern auf 70°~C geeichte und gröber eingeteilte
+Läuterspindel (rote Kennzeichnung) und die auf die Gärung und
+Kellertemperaturen ausgelegte Keller-/Envergärungsspindel (grüne
+Kennzeichnung) \parencite[381\psqq]{Brueckelmeier2018}.
+
+%\parencite{Sauseng2017}
+
 In den USA führen Heimbrauer:innen Spindelmessungen zumeist
 mit einem Hydrometer durch um die relative Dichte von Würze in
 Bezug auf Wasser festzustellen. Die Skala einer Bierspindel ist hingegen
@@ -217,7 +226,6 @@ erfolgt auf Basis der Plato Tabellen über die Lincoln Gleichungen
 (\autoref{eq:calcptosg}, \autoref{eq:calcsgtop}) oder vergleichbaren
 Näherungsverfahren.
 \parencites[648]{Kunze2004}[126,140\psq]{Spedding2016}
-% TODO
 
 \begin{equation}
 \sg\:[g/ml] = \frac{\degree P}{258,6 - \mathit{P} / 258,2 \cdot 227,1} + 1
@@ -428,7 +436,7 @@ zu messen. Je nach Funktion sind unveränderte (\bxitext, \bxftext)
 oder um den Würze-Korrekturfaktor angepasste Messwerte
 (\bxictext, \bxfctext) einzusetzen.
 
-\subsection*{Gardner (GA)}
+\subsection*{Gardner}
 
 Das lineare Gardner Modell zu Berechnung des scheinbaren Restextrakts
 (\autoref{eq:gardner}) wurde im Jahr 2000 in der Zeitschrift
@@ -453,7 +461,7 @@ erfahren zu haben.
 \end{split} \label{eq:gardnerabw} 
 \end{align}
 
-\subsection*{Bonham (BO)}
+\subsection*{Bonham}
 
 Das von Bonham im Jahr 2001 im Zymurgy Magazin der American Homebrewers
 Association veröffentlichte Korrelationsmodell ist auch als
@@ -485,7 +493,7 @@ und einer Gleichung zur Bestimmung des Alkoholgehalts in Volumenprozent
 \end{split} \label{eq:bonhamabv} 
 \end{align}
 
-\subsection*{Terrill (TK, TL)}
+\subsection*{Terrill}
 
 Bei Vergleichsmessungen zwischen einem Hydrometer und einem Handrefraktometer
 in Verbindung mit der Bonham Gleichung hat Terrill im Jahr 2010 eine
@@ -536,12 +544,14 @@ Abw. < 0,25 g/100g [\%] & 18 & 56 & 63 \\
 Abw. < 0,50 g/100g [\%] & 41 & 85 & 84 \\
 Abw. < 1,00 g/100g [\%] & 90 & 97 & 99 \\
 \bottomrule
-\end{tabular}
+\end{tabular}  \\
+\vspace{2mm}
+\small{BO=Bonham, TK=Terrill Kub., TL=Terrill Lin.}
 \caption{Vergleich zwischen Bonham und Terrill Modell \parencite{Terrill2011}}
 \label{table:terrillcomp}
 \end{table}
 
-\subsection*{Gossett (GO)}
+\subsection*{Gossett}
 
 Von den zuvor beschriebenen Korrelationsmodellen wird ein indirekter
 Messwert in einen anderen transformiert. Gossett
@@ -575,7 +585,7 @@ aus dem durch \autoref{eq:gossettabw} erhaltenen Alkoholgehalt möglich.
 \label{eq:gossettcor}
 \end{equation}
 
-\subsection*{Novotný (NL, NQ)}
+\subsection*{Novotný}
 
 Um das Jahr 2017 hat sich Novotný mit bestehenden Berechnungsvorschriften
 im Heimbraubereich beschäftigt und nach Verbesserungsmöglichkeiten
@@ -618,7 +628,7 @@ Modell im Vergleich während der ersten Tage der Gärung höhere
 Abweichungen und auch eine geringfügig höhere Endabweichung.
 \parencites{Novotny2017a}{Novotny2017}
 
-\subsection*{Terrill \& Novotný (TN)}
+\subsection*{Terrill \& Novotný}
 
 Von den vorgestellten Korrelationsmodellen scheinen nur die
 Modelle von Bonham, Terrill und Novotný eine weitere Verbreitung im Heimbraubereich erfahren zu haben, wobei das Modell von Terrill selbst
@@ -637,8 +647,7 @@ Messbereich eines Gärverlaufs. Darüber hinaus wurde während dieser Diskussion
 auf Basis von Terrills Datensatz ebenfalls festgestellt, dass das
 Terrill Modell bei einem scheinbaren Restextrakt kleiner als 3,8~g/100g 
 (1,014~g/ml) geringere Abweichungen erzeugt, bei einem Höheren jedoch
-das Modell von Novotný (\autoref{table:terrillnovotnycomp},
-\autoref{table:terrillnovotnycomplg}). Um geringere Abweichungen zu
+das Modell von Novotný. Um geringere Abweichungen zu
 erzielen, wäre es
 daher denkbar, mit beiden Modellen eine Vorabschätzung des scheinbaren Restextrakts durchzuführen und anhand dieser Abschätzung das besser
 geeignete Modell zu wählen. Für den folgenden Vergleich wird der
@@ -653,37 +662,11 @@ Statistik & NL & NQ & TK & TL \\
 Mittlere Abw. [g/100g] & -0,4 & -0,5 & 0,0 & -0,1 \\
 Standardabw. [g/100g] & 0,5 & 0,5 & 0,3 & 0,4 \\
 \bottomrule
-\end{tabular}
+\end{tabular} \\
+\vspace{2mm}
+\small{NL=Novotný Lin., NQ=Novotný Quad., TK=Terrill Kub., TL=Terrill Lin.}
 \caption{Vergleich zwischen Novotný und Terrill Modell \parencite{h22lude2020}}
 \label{table:terrillnovotnycomp}
-\end{table}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{lrrrr}
-\toprule
-Statistik & NL & NQ & TK & TL \\
-\midrule
-Mittlere Abw. [g/100g] & -0,6 & -0,7 & 0,0 & -0,1 \\
-Standardabw. [g/100g] & 0,5 & 0,5 & 0,3 & 0,4 \\
-\bottomrule
-\end{tabular}
-\caption{Vergleich zwischen Novotný und Terrill Modell, scheinb. Restex. 1,3 bis 3,7~g/100g \parencite{h22lude2020}}
-\label{table:terrillnovotnycomplg}
-\end{table}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{lrrrr}
-\toprule
-Statistik & NL & NQ & TK & TL \\
-\midrule
-Mittlere Abw. [g/100g] & 0,0 & -0,1 & 0,0 & 0,1 \\
-Standardabw. [g/100g] & 0,2 & 0,3 & 0,5 & 0,4 \\
-\bottomrule
-\end{tabular}
-\caption{Vergleich zwischen Novotný und Terrill Modell, scheinb. Restex. 3,8 bis 6,1~g/100g \parencite{h22lude2020}}
-\label{table:terrillnovotnycomphg}
 \end{table}
 
 \subsection*{Modellvergleich}
@@ -730,14 +713,18 @@ Abweichungen. Insgesamt ist aber anzumerken, dass eine geringfügige
 
 \begin{table}[H]
 \centering
-\input{table_fermentation.tex}
-\caption{Abweichungen des scheinbaren Restextrakts bei Gärverlauf (Ascher, 2021)}
+\input{table_fermentation.tex} \\
+\vspace{2mm}
+\small{BO=Bonham, GA=Gardner, GO=Gossett, NL=Novotný Lin., NQ=Novotný Quad., TK=Terrill Kub., TL=Terrill Lin.}
+\caption{Abweichungen des scheinbaren Restextrakts bei Gärverlauf (Ascher, 2021)} 
 \label{table:novotnytable}
 \end{table}
 
 \begin{table}[H]
 \centering
-\input{table_ae.tex}
+\input{table_ae.tex} \\
+\vspace{2mm}
+\small{BO=Bonham, GA=Gardner, GO=Gossett, NL=Novotný Lin., NQ=Novotný Quad., TK=Terrill Kub., TL=Terrill Lin.}
 \caption{Abweichungen des scheinbaren Restextrakts bei endvergorener Probe  (Ascher, 2021)}
 \label{table:aetable}
 \end{table}
