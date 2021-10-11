@@ -29,83 +29,149 @@
 
 \title{Grainfather Conical Fermenter Pro Controller}
 \author{Thomas Ascher <thomas.ascher@gmx.at>}
-\date{09. Oktober 2021, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
+\date{11. Oktober 2021, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
 
 \begin{document}
 \maketitle
 
 \section*{Einleitung}
 
-Mittlerweile stehen dem Heimbrauumfeld eine breite Auswahl von Instrumenten
-mit verschiedenen Messprinzipien zur Verfügung, die es ermöglichen, den
-Alkoholgehalt eines selbst gebrauten Biers abzuschätzen oder den
-Gärverlauf zu beobachten. Das ist neben der klassischen Bierspindel
-unter anderem das Handrefraktometer. Die Refraktometrie ist
-kein Neuling im Bereich der Bieranalyse. Versuche,
-auf Basis dieses Messprinzips den Alkoholgehalt zu bestimmen, reichen bis
-in das Jahr 1843 zurück.
-
+Zusammen mit der neuesten Generation des Conical Fermenters
+hat Grainfather für die vorherige Geräterevision ein Upgrade
+in der Form des Grainfather Conical Fermenter Pro Controllers (\autoref{fig:package}) für rund € 99 auf den Markt gebracht.
+Die wesentlichen Verbesserungen dieses Upgrades werden im Rahmen
+dieses Artikels vorgestellt. 
+ 
 \begin{figure}[h]
 \centering
-%\includegraphics[width=4.8cm]{images/types.jpg}
-\caption{Typische Refraktometer im Heimbraubereich (Ascher, 2021)}
-\label{fig:refactotype}
+\includegraphics[width=4.8cm]{images/gfpc_package.jpg}
+\caption{Lieferumfang des Pro Controllers (Ascher, 2021)}
+\label{fig:package}
 \end{figure}
 
-\begin{table}[h]
+\section*{Verbesserungen im Überblick}
+
+Neben der Internetanbindung an die Grainfather Community
+via WLAN zur Fernsteuerung und Messdatenaufzeichung kann der
+Pro Controller auch mit einigen Detailverbesserungen aufwarten.
+Das sind unter anderem ein Farbdisplay und eine Anpassung
+der einzelnen Menüdarstellung (\autoref{fig:displaynewmain},
+\autoref{fig:displayoldmain}). Darüber hinaus ist der neue
+Controller wasserdicht und kann nach der Montage nicht
+wie sein Vorgänger einfach abgenommen werden.
+Während sich beim alten Controller noch vier fixe Gärprofile mit
+maximal fünf Temperaturstufen konfigurieren lassen, können nun
+auch neue Profile mit maximal sechs Stufen angelegt werden.
+
+\begin{figure}[H]
 \centering
-\begin{tabular}{lrr}
-\toprule
-Parameter &  Handrefraktometer &  Milwaukee MA885 \\
-\midrule
-Preis [€] & 40 & 185 \\
-Messbereich [°Bx] & 0--32 & 0--50 \\
-Auflösung [°Bx] & 0,2 & 0,1 \\
-Genauigkeit [°Bx] & 0,2 & 0,1 \\
-ATC [°C] & 10--30 & 10--40 \\
-Maßeinheiten & °Bx, SG & °Bx, °Oe, °KWM \\
-Kalibrierschein & nein & ja \\
-\bottomrule
-\end{tabular}
-\caption{Spezifikation typischer Refraktometer im Heimbraubereich  (Ascher, 2021)}
-\label{table:refactospec}
-\end{table}
+\includegraphics[width=4.8cm]{images/gfpc_display_new_main.jpg}
+\caption{Pro Controller Display (Ascher, 2021)}
+\label{fig:displaynewmain}
+\end{figure}
 
-Tilt Hydrometer
-Brewbrain Float
-PLAATO Airlock
-iSpindel
-Grainfather Conical Fermenter Pro
-Grainfather Glycol Chiller Adapter
-Manuelle Einträge
+\begin{figure}[H]
+\centering
+\includegraphics[width=4.8cm]{images/gfpc_display_old_main.jpg}
+\caption{Altes Controller Display (Ascher, 2021)}
+\label{fig:displayoldmain}
+\end{figure}
 
-5 -> 6 phasen
-4 profile, neue anlegen
+Die Software des Pro Controllers lässt sich per Firmware Update
+aktualisieren. Seit der Veröffentlichung wurden bereits zwei
+neue Funktionen nachgeliefert, das sind die Möglichkeit den
+gemessenen Temperaturwert zu kalibrieren und eine Warnung
+bei Unterschreitung der Regeltemperatur auszugeben.
 
-Lower Temperature Alert
-Calibration
+\section*{Anbindung an die Grainfather Community}
 
-Firmware Update
+Zur Nutzung der Online-Funktionen des Pro Controllers wird ein
+kostenfreies Grainfather Community Konto und die Grainfather
+Community App (GF Connect) für Android oder iOS vorausgesetzt.
+Das initiale Pairing zwischen WLAN und Konto erfolgt über die App.
+Danach kann der Zugriff entweder über die App oder durch die
+Webseite \url{https://community.grainfather.com} erfolgen.
 
-\url{https://community.grainfather.com}
-Grainfather Community Account
+Die Grainfather Community enthält einen vollständigen
+Braurechner. Die Anbindung des Conical Fermenters ist
+im Rahmen dessen Workflows integriert (\autoref{fig:integration}).
+Dafür muss erst ein Rezept im Braurechner erstellt oder
+via BeerXML importiert und ein neuer Brauvorgang gestartet werden.
+Spezielle Importe sind für BeerSmith, Brewer's Friend und
+Brewfather realisiert. Während der Gärphase kann
+durch die Betätigung den Schalters „Manager Mode“ das
+Gärprofil des Rezepts an den Pro Controller übertragen werden.
 
-GF Connect App
+Neben der Übertragung der Gärprofile lassen sich auch
+Messdaten (Temperatur und scheinbarer Restextrakt) innerhalb von Grainfather Community aufzeichnen und ebenfalls als CSV Datei herunterladen. Dabei werden neben dem Pro Controller folgende
+Geräte unterstützt:
+\begin{itemize}
+\item \href{https://brewbrain.nl}{Brewbrain Float Hydrometer}
+\item \href{https://www.ispindel.de}{iSpindel}
+\item \href{https://plaato.io/products/plaato-airlock}{PLAATO Airlock} 
+\item \href{https://tilthydrometer.com}{Tilt Hydrometer}
+\end{itemize}
 
-\section*{Umrüstung}
+Für die Einrichtung der zusätzlichen Messgeräte beinhaltet
+der Braurechner entsprechende Hilfetexte. Für das
+Tilt Hydrometer wird während der gesamten Aufzeichnungszeit ein
+zusätzliches Android oder iOS Gerät oder Tilt Pi benötigt.
+Beim Float Hydrometer  ist im Brewbrain Konto die Grainfather
+Integration zu aktivieren.
 
+Auf Basis der aufgezeichneten Messdaten und der verstrichenen
+Gärzeit ist es möglich Benachrichtigungen zu konfigurieren
+(\autoref{fig:notification}). Ein Beispiel hierfür ist
+die Zusendung einer E-Mail nach Erreichung
+eines definierten scheinbaren Restextrakts.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=4.8cm]{images/gfpc_notification.png}
+\caption{Konfiguration von Benachrichtigungen (Ascher, 2021)}
+\label{fig:notification}
+\end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=14.4cm]{images/gfpc_integration.png}
+\caption{Integration in Grainfather Community (Ascher, 2021)}
+\label{fig:integration}
+\end{figure}
+
+\section*{Umbau}
+
+Der Umbau auf den Pro Controller gestaltet sich einfach. Es
+wird dafür lediglich ein Kreuzschraubenzieher benötigt.
+Nach dem Abnehmen des alten Controllers kann die Deckplatte
+abgeschraubt und die daran befestigten Steckverbinder
+gelöst werden (\autoref{fig:installold}). Die Stecker des
+Pro Controllers sind dann wie in \autoref{fig:installnew}
+gezeigt wieder zu verbinden. Dabei ist auf die farbliche
+kodierung der einzelnen Leitungen zu achten.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=4.8cm]{images/gfpc_install_old.jpg}
+\caption{Ausbau alter Controller (Ascher, 2021)}
+\label{fig:installold}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=4.8cm]{images/gfpc_install_new.jpg}
+\caption{Einbau Pro Controller (Ascher, 2021)}
+\label{fig:installnew}
+\end{figure}
+
+Im Lieferumfang des Pro Controllers (\autoref{fig:package})
+befindet sich neben dem Controller selbst auch ein Isolierband
+zur Isolierung der Steckverbindungen zum Schutz vor
+Korrosion. Die beigelegten Stopfen verschließen die
+Schraublöcher und den Stromanschluss des Conical Fermenters.
 
 \section*{Resümee}
 
-Die relevanten Eckpunkte dieses Artikels sind:
-
-\begin{itemize}
-\item Refraktometer messen auf Basis der Brechung des Lichts. Im
-
-
-\end{itemize}
 
 
 \end{document}
