@@ -18,6 +18,7 @@
   pdfusetitle,
   pdfkeywords={Bier,Bierstil,Witbier}]{hyperref}
 \usepackage{microtype}
+\DisableLigatures{encoding=*, family=*}
 
 \addto\extrasngerman{
 \def\figureautorefname{Abb.}
@@ -38,7 +39,7 @@
 
 \title{Stilportrait: Witbier / Biere blanché}
 \author{Thomas Ascher <thomas.ascher@gmx.at>}
-\date{20. Oktober 2021, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
+\date{29. Dezember 2021, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
 
 \addbibresource{witbier.bib}
 
@@ -56,10 +57,10 @@ und die Verwendung eines oktagonalen Witbier-Glases \parencite{CelisBrewery2021}
 Typische Vertreter dieses Bierstils sind \parencite{Roncoroni2018}:
 
 \begin{itemize}
-\item Brugs -- Brouwerij De Gouden Boom
-\item Celis White -- Brouwerij Van Steenberge
-\item Hoegaarden -- Brouwerij De Kluis
-\item Watou's Wit -- Leroy Breweries
+\item Brugs – Brouwerij De Gouden Boom
+\item Celis White – Brouwerij Van Steenberge
+\item Hoegaarden – Brouwerij De Kluis
+\item Watou's Wit – Leroy Breweries
 \end{itemize}
 
 \section*{Sensorischer Eindruck}
@@ -73,7 +74,7 @@ vorhanden. Das Erscheinungsbild ist charakterisiert durch eine helle
 bis leicht goldene Farbe, eine durch Stärke und Hefe induzierte Trübung
 und einem dichten Schaum. \parencites[48\psq]{BJCP2015}[24]{BA2021}
 
-\section*{Brautechnische Parameter}
+\section*{Stilparameter}
 
 In \autoref{table:parameters} sind die vom \citeauthor{BJCP2015} und die von
 \citeauthor{Strottner1999} genannten brautechnischen Parameter erfasst.
@@ -88,257 +89,173 @@ Witbiere weisen allerdings nur einen gemessenen Bittergehalt von
 \toprule
 Parameter                    & \citeauthor{BJCP2015} & \citeauthor{Strottner1999} \\
 \midrule
-Alkoholgehalt [\%v/v]        & 4,5--5,5 & 4--6,9 \\
-Stammwürze [°P]              & 11--12,9 & 9,4--14,9 \\
-Scheinb. Restextrakt [\%w/w] & 2,1--3,1 & 1,8--3,2 \\
-Scheinb. Vergärungsgrad [\%] & --       & 74,9--86,7 \\
-Bittere [IBU]                & 8--20    & 6--18 \\
-Farbe [EBC]                  & 4--8     & 5--17 \\
+Alkoholgehalt [\%v/v]        & 4,5–5,5 & 4–6,9 \\
+Stammwürze [°P]              & 11–12,9 & 9,4–14,9 \\
+Scheinbarer Restextrakt [\%w/w] & 2,1–3,1 & 1,5–3,2 \\
+Scheinbarer Vergärungsgrad [\%] & –       & 74,9–86,7 \\
+Bittere [IBU]                & 8–20    & 9–18 \\
+Farbe [EBC]                  & 4–8     & 6–14 \\
 \bottomrule
 \end{tabular}
-\caption{Parameter \parencites[49]{BJCP2015}{Strottner1999}}
+\caption{Stilparameter \parencites[49]{BJCP2015}{Strottner1999}}
 \label{table:parameters}
 \end{table}
 
 Es existieren nur wenige Angaben hinsichtlich Karbonisierung.
 \citeauthor{Zainasheff2007} nennt hierbei einen \ch{CO2} Gehalt von
 4,9 bis 5,9~g/l bzw. 2,5 bis 3~vols \parencite{Zainasheff2007}.
-Die BeerSmith Software empfiehlt sogar bis zu 6,7~g/l bzw. 3,40~vols.
+Die BeerSmith Software empfiehlt sogar bis zu 6,7~g/l bzw. 3,4~vols.
 
 \section*{Historische Entwicklung}
 
-Ursprungsort des Witbiers ist das durch den Weizenanbau geprägte
+Der Ursprungsort des Witbiers ist das durch den Weizenanbau geprägte
 Flämisch-Brabant im Zentrum von Belgien \parencite[44]{Roncoroni2018}.
-Weitere historische Produktionsstandorte waren auch die
-Regionen Flandern, Hainaut und Limburg \parencite[118]{Strottner1999}.
+Weitere Produktionsstandorte waren auch die Provinzen Hennegau und
+Limburg \parencite[118]{Strottner1999}.
 Belege dafür reichen zumindest bis in das 16. Jahrhundert
-zurück, zu einer Zeit als die kleine Stadt Hoegaarden größere
+zurück, zu einer Zeit, als die kleine Stadt Hoegaarden größere
 Teile des belgischen Biermarkts belieferte \parencite[46]{Mulder2020}. 
-Durch gewährte Steuerprivilegien existierten alleine in
-der Stadt Hoegaarden zu Glanzzeiten 35 Brauereien auf nur 2000
-Einwohner \parencite[27]{Sparrow2002}.
+Durch gewährte Steuerprivilegien existierten dort zu Glanzzeiten 35
+Brauereien auf nur 2000 Einwohner \parencite[27]{Sparrow2002}.
 
 In Flämisch-Brabant wurde bereits ab dem Mittelalter Bier auf
 Basis von Weizenrohfrucht gebraut. Damals aber noch mit
 spontaner Gärung und Grut statt Hopfen zur Bitterung.
-Besondere Bedeutung erlangten dabei die Witbiere aus Löwen (Leuven)
+Besondere Bedeutung erlangten dabei die Witbiere aus Löwen
 und aus dem 20 Kilometer entfernten Hoegaarden. In Löwen
 entstand um 1425 eine Universität mit einer heute renommierten Brauschule
 und im Jahr 1453 in Hoegaarden ein Kloster. Die dort ansässigen
 Mönche haben später als Erste aromatisiertes Witbier mit
 Curaçao-Orangen-Schalen und Koriander gebraut. Flämisch-Brabant war
 früher Teil der Niederlande. Durch den während der
-Kolonialzeit vorangetriebenen Gewürzhandel standen
+Kolonialzeit vorherrschenden Gewürzhandel standen
 Brauereien deshalb neue exotische Zutaten zur Verfügung.
 \parencite[1,4]{Strottner1999}
 
-Im 17. und 18. Jahrhundert war Witbier der beliebteste Bier
+Während des 17. und 18. Jahrhunderts war Witbier das beliebteste Bier
 in der Stadt Brüssel \parencite{Zainasheff2007}.
 Mehrere Umstände haben dann aber schlussendlich dazu geführt, dass
-es kurzzeitig gänzlich vom Markt verschwunden ist.
-Zuerst wurde nach der französischen Revolution den Brauereien in
+es für fast ein Jahrzehnt gänzlich vom Markt verschwunden ist.
+Nach der Französischen Revolution den Brauereien in
 Flämisch-Brabant gewährte Steuerprivilegien wieder entzogen
-\parencite[44]{Roncoroni2018}. Während des ersten Weltkrieges
+\parencite[44]{Roncoroni2018}. Während des Ersten Weltkrieges
 musste dann aufgrund von Weizenrationierungen die Produktion gänzlich
-eingestellt werden. Nach den beiden Weltkriegen hat sich
-das Konsumverhalten, auch bedingt durch den amerikanischen
-Einfluss, zugunsten von untergärigen Bieren verschoben \parencite[4]{Strottner1999}. Letztendlich schloss im Jahr 1957 die letzte
+eingestellt werden. Nach beiden Weltkriegen hat sich
+das Konsumverhalten bedingt durch den amerikanischen
+Einfluss zugunsten von untergärigen Bieren verschoben \parencite[4]{Strottner1999}. Letztendlich schloss im Jahr 1957 die letzte
 Witbier produzierende Brauerei Tomsin ihre Tore \parencite[44]{Roncoroni2018}.
 
-Der in den fünfzigerjahren in Hoegaarden ansässige Milchhändler Pierre
+Der in den Fünfzigerjahren in Hoegaarden ansässige Milchhändler Pierre
 Celis hatte gelegentlich bei Brauvorgängen bei Tomsin ausgeholfen. Im
 Jahr 1966 begann er nach Beratung mit dem ehemaligen
 Braumeister von Tomsin und der Gründung der Brauerei Celis
-(später De Kluis) selbst mit der Produktion von Witbier. Die von
+(später De Kluis) wieder mit der Produktion von Witbier. Die von
 Celis geschaffene und von historischen Vorlagen abweichende Interpretation
 gilt heute als Prototyp dieses Bierstils.
 \parencite[37,49]{Hieronymus2010} 
 
-Ab den frühen achtziger Jahren erfährt der Konsum von Witbier -- es
-existieren mittlerweile mehrere produzierende Brauereien -- national und
-international einen starken Aufschwung. Allerdings ist dieser
-ab den neunziger Jahr in Belgien selbst wieder rückläufig.
+Ab den frühen Achtzigerjahren erfährt der Konsum von Witbier – es
+existieren mittlerweile mehrere produzierende Brauereien – national und
+international einen starken Aufschwung. Allerdings war dieser
+ab den Neunzigerjahren in Belgien selbst wieder rückläufig.
 Celis selbst sieht sich im Jahr 1985 nach einem Feuer im Malzhaus der Brauerei
-De Kluis dazu gezwungen Unternehmensanteile an Artois (heute
+De Kluis dazu gezwungen, Unternehmensanteile an Artois (heute
 AB InBev) zu veräußern. Nach dem Verkauf seiner restlichen Anteile
 emigriert er in die USA und gründet dort die Brauerei Celis in Austin,
-Texas. Nach mehreren Unternehmensveräußerungen und dem Tod von Celis in 2011
-hat dessen Tochter die Brauerei 2017 wiedereröffnet. \parencites[1]{Strottner1999}[37,49]{Hieronymus2010}{Meewes2017}
+Texas. Nach mehreren Besitzerwechseln und dem Tod von Celis in 2011
+hat dessen Tochter die Brauerei 2017 in Austin wiedereröffnet.
+\parencites[1]{Strottner1999}[37,49]{Hieronymus2010}{Meewes2017}
 
 Die Herstellungsmethoden und Zusammensetzung von Witbieren haben
 sich über die Zeit zum Teil stark verändert und den heutigen
-Marktgegebenheiten gerecht zu werden. Insgesamt wurden diese
+Marktanforderungen gerecht zu werden. Insgesamt wurden diese
 Biere primär lokal ausgeschenkt und waren nur wenige
 Wochen aufgrund der zunehmenden Säurebildung genießbar.
 \parencite[118]{Strottner1999}
 
 Historische Brauprozesse bestanden bis zu einundzwanzig
 Einzelschritten mit sechs Teilmaischen und dauerten bis zu
-17 Stunden an. Dabei wurde oft nur ein geringe Endvergärungsgrad
-von circa 50 \% erreicht. Durch eine geringe Nutzung von
-gealtertem Hopfen und kurzen Kochzeiten waren die
-Biere besonders anfällig für Infektionen durch
-Milchsäurebakterien und andere Mikroben. Deshalb erfolgte
-eine Auslieferung an Kunden teilweise direkt nach
-der Hauptgärung.
-\parencite[38--41]{Hieronymus2010}
+17 Stunden. Dabei wurde oft nur ein geringer Endvergärungsgrad
+von circa 50~\% erreicht. Durch eine geringe Nutzung von gealtertem
+Hopfen, kurzen Kochzeiten, um helle Biere zu produzieren 
+und geringe Anstellraten bei der Gärung waren die Biere besonders
+anfällig für Infektionen durch Milchsäurebakterien und andere Mikroben.
+Deshalb erfolgte eine Auslieferung an Kunden teilweise direkt nach
+der Hauptgärung. Errungenschaften wie die Verwendung von
+Hefereinkulturen statt spontaner Gärung und der Einsatz von
+Kälteanlagen nach dem Ersten Weltkrieg haben die Produktionsbedingungen
+nachträglich verbessert. \parencite[38–41]{Hieronymus2010}
 
+Eine detaillierte Vorgehensweise für traditionelle Herstellungsprozessen
+ist bei \citeauthor{Hieronymus2010}, \citeauthor{Mulder2020} und
+\citeauthor{Strottner1999} beschrieben.
 
+\section*{Schüttungszusammenstellung}
 
+Extraktlieferanten für Witbier sind helle Gerstenmalze wie Pilsner Malz,
+helle Weizenmalze, Zucker und Rohfrucht der Getreidearten Weizen, Roggen,
+Dinkel, Hafer und Buchweizen \parencite[14]{Strottner1999}. Im 19.
+Jahrhundert war der Einsatz von luftgetrocknetem Grünmalz gängig
+\parencite[38]{Hieronymus2010}. \autoref{table:grains} zeigt die von \citeauthor{Strottner1999}
+ermittelten Schüttungsanteile. Moderne Witbiere haben einen Weizenanteil
+von 30 bis 50~\% \parencite[45]{Mulder2020}. Historische
+Schüttungen weisen einen Haferanteil von bis zu 15~\% auf, wobei
+einen Großteil davon auch Hafermalz bilden kann \parencite[45]{Hieronymus2010}.
+Der Einsatz von Hafer ist optional. Die Hoegaarden Schüttung
+besteht z. B. aus 55~\% Gerstenmalz und 45~\% Weizenrohfrucht \parencite[43]{Strottner1999}.
 
-\parencite[38]{Hieronymus2010}
-- typischerweise im sommer gebraut und konsumiert
-- waren oft mit Lactobacillus und manchmal mit Pediococcus infiziert
-- Hoegaarden sehr sauer im Gegensatz zum Leuven, Noten von saurer Milch
-- 19 sehr hell gebraut mit Wind-Malz -> Luft Trocknung, nur kurz gekocht
-  auch nur ein Teil der Würze, antibaktierller Schutz kaum gegeben,
-  geringe Hopfengaben von gealtertem Hopfen
+\begin{table}[H]
+\centering
+\begin{tabular}{lr}
+\toprule
+Malz/Rohfrucht      & Anteil [\%] \\
+\midrule
+Gerstenmalz           & 50–60 \\
+Weizenmalz            & 25–50 \\
+Weizenrohfrucht       & 10–50 \\
+Hafer (optional)      & 0,1–5 \\
+Buchweizen (optional) & 0,1–5 \\
+\bottomrule
+\end{tabular}
+\caption{Typische Schüttungsanteile \parencite[13]{Strottner1999}}
+\label{table:grains}
+\end{table}
 
-\parencite[39]{Hieronymus2010}
-- trübung hoher Proteingehalt von Weizen und Wintergerste.
- Durch Bakterien. Getrunken während noch Hefe in schwebe war,
- typisch Staubhefen. Kartoffelstärke um Effekt zu verstärken
+Rohfrucht erfordert eine spezielle Behandlung bei der Maischeführung. Damit
+die Stärke in der Rohfrucht für Enzyme zugänglich wird, muss diese zuerst,
+abhängig von der Getreideart, für längere Zeit auf Verkleisterungstemperatur
+gebracht werden. Es ist daher einfacher, den Rohfruchtanteil in der Schüttung
+durch vorverkleisterte Weizen- und Haferflocken zu ersetzen.
 
-- komplizierte historische Brauprozesse bis zu 17 Stunden, geringer
-  Endvergärungsgrad um die 50 \%
-
-
-
-\parencite[9]{Strottner1999}
-bedingt durch den Anstieg der Viskosität der Würze durch die
-Zugabe von Weizenrohfrucht, versuchten die ursprünglichen Blanche-Hersteller mit
-äußerst komplizierten Maischverfahren zu lösen.
-
-
-
-
-\section*{Schüttung}
-
-\parencite[45]{Mulder2020}
-Nowadays, Belgian-style white beer usually contains 30 to 50 percent wheat.
-
-
-\parencite[29]{Sparrow2002}
-ording to the
-Hoegaarden brewery, the grain bill is typi-
-cally 55 percent malted barley and 45 per-
-cent unmalted wheat.
-
-\parencite[28]{Sparrow2002}
-Wit was 50 percent malted barley, 40-45 percent unmalted wheat and 5-10 percent oats
-
-\parencite{Zainasheff2007}
-melanoidin rich malt like Munich it adds a slight bready note that is warmer in character
-eep the amount to 5%
-
-\parencite[46]{Roncoroni2018}
-oats not uncommon
-45 weizen or weizenmalz  
-zugabe von hafer
-Hefe und Stärke haze
-
-\parencite[14]{Strottner1999}
-Als Extraktlieferanten werden sehr helle Gerstenmalze, meist des Pilsener Typs,
-helle Weizenmalze, Zuckersirup, sowie Rohfrucht der folgenden Getreidearten
-benutzt : Weizen, Roggen, Dinkel, Hafer, Buchweizen (7).
-
-\parencite[16]{Strottner1999}
-- Einmaischen bei 54°C mit einer Rast von 20 Minuten.
-- Die Temperaturstufe von 35°C wird weggelassen, um den beta-Glucan- und Eiweißabbau zu hemmen. 
-- Eiweißrast begünstigt die Bildung von höhermolekularen Stickstoffsubstanzen.
-  Die Trübung der Blanche wird neben der Hefe von einem hohen Gehalt an
-  hochmolekularem Stickstoff gebildet.
-- Die zweite Rast findet bei 64°C statt. Bei dieser Maltoserast wird der
-   keine  unterteilte Rast
-- Die Verzuckerungsrast liegt bei 75°C, wobei die alpha-Amylase die Stärke zu Dextrine
-
-
-\parencite[13]{Strottner1999}
-Schüttungsanteil :
-Gerstenmalz50 bis 60 %
-Weizenrohfrucht10 bis 50 %
-Weizenmalz25 bis 50 %
-Hafer / Buchweizen0,1 bis 5 %
-
-Einmaischtemperatur38 bis 56°C
-Intensität der Eiweißrast50 bis 56°C
-10 bis 35 Minuten
-Intensität der Maltoserast
-60 bis 64°C
-20 bis 60 Minuten
-Maischdauer60 bis 150 Minuten
-
-\parencite[12]{Strottner1999}
-Bei der Blanche-Herstellung wird heute meist ein Infusionsmaischverfahren
-angewendet.
-
-\parencite[1]{Strottner1999}
-Extraktlieferanten dienen sehr helle Gersten- und Weizenmalze, Zuckersirup,
-Weizen, Roggen, Dinkel, Hafer und Buchweizen.
-
-\parencite[40]{Hieronymus2010}
-Also Known as Leuvens Witbier or Leuvensch Wit
-Grains: Malted barley (45 to 55 percent), unmalted wheat (44 to 56
-percent), unmalted oats (6 to 12 percent)
-
-Ab zwanzistem Jahrhundert typische Zusammenstellung
-Grist: 40 percent unmalted wheat, 50 percent malt, 10 percent unmalted
-oats.
-\parencite[43]{Hieronymus2010}
-
-\parencite[45]{Hieronymus2010}
-Bière de Hougaerde (or Hoegaerde)
-Also Known As Hoegaardse Bier
-Lacambre indicated that in 1851 the grist included 50 to 60 percent
-wind-malted barley, germinated slowly, 20 percent unmalted wheat, and
-10 to 15 percent unmalted oats. Other reports mention malted oats.
-
-1933 Verlinden reported a grist we are more used to, with a balance be-
-tween malted barley and wheat: 43 percent unmalted wheat, 44 percent
-malted barley, 8 percent malted oats, and 4 percent unmalted oats.
-
-Das Malz sollte
-sehr hell sein, meist wurde das Grünmalz nur an der Luft getrocknet.
-
-\parencite[46]{Hieronymus2010}
-- Geringe Einmaischetemperatur 15 °C
-- 42 für 20 min
-- 55 für 45
-- Kurze rasten bei 65 und 70
-- bei 74 °C 45 min
-- für eine stunde gekocht
-
-- Nach Kühlung in Holzfässer, ein Warmen raum gelagert, oder offene Gärung zuerst
-
-- Teilweise mit spontaner Gärung
-
-- Hougaerde Bier: spontaner Gärung im, lactic bevor alkoholische Gärung
-
-\parencite[11]{Strottner1999}
-Diese Blanche wurde ähnlich hergestellt wie die Leuvener Blanche mit dem
-wesentlichen Unterschied, daß man keine Hefe zufügte und die Gärung spontan im
-Faß stattfand
+% TODO Mosher, geschmackliche Veränderung
 
 \section*{Maischeführung}
 
-\parencite[26]{Strong2021}
-e Clerck described
-cereal mashes and mixed mashing methods with wheat
-boiled separately and multiple mash rests. Much of these
-processes seem to be dealing with making sure the wheat is
-properly gelatinized before it is converted, and then to avoid
-scorching of the viscous mash.
-Modern approaches can use pre-gelatinized flaked wheat
-(and oats) to avoid the laborious mashing processes. Some
-flavor could be compromised by using these ingredients; in
-his book, Radical Brewing, Randy Mosher recommends per-
-forming a cereal mash to better preserve that character. It’s
-definitely a trade-off, but | consider it to be a very advanced
-method. | wouldn't use it on my first attempt at the style;
-better to understand the fermentation and spicing first. Most
-commercial breweries today seem to be using a step mash
-process.
+Die mehrstufige Infusion ist heute das meist verwendete Maischeverfahren
+für Witbiere. \autoref{table:mashtable}
+zeigt einen exemplarischen Rastverlauf. Die enthaltene
+Eiweißrast dient zur Bildung von höhermolekularen Stickstoffsubstanzen die
+Biertrübung begünstigten. \parencite[12,16]{Strottner1999}
 
+\begin{table}[H]
+\centering
+\begin{tabular}{lrr}
+\toprule
+Rast              & Temperatur [°C] & Dauer [Min.] \\
+\midrule
+Einmaischen       & 38–56          & –     \\
+Eiweißrast        & 50–56          & 10–35 \\
+Maltoserast       & 60–64          & 20–60 \\
+Verzuckerungsrast & 75              & –     \\
+\bottomrule
+\end{tabular}
+\caption{Exemplarischer Rastverlauf \parencite[16]{Strottner1999}}
+\label{table:mashtable}
+\end{table}
+
+Eine Zugabe von Rohfrucht erhört die Viskosität der Würze \parencite[9]{Strottner1999}.
+Dadurch können Probleme beim Läutern entstehen, die durch Einsatz von
+Reisspelzen gemindert werden können.
 
 \section*{Hopfen und Hopfengaben}
 
@@ -357,7 +274,7 @@ Aromahopfen in Dolden oder als Pellets verwendet.
 
 \parencite[17]{Strottner1999}
 Bei der Blanche-Herstellung sollte die Kochung kurz und schonend sein. Eine
-Kochdauer von z.B. einer Stunde bei 100°C und einem Würze-pH von etwa 5,2
+Kochdauer von z. B. einer Stunde bei 100°C und einem Würze-pH von etwa 5,2
 würde den erwünschten hohen Eiweißgehalt erhalten.
 
 \parencite[17]{Strottner1999}
@@ -368,74 +285,6 @@ Blanche ist meist schwach gehopft, die Bittere liegt allgemein bei 10 bis 18 BE
 \parencite{Zainasheff2007}
 BJCP style guide hints at low-hop flavor and aroma being acceptable, you’re better
 off with neither. Hop flavor and aroma in this beer seems to battle with the other subtle spice notes.
-
-
-
-\section{Hefe, Gärführung und Reifung}
-
-\parencite[31]{Sparrow2002}
-Primary fermentation at Hoegaarden is carried out between (18-25 C)
-
-\parencite[46]{Roncoroni2018}
-Hefe strain clove like aroma 4-vinyl guaiacol, phenolisch off
-
-\parencite[13]{Strottner1999}
-Gärtemperatur12 bis 25°C
-Gärdauer3 bis 10 Tage
-Zucker als Speise
-
-\parencite[14]{Strottner1999}
-Warmlagerungsphase
-22 bis 25°C
-7 bis 18Tage
-Kaltlagerungsphase
-0 bis 2°C
-7 bis 21 Tage
-
-Hefezugabe
-
-\begin{table}[]
-\centering
-\begin{tabular}{lllll}
-\toprule
-Hersteller      & Nummer  & Bezeichnung          & Form    & Gärtemp. [°C] \\
-\midrule
-Fermentis       & WB-06   & --                   & Trocken & 18--24        \\
-Lallemand       & --      & WIT                  & Trocken & 17--22        \\
-Mangrove Jack's & M21     & Belgian Wit          & Trocken & 18--25        \\
-White Labs      & WLP400  & Belgian Wit          & Flüssig & 19--23        \\
-White Labs      & WLP410  & Belgian Wit II       & Flüssig & 19--23        \\
-Wyeast          & 3463 PC & Forbidden Fruit      & Flüssig & 17--25        \\
-Wyeast          & 3942 PC & Belgian Wheat        & Flüssig & 18--23        \\
-Wyeast          & 3944    & Belgian Witbier      & Flüssig & 17--25        \\
-\bottomrule
-\end{tabular}
-\caption{Hefeempfehlungen verschiedener Hersteller (Ascher, 2021)}
-\label{table:yeasts}
-\end{table}
-
-\parencite[2]{Strottner1999}
-- obergäriger Hefe vergoren
-- Hauptgärung dauert 3 bis 6 Tage
-- Nachgärung im Tank oder in der Flasche statt
-- Einige Brauer fügen vor der Abfüllung dem Bier zur geschmacklichen Abrundung Milchsäure und Essigsäure zu.
-
-\parencite[18]{Strottner1999}
-Die auf etwa 20°C abgekühlte Würze wird, ohne Kühltrubabscheidung, mit
-obergäriger Hefe bei einer Gärtemperatur zwischen 18 bis 25°C innerhalb von
-3 bis 6 Tagen vergoren. 
-Flaschengärung erzeugten, Blanche setzt sich die Hefe mit einem
-Teil der Eiweißtrübung im Laufe der Zeit als unansehnlicher brauner, mehr oder
-weniger fester Satz ab.
-
-Nach einer Speisezugabe vermischt man das Bier vorzugsweise
-mit einer Staubhefe und lagert die Flaschen dann 7 bis 14 Tage bei 22 bis 25°C für
-die Nachgärung.
-
-Um den Geschmack der alten traditionellen Blanche besser zu treffen, fügen einige
-Brauer dem Bier vor der Abfüllung Milchsäure und Essigsäure zu.
-
-
 
 \section*{Gewürze}
 
@@ -553,6 +402,92 @@ yeast strains available. Wyeast 3944
 Wheat), Wyeast 3463 (Forbidden Fruit),
 White Labs WLP400 (Belgian Wit), and
 White Labs WLP410 (Belgian Wit II)
+
+\section*{Hefe}
+
+Für die Gärung von Witbier kommen primär obergängige Hefestämme
+zum Einsatz die zur Bildung des phenolischen Hefearomas
+Gewürznelke (4-Vinyl Guaiacol) neigen \parencite[46]{Roncoroni2018}.
+Hefen, die diesen Voraussetzungen entsprechen, sind
+basierend auf Herstellerempfehlungen mit typischer Gärtemperatur,
+in \autoref{table:yeasts} angeführt. Wyeast Hefen, die die
+Bezeichnung PC bzw. „Private Collection“ in der Produktnummer enthalten,
+werden nur gelegentlich aufgelegt. White Labs und Wyeast empfehlen
+auch die Verwendung diverser Hefen für Saison- und Abteibiere,
+die über ein passendes Aromaprofil verfügen.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lllll}
+\toprule
+Hersteller      & Nummer  & Bezeichnung          & Form    & Gärtemp. [°C] \\
+\midrule
+Fermentis       & WB-06   & –                    & Trocken & 18–24        \\
+Lallemand       & –       & WIT                  & Trocken & 17–22        \\
+Mangrove Jack's & M21     & Belgian Wit          & Trocken & 18–25        \\
+White Labs      & WLP400  & Belgian Wit          & Flüssig & 19–23        \\
+White Labs      & WLP410  & Belgian Wit II       & Flüssig & 19–23        \\
+Wyeast          & 3463 PC & Forbidden Fruit      & Flüssig & 17–25        \\
+Wyeast          & 3942 PC & Belgian Wheat        & Flüssig & 18–23        \\
+Wyeast          & 3944    & Belgian Witbier      & Flüssig & 17–25        \\
+\bottomrule
+\end{tabular}
+\caption{Witbier Hefen verschiedener Hersteller (Ascher, 2021)}
+\label{table:yeasts}
+\end{table}
+
+% TODO Hefestripping
+
+\section*{Gärführung und Reifung}
+
+\parencite[39]{Hieronymus2010}
+- trübung hoher Proteingehalt von Weizen und Wintergerste.
+ Durch Bakterien. Getrunken während noch Hefe in schwebe war,
+ typisch Staubhefen. Kartoffelstärke um Effekt zu verstärken
+
+\parencite[31]{Sparrow2002}
+Primary fermentation at Hoegaarden is carried out between (18-25 C)
+
+\parencite[13]{Strottner1999}
+Gärtemperatur12 bis 25°C
+Gärdauer3 bis 10 Tage
+Zucker als Speise
+
+\parencite[14]{Strottner1999}
+Warmlagerungsphase
+22 bis 25°C
+7 bis 18Tage
+Kaltlagerungsphase
+0 bis 2°C
+7 bis 21 Tage
+
+Hefezugabe
+
+
+\parencite[2]{Strottner1999}
+- obergäriger Hefe vergoren
+- Hauptgärung dauert 3 bis 6 Tage
+- Nachgärung im Tank oder in der Flasche statt
+- Einige Brauer fügen vor der Abfüllung dem Bier zur geschmacklichen Abrundung Milchsäure und Essigsäure zu.
+
+\parencite[18]{Strottner1999}
+Die auf etwa 20°C abgekühlte Würze wird, ohne Kühltrubabscheidung, mit
+obergäriger Hefe bei einer Gärtemperatur zwischen 18 bis 25°C innerhalb von
+3 bis 6 Tagen vergoren. 
+Flaschengärung erzeugten, Blanche setzt sich die Hefe mit einem
+Teil der Eiweißtrübung im Laufe der Zeit als unansehnlicher brauner, mehr oder
+weniger fester Satz ab.
+
+Nach einer Speisezugabe vermischt man das Bier vorzugsweise
+mit einer Staubhefe und lagert die Flaschen dann 7 bis 14 Tage bei 22 bis 25°C für
+die Nachgärung.
+
+Um den Geschmack der alten traditionellen Blanche besser zu treffen, fügen einige
+Brauer dem Bier vor der Abfüllung Milchsäure und Essigsäure zu.
+
+
+
+
 
 \section*{Brauwasseraufbereitung}
 
