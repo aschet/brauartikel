@@ -9,6 +9,7 @@
 \usepackage{chemformula}
 \usepackage[regular,condensed,sfdefault]{roboto}
 \usepackage{booktabs}
+\usepackage{multicol}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage[style=apa,backend=biber]{biblatex}
@@ -54,7 +55,18 @@ aromatisiertes, weißliches und naturtrübes obergäriges Bier auf Weizenbasis, 
 Die Celis Brauerei empfiehlt eine Trinktemperatur von circa 3,5 bis 5,5~°C
 und die Verwendung eines oktagonalen Witbier-Glases \parencite{CelisBrewery2021}.
 
-Typische Vertreter dieses Bierstils sind \parencite{Roncoroni2018}:
+\begin{multicols}{2}
+\begin{figure}[H]
+\centering
+\includegraphics[width=4.8cm]{images/witbier.jpg}
+\caption{Heimgebrautes Witbier (Ascher, 2021)}
+\label{fig:witbier}
+\end{figure}
+
+\vfill\null
+\columnbreak
+
+Typische Vertreter dieses Bierstils sind \parencite[96-121]{Roncoroni2018}:
 
 \begin{itemize}
 \item Brugs – Brouwerij De Gouden Boom
@@ -63,12 +75,10 @@ Typische Vertreter dieses Bierstils sind \parencite{Roncoroni2018}:
 \item Watou's Wit – Leroy Breweries
 \end{itemize}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=4.8cm]{images/witbier.jpg}
-\caption{Heimgebrautes Witbier (Ascher, 2021)}
-\label{fig:witbier}
-\end{figure}
+\vfill\null
+\end{multicols}
+
+\vspace{-1.5cm}
 
 \section*{Sensorischer Eindruck}
 
@@ -88,20 +98,20 @@ In \autoref{table:parameters} sind die vom \citeauthor{BJCP2015} und die von
 Die Angaben der Brewers Association Stil-Richtlinien sind annähernd
 deckungsgleich \parencites[24]{BA2021}. Einige am Markt erhältliche
 Witbiere weisen allerdings nur einen gemessenen Bittergehalt von
-2 bis 7~IBU auf \parencite{Roncoroni2018}.
+2 bis 7~IBU auf \parencite[96-121]{Roncoroni2018}.
 
 \begin{table}[H]
 \centering
 \begin{tabular}{lrr}
 \toprule
-Parameter                    & \citeauthor{BJCP2015} & \citeauthor{Strottner1999} \\
+Parameter                       & \citeauthor{BJCP2015} & \citeauthor{Strottner1999} \\
 \midrule
-Alkoholgehalt [\%v/v]        & 4,5–5,5 & 4–6,9 \\
-Stammwürze [°P]              & 11–12,9 & 9,4–14,9 \\
+Alkoholgehalt [\%v/v]           & 4,5–5,5 & 4–6,9 \\
+Stammwürze [°P]                 & 11–12,9 & 9,4–14,9 \\
 Scheinbarer Restextrakt [\%w/w] & 2,1–3,1 & 1,5–3,2 \\
 Scheinbarer Vergärungsgrad [\%] & –       & 74,9–86,7 \\
-Bittere [IBU]                & 8–20    & 9–18 \\
-Farbe [EBC]                  & 4–8     & 6–14 \\
+Bittere [IBU]                   & 8–20    & 9–18 \\
+Farbe [EBC]                     & 4–8     & 6–14 \\
 \bottomrule
 \end{tabular}
 \caption{Stilparameter \parencites[49]{BJCP2015}[23-113]{Strottner1999}}
@@ -149,7 +159,8 @@ Flämisch-Brabant gewährte Steuerprivilegien wieder entzogen
 musste dann aufgrund von Weizenrationierungen die Produktion gänzlich
 eingestellt werden. Nach beiden Weltkriegen hat sich
 das Konsumverhalten bedingt durch den amerikanischen
-Einfluss zugunsten von untergärigen Bieren verschoben \parencite[4]{Strottner1999}. Letztendlich schloss im Jahr 1957 die letzte
+Einfluss zugunsten von untergärigen Bieren verschoben \parencite[4]{Strottner1999}.
+Letztendlich schloss im Jahr 1957 die letzte
 Witbier produzierende Brauerei Tomsin ihre Tore \parencite[44]{Roncoroni2018}.
 
 Der in den Fünfzigerjahren in Hoegaarden ansässige Milchhändler Pierre
@@ -238,11 +249,11 @@ durch vorverkleisterte Weizen- und Haferflocken zu ersetzen.
 
 \section*{Maischeführung}
 
-Die mehrstufige Infusion ist heute das meist verwendete Maischeverfahren
-für Witbiere. \autoref{table:mashtable}
-zeigt einen exemplarischen Rastverlauf. Die enthaltene
+Die mehrstufige Infusion ist heute das meist genutzte Maischeverfahren.
+Vereinzelt verwenden Brauereien stattdessen die Dekoktion.  
+\autoref{table:mashtable} zeigt einen exemplarischen Rastverlauf. Die enthaltene
 Eiweißrast dient zur Bildung von höhermolekularen Stickstoffsubstanzen die
-Biertrübung begünstigten. \parencite[12,16]{Strottner1999}
+Biertrübung begünstigten. \parencite[12,16,78]{Strottner1999}
 
 \begin{table}[H]
 \centering
@@ -287,13 +298,13 @@ Zur Aromatisierung eines Witbiers erfolgt eine Zugabe von getrockneten
 Bitterorangenschalen (Curaçao Orangen) und Koriandersamen, aber auch
 optional von weiteren Gewürzen wie zum Beispiel Holunderblüten,
 Süßholz und Muskatnuss \parencite[1]{Strottner1999}. Modernere
-Rezepturen enthalten auch Zitronenschalen \parencites[24]{BA2021}.
+Rezepturen enthalten auch teilweise Zitronenschalen \parencites[24]{BA2021}.
 
 \citeauthor{Strottner1999} nennt eine Orangenschalenzugabe von
 0,13 bis 0,8~g/l und eine Korianderzugabe
 von 0,1 bis 0,5~g/l \parencite[13]{Strottner1999}.
 Für ein klassisches Rezept ist eine Menge von 0,2~g/l Orangenschalen
-und 0,25~g/l Koriander ausreichen \parencite[29]{Sparrow2002}.
+und 0,25~g/l Koriander ausreichend \parencite[29]{Sparrow2002}.
 Historische Witbiere enthielten eine geringere Koriandermenge
 von nur 0,01 bis 0,02~g/l \parencite[40]{Hieronymus2010}.
 Amerikanische Brauereien neigen tendenziell zu höheren
@@ -302,7 +313,8 @@ Gewürzgaben \parencite[26]{Strong2021}.
 Koriander für die Bierherstellung sollte möglich frisch sein, da
 dieser sonst Fehlaromen wie Sellerie und Seife anstatt der erwünschten
 Zitrusnoten einbringen kann \parencite[26]{Strong2021}. Vor der Zugabe
-sollte eine Zerkleinerung mit einem Mörser erfolgen \parencite[29]{Sparrow2002}. Nicht jede Koriander-Sorte ist für das Brauen geeignet. Ungeeignete
+sollte eine Zerkleinerung mit einem Mörser erfolgen.
+Nicht jede Koriander-Sorte ist für das Brauen geeignet. Ungeeignete
 Sorten verursachen Schinken- oder Selleriegeschmack im Bier
 \parencites[48]{BJCP2015}. \citeauthor{Mosher2015} empfiehlt die längliche
 indische Sorte \parencite[338\psq]{Mosher2015}.
@@ -363,40 +375,19 @@ Die Brauerei Bavik stellt zum Beispiel bei 18~°C mit 10 Millionen Zellen
 per Milliliter bei einer Stammwürze von 11,5~°P an \parencite[63]{Hieronymus2010}.
 Temperaturempfehlungen je Hefe sind \autoref{table:yeasts} zu entnehmen.
 Es kann entweder über die gesamte Gärverlauf den gleiche Temperatur beibehalten
-oder zunehmend erhört werden \parencite[63]{Hieronymus2010}.
 
+Sowohl die Flaschengärung als auch die Tankreifung finden für die Reifung
+Anwendung. Teilweise auch in Kombination, wobei vor der Abfüllung eine
+Zugabe frischer Hefe erfolgt. \citeauthor{Strottner1999} berichtet
+von Warmlagerungsphasen von 22 bis 25~°C über 7 bis 18~Tage für beide
+Verfahren und Kaltlagerungsphasen von 0 bis 2~°C über 7 bis 21~Tage
+bei Tankreifung. Zucker ist das bevorzugte Speisemedium. Bei mit Flaschengärung
+ist zu beachten, dass sich über längere Zeit ein Teil der Eiweißtrübung
+mit der Hefe als Bodensatz absetzt. \parencite[13\psq,18]{Strottner1999}
 
-
-\parencite[13]{Strottner1999}
-
-Zucker als Speise
-
-\parencite[14]{Strottner1999}
-Warmlagerungsphase
-22 bis 25°C
-7 bis 18Tage
-Kaltlagerungsphase
-0 bis 2°C
-7 bis 21 Tage
-
-\parencite[39]{Hieronymus2010}
-- trübung hoher Proteingehalt von Weizen und Wintergerste.
- Durch Bakterien. Getrunken während noch Hefe in schwebe war,
- typisch Staubhefen. Kartoffelstärke um Effekt zu verstärken
-
-Bei mit Flaschengärung hergestellte Witbieren setzt sich über längere Zeit
-die Teil der Eiweißtrübung mit der Hefe als Bodensatz ab.
-\parencite[18]{Strottner1999}. 
-
-
-
- \parencite[18]{Strottner1999}.
-Nach einer Speisezugabe vermischt man das Bier vorzugsweise
-mit einer Staubhefe und lagert die Flaschen dann 7 bis 14 Tage bei 22 bis 25°C für
-die Nachgärung.
-
-Um den Geschmack der alten traditionellen Blanche besser zu treffen, fügen einige
-Brauer dem Bier vor der Abfüllung Milchsäure und Essigsäure zu.
+Für ein traditionelleres Geschmacksbild kann einem Witbier vor
+der Abfüllung Milchsäure und Essigsäure zugesetzt werden
+\parencite[18]{Strottner1999}.
 
 \section*{Brauwasseraufbereitung}
 
@@ -407,10 +398,12 @@ wird der pH-Wert aber zumeist auf einen Wert zwischen 5,2 und
 
 \section*{Rezept „Witgenstein“}
 
-\url{https://braureka.de/rezepte/rezeptdetails/?id=38961}
-
-Overall Brewhouse Yield (OBY) von 65~\%
-
+Das folgende einfache Rezept des Autors hat einen eher geringen Weizenanteil,
+einen erhöhten Haferanteil und eine überdurchschnittliche Gewürzgabe.
+Durch die Gärtemperatur von 18~°C ist das Gewürznelkenaroma etwas schwächer
+ausgeprägt.  Berechnet wurde das Rezept mit BeerSmith für einen Overall
+Brewhouse Yield (OBY) von 65~\%. Die Angaben der Online-Version \url{https://braureka.de/rezepte/rezeptdetails/?id=38961} sind entsprechend
+angepasst, um ähnliche Ergebnisse zu erzielen.
 
 \begin{table}[H]
 \centering
@@ -433,7 +426,7 @@ Overall Brewhouse Yield (OBY) von 65~\%
  & 10,8~l Nachguss \\
 \midrule
 \textbf{Maische} & Einmaischen mit 52°C (50~°C) \\
-pH-Wert 4,5 & Aufheizen auf 65°C, Rast 40~min \\
+pH-Wert 5,4 & Aufheizen auf 65°C, Rast 40~min \\
  & Aufheizen auf 78°C, Rast 10~min \\
 \midrule
 \textbf{Kochen} & 25~g Saazer Pellets (4,1~\%), 60~min \\
