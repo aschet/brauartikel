@@ -1,0 +1,115 @@
+% Copyright 2022 Thomas Ascher
+% SPDX-License-Identifier: CC-BY-SA-4.0
+
+\documentclass[a4paper,parskip=half]{scrartcl}
+
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{csquotes}
+\usepackage{chemformula}
+\usepackage[regular,condensed,sfdefault]{roboto}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[style=apa,backend=biber]{biblatex}
+\DeclareLanguageMapping{ngerman}{ngerman-apa}
+\usepackage[hidelinks,pdfencoding=auto,
+  pdfauthor={Thomas Ascher},
+  pdfusetitle,
+  pdfkeywords={Bier,Bitterung,Bitterausbeute,IBU,Tinsetz,Rager,Garetz}]{hyperref}
+\usepackage{microtype}
+\DisableLigatures{encoding=*, family=*}
+
+\addto\extrasngerman{
+\def\figureautorefname{Abb.}
+\def\tableautorefname{Tab.}
+\def\equationautorefname{Gl.}
+}
+
+\addto\captionsngerman{
+\renewcommand{\figurename}{Abb.}
+\renewcommand{\tablename}{Tab.}
+}
+
+\NewBibliographyString{gethesis}
+\DefineBibliographyStrings{ngerman}{
+  mathesis = {Masterarbeit},
+  gethesis = {Diplomarbeit},
+}
+
+\title{Eine bittere Angelegenheit: Berechnungen rund um den Hopfen}
+\author{Thomas Ascher <thomas.ascher@gmx.at>}
+\date{1. Jänner 2022, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
+
+\addbibresource{hopfenbittere.bib}
+
+\begin{document}
+\maketitle
+
+\section*{Einleitung}
+
+Meiste Bittere vom Hopfen, ein Teil von Röstmalzen \parencite[11]{Garetz1994}
+
+\section*{Hopfenbestandteile}
+
+\parencite[11]{Garetz1994}
+Alphasäuren: humulone, cohumulone, adhumulone, sind Bittere und kommen in
+verschiednen Hopfensorten in unterschiedlichen Verhältnissen vor
+Glauben: Mit hohem Cohumulone Gehalt unangenehmere Bittere.
+Beta Säuren, nicht Bitter? Ignoriert hinsichtlich Bitterpotential
+Alphasäuren schlecht löslich in Würze bei geringeren Temperaturen
+und normalem pH-Wert.
+
+\parencite[20]{Garetz1994}
+Weibliche Pflanze der Hopfengattung Humulus lupulus, Alpha Beta
+Säuren teil des resins, Resin mit Hopfenölen in gelben
+Lupulindrüsen in Dolden produziert.
+
+
+\section*{Alphasäure und Isomerisierung}
+
+\parencite[12]{Garetz1994}
+Durch Kochen geht ein Teil der Alphasäuren in Lösung. Durch Kochen
+chemischen Prozess der Isomerisierung. Iso-Alpha Säuren. Sehr löslich.
+Bei Kochen geht AS schnell in Lösung, Isomerisierung dauert lange.
+Ab 90 Min. Plateu erreicht.
+Nur Ungefähr 20\% Alphasäure -> Utilisierung landen als Iso-Alpha im
+fertigen Bier.
+Verlust: zu kurze Isomerisierugszeit, fällt mit Kühltrub aus,
+während Fermentierung und Filterung
+
+\parencite[13]{Garetz1994}
+Kettle Utilization, Boil Utilization während Kochen
+
+\parencite[14]{Garetz1994} 
+Bitte in IBU, mg of iaa in l Bier, Verluste während des gesamten
+Prozesses
+
+\parencite[34]{Garetz1994}
+Alphasäure Bestandteil am Gewicht des ganzen Hopfens. Herangezogen
+zur Bitterberechnung. Betasäure wird ignoriert.
+
+\parencite[35]{Garetz1994}
+Nobelhopfen Alpha:Beta = 1:1, nieder cohumulone.
+mehr cohumulone harsch, gibt aber hopfen mit hohem cohumulone
+Anteil, die nicht als Harsch bekannt sind. Ineratkion
+mit anderem.
+
+\section*{Hopfenprodukte}
+
+
+\parencite{Annemueller2015}
+\parencite{Beechum2017}
+\parencite{Janish2019}
+\parencite{Hieronymus2012}
+\parencite{Nottebohm2020}
+\parencite{Hall1997}
+\parencite{Rager1990}
+\parencite{Daniels1996}
+\parencite{Mosher1994}
+\parencite{Holle2010}
+
+\printbibliography[title=Quellen]
+
+\end{document}
