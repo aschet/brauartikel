@@ -4,9 +4,8 @@
 \documentclass[a4paper,parskip=half]{scrartcl}
 
 \usepackage[T1]{fontenc}
-\usepackage[ngerman]{babel}
+\usepackage[naustrian]{babel}
 \usepackage{csquotes}
-\usepackage{chemformula}
 \usepackage[regular,condensed,sfdefault]{roboto}
 \usepackage{booktabs}
 \usepackage{graphicx}
@@ -18,32 +17,32 @@
 \usepackage[italic,symbolgreek]{mathastext}
 \usepackage{float}
 \usepackage[style=apa,backend=biber]{biblatex}
-\DeclareLanguageMapping{ngerman}{ngerman-apa}
+\DeclareLanguageMapping{naustrian}{naustrian-apa}
 \usepackage[hidelinks,pdfencoding=auto,
   pdfauthor={Thomas Ascher},
   pdfusetitle,
-  pdfkeywords={Bier,Bitterung,Bitterausbeute,IBU,Tinsetz,Rager,Garetz}]{hyperref}
+  pdfkeywords={Bier,Bitterung,Bitterausbeute,IBU,Tinseth,Rager,Garetz}]{hyperref}
 \usepackage{microtype}
 \DisableLigatures{encoding=*, family=*}
 
-\addto\extrasngerman{
+\addto\extrasnaustrian{
 \def\figureautorefname{Abb.}
 \def\tableautorefname{Tab.}
 \def\equationautorefname{Gl.}
 }
 
-\addto\captionsngerman{
+\addto\captionsnaustrian{
 \renewcommand{\figurename}{Abb.}
 \renewcommand{\tablename}{Tab.}
 }
 
 \NewBibliographyString{gethesis}
-\DefineBibliographyStrings{ngerman}{
+\DefineBibliographyStrings{naustrian}{
   mathesis = {Masterarbeit},
   gethesis = {Diplomarbeit},
 }
 
-\title{Eine bittere Angelegenheit: Berechnungen rund um den Hopfen}
+\title{Eine bittere Angelegenheit: IBU Berechnungen}
 \author{Thomas Ascher <thomas.ascher@gmx.at>}
 \date{1. Jänner 2022, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
 
@@ -54,6 +53,9 @@
 
 \section*{Einleitung}
 
+\parencite{Bastgen2020}
+%TODO
+
 Meiste Bittere vom Hopfen, ein Teil von Röstmalzen \parencite[11]{Garetz1994}
 
 \parencite[10]{Garetz1994}
@@ -61,6 +63,7 @@ Aroma, Bittere und Haltbarkeit
 
 \parencite[103]{Garetz1994}
 Brauer interesserit: Alpha, Beta und Ölgehalt.
+
 
 \section*{Hopfenbestandteile}
 
@@ -88,6 +91,88 @@ nur geringe Bittere, noch schlechter Wasserlöslich, mehrere Säuren,
 lupulone, colupulone und adlupulone
 Während lagerung und und kochen oxiieren und bilden Bitterstoffe
 
+\parencite[60]{Beechum2017}
+Genaue Messung von iso-alpha zeitintensiv und teuer
+in 1950 verinfachte methode, die von der ASBC in 1968
+als Standard etabliert wurde.
+spectrophotometer, Lichtabsorbtion bei Wällenlänge
+von 275 Nanometer wenn durch präperierte Probe
+Korreliert miit der Konzentration von iso-alpha.
+Beeinflusst durch Dry Hops und andere Substanzen
+
+Iso-Alpha acids aren’t the only things that cause an organoleptic
+sensation of bitterness, the IBU is an incomplete picture of just how bitter a
+beer really is.
+
+Glenn Tinseth Modell ist der de facto standard
+Messungen und Berechnungen wurden für sein Brausystem und Prozess entwickelt
+
+\parencite[61]{Beechum2017}
+Spezifische dichte der Kochwürze wird als Konstante betrachtet
+Nur für gekochte Hopfen
+Nur für Dolen, es gibt verschiedene Korrekturfaktoren
+
+IGOR volunteers Basic Pale Ale, Basic IPA, or
+Basic DIPA 
+Versuch mit 22 Suden, verschiedene Rezpete
+Oregon Brew Lab, sensorisch getestet.
+
+\parencite[62]{Beechum2017}
+10 mL of beer with a little bit of Salzsäure and iso-Octan. The resulting
+solution is agitated vigorously until it sep-
+arates into two to three phases. The 275
+nm absorption of the distinct clear phase
+at the top of the sample is compared to
+pure iso-octane. That comparison gives
+you the official IBU number.
+
+APAs. Both the median and mode of the
+sample set were spot on with the formula’s
+calculated estimate. As the beers increase
+in gravity, the wobbliness we expected
+begins to emerge. The IPA is still close,
+with the average about 5 IBUs below the
+predicted value. The DIPA, though, is a
+full 21 IBUs (about 28 percent) below the
+calculated value.
+
+\parencite[65]{Beechum2017}
+we think the “undershoot” is due to the
+rapid chilling procedures that are more
+common today than they were during the
+formulae’s development.
+Well,
+one is that there’s probably more work
+to be done to figure out how the
+numbers change with different chill-
+ing regimes, kettle geometry, and boil
+vigor.
+
+Well,
+one is that there’s probably more work
+to be done to figure out how the
+numbers change with different chill-
+ing regimes, kettle geometry, and boil
+vigor.
+
+\parencite[65\psqq]{Beechum2017}
+Here’s our recommendation: ignore the
+number as “concrete reality.” No calcula-
+tion is ever going to be perfect for you.
+Unless you take the time to dial in your
+process, analyze your beers, and create
+your own utilization curves, the number
+will always be a bit of a lie. Instead, treat it
+as a squishy imprecise landmark that only
+has meaning for you.
+Learn what calculated IBU values of 15,
+30, 50, 70, and so on mean to your taste
+buds when brewed on your equipment.
+Use those landmarks to hit what you want
+to taste. That’s the only value to the num-
+ber, because, frankly, the number itself is
+fairly taste-free.
+
 \section*{AAU, HBU}
 
 \parencite[122\psq]{Garetz1994} 
@@ -97,7 +182,54 @@ Dave line
 Abhängig von Sudmenge, beschreiben keine Verluste oder bittere
 des finalzen biers.
 
+\parencite[40]{Favre1990}
+AAC=HBU=aa\%*oz
+Für Pellets 10 bis 15 Prozent höher
+
+\parencite[60]{Papazian2003}
+MBU=aa\%*oz
+
 \section*{Bitterausbeute}
+
+\parencite[50]{Holle2010}
+Utilisation rate wie viel alphasäuren vom Hopfen in Lösung gehen
+und im Bier laden. 10 bis20 verlust
+
+Höhere utilisation bei
+vigor boild und temperature (umgebungsdruck, seehöhe)
+geringerer spezifischen Dichte
+geringere Hopfenmenge
+höherer pH Wert, -> zum Teil unangenehmere Bittere
+
+\parencite[159]{Annemueller2015}
+
+Art (zerkleinerungsgrad9 des Hopfenprodukts. Pelletts 35, Presshopfen
+30. bei 100°C 90 min.
+
+Kochdauer (je länger des höher), Konzentration der alphasäuren (je höher desto geringer)
+Kochtemperatur (höher schnellere Isomerisierung)
+Ph-Wert der Würze (je höher, desto höher).
+Bruch-/Trumbenge: je höher desto geringere Ausbeute 
+
+\parencite[160]{Annemueller2015}
+Verlust von Anstellwürze
+Offene Warmgärung 40..50
+Druckgärung 10...15
+
+\parencite[162\psq]{Annemueller2015}
+Bezieht sie auf Kalte Anstellwürze oder Fertigbier. Leitet sich aus der
+Formel für die Bitterstoffausbeute ab. 
+
+AW Anstellwürze
+Pfvw = Pfannenvollwürze
+
+BA=IBU AW * 100 / IBU Pfvw
+
+BA = IBU Bier * 100/IBU Pfvw
+
+\parencite[160-164]{Annemueller2015}
+Bitterstoffgabe, Bitterstoffbilanz
+Betriebliche Bitterstoffausbeute
 
 \parencite[124]{Garetz1994} 
 
@@ -153,7 +285,35 @@ Bei pellets platzen die lupulindrüsen.
 
 Hopfensack ebenfalls einfluss,geringere utisilierung
 
+\parencite[153]{Garetz1994} 
+Beim Kochen mehrere Denkschulen
+- bei Kochbeginn
+- erste Anzeichen von Würzebruck
+-> Bindet hopfenharze, reduziert Ausbeute; primär werden
+Tanine gebunden
+Vermindert Oberflächenspannung, reduziert überkochen
+bei der Zugabe kann es zum überkochen kommen
+
+\parencite[158\psq]{Garetz1994} 
+Hopfen sind primärer Quelle für Bitterstoffe, balance
+maskiert durch Malzssüße, 
+Röstmalze liefern Bitterstoffe
+Wasserprofil hat Einwirkung.
+
 \section*{Alphasäure und Isomerisierung}
+
+\parencite[51]{Davidson1997} gleiche Atomzusammenstellung wie
+eine andere Substanz aber in anderer Struktur, struktuerelle
+Veränderung
+- nach 4 Stunden Rekation nocn nicht abgeschlossen
+- util = alpha in work / alpha zugegeben
+
+\parencite{MEBAK2020}
+Die wichtigsten Bitterstoffe in Würze und Bier sind die iso-alpha-Säuren. Zudem lassen sich, vor allem in Würze, noch beta-Säuren sowie -Säuren nachweisen. Darüber hinaus enthalten Würze und Bier andere Derivate der Hopfenbittersäuren, insbesondere Oxidationsprodukte, die ebenfalls zum Bittergeschmack beitragen.
+Die Bitterstoffe, hauptsächlich iso-alpha-Säuren, werden mit iso-Oktan aus der
+angesäuerten Probe extrahiert und ihre Konzentration im Auszug spektralphotometrisch bestimmt.
+
+
 
 \parencite[120\psq]{Garetz1994}
 Bittere historisch beschrieben mit gegebener Hopfenmenge
@@ -207,10 +367,15 @@ Höhere Hopfengaben ebenfalls. 40mg/l alpha
 Gravity über 1.050 einfluss, Kochtemperatur (abhängig von Seehöhe).
 
 
+\parencite[78]{Daniels1996}
+ph-wert beeinflusst die isomerisierung nicht stark, aber Bitterwahrnahme
+hoher ph wert harsche bittere mehr als 50 ppm carbonates
+
+\parencite[49]{Holle2010} Isomerisierung bei Kochtemperatur
+aber auch im Whirlpool 90-95
+
 
 \section{Hopfenprodukte}
-
-
 
 \parencite[80\psq]{Garetz1994}
 Doldenhopfen: am wenigsten verarbeitet, manche Brauer glauben
@@ -246,6 +411,33 @@ late hops, wird in England für Casc conditioning, bessere konsistenz
 Stark konzentriert, weniger für Anwendung im Heimbereich für
 kleine Sude
 
+\parencite[52]{Davidson1997}
+nicht pre-isomerisiert
+Pre-isomerized Hop Products -> doppelter gehalt
+pre-isomerisierte pellets enthalten öle
+The reduced (rho) , hexa, and tetra extracts
+all provide bitterness and protection against
+the sunstruck reaction that produces a
+skunky note in beer. Additionally, hexa and
+tetra improve foam stability.
+The
+reduced, hexa and tetra extracts are the
+reduced fo rms (by hydrogen addition to
+the iso-alpha acids) and the sensory bit-
+terness of these compounds differs. Tetra-
+iso-extract has a prolonged senso ry bitter-
+ness , a lingering bitterness compared to
+the normal iso-al pha acids . He xa-iso-
+extract is less lingering and prolonged and
+is more similar to iso-alpha acids . The
+reduced iso-extract also is similar to iso-
+alpha acids, in that it tends to be a quick,
+clean bitterness.
+
+found isohumulone (with traces of
+iso-adhumu lone) was preferred to isoco-
+humulone.
+
 \section*{Hopfengaben}
 
 \parencite[15]{Garetz1994}
@@ -254,6 +446,10 @@ oder gleich durch Kochen. Oder verändert, nicht mehr gleich
 wie im Naturhopfen. 15 Minuten vor Ende. Wenig isomerisierung.
 
 \section*{Effekte der Hopfenalterung}
+
+\parencite[50]{Holle2010}
+Je älter der Hopfen desto geringer der alpha, bestimmt über
+HSI.
 
 Nördliche Hemisphere einmal Ernte pro Jahr. Mitte August bis
 Anfang September.
@@ -287,21 +483,152 @@ Taste Titration
 Bier mit bekannter Bittere,, iso-alpha extrakt hinzufügen
 bis gleich bitter wie test bier kalibrierter Extrakt, 0,44 IBU
 
+\parencite[52]{Davidson1997}
+Oxidation von beta säuren -> ähnliche hulupones wie isohomulone
+
+
 % TODO ev. Berechnung beschreiben
 % TODO Diagramm zu Alphaverlust
 
-\section*{Modelle zur Schätung der Bitterausbeute}
+\section*{Modelle zur Schätzung der Bitterausbeute}
+
+\parencite[320]{Kunze2004}
+BU mg of bitter substance / l Beer
+Berechnung auf Volumen kalte Ausschlagwürze contracts (4\%)
+bitterness yield, only part of substance
+25 und 35\% für kommerzielle Brauereien
+Für Hopfengabe müssen für Bitterness Yield, Versuchssude in der Brauerei
+Circa ein Drittel der gegebenen Alphasäuren landet im 
+100\% Bitterness=aacid * 100 / BY
+
+\parencite[51]{Holle2010}
+ibu = mg hop * util * alpha acid \% / l
 
 \parencite[127]{Garetz1994} 
 Keine in professioneller Brauliteratur, Messtechnisch erhoben
 werden. Nach einigen Brauversuchen lässt sich also einstellen.
 Blending mehrer Batches.
 
+\parencite[76]{Daniels1996}
+Große Brauereien können große Hopfenmengen mischen und
+Biere um unterschiede auszugleichen.
+
+\parencite[51]{Holle2010}
+Einziger verlässliche Weg ist labortechnische Analysen.
+
+
+
+\subsection*{Kritik}
+
+\parencite{Bonham2001}
+% TODO
+byron burch 
+Brewing Quality Beers
+
+\parencite{Jones1995}
+. A lot of us have used his formula with mixed success. Most of us felt
+the utilizations were on the high side resulting in too low of an IBU calculation.
+
+Then along came Mark Garetz with his book on "Using Hops" that included yet another formula to
+calculated IBUs. His formulas and techniques stirred things up a bit and most brewers felt his IBU
+numbers were too high or the utilizations were too low.
+
+The one thing both of these authors did not have was hard data to back up their claims. I think each had
+done a few tests, but not really extensive enough, in my opinion, to really convince me that the
+calculations were right.
+
+t Glenn has the resources, friends
+and equipment to better explore and measure hop utilization. He has friends and tools at the USDA hop
+labs at Oregon State University.
+
+knew Glenn was working on this project as we spoke about it over 3 years ago.
+The following plot shows that Tinseth's utilization numbers generally fall between the
+old Rager and Garetz utilizations.
+
+oth Rager’s and Garetz’s plots follow a familiar "S" shaped curve. Tinseth observes that
+it doesn't seem to accurately reflect what's happening in the brew kettle.
+I like the look of Glenn's curve. It fits and looks more like a classical chemical reaction as well as a lot of
+other things in nature. Let’s take a look at the new IBU calculation as see how it works.
+
 \subsection*{Rager}
+
+\parencite[53]{Rager1990}
+Grundlage Fred Eckhardt,
+Dave Miller and Byron Burch because
+
+A gravity adjustment calculation
+is used for high-gravity beers or when
+the brew kettle is too small to boil the
+full batch. It is calculated by taking
+the larger of gravity of boil (GB) minus
+.050, divided by 0.2. If neither gravity
+is greater than 1.050, then (GA)
+equals 0.
+
+12.4 °P
+
+Note: In formulas, percent utilization
+must be expressed as a decimal.
+
+\%U Percent utilization
+\%A Percent alpha acid
+Wgz· Weight in grams
+VL Volume in liters
+GA Gravity adjustment
+GB Gravity of boiling wort
+IBU (International) Bittering Units
+
+GA=(GB)- .050 / 0,2
+
+\parencite[54]{Rager1990}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{rr}
+\toprule
+\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
+\midrule
+0–5             & 5 \\
+6–10            & 6 \\
+11–15           & 8 \\
+16–20           & 10,1 \\
+21–25           & 12,1 \\
+26–30           & 15,3 \\
+31–35           & 18,8 \\
+36–40           & 22,8 \\
+41–45           & 26,9 \\
+46–50           & 28,1 \\
+51–60           & 30 \\
+\bottomrule
+\end{tabular}
+\caption{Bitterausbeute für Dolden nach \citeauthor{Rager1990} \parencite[54]{Rager1990}}
+\label{table:ragerutil}
+\end{table}
+
+\begin{equation}
+\mathit{GA} = \frac{\mathit{GB} - 0,05}{0,2}
+\label{eq:ragerga}
+\end{equation}
+
+%\newcommand{\bxfc}{\mathit{Rc}_f}
+%\newcommand{\bxfctext}{$\smash{\bxfc}$}
+
+\begin{equation}
+\mathit{IBU} = \frac{\%U \cdot \%A \cdot W\:[g] \cdot 1000}{V\:[l] \cdot (1 + \mathit{GA})}
+\label{eq:rageribu}
+\end{equation}
+
+\begin{equation}
+W\:[g] = \frac{V\:[l] \cdot (1 + \mathit{GA}) \cdot \mathit{IBU}}{\%U \cdot \%A \cdot 1000}
+\label{eq:ragerw}
+\end{equation}
 
 \parencite[134]{Garetz1994} 
 Nur ein Korrekturfaktor: boil Gravity, Ausbeutewerte sehr optimistisch
 gewählt. 
+
+\subsection*{Burch}
+Brewing Quality Beers
 
 \subsection*{Garetz}
 
@@ -319,7 +646,7 @@ boil gravity bg=(CF*(starting gravity -1))+1
 gravity factor
 GF=((BG-1.050/0.2)+1 = GA+1
 Hoping rate factor
-HF=((CF*desired ibu/260)+1
+HF=((CF*desired ibu/260)+1  -> HCF
 TF((eleation in feet/550)*0.02+1)
 Seehöhe = 1. Negative nummer wenn unter Seehöhe
 
@@ -329,7 +656,7 @@ CA = GF*HF*TF
 \centering
 \begin{tabular}{rr}
 \toprule
-Kochzeit [min.] & Ausbeute [\%] \\
+\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
 \midrule
 0–10            & 0 \\
 11–15           & 2 \\
@@ -346,7 +673,7 @@ Kochzeit [min.] & Ausbeute [\%] \\
 81–90           & 23 \\
 \bottomrule
 \end{tabular}
-\caption{Bitterausbeute nach Garetz \parencite[138]{Garetz1994}}
+\caption{Bitterausbeute für Dolden nach \citeauthor{Garetz1994} \parencite[138]{Garetz1994}}
 \label{table:garetzutil}
 \end{table}
 
@@ -377,34 +704,240 @@ HF Faktor bei Berechnung der IBU nicht vorhanden, schätzung :(
 IBU Messung von Labor durchführen lassen
 \parencite[145]{Garetz1994} 
 
+Berücksichtigt Ausbeute während Whirlpool nicht weil geringe
+Isomerisierung für Heimbrauer.
+\parencite[167]{Garetz1994} 
+
+\subsection{Mosher}
+
+2 charts, für pellets und dolden, 3h 1,000-1120,nennt keine quellen
+\parencite[160\psq]{Mosher1994}
+
+\parencite{Mosher2022} Bereits ende der Achzigerjahre. Mechanischer
+Rechner mit drehschreiben.
+
+\parencite[51]{Holle2010}
+Von Mosher bestimmte Werte finden sich hier
+
+% \usepackage{booktabs}
 
 
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrrrrr} 
+\toprule
+\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{7}{c}{\textbf{Ausbeute [\%] per spezifischer Dichte [g/ml]}}  \\
+                                             & 1,030 & 1,040 & 1,050 & 1,060 & 1,070 & 1,080  & 1,090                      \\
+\midrule
 
-\subsection*{Tinseth}
+5                                            & 5     & 5     & 4     & 4     & 3     & 3      & 3                          \\
+15                                           & 12    & 12    & 11    & 11    & 11    & 10     & 9                          \\
+30                                           & 17    & 17    & 16    & 16    & 15    & 15     & 13                         \\
+45                                           & 21    & 21    & 20    & 19    & 18    & 17     & 16                         \\
+60                                           & 24    & 23    & 23    & 22    & 21    & 20     & 18                         \\
+90                                           & 28    & 27    & 26    & 26    & 25    & 23     & 21                         \\
+\bottomrule
+\end{tabular}
+\caption{Bitterausbeute für Dolden nach \citeauthor{Mosher1994} \parencite[51]{Holle2010}}
+\label{table:mosherutil}
+\end{table}
 
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrrrrr} 
+\toprule
+\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{7}{c}{\textbf{Ausbeute [\%] per spezifischer Dichte [g/ml] }}  \\
+                                             & 1,030 & 1,040 & 1,050 & 1,060 & 1,070 & 1,080  & 1,090                      \\
+\midrule
+5                                            & 6     & 6     & 5     & 5     & 4     & 4      & 3                          \\
+15                                           & 15    & 15    & 14    & 14    & 13    & 13     & 11                         \\
+30                                           & 22    & 21    & 21    & 20    & 19    & 18     & 16                         \\
+45                                           & 26    & 26    & 25    & 24    & 23    & 22     & 21                         \\
+60                                           & 29    & 28    & 28    & 27    & 26    & 25     & 23                         \\
+90                                           & 35    & 34    & 33    & 32    & 31    & 29     & 27                         \\
+\bottomrule
+\end{tabular}
+\caption{Bitterausbeute für Pellets nach \citeauthor{Mosher1994} \parencite[51]{Holle2010}}
+\label{table:mosherutilpellets}
+\end{table}
+
+% TODO tabelle
+\parencite[53]{Holle2010}
+Spezifische Dichte und Volumen der gekühlten Ausschlagswürze
+
+\subsection*{Tinseth }
+
+\parencite{Tinseth1995}
 \url{https://www.realbeer.com/hops/bcalc_js.html}
+
+access to some handy tools and knowledgable friends at the USDA hop labs and the Flavor Perception labs at Oregon State University. Over the years I've read a lot of scientific papers on the subject and had quite a few worts and beers analyzed.
+
+different than the curves attributed to Jackie Rager in Zymurgy or to Mark Garetz in his book. That's because I believe, backed up by the brewing literature, that alpha acid isomerization is a first order, or more likely, a pseudo first order chemical reaction
+
+The "S" shaped curves most homebrewers are familiar with don't seem to accurately reflect what's happening in the brew kettle. What follows is a primer on how to calculate IBUs using my numbers.
+
+IBUs = decimal alpha acid utilization * mg/l of added alpha acids
+
+mg/l of added alpha acids = decimal AA rating * grams hops * 1000
+                            -------------------------------------
+                              volume of finished beer in liters
+                              
+
+
+
+The Bigness factor accounts for reduced utilization due to higher wort gravities. Use an average gravity value for the entire boil to account for changes in the wort volume.
+
+\begin{equation}
+\mathit{GF} = 1,65 \cdot 0,000125^{(\overline{SG}\:[g/ml] - 1)}
+\label{eq:tinsethgf}
+\end{equation}
+
+\begin{equation}
+\mathit{TF} = \frac{1 - e^{(-0,04 \cdot t\:[min])}}{4,15}
+\label{eq:tinsethtf}
+\end{equation}
+
+\begin{equation}
+\mathit{U\:[\%]} = \mathit{GF} \cdot \mathit{TF} \cdot 100
+\label{eq:tinsethutil}
+\end{equation}
+
+decimal alpha acid utilization = Bigness factor * Boil Time factor
+
+The Boil Time factor accounts for the change in utilization due to boil time:
+
+
+The numbers 1.65 and 0.000125 are empirically derived to fit my data. The number 0.04 controls the shape of the utilization vs. time curve. The factor 4.15 controls the maximum utilization value--make it smaller if your kettle utilization is higher than mine.
+
+I'd suggest fiddling with 4.15 if necessary to match your system; only play with the other three if you like to muck around. I make no guarantees if you do.
+                              
+
+\subsection*{Daniels}
+
+\parencite[80]{Daniels1996}
+Setzt auf Berechnungsvorschrift von \citeauthor{Rager1990}
+einfache
+
+eigenen Tests und mehreren Quellen, insbesondere Randy Mosher
+Hop-Go-Round
+
+\begin{table}[H]
+\centering
+\begin{tabular}{rr}
+\toprule
+\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
+\midrule
+0–9            & 5  \\
+10–19          & 12 \\
+20–29          & 15 \\
+30–44          & 19 \\
+45–49          & 22 \\
+60–74          & 24 \\
+>74            & 27 \\
+\bottomrule
+\end{tabular}
+\caption{Bitterausbeute für Dolden nach \citeauthor{Daniels1996} \parencite[80]{Daniels1996}}
+\label{table:danielsutil}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{rr}
+\toprule
+\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
+\midrule
+0–9            & 6 \\
+10–19          & 15 \\
+20–29          & 19 \\
+30–44          & 24 \\
+45–49          & 27 \\
+60–74          & 30 \\
+>74            & 34 \\
+\bottomrule
+\end{tabular}
+\caption{Bitterausbeute für Pellets nach \citeauthor{Daniels1996} \parencite[80]{Daniels1996}}
+\label{table:danielsutilpellets}
+\end{table}
+
+\parencite[85]{Daniels1996}
+IBU für 30 Minuten vermessen und dann eigene util zusammenstellen
+
+\parencite[86]{Daniels1996}
+Um mehrere Faktoren verweist auf den HCF nach Garetz
+
+\subsection*{Noonan}
+BU=Bittering unit (IBU x 1.125)
+\parencite[215]{Noonan1996}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrrr} 
+\toprule
+\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{5}{c}{\textbf{Ausbeute [\%] per spezifischer Dichte [g/ml]}}                                 \\
+                                             & 1,032–50 & 1,050–65 & \multicolumn{1}{l}{1,065–75} & \multicolumn{1}{l}{1,075–85} & \multicolumn{1}{l}{1,085–95}  \\
+\midrule                                             
+0                                            & 5        & 4        & 4                            & 4                            & 3                             \\
+5                                            & 5        & 5        & 5                            & 4                            & 4                             \\
+15                                           & 8        & 8        & 7                            & 7                            & 7                             \\
+30                                           & 15       & 14       & 13                           & 13                           & 12                            \\
+60                                           & 28       & 26       & 24                           & 23                           & 21                            \\
+90                                           & 31       & 28       & 27                           & 26                           & 24                            \\
+\bottomrule
+\end{tabular}
+\caption{Bitterausbeute für Dolden nach \citeauthor{Noonan1996} \parencite[215]{Noonan1996}}
+\label{table:noonanutil}
+\end{table}
+
+Die in Quelle fehlerhafte Bitterausbeute für Pellets bei 90~Minuten und einer
+spezifischen Dichte von 1,085–95 wurde in \autoref{table:noonanutilpellets}
+korrigiert.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrrr} 
+\toprule
+\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{5}{c}{\textbf{Ausbeute [\%] per spezifischer Dichte [g/ml]}}                                 \\
+                                             & 1,032–50 & 1,050–65 & \multicolumn{1}{l}{1,065–75} & \multicolumn{1}{l}{1,075–85} & \multicolumn{1}{l}{1,085–95}  \\
+\midrule
+0                                            & 5        & 5        & 4                            & 4                            & 3                             \\
+5                                            & 6        & 6        & 5                            & 4                            & 4                             \\
+15                                           & 12       & 12       & 10                           & 9                            & 8                             \\
+30                                           & 18       & 17       & 16                           & 16                           & 15                            \\
+60                                           & 31       & 28       & 26                           & 25                           & 23                            \\
+90                                           & 33       & 30       & 28                           & 27                           & 25                     \\
+\bottomrule
+\end{tabular}
+\caption{Bitterausbeute für Pellets nach \citeauthor{Noonan1996} \parencite[215]{Noonan1996}}
+\label{table:noonanutilpellets}
+\end{table}
+
+Tabelle
 
 \subsection*{Novotný}
 
 \url{https://www.diversity.beer/2018/02/ibu-spreadsheet-english-version.html}
+\parencite{Novotny2016}
+\parencite{Novotny2018}
 
 \section*{Hopfenprodukte}
 
 
-\parencite{Annemueller2015}
-\parencite{Beechum2017}
 \parencite{Janish2019}
 \parencite{Hieronymus2012}
 \parencite{Nottebohm2020}
 \parencite{Hall1997}
-\parencite{Rager1990}
-\parencite{Daniels1996}
-\parencite{Mosher1994}
-\parencite{Holle2010}
-\parencite{Tinseth1995}
-\parencite{Jones1995}
-\parencite{Novotny2016}
-\parencite{Brueckelmeier2018}
+\parencite{Pyle1995}
+\parencite{Justus2018}
+\parencite{Parkin2017}
+\parencite{Bishop1964}
+\parencite{Nickerson1979}
+\parencite{Calado2019}
+
+\parencite{Bruecklmeier2017}
+\parencite{Bruecklmeier2018}
+
+Bieranalyse Fuchs crica 30 € \url{https://bieranalyse.de/}
+Weinlabor Krauß: \url{https://www.weinlabor-krauss.de}
 
 \printbibliography[title=Quellen]
 
