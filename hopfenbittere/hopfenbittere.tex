@@ -12,12 +12,13 @@
 \usepackage{chemformula}
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{icomma}
-\usepackage{textcomp}
+%\usepackage{textcomp}
 \usepackage{gensymb}
-\usepackage[italic,symbolgreek]{mathastext}
+%\usepackage[italic,symbolgreek]{mathastext}
 \usepackage{float}
 \usepackage[style=apa,backend=biber]{biblatex}
 \DeclareLanguageMapping{naustrian}{naustrian-apa}
+
 \usepackage[hidelinks,pdfencoding=auto,
   pdfauthor={Thomas Ascher},
   pdfusetitle,
@@ -42,9 +43,23 @@
   gethesis = {Diplomarbeit},
 }
 
+\newcommand{\BA}{\mathit{BA}}
+\newcommand{\BAKt}{{\mathit{BA}}_{\mathit{Kt}}}
+\newcommand{\umin}{\:[\mathit{min}]}
+\newcommand{\uden}{\:[\mathit{g/cm^3}]}
+\newcommand{\uper}{\:[\%]}
+\newcommand{\FKd}{F_{\mathit{Kd}}}
+\newcommand{\FHR}{F_{\mathit{HR}}}
+\newcommand{\FSP}{F_{\mathit{SP}}}
+\newcommand{\FAH}{F_{\mathit{AH}}}
+\newcommand{\FHF}{F_{\mathit{HF}}}
+\newcommand{\FHS}{F_{\mathit{HS}}}
+\newcommand{\FFil}{F_{\mathit{FI}}}
+\newcommand{\dPfvw}{d_\mathit{Pfvw}}
+
 \title{Eine bittere Angelegenheit: IBU Berechnungen}
 \author{Thomas Ascher <thomas.ascher@gmx.at>}
-\date{1. Jänner 2022, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
+\date{\today, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
 
 \addbibresource{hopfenbittere.bib}
 
@@ -395,11 +410,18 @@ acbc (1992). zentrifuge + spectrophototmeter
 
 Wahrnehmungsschwelle 4 IBU
 
-\parencite[59]{Hall1997}
-geheimsamer Framework, fehler ausgebessert
-basierend auf Kochzeit. Darauf werden weitere
-Korrekturfaktoren angewendet.
 
+
+
+
+\parencite[320]{Kunze2004}
+BU mg of bitter substance / l Beer
+Berechnung auf Volumen kalte Ausschlagwürze contracts (4\%)
+bitterness yield, only part of substance
+25 und 35\% für kommerzielle Brauereien
+Für Hopfengabe müssen für Bitterness Yield, Versuchssude in der Brauerei
+Circa ein Drittel der gegebenen Alphasäuren landet im 
+100\% Bitterness=aacid * 100 / BY
 
 
 \section*{Alphasäure und Isomerisierung}
@@ -594,28 +616,23 @@ Oxidation von beta säuren -> ähnliche hulupones wie isohomulone
 
 \section*{Modelle zur Schätzung der Bitterausbeute}
 
-Die Umrechnung zwischen
-Massenanteil in °P und der relative Dichte
-erfolgt auf Basis der Plato Tabellen über die Goldiner Gleichungen
-(\autoref{eq:calcptosg}) oder vergleichbaren
-Näherungsverfahren.
-\parencite[140\psq]{Spedding2016}
+Spätenstens seit der Veröffentlichung des Berechnungsverfahrens nach
+Rager im Zymurgy Magazin im Jahr 1990 stand einem breiteren
+Publikum die Möglichkeit zur Verfügung, Berechnungen für Hopfengaben auf
+Basis der IBU
+durchzuführen \parencite[59]{Hall1997}. Im Verlauf der Neunzingerjahre
+sind dann noch weitere Modelle zur Schätzung der Bitterausbeute entstanden.
+Von diesen hat sich das Tinseth Modell inzwischen als De-facto-Standard im
+Heimbraubereich etabliert \parencite[185]{Hieronymus2012}.
 
+Die Umgestaltung bestehender und die Schaffung neuer Bierstile
+durch die Craft Beer Szene in den letzten zwanzig Jahren hat auch zu Änderungen
+der Abläufe bei Hopfengaben, in der Form der vermehrten Anwendung von Vorderwürze-
+und Whirlpoolhopfung, geführt. Die Modelle der Neunzigerjahre sind aber
+nicht dafür ausgelegt, große Hopfengaben gegen Ende des Kochprozesses richtig
+zu bewerten. Aktuelle Ansätze versuchen diesen Fehler zu korrigieren.
+\parencite[39]{Novotny2018}
 
-\begin{equation}
-d_{\frac{20}{20}}\:[g/cm^3] = \frac{\degree P}{258,6 - \degree P / 258,2 \cdot 227,1} + 1
-\label{eq:calcptosg}
-\end{equation}
-
-
-\parencite[320]{Kunze2004}
-BU mg of bitter substance / l Beer
-Berechnung auf Volumen kalte Ausschlagwürze contracts (4\%)
-bitterness yield, only part of substance
-25 und 35\% für kommerzielle Brauereien
-Für Hopfengabe müssen für Bitterness Yield, Versuchssude in der Brauerei
-Circa ein Drittel der gegebenen Alphasäuren landet im 
-100\% Bitterness=aacid * 100 / BY
 
 \parencite[51]{Holle2010}
 ibu = mg hop * util * alpha acid \% / l
@@ -635,6 +652,11 @@ Einziger verlässliche Weg ist labortechnische Analysen.
 
 
 \subsection*{Kritik}
+
+
+
+
+
 
 \parencite{Bonham2001}
 Kochzeit , Hopfen bit bekannter Alphasäure und gleicher Brauverfahren
@@ -676,25 +698,37 @@ it doesn't seem to accurately reflect what's happening in the brew kettle.
 I like the look of Glenn's curve. It fits and looks more like a classical chemical reaction as well as a lot of
 other things in nature. Let’s take a look at the new IBU calculation as see how it works.
 
-\subsection*{Klassische Modelle}
+\subsection*{Modelle der Neunzigerjahre}
 
-\parencite[59]{Hall1997}
-Rager war erste Methode in Heimbrauliteratur, weit verbreitet.
+Hall hat einen Großteil der relevanten, ab 1990 veröffentlichten, Modelle analysiert,
+deren Daten normalisiert und in ein gemeinsames Berechnungsschema überführt. Dabei ist
+pro Hopfengabe zuerst eine initiale Bitterausbeute basierend auf der Kochzeit
+($\BAKt$) zu bestimmen und anschließend durch mehrere Korrekturfaktoren anzupassen.
+Aus den eingebrachten Alphasäuremengen der einzelnen Gaben und den ermittelten
+Bitterausbeuten lässt sich dann ein IBU Wert für ein Rezept berechnen. \parencite[59-65]{Hall1997}
 
-\parencite[60]{Hall1997}
-Garetz niedrigere Utilisierung und neue Korrekturfaktoren.
+% TODO verweis konzentration
 
-Tinseth: zwischen Rager und Garetz.
+Folgende Korrekturfaktoren sind modellabhängig vorgesehen:
 
-\parencite[60]{Hall1997}
-U% = U%bt Fbg Fhf Fhr Fbp Fst Fhb Fyf Ffil
-boil gravity
-hop form
-hop rate
-boiling-
-point temperature, storage losses, hop bags
-yeast flocculation rate and filtration
-Basisformel + Korrekturfaktoren
+\begin{itemize}
+\item Relative Dichte der Kochwürze ($\FKd$)
+\item Hopfenrate ($\FHR$)
+\item Siedepunkt des Wassers basierend auf der Seehöhe ($\FSP$)
+\item Ausflockung der Hefe ($\FAH$)
+\item Hopfenform: Dolden oder Pellets ($\FHF$)
+\item Verwendung eines Hopfensacks ($\FHS$)
+\item Filtration ($\FFil$)
+\end{itemize}
+
+Die Umrechnung von Extraktgehalt in relative Dichte erfolgt auf Basis
+der Plato Tabellen über die Goldiner Gleichungen (\autoref{eq:calcptosg})
+oder vergleichbaren Näherungsverfahren \parencite[140\psq]{Spedding2016}.
+
+\begin{equation}
+d_{\frac{20}{20}} \uden = \frac{\degree P}{258,6 - \degree P / 258,2 \cdot 227,1} + 1
+\label{eq:calcptosg}
+\end{equation}
 
 \parencite[62]{Hall1997}
 hop utilization rates decrease with increas-
@@ -730,7 +764,7 @@ faktor Zulsetzt anwenden
 Kochbeginn, mitte kochzeit und Ende, Stopfen
 45.5
 RAGER  57.82
-GARETZ 24.12
+%GARETZ 24.12
 MOSHER 35.65
 TINSETH  47.54
 NOONAN 53.21
@@ -738,35 +772,20 @@ DANIELS 46.51
 
 \subsubsection*{Rager}
 
-\parencite[53]{Rager1990}
-Grundlage Fred Eckhardt,
-Dave Miller and Byron Burch because
+Die Grundlage für Ragers Modell bildeten Heimbraubücher von Fred Eckhardt,
+Dave Miller und Byron Burch. Er hat die darin enthaltenen Informationen
+zu einem Berechnungsverfahren zusammengeführt \parencite[53]{Rager1990}. 
+Garetz kritisierte an Ragers Methode, dass nur der Korrekturfaktor
+$\FKd$ berücksichtigt wurde \parencite[134]{Garetz1994}. Die Beträge
+der berechneten Bitterausbeuten scheinen insgesamt zu hoch zu sein \parencite{Jones1995}.
 
-A gravity adjustment calculation
-is used for high-gravity beers or when
-the brew kettle is too small to boil the
-full batch. It is calculated by taking
-the larger of gravity of boil (GB) minus
-.050, divided by 0.2. If neither gravity
-is greater than 1.050, then (GA)
-equals 0.
-
-12.4 °P
-
-Note: In formulas, percent utilization
-must be expressed as a decimal.
-
-\%U Percent utilization
-\%A Percent alpha acid
-Wgz· Weight in grams
-VL Volume in liters
-GA Gravity adjustment
-GB Gravity of boiling wort
-IBU (International) Bittering Units
-
-GA=(GB)- .050 / 0,2
-
-\parencite[54]{Rager1990}
+Für die Modellberechnung ist zuerst die Ausbeute $\BAKt$ über die \autoref{table:ragerbakt}
+oder die \autoref{eq:ragerbakt} auf Basis der Kochdauer der jeweiligen Hopfengabe
+zu wählen \parencite{Steinmeyer2021}.
+Danach ist der Korrekturfaktor $\FKd$ anhand der relativen Dichte der
+Pfannenvollwürze ($\dPfvw$) gemäß \autoref{eq:ragerga} und \autoref{eq:ragerfkd}
+zu bestimmen \parencite[53]{Rager1990}.
+Abschließend erfolgt die Berechnung der Bitterausbeute über \autoref{eq:ragerba}.
 
 \begin{table}[H]
 \centering
@@ -787,54 +806,75 @@ GA=(GB)- .050 / 0,2
 51–60           & 30 \\
 \bottomrule
 \end{tabular}
-\caption{Bitterausbeute für Dolden nach \citeauthor{Rager1990} \parencite[54]{Rager1990}}
-\label{table:ragerutil}
+\caption{Bitterausbeute für Dolden nach Rager \parencite[54]{Rager1990}}
+\label{table:ragerbakt}
 \end{table}
 
-%((final volume x (final gravity – 1)) / estimated boil volume) + 1 = estimated boil gravity
-
-
-
-Näherungsweise lässt sich die Bitterausbeute von \autoref{table:ragerutil}
-auch über die \autoref{eq:ragerutil} berechnen \parencite{Steinmeyer2021}. 
-
 \begin{equation}
-\mathit{BA}_{\mathit{Tab.}}\:[\%] = 18,11 + \left(13,86 \cdot \tanh{\frac{\mathit{Kochzeit}\:[min] - 31,32}{18,27}}\right)
-\label{eq:ragerutil}
+\BAKt \uper = 18,11 + \left(13,86 \cdot \tanh{\frac{\mathit{Kochzeit} \umin - 31,32}{18,27}}\right)
+\label{eq:ragerbakt}
 \end{equation}
 
+
 \begin{equation}
-\mathit{DA} = \frac{\mathit{GB} - 0,05}{0,2}
+\mathit{GA} = \begin{cases}
+0 \quad \text{für} \quad d_{\mathit{Pfvw}} \le 1,050 \uden, \\
+\frac{d_{\mathit{Pfvw}} - 0,05}{0,2} \quad \text{für} \quad d_{\mathit{Pfvw}} > 1,050 \uden.
+\end{cases}
 \label{eq:ragerga}
 \end{equation}
 
-%\newcommand{\bxfc}{\mathit{Rc}_f}
-%\newcommand{\bxfctext}{$\smash{\bxfc}$}
-
 \begin{equation}
-\mathit{IBU} = \frac{\%U \cdot \%A \cdot W\:[g] \cdot 1000}{V\:[l] \cdot (1 + \mathit{GA})}
-\label{eq:rageribu}
+\FKd = \frac{1}{1 + GA}
+\label{eq:ragerfkd}
 \end{equation}
 
-\begin{equation}
-W\:[g] = \frac{V\:[l] \cdot (1 + \mathit{GA}) \cdot \mathit{IBU}}{\%U \cdot \%A \cdot 1000}
-\label{eq:ragerw}
-\end{equation}
 
-\parencite[134]{Garetz1994} 
-Nur ein Korrekturfaktor: boil Gravity, Ausbeutewerte sehr optimistisch
-gewählt. 
+\begin{equation}
+\BA \uper = \BAKt \cdot \FKd
+\label{eq:ragerba}
+\end{equation}
 
 \subsubsection*{Burch}
 Brewing Quality Beers
 
 \subsubsection*{Garetz}
 
+Das grundlegende Berechnungsverfahren für das von Garetz in 1994 in seinem
+Buch „\citetitle{Garetz1994}“ veröffentlichte Modell übernahm er
+von Rager. Anpassungen sind jedoch an der Tabelle der Kochzeiten und den
+Korekturfaktoren erfolgt, um den damaligen Forschungsstand zu berücksichtigen
+\parencite[134-144]{Garetz1994}. Die Beträge der geschätzten
+Bitterausbeuten scheinen insgesamt zu gering zu sein \parencite{Jones1995}.
+
+Die Berechnung nach Garetz kann in zwei Ausbaustufen erfolgen. Einer minimalen
+Variante gemäß \autoref{eq:ragerba1} und einer umfangreichen Varinate gemäß
+\autoref{eq:ragerba2}. 
+
+\begin{equation}
+\BA_1 \uper = \BAKt \cdot \FKd \cdot \FHR \cdot \FSP
+\label{eq:ragerba1}
+\end{equation}
+
+\begin{equation}
+\BA_2 \uper = BA_1 \cdot \FAH \cdot \FHF \cdot \FHS \cdot \FFil
+\label{eq:ragerba2}
+\end{equation}
+
+\begin{equation}
+\FAH = \begin{cases}
+0 \quad \text{für} \quad d_{\mathit{Pfvw}} \le 1,050 \uden, \\
+\frac{d_{\mathit{Pfvw}} - 0,05}{0,2} \quad \text{für} \quad d_{\mathit{Pfvw}} > 1,050 \uden.
+\end{cases}
+\label{eq:ragerga}
+\end{equation}
+
+
 g=v*ca*ibu desired/util*alpha*0,1
 
 ibu=g*util*alpha*0,1/vol*CA
 
-\parencite[134-144]{Garetz1994} 
+
 Basiert auf Ragers Formel. Angepasst. Combined
 Adjustments statt 1+GA.
 
@@ -879,7 +919,7 @@ Näherungsweise lässt sich die Bitterausbeute von \autoref{table:garetzutil}
 auch über die \autoref{eq:garetzutil} berechnen \parencite{Steinmeyer2021}. 
 
 \begin{equation}
-\mathit{BA}_{\mathit{Tab.}}\:[\%] = 7,2994 + \left(15,0746 \cdot \tanh{\frac{\mathit{Kochzeit}\:[min] - 21,86}{24,71}}\right)
+\BAKt \uper = 7,2994 + \left(15,0746 \cdot \tanh{\frac{\mathit{Kochzeit} \umin - 21,86}{24,71}}\right)
 \label{eq:garetzutil}
 \end{equation}
 
@@ -916,21 +956,19 @@ Isomerisierung für Heimbrauer.
 
 \subsubsection*{Mosher}
 
-2 charts, für pellets und dolden, 3h 1,000-1120,nennt keine quellen
-\parencite[160\psq]{Mosher1994}
+Bereits am Ende der Achzigerjahre hatte Mosher einen aus mehreren
+Drehscheiben bestehenden Rechenschieber zur IBU Berechnung erstellt und später
+auch vertrieben \parencite{Mosher2022}. Sein 1994 veröffentlichtes
+Buch „\citetitle{Mosher1994}“ enthält zwei Diagramme zur grafischen
+Bestimmung der Bitterausbeute für Kochzeiten bis zu drei Stunden
+\parencite[160\psq]{Mosher1994}. Holle und \citeauthor{Thesseling2019} verwenden
+einen Teil der abgemessenen Diagrammdaten auch in aktuelleren Publikationen für Abschätzungen
+im Brauerei- und Laborbereich \parencites[51]{Holle2010}[9]{Thesseling2019}.
 
-\parencite{Mosher2022} Bereits ende der Achzigerjahre. Mechanischer
-Rechner mit drehschreiben.
-
-\parencite[51]{Holle2010}
-Von Mosher bestimmte Werte finden sich hier
-
-\parencite[9]{Thesseling2019}
-
-Die Bitterausbeute ist basierend auf der Stammwürze für die entsprechende
-Kochzeit zu bestimmen. Für Dolden ist dabei der Wert aus \autoref{table:mosherutil}
-und für Pellets aus \autoref{table:mosherutilpellets} zu entnehmen.
-
+Die Bitterausbeute nach Mosher ist basierend auf der relativen Dichte der
+Pfannenvollwürze und der Kochzeit der jeweiligen Hopfengabe zu bestimmen.
+Für Dolden ist dabei der Wert aus \autoref{table:mosherutil} und für Pellets aus
+\autoref{table:mosherutilpellets} zu entnehmen.
 
 \begin{table}[H]
 \centering
@@ -938,7 +976,7 @@ und für Pellets aus \autoref{table:mosherutilpellets} zu entnehmen.
 \toprule
 \multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{7}{c}{\textbf{Ausbeute [\%]}}  \\
 Relative Dichte [g/cm³]:                                        & 1,030 & 1,040 & 1,050 & 1,060 & 1,070 & 1,080  & 1,090                   \\
-Stammwürze [°P]:                                            & 7,6 & 10 & 12,4 & 14,7 & 17,1 & 19,3  & 21,6                   \\                                            
+Extraktgehalt [\%w/w]:                                            & 7,6 & 10 & 12,4 & 14,7 & 17,1 & 19,3  & 21,6                   \\                                            
 \midrule
 
 5                                            & 5     & 5     & 4     & 4     & 3     & 3      & 3                          \\
@@ -959,7 +997,7 @@ Stammwürze [°P]:                                            & 7,6 & 10 & 12,4 
 \toprule
 \multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{7}{c}{\textbf{Ausbeute [\%]}}  \\
 Relative Dichte [g/cm³]:                                        & 1,030 & 1,040 & 1,050 & 1,060 & 1,070 & 1,080  & 1,090                   \\
-Stammwürze [°P]:                                            & 7,6 & 10 & 12,4 & 14,7 & 17,1 & 19,3  & 21,6                   \\  
+Extraktgehalt [\%w/w]:                                            & 7,6 & 10 & 12,4 & 14,7 & 17,1 & 19,3  & 21,6                   \\  
 \midrule
 5                                            & 6     & 6     & 5     & 5     & 4     & 4      & 3                          \\
 15                                           & 15    & 15    & 14    & 14    & 13    & 13     & 11                         \\
@@ -977,51 +1015,7 @@ Stammwürze [°P]:                                            & 7,6 & 10 & 12,4 
 \parencite[53]{Holle2010}
 Spezifische Dichte und Volumen der gekühlten Ausschlagswürze
 
-\subsubsection*{Tinseth}
 
-\parencite{Tinseth1995}
-\url{https://www.realbeer.com/hops/bcalc_js.html}
-
-access to some handy tools and knowledgable friends at the USDA hop labs and the Flavor Perception labs at Oregon State University. Over the years I've read a lot of scientific papers on the subject and had quite a few worts and beers analyzed.
-
-different than the curves attributed to Jackie Rager in Zymurgy or to Mark Garetz in his book. That's because I believe, backed up by the brewing literature, that alpha acid isomerization is a first order, or more likely, a pseudo first order chemical reaction
-
-The "S" shaped curves most homebrewers are familiar with don't seem to accurately reflect what's happening in the brew kettle. What follows is a primer on how to calculate IBUs using my numbers.
-
-IBUs = decimal alpha acid utilization * mg/l of added alpha acids
-
-mg/l of added alpha acids = decimal AA rating * grams hops * 1000
-                            -------------------------------------
-                              volume of finished beer in liters
-                              
-
-
-
-The Bigness factor accounts for reduced utilization due to higher wort gravities. Use an average gravity value for the entire boil to account for changes in the wort volume.
-
-\begin{equation}
-\mathit{GF} = 1,65 \cdot 0,000125^{\left( \overline{d_{\frac{20}{20}}}\:[g/cm^3] - 1 \right)}
-\label{eq:tinsethgf}
-\end{equation}
-
-\begin{equation}
-\mathit{TF} = \frac{1 - e^{\left( -0,04 \cdot \mathit{Kochzeit}\:[min] \right)}}{4,15}
-\label{eq:tinsethtf}
-\end{equation}
-
-\begin{equation}
-\mathit{BA\:[\%]} = \mathit{GF} \cdot \mathit{TF} \cdot 100
-\label{eq:tinsethutil}
-\end{equation}
-
-decimal alpha acid utilization = Bigness factor * Boil Time factor
-
-The Boil Time factor accounts for the change in utilization due to boil time:
-
-
-The numbers 1.65 and 0.000125 are empirically derived to fit my data. The number 0.04 controls the shape of the utilization vs. time curve. The factor 4.15 controls the maximum utilization value--make it smaller if your kettle utilization is higher than mine.
-
-I'd suggest fiddling with 4.15 if necessary to match your system; only play with the other three if you like to muck around. I make no guarantees if you do.
                               
 
 \subsubsection*{Daniels}
@@ -1079,11 +1073,11 @@ Um mehrere Faktoren verweist auf den HCF nach Garetz
 
 \subsubsection*{Noonan}
 
-Die Bitterausbeute ist basierend auf der Stammwürze für die entsprechende
-Kochzeit zu bestimmen. Für Dolden ist dabei der Wert aus \autoref{table:noonanutil}
-und für Pellets aus \autoref{table:noonanutilpellets} zu entnehmen.
-Die in Quelle fehlerhafte Bitterausbeute für Pellets bei 90~Minuten und einer
-Stammwürze von 20,5 bis 23~°P wurde korrigiert.
+Die Bitterausbeute ist basierend auf der relativen Dichte der Pfannenvollwürze für
+die entsprechende  Kochzeit zu bestimmen. Für Dolden ist dabei der Wert
+aus \autoref{table:noonanutil} und für Pellets aus \autoref{table:noonanutilpellets}
+zu entnehmen. Die in Quelle fehlerhafte Bitterausbeute für Pellets bei 90~Minuten und
+einem Extraktgehalt von 20,5 bis 23~\%w/w wurde korrigiert.
 
 \begin{table}[H]
 \centering
@@ -1091,7 +1085,7 @@ Stammwürze von 20,5 bis 23~°P wurde korrigiert.
 \toprule
 \multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{5}{c}{\textbf{Ausbeute [\%]}}                                 \\
 Relative Dichte [g/cm³]:                    & 1,032–50 & 1,050–65 & 1,065–75 & 1,075–85 & 1,085–95  \\
-Stammwürze [°P]:                    & 8–12,5 & 12,5–16 & 16–18 & 18–20,5 & 20,5–23  \\
+Extraktgehalt [\%w/w]:                    & 8–12,5 & 12,5–16 & 16–18 & 18–20,5 & 20,5–23  \\
 \midrule                                             
 0                                            & 5        & 4        & 4                            & 4                            & 3                             \\
 5                                            & 5        & 5        & 5                            & 4                            & 4                             \\
@@ -1111,7 +1105,7 @@ Stammwürze [°P]:                    & 8–12,5 & 12,5–16 & 16–18 & 18–20
 \toprule
 \multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{5}{c}{\textbf{Ausbeute [\%]}}                                 \\
 Relative Dichte [g/cm³]:                    & 1,032–50 & 1,050–65 & 1,065–75 & 1,075–85 & 1,085–95  \\
-Stammwürze [°P]:                    & 8–12,5 & 12,5–16 & 16–18 & 18–20,5 & 20,5–23  \\
+Extraktgehalt [\%w/w]:                    & 8–12,5 & 12,5–16 & 16–18 & 18–20,5 & 20,5–23  \\
 \midrule
 0                                            & 5        & 5        & 4                            & 4                            & 3                             \\
 5                                            & 6        & 6        & 5                            & 4                            & 4                             \\
@@ -1125,11 +1119,171 @@ Stammwürze [°P]:                    & 8–12,5 & 12,5–16 & 16–18 & 18–20
 \label{table:noonanutilpellets}
 \end{table}
 
-\subsection*{Aktuelle Modelle}
+\subsubsection*{Tinseth}
+
+iso octane organisches Lösungsmittel
+
+0:47:20-40
+IBUS entsprechen nicht perceived bitterness, andere komponenten
+
+49:45-50:25
+sellhammer nicht gravity und sugar theorie, höheres protein
+
+55:45 mid 80ies homebrew
+58:05-1:00:27
+Hopfer verkauft, vakuum verpackt. Verschickt. 
+PHD Chemie
+artikel lesen hop usage und util
+brewing programm oregon state
+usad hop lab
+für Online Präsenz
+Gegen gefälligkeiten das lab nutzen
+
+aus kinetischer sicht möglich, die rager kurve
+
+1:01:
+s-shape konnte nicht sein
+
+full batches auf eigenem set
+asahi, sierre nevada, usda hop lab
+unterschiede analysiert.
+Kurver verglichen 10 gal
+1:02:30
+
+1:03:21- time und gravity weil in literatur
+die wichtigsten. how much hops 1:04:20
+
+1.06 pale ale 1.07.40
+SELBES rezept gescalt, pale ale, ipa, dipa. ctz, cent cascade
+20-43 31,8 mit beersmith berechnet
+
+1:08:00 boil vigor, pellets nicht ausgelegt, nie daten genutzt die pellets
+pellets waren nicht von gutre qualität 1:09
+
+1:09:38 58
+38, 66
+dipa 57,9 l 44 71
+1:11:00
+
+1:11:35 within 10 % genauigkeit wenn glück, +30
+konsistent, sensorisches eindruck korrelieren
+1:12:20
+
+1:18:10
+protein level 
+\parencite{Beechum2017a}
+
+BSHB
+
+2:10-4:30
+Besitzer eines kleine Hopfenhandels
+oregon state phd Chemie
+procrastiation
+working on dissertation
+homebrewer
+USDA Hop Lab
+Grind Hops to use measurement equipment
+Library copied brewing literature
+Personal communication
+Curve for utilization does not look like it supposed to do
+1994
+
+-6:30
+zip lock bags
+hop-tech, HopTech vakum verpackt
+
+11:10--11:14
+easily reliable calculate AA Percent
+
+12:00--12:10
+11-30% alpha util
+
+20:55-22:00
+Alle Forschung basierend auf persönlichem System, 
+Oregon State 
+From Daten nicht herausrechenbar
+10 % Genauigkeit
+Nicht einmal genau welche alpha der Hopfen weil nur ein eine geringe 
+Probe davon.
+
+22:05-23
+within 10 ibu
+
+konsistenz ist wichtiger, feinadjustment, nummer nicht,
+korrelation zwischen nummer aus gleichung und sensorischem eindruck
+
+
+\parencite{Smith2011}
+
+\parencite{Tinseth1997}
+\url{https://www.realbeer.com/hops/bcalc_js.html}
+
+access to some handy tools and knowledgable friends at the USDA hop labs and the Flavor Perception labs at Oregon State University. Over the years I've read a lot of scientific papers on the subject and had quite a few worts and beers analyzed.
+
+different than the curves attributed to Jackie Rager in Zymurgy or to Mark Garetz in his book. That's because I believe, backed up by the brewing literature, that alpha acid isomerization is a first order, or more likely, a pseudo first order chemical reaction
+
+The "S" shaped curves most homebrewers are familiar with don't seem to accurately reflect what's happening in the brew kettle. What follows is a primer on how to calculate IBUs using my numbers.
+
+IBUs = decimal alpha acid utilization * mg/l of added alpha acids
+
+mg/l of added alpha acids = decimal AA rating * grams hops * 1000
+                            -------------------------------------
+                              volume of finished beer in liters
+                              
+
+
+
+The Bigness factor accounts for reduced utilization due to higher wort gravities. Use an average gravity value for the entire boil to account for changes in the wort volume.
+
+\begin{equation}
+\BAKt \uper = \frac{1 - e^{\left(-0,04 \cdot \mathit{Kochzeit} \umin \right)}}{4,15} \cdot 100
+\label{eq:tinsethbakt}
+\end{equation}
+
+\begin{equation}
+\FKd = 1,65 \cdot 0,000125^{\left(\overline{d_{KW}} \uden - 1 \right)}
+\label{eq:tinsethgf}
+\end{equation}
+
+\begin{equation}
+\BA \uper = \BAKt \cdot \FKd
+\label{eq:tinsethba}
+\end{equation}
+
+decimal alpha acid utilization = Bigness factor * Boil Time factor
+
+The Boil Time factor accounts for the change in utilization due to boil time:
+
+
+The numbers 1.65 and 0.000125 are empirically derived to fit my data. The number 0.04 controls the shape of the utilization vs. time curve. The factor 4.15 controls the maximum utilization value--make it smaller if your kettle utilization is higher than mine.
+
+I'd suggest fiddling with 4.15 if necessary to match your system; only play with the other three if you like to muck around. I make no guarantees if you do.
+
+\subsection*{Aktuelle Ansätze}
 
 \subsubsection*{Wolf}
 
-https://www.maischemalzundmehr.de/index.php?inhaltmitte=toolsiburechner
+„\href{https://www.maischemalzundmehr.de/index.php?inhaltmitte=toolsiburechner}{Maische, Malz und Mehr}“
+
+die Nachisomerisierungzeit (Zeit zwischen Kochende und Whirlpool) wird zur Kochzeit jeder Hopfengabe hinzugerechnet, allerdings entsprechenend ihrer Dauer und der Geschwindigkeit der Abkühlung mit einem niedrigeren Wert gegenüber der regulären Kochzeit (siehe Theorieteil) 
+
+bei Verwendung von Hopfenpellets wird gegenüber Hopfendolden eine 10% höhere Hopfenausnutzung angenommen
+Da die Tinseth-Formel auf Experimenten mit Hopfendolden basiert, wird bei der Verwendung von Hopfenpellets die Hopfenausnutzung mit dem Faktor 1.1 nach oben korrigiert, während bei Verwendung von Hopfendolden nicht korrigiert wird. 
+
+Weiterhin hat Glenn Tinseth seine Formel mit Hopfengaben direkt zu Kochbeginn entwickelt. Durch Ausscheidungen mit dem Würzebruch gehen der Würze jedoch eine gewisse Menge an Bitterstoffen verloren. Der IBU-Rechner ehöht die Hopfenausnutzung bei Gaben nach dem Würzebruch um den Faktor 1.1 gegenüber der Tinseth-Formel. Bei Vorderwürzehopfung bzw. bei Hopfengaben zu Kochbeginn gilt die Tinseth-Formel unverändert. 
+
+bei Hopfengaben nach dem Würzebruch (>15 min nach Kochbeginn, d.h. Gesamtkochzeit minus individuelle Hopfenkochzeit > 15) wird eine 10% höhere Hopfenausnutzung angenommen 
+
+In der Zeit zwischen Kochende und Kühlschlange werden weiterhin alpha-Säuren zu iso-alpha-Säuren isomerisiert. Diese Nachisomerisierung wird von der Tinseth-Formel nicht berücksichtigt. Da sie bei Temperaturen <100°C stattfindet, verläuft sie nicht so schnell wie die reguläre Isomerisierung während des Hopfenkochens. Je niedriger die Temperatur, desto langsamer. Die Nachisomerisierung kann mit dem IBU-Rechner jedoch abgeschätzt werden. Dazu wird die Nachisomerisierungszeit zur Würzekochzeit jeder Hopfengabe hinzugerechnet, allerdings entsprechenend ihrer Dauer und der Geschwindigkeit der Abkühlung der Würze mit einem niedrigeren Wert gegenüber der regulären Kochzeit. Dabei wird davon ausgegangen, dass sich die Geschwindigkeit der Isomerisierung alle 10°C unter 100°C halbiert. Diese Abhängigkeit kann mit einem Faktor ausgedrückt werden, welcher bei 100°C daher 1.0, bei 90°C 0.5 und bei 80°C 0.25 usw. entspricht. über eine Regression kann er rechnerisch auch wie folgt ermittelt werden: 
+
+%Isomerisierungsgeschwindigkeitsfaktor = 0.001 x e^0.069 x Temperatur
+
+Mit der Nachisomerisierungszeit multipliziert ergibt dieser Wert die Effektive Kochzeit während der Nachisomerisierung. Bei einer Nachisomerisierung von 30 min und einer Temperatur von 90°C, entspricht die Zeit der Nachisomerisierung effektiv einer Kochzeit von nur 15 min %(Effektive Kochzeit = 30 min x 0.001 x e^0.069 x 90 = 15 min). In der Realität läuft die Nachisomerisierung allerdings nicht bei einer konstanten Temperatur ab. Die Würze kühlt sich in der Nachisomerisierungszeit ausgehend von ca. 100°C kontinuierlich ab. In dieser Abkühlungsphase verringert sich natürlich der Isomerisierungsgeschwindigkeitsfaktor permanent. Messen wir die Temperatur am Ende der Nachisomerisierungszeit, können wir den Isomerisierungsgeschwindigkeitsfaktor allerdings über den Temperaturbereich der Nachisomerisierung (100°C bis Temperatur am Ende der Nachisomerisierung) integrieren: 
+
+%Gleichung 3: Integrierter Isomerisierungsgeschwindigkeitsfaktor = 0.046 e^(0.031 x Temperatur am Ende der Nachisomerisierung). 
+
+Dieser Integrierte Isomerisierungsgeschwindigkeitsfaktor ist dann der Wert, welcher mit der Nachisomerisierungszeit multipliziert die Zeit ergibt, welche im IBU-Rechner zur regulären Kochzeit hinzugerechnet wird. So werden z.B. bei einer Nachisomerisierungszeit von 30 min, während der die Würze auf 80°C abkühlt (errechneter Integrierter Isomerisierungsgeschwindigkeitsfaktor = 0.53), zu jeder Hopfengabe 16 min (30 min x 0.53 = 16 min) zusätzliche Kochzeit hinzugerechnet. Insbesonder bei reichlichen Hopfengaben gegen Kochende, d.h. wenn der Hopfen noch nicht "ausgelutscht" ist, hat die Nachisomerisierung einen enormen Einfluss auf die Gesamtbittere. 
+
 Bereits seit 2012
 
 \parencite{Wolf2022}
@@ -1148,17 +1302,19 @@ Bereits seit 2012
 
 \subsubsection*{Smith}
 
-\parencite{Smith2019}
+Zur Berechnung der Bitterausbeute im Whirlpool wendet \citeauthor{Smith2019}
+einen von der Temperatur abhängigen, durch \autoref{eq:smithkfwp} definierten,
+Korrekturfaktor an. Dabei ist für Hopfengabe, die erst während des Whirlpools
+erfolgen, die Ausbeute für eine äquivalente Kochzeit zu berechnen und dann der
+Korrekturfaktor anzuwenden. Bei Hopfengaben, die bereits vor dem Whirlpool erfolgt
+sind, ist berücksichtigen, dass bereits ein Teil Alphasäuren isomerisiert wurde.
+Der verbleibende nicht isomerisierte Säuregehalt ist die Basis für weitere
+Berechnungen. \parencite{Smith2019}
 
-If we calculate the hop utilization for an equivalent boil hop using the time, volume and gravity of the wort for the addition, we can then apply the “whirlpool utilization” to this number to estimate the overall hop utilization. Here’s a look at the whirlpool utilization with temperature assuming 100% would be an equivalent boil hop:
-
-   % Formula: Utilization = 2.39 * 10^11 * e^(-9773/T) where T is in Kelvin
-    Boiling: 100 C (212 F) – Utilization is 100%
-    At 90 C (194 F) – Utilization is 49%
-    At 80 C (176 F) – Utilization is 23%
-    At 70 C (158 F) – Utilization is 10%
-    At 60 C (140 F) – Utilization is 4.3%
-    At 50 C (122 F) – Utilization is 1.75%
+\begin{equation}
+\mathit{F}_{\mathit{WP}} = 2,39 \cdot 10^{11} \cdot e^{\left(\frac{-9773}{\mathit{WP-Temperatur}\:[K]} \right)}
+\label{eq:smithkfwp}
+\end{equation}
 
 \subsubsection*{Hosom – SMPH}
 

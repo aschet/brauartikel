@@ -9,6 +9,9 @@ from numpy.core.einsumfunc import _parse_possible_contraction
 def p_to_sg(p):
     return p / (258.6 - (p / 258.2 * 227.1)) + 1.0
 
+def c_to_k(c):
+    return c + 273.15
+
 def calc_alpha_acid_concentration(hop_weight, alpha_acid_rating, cast_wort_volume):
     hop_weight_mg = hop_weight * 1000.0
     alpha_acid_rating_decimal = alpha_acid_rating / 100.0
@@ -86,7 +89,7 @@ def calc_utilization_garetz(boil_time, sg):
 calc_utilization_garetz_vectorized = np.vectorize(calc_utilization_garetz)
 
 def calc_utilization_garetz_function(boil_time, sg):
-    utilization = 7.2994 + (15.0746 * np.tanh((boil_time - 21.86) / 24.71)) 
+    utilization = np.maximum(0.0, 7.2994 + (15.0746 * np.tanh((boil_time - 21.86) / 24.71))) 
     return utilization    
 
 def calc_utilization_mosher(boil_time, sg):
@@ -96,8 +99,8 @@ calc_utilization_mosher_vectorized = np.vectorize(calc_utilization_mosher)
 
 def calc_utilization_tinseth(boil_time, sg_mean):
     gravity_adjustment = 1.65 * np.power(0.000125, sg_mean - 1.0)
-    time_adjustment = (1.0 - np.exp(-0.04 * boil_time)) / 4.15
-    return gravity_adjustment * time_adjustment * 100.0 * 1.1
+    time_adjustment = (1.0 - np.exp(-0.04 * boil_time)) / 4.15 * 100.0
+    return gravity_adjustment * time_adjustment
 
 def calc_utilization_daniels(boil_time, sg):
     utilization = lut_daniels.lookup(boil_time)   
@@ -114,19 +117,23 @@ def calc_ibu(alpha_acid_concentration, utilization):
     utilization_decimal = utilization / 100.0
     return alpha_acid_concentration * utilization_decimal
 
+def calc_kfwp_smith(temp):
+    return 2.39 * 10.0**11 * np.exp(-9773.0 / c_to_k(temp))
+
+print(calc_kfwp_smith(90))
+
 hop_weight = 30
 alpha_acid_rating = 5.0
 pre_boil_volume = 25
-pre_boil_extract = 10.5
+pre_boil_extract = 13.0
 pre_boil_sg = p_to_sg(pre_boil_extract)
-boil_time = 90.0
+boil_time = 120.0
 evaporation_rate = 2.5
 cast_wort_volume = pre_boil_volume - (evaporation_rate * boil_time / 60.0)
 oe = pre_boil_extract * pre_boil_volume / cast_wort_volume
 og = p_to_sg(oe)
 sg_mean = (og + pre_boil_sg) / 2.0
-
-calc_utilization_rager(60, pre_boil_sg)
+pre_boil_sg = sg_mean
 
 time_scale = np.linspace(0, boil_time, dtype=int)
 utilizations_tinset = calc_utilization_tinseth(time_scale, sg_mean)
@@ -140,10 +147,10 @@ utilizations_noonan = calc_utilization_noonan_vectorized(time_scale, pre_boil_sg
 
 plt.plot(time_scale, utilizations_tinset)
 plt.plot(time_scale, utilizations_rager)
-#plt.plot(time_scale, utilizations_rager_function)
+plt.plot(time_scale, utilizations_rager_function)
 plt.plot(time_scale, utilizations_garetz)
-#plt.plot(time_scale, utilizations_garetz_function)
-#plt.plot(time_scale, utilizations_mosher)
-#plt.plot(time_scale, utilizations_daniels)
-#plt.plot(time_scale, utilizations_noonan)
+plt.plot(time_scale, utilizations_garetz_function)
+plt.plot(time_scale, utilizations_mosher)
+plt.plot(time_scale, utilizations_daniels)
+plt.plot(time_scale, utilizations_noonan)
 plt.show()
