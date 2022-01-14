@@ -74,13 +74,13 @@ def calc_fga_rager(sg):
 
 def calc_utilization_rager(boil_time, brew_data):
     utilization = lut_rager.lookup(boil_time)   
-    return utilization * calc_fga_rager(brew_data.pre_boil_sg)
+    return utilization * calc_fga_rager(brew_data.pre_boil_sg) * 1.1
 
 calc_utilization_rager_vectorized = np.vectorize(calc_utilization_rager)
 
 def calc_utilization_rager_function(boil_time, brew_data):
     utilization = 18.11 + (13.86 * np.tanh((boil_time - 31.32) / 18.27))
-    return utilization * calc_fga_rager(brew_data.pre_boil_sg) 
+    return utilization * calc_fga_rager(brew_data.pre_boil_sg) * 1.1
 
 def calc_utilization_garetz(boil_time, brew_data):
     utilization = lut_garetz.lookup(boil_time)  
@@ -100,7 +100,7 @@ calc_utilization_mosher_vectorized = np.vectorize(calc_utilization_mosher)
 def calc_utilization_tinseth(boil_time, brew_data):
     gravity_adjustment = 1.65 * np.power(0.000125, brew_data.sg_mean - 1.0)
     time_adjustment = (1.0 - np.exp(-0.04 * boil_time)) / 4.15 * 100.0
-    return gravity_adjustment * time_adjustment
+    return gravity_adjustment * time_adjustment * 1.1
 
 def calc_utilization_daniels(boil_time, brew_data):
     utilization = lut_daniels.lookup(boil_time)   
@@ -133,37 +133,32 @@ brew_data = BrewData()
 
 time_scale = np.linspace(0, brew_data.boil_time, dtype=int)
 utilizations_tinseth = calc_utilization_tinseth(time_scale, brew_data)
-utilizations_rager = calc_utilization_rager_vectorized(time_scale, brew_data)
-utilizations_rager_function = calc_utilization_rager_function(time_scale, brew_data)
-utilizations_garetz = calc_utilization_garetz_vectorized(time_scale, brew_data)
-utilizations_garetz_function = calc_utilization_garetz_function(time_scale, brew_data)
-utilizations_mosher = calc_utilization_mosher_vectorized(time_scale, brew_data)
-utilizations_daniels = calc_utilization_daniels_vectorized(time_scale, brew_data)
-utilizations_noonan = calc_utilization_noonan_vectorized(time_scale, brew_data)
 
 fig_utilizations = plt.figure(constrained_layout=True, figsize=(8, 12))
 axes = fig_utilizations.subplots(3, 2, sharex=True, sharey=True)
 
-def plot(ax, name, utilization, utilization2):
+def plot(ax, name, utilization_func, utilization_func2):
     ax.set_title(name)
     ax.set_xlabel('Kochzeit [min]')
     ax.set_ylabel('Bitterausbeute [%]')
     ax.plot(time_scale, utilizations_tinseth, label='Tinseth')
-    ax.plot(time_scale, utilization, label=name + ' (Tabelle)')
+    utilization = utilization_func(time_scale, brew_data)
+    ax.plot(time_scale, utilization, label=name + ' Tabelle')
 
-    if utilization2 is not None:
-        ax.plot(time_scale, utilization2, label=name + ' (Funktion)')
+    if utilization_func2 is not None:
+        utilization2 = utilization_func2(time_scale, brew_data)
+        ax.plot(time_scale, utilization2, label=name + ' Funktion')
     else:
         polynomial_coeff=np.polyfit(time_scale, utilization, 3)
         ynew=np.poly1d(polynomial_coeff)
-        ax.plot(time_scale,ynew(time_scale), label=name + ' (Polyfit)')
+        ax.plot(time_scale,ynew(time_scale), label=name + ' Polyfit')
 
     ax.legend(loc='lower right')  
 
-plot(axes[0, 0], "Rager", utilizations_rager, utilizations_rager_function)
-plot(axes[0, 1], "Garetz", utilizations_garetz, utilizations_garetz_function)
-plot(axes[1, 0], "Mosher", utilizations_mosher, None)
-plot(axes[1, 1], "Daniels", utilizations_daniels, None)
-plot(axes[2, 0], "Noonan", utilizations_noonan, None)
+plot(axes[0, 0], "Rager", calc_utilization_rager_vectorized, calc_utilization_rager_function)
+plot(axes[0, 1], "Garetz", calc_utilization_garetz_vectorized, calc_utilization_garetz_function)
+plot(axes[1, 0], "Mosher", calc_utilization_mosher_vectorized, None)
+plot(axes[1, 1], "Daniels", calc_utilization_daniels_vectorized, None)
+plot(axes[2, 0], "Noonan", calc_utilization_noonan_vectorized, None)
 fig_utilizations.savefig('graph_utilization.pdf', format='pdf')
 plt.show()
