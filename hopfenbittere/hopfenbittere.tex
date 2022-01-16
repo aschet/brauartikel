@@ -10,6 +10,7 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{chemformula}
+%\usepackage{euler}
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{icomma}
 %\usepackage{textcomp}
@@ -137,7 +138,7 @@ sensation of bitterness, the IBU is an incomplete picture of just how bitter a
 beer really is.
 
 \parencite[61]{Beechum2017}
-Spezifische dichte der Kochwürze wird als Konstante betrachtet
+Relative dichte der Kochwürze wird als Konstante betrachtet
 Nur für gekochte Hopfen
 Nur für Dolen, es gibt verschiedene Korrekturfaktoren
 
@@ -277,7 +278,7 @@ und im Bier laden. 10 bis20 verlust
 
 Höhere utilisation bei
 vigor boild und temperature (umgebungsdruck, seehöhe)
-geringerer spezifischen Dichte
+geringerer relative Dichte
 geringere Hopfenmenge
 höherer pH Wert, -> zum Teil unangenehmere Bittere
 
@@ -627,16 +628,16 @@ Bitterausbeuten lässt sich dann ein IBU Wert für ein Rezept berechnen. \parenc
 Folgende Korrekturfaktoren sind modellabhängig vorgesehen:
 
 \begin{itemize}
-\item Spezifische Dichte der Kochwürze ($\FKd$)
+\item Relative Dichte der „Kochwürze“ ($\FKd$)
 \item Hopfenrate ($\FHR$)
 \item Siedepunkt des Wassers basierend auf der Seehöhe ($\FSP$)
-\item Ausflockung der Hefe ($\FAH$)
+\item Sedimentationsverhalten der Hefe ($\FAH$)
 \item Hopfenform: Dolden oder Pellets ($\FHF$)
 \item Verwendung eines Hopfensacks ($\FHS$)
 \item Filtration ($\FFil$)
 \end{itemize}
 
-Die Umrechnung von Extraktgehalt in spezifische Dichte erfolgt auf Basis
+Die Umrechnung von Extraktgehalt in relative Dichte erfolgt auf Basis
 der Plato Tabellen über die Goldiner Gleichungen (\autoref{eq:calcptosg})
 oder vergleichbaren Näherungsverfahren \parencite[140\psq]{Spedding2016}.
 
@@ -645,39 +646,7 @@ d_{\frac{20}{20}} \uden = \frac{\degree P}{258,6 - \degree P / 258,2 \cdot 227,1
 \label{eq:calcptosg}
 \end{equation}
 
-\parencite[62]{Hall1997}
-hop utilization rates decrease with increas-
-ing boil gravity above 1.050
-
-Correcting the utilization to
-account for the hop form also is common.
-Leaf hops or hop plugs do not need a cor-
-rection, but hops in the pellet form are
-reported to have an increased utilization.
-The Garetz method sets Fhf equal to 1.1 for
-pellets boiled from 10 to 30 minutes, and
-unity otherwise. The Mosher method sets
-Fhf equal to 1.33 for pellets in general, inde-
-pendent of gravity and boil time. Noonan
-again uses a table, which gives Fhf between
-1.0 and 1.5 for pellets, with maximum val-
-ues centering around 15 minutes of boil
-time and low boil gravities. Daniels does not
-give a value for F hf , although he recom-
-mends using something between 1 and 1.25
-for pellets. The other methods do not give
-a correction factor for hop form, but any of
-the above methods may be used with them.
-
-\parencite[63]{Hall1997}
-Hopping rate:
-Iterativ berechnen oder quadratische
-Formel. 
-faktor Zulsetzt anwenden
-
-
-
-\subsubsection*{Rager}
+\subsubsection*{Rager (1990)}
 
 Die Grundlage für Ragers Modell bildeten Heimbraubücher von Fred Eckhardt,
 Dave Miller und Byron Burch. Er hat die darin enthaltenen Informationen
@@ -688,7 +657,7 @@ $\FKd$ berücksichtigt wurde \parencite[134]{Garetz1994}.
 Für die Modellberechnung ist zuerst die Ausbeute $\BAKt$ über die \autoref{table:ragerbakt}
 oder die \autoref{eq:ragerbakt} auf Basis der Kochdauer der jeweiligen Hopfengabe
 zu wählen \parencite{Steinmeyer2021}.
-Danach ist der Korrekturfaktor $\FKd$ anhand der spezifischen Dichte der
+Danach ist der Korrekturfaktor $\FKd$ anhand der relativen Dichte der
 Pfannenvollwürze ($\dPfvw$) gemäß \autoref{eq:ragerga} und \autoref{eq:ragerfkd}
 zu bestimmen \parencite[53]{Rager1990}.
 Abschließend erfolgt die Berechnung der Bitterausbeute über \autoref{eq:ragerba}.
@@ -744,7 +713,7 @@ Abschließend erfolgt die Berechnung der Bitterausbeute über \autoref{eq:ragerb
 \subsubsection*{Burch}
 Brewing Quality Beers
 
-\subsubsection*{Garetz}
+\subsubsection*{Garetz (1994)}
 
 Das grundlegende Berechnungsverfahren für das von Garetz in 1994
 veröffentlichte Modell übernahm er von Rager. Anpassungen sind jedoch an
@@ -787,7 +756,7 @@ einer Hopfengabe durch eine quadratische Gleichung zu eliminieren      \parencit
 81–90           & 23 \\
 \bottomrule
 \end{tabular}
-\caption{Bitterausbeute für Dolden nach \citeauthor{Garetz1994} \parencite[138]{Garetz1994}}
+\caption{Bitterausbeute für Dolden nach Garetz \parencite[138]{Garetz1994}}
 \label{table:garetzbakt}
 \end{table}
 
@@ -841,7 +810,21 @@ d \uden = \begin{cases}
 \label{eq:garetzba1}
 \end{equation}
 
-140+
+Alle weiteren Faktoren erachtet Garetz als optional. Der Faktor
+$\FAH$ (\autoref{eq:garetzah}) ist anhand des Sedimentationsverhaltens
+der Hefe zu wählen. Je schneller eine Hefe sedimentiert, desto
+weniger Isoalphasäure haftet an den Zellwenden an und desto
+mehr Isoalphasäure bleibt in Lösung. Dementsprechend ist die
+Bitterausbeute um 5~\% nach unten oder nach oben zu korrigieren. 
+Für Weißbier veranschlagt Garetz eine 20~\% höhere Ausbeute,
+da die Hefe beim Trinken ebenfalls konsumiert wird.
+Bei der Verwendung von Pellets erfolgt eine erhöhung der
+Ausbeute um 10~\% bei einer Kochzeit bis 30~Minuten (\autoref{eq:garetzhf}).
+Für Hopfensäcke ist eine Reduktion der Ausbeute,
+basierend auf Packdichte, um bis zu 20~\% durchzuführen.
+(\autoref{eq:garetzhs}). Der Einsatz eines Filtersystems kann
+die Ausbeute inetwa um 1,25 bis 2,5~\% reduzieren (\autoref{eq:garetzfil}). 
+Garetz empfieht eine messtechnische Erhebung des Faktors $\FFil$. \parencite[140\psq]{Garetz1994}
 
 \begin{equation}
 \FAH = \begin{cases}
@@ -850,89 +833,61 @@ d \uden = \begin{cases}
 0,95 \quad \textrm{für langsam sedimentierender Hefe}, \\
 1,20 \quad \textrm{für Weißbierhefe}. \\
 \end{cases}
-\label{eq:garetzbah}
+\label{eq:garetzah}
 \end{equation}
 
 
 \begin{equation}
 \FHF = \begin{cases}
-1,00 \quad \textrm{für Dolden}, \\
-1,05 \quad \textrm{für Pellets für} \quad 10 < \textrm{Kochzeit} \umin \le 30. \\
+1,0 \quad \textrm{für Dolden}, \\
+1,1 \quad \textrm{für Pellets für} \quad 10 < \textrm{Kochzeit} \umin \le 30. \\
 \end{cases}
 \label{eq:garetzhf}
 \end{equation}
 
 \begin{equation}
 \FHS = \begin{cases}
-1,00 \quad \textrm{ohne Hopfensack}, \\
-0,90 \quad \textrm{für lose gepackten Hopfensack}, \\
-0,80 \quad \textrm{für dicht gepackten Hopfensack}. \\
+1,0 \quad \textrm{ohne Hopfensack}, \\
+0,9 \quad \textrm{für lose gepackten Hopfensack}, \\
+0,8 \quad \textrm{für dicht gepackten Hopfensack}. \\
 \end{cases}
 \label{eq:garetzhs}
 \end{equation}
 
-141
-
-$\FFil$
-
-1,25 bis 2,5 Beim Einsatz
-
+\begin{equation}
+\FFil := \left[0,975, 0,9875 \right]
+\label{eq:garetzfil}
+\end{equation}
 
 \begin{equation}
 \BA_2 \uper = BA_1 \cdot \FAH \cdot \FHF \cdot \FHS \cdot \FFil
 \label{eq:garetzba2}
 \end{equation}
 
-
-
-
-
-\parencite[140\psq]{Garetz1994} 
-Schnelle flokulierung 5\% höhere utilisierung. Hopfenmenge *0,95
-sonst * 1,05. Bei Hefeweizen * 0.8 weil an Hefezellen anhaftet.
-
-von 10 bis kleiner 30 minuten Kochzeit Pelletfaktor, 0.9 10\% höher
-
-Hopfensack
-frei 10 * geringer * 1,1
-eng 20 * geringer * 1,2
-1,25 bis 2,25 geringer * 1.0125
-
-HF Faktor bei Berechnung der IBU nicht vorhanden, schätzung :(
-
-\parencite[134-144]{Garetz1994} 
-
-IBU Messung von Labor durchführen lassen
-\parencite[145]{Garetz1994} 
-
-Berücksichtigt Ausbeute während Whirlpool nicht weil geringe
-Isomerisierung für Heimbrauer.
-\parencite[167]{Garetz1994} 
-
-\subsubsection*{Mosher}
+\subsubsection*{Mosher (1994)}
 
 Bereits am Ende der Achzigerjahre hatte Mosher einen aus mehreren
 Drehscheiben bestehenden Rechenschieber zur IBU Berechnung erstellt und später
-auch vertrieben \parencite{Mosher2022}. Sein 1994 veröffentlichtes
+auch vertrieben \parencite{Mosher2022}. Sein in 1994 veröffentlichtes
 Buch „\citetitle{Mosher1994}“ enthält zwei Diagramme zur grafischen
 Bestimmung der Bitterausbeute für Kochzeiten bis zu drei Stunden
 \parencite[160\psq]{Mosher1994}. Holle und \citeauthor{Thesseling2019} verwenden
 einen Teil der abgemessenen Diagrammdaten noch immer in aktuelleren
 Publikationen für grobe Abschätzungen \parencites[51]{Holle2010}[9]{Thesseling2019}.
 
-Die Bitterausbeute nach Mosher ist basierend auf der spezifischen Dichte und
+Die Bitterausbeute nach Mosher ist basierend auf der relativen Dichte und
 der Kochzeit der jeweiligen Hopfengabe zu bestimmen. Für Dolden ist
-dabei der Wert aus \autoref{table:mosherutil} und für Pellets aus
-\autoref{table:mosherutilpellets} zu entnehmen. Ob sich die
-spezifische Dichte dabei wie bei Rager auf die spezifische Dichte der Pfannenvollwürze
-bezieht, ist aus Moshers Publikation nicht ersichtlich.
+dabei der Wert aus \autoref{table:mosherbakt} und für Pellets aus
+\autoref{table:mosherbaktpellets} zu entnehmen. Ob sich die
+relativen Dichte dabei wie bei Rager auf die Pfannenvollwürze bezieht, ist aus Moshers Publikation nicht ersichtlich. Holle geht bei seinen Beispielen
+von der Stammwürze aus \parencite[53]{Holle2010}.
 
 \begin{table}[H]
 \centering
 \begin{tabular}{rrrrrrrr} 
 \toprule
 \multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{7}{c}{\textbf{Ausbeute [\%]}}  \\
-Spezifische Dichte [g/cm³]:                                        & 1,030 & 1,040 & 1,050 & 1,060 & 1,070 & 1,080  & 1,090                   \\
+Relative Dichte [g/cm³]:                                        & 1,030 & 1,040 & 1,050 & 1,060 & 1,070 & 1,080  & 1,090                   \\
 Extraktgehalt [\%w/w]:                                            & 7,6 & 10 & 12,4 & 14,7 & 17,1 & 19,3  & 21,6                   \\                                            
 \midrule
 
@@ -945,7 +900,7 @@ Extraktgehalt [\%w/w]:                                            & 7,6 & 10 & 1
 \bottomrule
 \end{tabular}
 \caption{Bitterausbeute für Dolden nach \citeauthor{Mosher1994} \parencite[51]{Holle2010}}
-\label{table:mosherutil}
+\label{table:mosherbakt}
 \end{table}
 
 \begin{table}[H]
@@ -953,7 +908,7 @@ Extraktgehalt [\%w/w]:                                            & 7,6 & 10 & 1
 \begin{tabular}{rrrrrrrr} 
 \toprule
 \multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{7}{c}{\textbf{Ausbeute [\%]}}  \\
-Spezifische Dichte [g/cm³]:                                        & 1,030 & 1,040 & 1,050 & 1,060 & 1,070 & 1,080  & 1,090                   \\
+Relative Dichte [g/cm³]:                                        & 1,030 & 1,040 & 1,050 & 1,060 & 1,070 & 1,080  & 1,090                   \\
 Extraktgehalt [\%w/w]:                                            & 7,6 & 10 & 12,4 & 14,7 & 17,1 & 19,3  & 21,6                   \\  
 \midrule
 5                                            & 6     & 6     & 5     & 5     & 4     & 4      & 3                          \\
@@ -965,24 +920,22 @@ Extraktgehalt [\%w/w]:                                            & 7,6 & 10 & 1
 \bottomrule
 \end{tabular}
 \caption{Bitterausbeute für Pellets nach \citeauthor{Mosher1994} \parencite[51]{Holle2010}}
-\label{table:mosherutilpellets}
+\label{table:mosherbaktpellets}
 \end{table}
 
-% TODO tabelle
-\parencite[53]{Holle2010}
-Spezifische Dichte und Volumen der gekühlten Ausschlagswürze
+\subsubsection*{Daniels (1996)}
 
-
-                              
-
-\subsubsection*{Daniels}
-
-\parencite[80]{Daniels1996}
-Setzt auf Berechnungsvorschrift von \citeauthor{Rager1990}
-einfache
-
-eigenen Tests und mehreren Quellen, insbesondere Randy Mosher
-Hop-Go-Round
+Das Modell von Daniels verwendet Teile der Berechnungsvorschriften
+von Rager und Garetz aber eigene Tabellen für die Bestimmung
+der Bitterausbeute basierend auf der Kochzeit und des
+verwendeten Hopfenprodukts (\autoref{table:danielsbakt} und \autoref{table:danielsbaktpellets}).
+Der Faktor $\FKd$ ist nach Rager mit \autoref{eq:ragerfkd} zu berechnen.
+Für den Faktor $\FHR$ hat Daniels eine eigene Tabelle vorgesehen,
+die hier nicht angeführt wurde, nachdem dessen Berechnung auch durch
+\autoref{eq:garetzhr} möglich ist.
+Die gesamte Bitterausbeute wird gemäß \autoref{eq:danielsba} gebildet.
+Neben Moshers Rechenschieber bilden noch weitere Quellen und eigene
+Tests die Datenbasis für Daniels Tabellen. \parencite[80,85-88]{Daniels1996}
 
 \begin{table}[H]
 \centering
@@ -1000,7 +953,7 @@ Hop-Go-Round
 \bottomrule
 \end{tabular}
 \caption{Bitterausbeute für Dolden nach \citeauthor{Daniels1996} \parencite[80]{Daniels1996}}
-\label{table:danielsutil}
+\label{table:danielsbakt}
 \end{table}
 
 \begin{table}[H]
@@ -1019,22 +972,22 @@ Hop-Go-Round
 \bottomrule
 \end{tabular}
 \caption{Bitterausbeute für Pellets nach \citeauthor{Daniels1996} \parencite[80]{Daniels1996}}
-\label{table:danielsutilpellets}
+\label{table:danielsbaktpellets}
 \end{table}
 
-\parencite[85]{Daniels1996}
-IBU für 30 Minuten vermessen und dann eigene util zusammenstellen
+\begin{equation}
+\BA \uper = \BAKt \cdot \FKd \cdot \FHR
+\label{eq:danielsba}
+\end{equation}
 
-\parencite[86]{Daniels1996}
-Um mehrere Faktoren verweist auf den HCF nach Garetz
 
-\subsubsection*{Noonan}
+\subsubsection*{Noonan (1996)}
 
-Die Bitterausbeute nach Noonan ist basierend auf der spezifischen Dichte und
+Die Bitterausbeute nach Noonan ist basierend auf der relativen Dichte und
 der Kochzeit der jeweiligen Hopfengabe zu bestimmen. Für Dolden ist
-dabei der Wert aus \autoref{table:noonanutil} und für Pellets aus
-\autoref{table:noonanutilpellets} zu entnehmen. Ob sich die
-spezifische Dichte dabei wie bei Rager auf die spezifische Dichte der Pfannenvollwürze
+dabei der Wert aus \autoref{table:noonanbakt} und für Pellets aus
+\autoref{table:noonanbaktpellets} zu entnehmen. Ob sich die
+relative Dichte dabei wie bei Rager auf die Pfannenvollwürze
 bezieht, ist aus Noonans Publikation nicht ersichtlich. Die in der Quelle
 fehlerhafte angegebene Bitterausbeute für Pellets bei 90~Minuten und
 einem Extraktgehalt von 20,5 bis 23~\%w/w wurde durch korrigiert.
@@ -1056,7 +1009,7 @@ Extraktgehalt [\%w/w]:                    & 8–12,5 & 12,5–16 & 16–18 & 18�
 \bottomrule
 \end{tabular}
 \caption{Bitterausbeute für Dolden nach \citeauthor{Noonan1996} \parencite[215]{Noonan1996}}
-\label{table:noonanutil}
+\label{table:noonanbakt}
 \end{table}
 
 \begin{table}[H]
@@ -1076,10 +1029,10 @@ Extraktgehalt [\%w/w]:                    & 8–12,5 & 12,5–16 & 16–18 & 18�
 \bottomrule
 \end{tabular}
 \caption{Bitterausbeute für Pellets nach \citeauthor{Noonan1996} \parencite[215]{Noonan1996}}
-\label{table:noonanutilpellets}
+\label{table:noonanbaktpellets}
 \end{table}
 
-\subsubsection*{Tinseth}
+\subsubsection*{Tinseth (1997)}
 
 Während Tinseth in den Neunzigerjahren an
 der Oregon State University sein Doktoratsstudium in Chemie absolvierte,
@@ -1137,7 +1090,7 @@ Kurvenform und die Konstante 4,15  die maximale Ausbeute
 \begin{figure}[H]
 \centering
 \includegraphics[width=10cm]{graph_utilization.pdf}
-\caption{Bitterausbeute bei 12 \%w/w Extrakt in Pfannenvollwürze (Ascher, 2022)}
+\caption{Bitterausbeute bei 10,5 \%w/w Extrakt in Pfannenvollwürze (Ascher, 2022)}
 \label{fig:novotnygraph}
 \end{figure}
 
@@ -1244,7 +1197,7 @@ Noonan: 56.9
 
 \subsection*{Aktuelle Ansätze}
 
-\subsubsection*{Wolf}
+\subsubsection*{Wolf (2012)}
 
 „\href{https://www.maischemalzundmehr.de/index.php?inhaltmitte=toolsiburechner}{Maische, Malz und Mehr}“
 
@@ -1271,19 +1224,19 @@ Bereits seit 2012
 
 \parencite{Wolf2022}
 
-\subsubsection*{Hosom – mIBU}
+\subsubsection*{Hosom – mIBU (2015)}
 
 \url{https://jphosom.github.io/alchemyoverlord}
 
 \parencite{Hosom2015}
 
-\subsubsection*{Novotný}
+\subsubsection*{Novotný (2016)}
 
 \url{https://www.diversity.beer/2018/02/ibu-spreadsheet-english-version.html}
 \parencite{Novotny2016}
 \parencite{Novotny2018}
 
-\subsubsection*{Smith}
+\subsubsection*{Smith (2019)}
 
 Zur Berechnung der Bitterausbeute im Whirlpool wendet \citeauthor{Smith2019}
 einen von der Temperatur abhängigen, durch \autoref{eq:smithkfwp} definierten,
@@ -1299,7 +1252,7 @@ Berechnungen. \parencite{Smith2019}
 \label{eq:smithkfwp}
 \end{equation}
 
-\subsubsection*{Hosom – SMPH}
+\subsubsection*{Hosom – SMPH (2021)}
 
 \parencite{Hosom2021}
 

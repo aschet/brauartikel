@@ -101,7 +101,7 @@ def calc_utilization_garetz_function(boil_time, brew_data):
     return utilization * calc_fx_garetz(brew_data)
 
 def calc_utilization_mosher(boil_time, brew_data):
-    return lut_mosher.lookup(brew_data.pre_boil_sg).lookup(boil_time)
+    return lut_mosher.lookup(brew_data.og).lookup(boil_time)
 
 calc_utilization_mosher_vectorized = np.vectorize(calc_utilization_mosher)
 
@@ -112,12 +112,12 @@ def calc_utilization_tinseth(boil_time, brew_data):
 
 def calc_utilization_daniels(boil_time, brew_data):
     utilization = lut_daniels.lookup(boil_time)   
-    return utilization * calc_fga_rager(brew_data.pre_boil_sg)
+    return utilization * calc_fga_rager(brew_data.pre_boil_sg) * calc_fhr_garetz(brew_data.total_ibu)
 
 calc_utilization_daniels_vectorized = np.vectorize(calc_utilization_daniels)
 
 def calc_utilization_noonan(boil_time, brew_data):
-    return lut_noonan.lookup(brew_data.pre_boil_sg).lookup(boil_time)
+    return lut_noonan.lookup(brew_data.og).lookup(boil_time)
 
 calc_utilization_noonan_vectorized = np.vectorize(calc_utilization_noonan)
 
@@ -129,14 +129,15 @@ class BrewData:
     def __init__(self):
         self.elevation = 353
         self.pre_boil_volume = 25
-        self.pre_boil_extract = 12.0
+        self.pre_boil_extract = 10.5
         self.pre_boil_sg = p_to_sg(self.pre_boil_extract)
         self.boil_time = 90.0
-        evaporation_rate = 2.5
+        evaporation_rate = 2
         self.cast_wort_volume = self.pre_boil_volume - (evaporation_rate * self.boil_time / 60.0)
         oe = self.pre_boil_extract * self.pre_boil_volume / self.cast_wort_volume
-        og = p_to_sg(oe)
-        self.sg_mean = (og + self.pre_boil_sg) / 2.0
+        print(oe)
+        self.og = p_to_sg(oe)
+        self.sg_mean = (self.og + self.pre_boil_sg) / 2.0
         self.total_ibu = calc_utilization_tinseth(self.boil_time, self)
 
 brew_data = BrewData()
