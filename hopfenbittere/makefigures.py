@@ -145,13 +145,23 @@ brew_data = BrewData()
 time_scale = np.linspace(0, brew_data.boil_time, dtype=int)
 utilizations_tinseth = calc_utilization_tinseth(time_scale, brew_data)
 
+def plot_tintseth():
+    fig_tinseth = plt.figure(constrained_layout=True, figsize=(4, 4))
+    axes_tinseth = fig_tinseth.subplots(1, 1, sharex=True, sharey=True)
+    axes_tinseth.set_xlabel('Kochzeit [min]')
+    axes_tinseth.set_ylabel('Bitterstoffausbeute [%]')
+    axes_tinseth.plot(time_scale, utilizations_tinseth)
+    fig_tinseth.savefig('graph_tinseth.pdf', format='pdf')
+
+plot_tintseth()
+
 fig_utilizations = plt.figure(constrained_layout=True, figsize=(8, 12))
 axes = fig_utilizations.subplots(3, 2, sharex=True, sharey=True)
 
 def plot(ax, name, utilization_func, utilization_func2):
     ax.set_title(name)
     ax.set_xlabel('Kochzeit [min]')
-    ax.set_ylabel('Bitterausbeute [%]')
+    ax.set_ylabel('Bitterstoffausbeute [%]')
     ax.plot(time_scale, utilizations_tinseth, label='Tinseth')
     utilization = utilization_func(time_scale, brew_data)
     ax.plot(time_scale, utilization, label=name + ' Tabelle')
