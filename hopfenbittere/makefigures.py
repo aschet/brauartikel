@@ -2,6 +2,7 @@
 # Copyright 2022 Thomas Ascher
 # SPDX-License-Identifier: GPL-3.0+
 
+from cmath import nan
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -36,34 +37,42 @@ class GravityLUT:
                 return entry[1]
         return self.lut[-1][1]
 
-rager_time = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 51]
-lut_rager = TimeLUT(rager_time, [5.0, 6.0, 8.0, 10.1, 12.1, 15.3, 18.8, 22.8, 26.9, 28.1, 30.0])
+burch_time = [14, 44, 60, 61]
+lut_burch = TimeLUT(burch_time, [5.0, 12.0, 30.0, nan])
 
-garetz_time = [10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90]
-lut_garetz = TimeLUT(garetz_time, [0, 2, 5, 8, 11, 14, 16, 18, 19, 20, 21, 22, 23])
+rager_time = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 51, 60, 61]
+lut_rager = TimeLUT(rager_time, [5.0, 6.0, 8.0, 10.1, 12.1, 15.3, 18.8, 22.8, 26.9, 28.1, 30.0, 30.0, nan])
 
-mosher_time = [5, 15, 30, 45, 60, 90]
-lut_mosher_1030 = TimeLUT(mosher_time, [5.0, 12.0, 17.0, 21.0, 24.0, 28.0])
-lut_mosher_1040 = TimeLUT(mosher_time, [5.0, 12.0, 17.0, 21.0, 23.0, 27.0])
-lut_mosher_1050 = TimeLUT(mosher_time, [4.0, 11.0, 16.0, 20.0, 23.0, 26.0])
-lut_mosher_1060 = TimeLUT(mosher_time, [4.0, 11.0, 16.0, 19.0, 22.0, 26.0])
-lut_mosher_1070 = TimeLUT(mosher_time, [3.0, 11.0, 15.0, 18.0, 21.0, 25.0])
-lut_mosher_1080 = TimeLUT(mosher_time, [3.0, 10.0, 15.0, 17.0, 20.0, 23.0])
-lut_mosher_1090 = TimeLUT(mosher_time, [3.0, 9.0, 13.0, 16.0, 18.0, 21.0])
+garetz_time = [10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 91]
+lut_garetz = TimeLUT(garetz_time, [0, 2, 5, 8, 11, 14, 16, 18, 19, 20, 21, 22, 23, nan])
+
+mosher_time = [5, 15, 30, 45, 60, 90, 91]
+lut_mosher_1030 = TimeLUT(mosher_time, [5.0, 12.0, 17.0, 21.0, 24.0, 28.0, nan])
+lut_mosher_1040 = TimeLUT(mosher_time, [5.0, 12.0, 17.0, 21.0, 23.0, 27.0, nan])
+lut_mosher_1050 = TimeLUT(mosher_time, [4.0, 11.0, 16.0, 20.0, 23.0, 26.0, nan])
+lut_mosher_1060 = TimeLUT(mosher_time, [4.0, 11.0, 16.0, 19.0, 22.0, 26.0, nan])
+lut_mosher_1070 = TimeLUT(mosher_time, [3.0, 11.0, 15.0, 18.0, 21.0, 25.0, nan])
+lut_mosher_1080 = TimeLUT(mosher_time, [3.0, 10.0, 15.0, 17.0, 20.0, 23.0, nan])
+lut_mosher_1090 = TimeLUT(mosher_time, [3.0, 9.0, 13.0, 16.0, 18.0, 21.0, nan])
 mosher_gravity = [1.030, 1.040, 1.050, 1.060, 1.070, 1.080, 1.090]
 lut_mosher = GravityLUT(mosher_gravity, [lut_mosher_1030, lut_mosher_1040, lut_mosher_1050, lut_mosher_1060, lut_mosher_1070, lut_mosher_1080, lut_mosher_1090])
 
 daniels_time = [9, 19, 29, 44, 49, 74, 75]
 lut_daniels = TimeLUT(daniels_time, [5, 12, 15, 19, 22, 24, 27])
 
-noonan_time = [4, 5, 15, 30, 60, 90]
-lut_noonan_1032 = TimeLUT(noonan_time, [5, 5, 8, 15, 28, 31])
-lut_noonan_1051 = TimeLUT(noonan_time, [4, 5, 8, 14, 26, 28])
-lut_noonan_1066 = TimeLUT(noonan_time, [4, 5, 7, 13, 24, 27])
-lut_noonan_1076 = TimeLUT(noonan_time, [4, 4, 7, 13, 23, 26])
-lut_noonan_1086 = TimeLUT(noonan_time, [3, 4, 7, 12, 21, 24])
+noonan_time = [4, 5, 15, 30, 60, 90, 91]
+lut_noonan_1032 = TimeLUT(noonan_time, [5, 5, 8, 15, 28, 31, nan])
+lut_noonan_1051 = TimeLUT(noonan_time, [4, 5, 8, 14, 26, 28, nan])
+lut_noonan_1066 = TimeLUT(noonan_time, [4, 5, 7, 13, 24, 27, nan])
+lut_noonan_1076 = TimeLUT(noonan_time, [4, 4, 7, 13, 23, 26, nan])
+lut_noonan_1086 = TimeLUT(noonan_time, [3, 4, 7, 12, 21, 24, nan])
 noonan_gravity = [1.032, 1.051, 1.066, 1.076, 1.086]
 lut_noonan = GravityLUT(noonan_gravity, [lut_noonan_1032, lut_noonan_1051, lut_noonan_1066, lut_noonan_1076, lut_noonan_1086])
+
+def calc_utilization_burch(boil_time, brew_data):
+    return lut_burch.lookup(boil_time)   
+
+calc_utilization_burch_vectorized = np.vectorize(calc_utilization_burch)
 
 def calc_fga_rager(sg):
     gravity_adjustment = 0.0
@@ -160,6 +169,7 @@ axes = fig_utilizations.subplots(3, 2, sharex=True, sharey=True)
 
 def plot(ax, name, utilization_func, utilization_func2):
     ax.set_title(name)
+    ax.set_ylim([0,35])
     ax.set_xlabel('Kochzeit [min]')
     ax.set_ylabel('Bitterstoffausbeute [%]')
     ax.plot(time_scale, utilizations_tinseth, label='Tinseth')
@@ -170,16 +180,18 @@ def plot(ax, name, utilization_func, utilization_func2):
         utilization2 = utilization_func2(time_scale, brew_data)
         ax.plot(time_scale, utilization2, label=name + ' Funktion', linestyle=':')
     else:
-        polynomial_coeff=np.polyfit(time_scale, utilization, 3)
+        idx = np.isfinite(time_scale) & np.isfinite(utilization)
+        polynomial_coeff=np.polyfit(time_scale[idx], utilization[idx], 3)
         ynew=np.poly1d(polynomial_coeff)
         ax.plot(time_scale,ynew(time_scale), label=name + ' Polyfit', linestyle=':')
 
     ax.legend(loc='lower right')  
 
-plot(axes[0, 0], "Rager", calc_utilization_rager_vectorized, calc_utilization_rager_function)
-plot(axes[0, 1], "Garetz", calc_utilization_garetz_vectorized, calc_utilization_garetz_function)
-plot(axes[1, 0], "Mosher", calc_utilization_mosher_vectorized, None)
-plot(axes[1, 1], "Daniels", calc_utilization_daniels_vectorized, None)
-plot(axes[2, 0], "Noonan", calc_utilization_noonan_vectorized, None)
+plot(axes[0, 0], "Burch", calc_utilization_burch_vectorized, None)
+plot(axes[0, 1], "Rager", calc_utilization_rager_vectorized, calc_utilization_rager_function)
+plot(axes[1, 0], "Garetz", calc_utilization_garetz_vectorized, calc_utilization_garetz_function)
+plot(axes[1, 1], "Mosher", calc_utilization_mosher_vectorized, None)
+plot(axes[2, 0], "Daniels", calc_utilization_daniels_vectorized, None)
+plot(axes[2, 1], "Noonan", calc_utilization_noonan_vectorized, None)
 fig_utilizations.savefig('graph_utilization.pdf', format='pdf')
 plt.show()
