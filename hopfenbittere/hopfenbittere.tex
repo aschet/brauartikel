@@ -5,22 +5,13 @@
 
 \usepackage[T1]{fontenc}
 \usepackage{mathpazo}
-%\usepackage[math]{iwona}
-%\usepackage[math]{kurier}
-%\usepackage{mathpazo}
 \usepackage[naustrian]{babel}
 \usepackage{csquotes}
-%\usepackage{cmbright}
-%\usepackage[regular,condensed,sfdefault]{roboto}
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{chemformula}
-%\usepackage{euler}
-%\usepackage{amsmath,amsfonts,amssymb}
 \usepackage{icomma}
-%\usepackage{textcomp}
 \usepackage{gensymb}
-%\usepackage{mathastext}
 \usepackage{float}
 \usepackage[style=apa,backend=biber]{biblatex}
 \DeclareLanguageMapping{naustrian}{naustrian-apa}
@@ -70,7 +61,7 @@
 \newcommand{\dPfvw}{d_\mathit{Pfvw}}
 \newcommand{\dKt}{\overline{d_{\mathit{Kt}}}}
 
-\title{Eine bittere Angelegenheit: IBU Berechnungen}
+\title{Eine bittere Angelegenheit: Klassische IBU Berechnungen im Heimbraubereich}
 \author{Thomas Ascher <thomas.ascher@gmx.at>}
 \date{\today, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
 
@@ -81,38 +72,27 @@
 
 \section*{Einleitung}
 
-Hopfen, der auch als Seele des 
+Die Einstellung des durch Hopfen eingebrachten Bitterstoffgehalt eines Biers, den wir als IBU-Angabe kennen, ist ein wesentlicher Bestandteil des Brauprozesses und der Rezeptentwicklung. Typischerweise helfen uns heute Braurechner bei Bestimmung von benötigten Hopfenmengen. Aber wie funktionieren deren Berechnungen? Dieser Artikel soll darüber Aufschluss geben und stellt historische Modelle zur Schätzung der Bitterstoffausbeute während des Hopfenkochens aus dem Heimbraubereich vor.
 
-\parencite{Bastgen2020}
-%TODO
-
-Meiste Bittere vom Hopfen, ein Teil von Röstmalzen \parencite[11]{Garetz1994}
-
-\parencite[10]{Garetz1994}
-Aroma, Bittere und Haltbarkeit
-
-\section*{International Bitterness Unit}
+\section*{Bitterstoffe und die International Bitterness Unit}
 
 Die vorrangigen Bitterstoffe im Bier sind die Isomere der Alphasäuren des Hopfens: Isohumulone, Isocohumulone und Isoadhumulone. Darüber hinaus tragen auch noch weitere Hopfenbestandteile zum Bittereindruck bei, insbesondere Oxidationsprodukte der Alpha- und Betasäuren. \parencite{MEBAK2020}
 
-Für die Bildung der Weichharze, zu denen Alpha- und Betasäuren (Lupulone, Colupulone und Adlupulone) zählen, sind die Lupulindrüsen in den Dolden der weiblichen Hopfenpflanzen zuständig. Nicht oxidierte Weichharze sind weder in Würze noch Bier bei Raumtemperatur gut lösbar. Die Alphasäuren unterlaufen jedoch während des Hopfenkochens einem Isomerisierungsprozess, einer molekularen strukturellen Veränderung, und bilden die Isoalphasäuren, welche in Lösung verbleiben. \parencite{Hall1997}
+Für die Bildung der Weichharze, zu denen Alpha- und Betasäuren (Lupulone, Colupulone und Adlupulone) zählen, sind die Lupulindrüsen in den Dolden der weiblichen Hopfenpflanzen zuständig. Nicht oxidierte Weichharze sind weder in Würze noch in Bier bei Raumtemperatur gut lösbar. Die Alphasäuren unterlaufen jedoch während des Hopfenkochens einem Isomerisierungsprozess, einer molekularen strukturellen Veränderung, und bilden die Isoalphasäuren, welche in Lösung verbleiben. \parencites{Hall1997}[20-23]{Nottebohm2020}
 
-Die vorrangige Kennzahl zur Beschreibung des sensorischen Bittereindrucks eines Biers ist die International Bitterness Unit (IBU). Eine IBU entspricht einer Konzentration von einem Milligramm Isoalphasäure pro Liter Bier. Bei stark beziehungsweise kalt gehopften Bieren lässt sich der sensorische Bittereindruck durch vermehrt eingebrachte oxidierte Hopfenbestandteile und Polyphenole nicht mehr ausreichend durch die IBU charakterisieren. Die Schaffung neuer Wahrnehmungsmodelle, die unter anderem neben den Isoalphasäurekonzentration auch Oxidationsprodukte und den Alkoholgehalt berücksichtigen, sind Gegenstand  aktueller Forschung. \parencite{Kishimoto2021}
+Die vorrangige Kennzahl zur Beschreibung des sensorischen Bittereindrucks eines Biers ist die International Bitterness Unit (IBU). Eine IBU entspricht einer Konzentration von einem Milligramm Isoalphasäure pro Liter Bier. Bei stark und kalt gehopften Bieren lässt sich der sensorische Bittereindruck durch vermehrt eingebrachte oxidierte Hopfenbestandteile und Polyphenole nicht mehr ausreichend durch die IBU charakterisieren. Die Schaffung neuer Wahrnehmungsmodelle, die unter anderem neben den Isoalphasäurekonzentration auch Oxidationsprodukte und den Alkoholgehalt berücksichtigen, sind Gegenstand  aktueller Forschung. \parencite{Kishimoto2021}
 
-Von den normgebenden Gremien der Brauindsutrie – der \href{https://www.asbcnet.org}{ASBC}, der \href{https://europeanbreweryconvention.eu}{EBC} und der \href{https://www.mebak.org}{MEBAK} – wurden zur Messung der IBU ein in den 1950er-Jahren definiertes,  kostengünstiges, spektralphotometrisches analytisches Verfahren ratifiziert. Dabei erfolgt keine direkte Messung des Isoalphasäurekonzentration, sondern eine Korrelation der gemessenen Lichtabsorption einer aufbereiteten Bierprobe bei einer Wellenlänge von 275~nm. Es absorbieren aber auch andere Bestandteile der Probe Licht in diesem Spektrum. Die angewendete Korrelation, die Multiplikation des Messwertes mit 50, ist allerdings nur für typische Biere der 1950er und 1960er-Jahre gültig. \parencites{ASBC2011}{Hosom2017}
+Von normgebenden Gremien der Brauindsutrie – der \href{https://www.asbcnet.org}{ASBC}, der \href{https://europeanbreweryconvention.eu}{EBC} und später auch der \href{https://www.mebak.org}{MEBAK} – wurden zur Messung der IBU ein in den 1950er-Jahren definiertes,  kostengünstiges, spektralphotometrisches analytisches Verfahren ratifiziert. Dabei erfolgt keine direkte Messung des Isoalphasäurekonzentration, sondern eine Korrelation der gemessenen Lichtabsorption einer aufbereiteten Bierprobe bei einer Wellenlänge von 275~nm. Es absorbieren aber auch andere Bestandteile der Probe Licht in diesem Spektrum. Die angewendete Korrelation, die Multiplikation des Messwertes mit 50, ist allerdings nur für typische Biere der 1950er und 1960er-Jahre gültig, da heute eingesetzter Hopfen aufgrund besserer Lagerbedingungen weniger Oxidationsprodukte enthält. Die derzeit genaueste
+verfügbare Messmethode basiert auf der Hochleistungsflüssigkeitschromatographie (HPLC),
+bei der sich Einzelververbindungen spezifisch messen lassen. Die Problematik der spektralphotometrisches Methode kann somit vermieden werden. \parencites{ASBC2011}{Hosom2017}[28]{Nottebohm2020}
 
-\parencite[5\psq]{Malowicki2005}
-Overlap zwischen verschiedenen Inhaltsstoffen. Photemeter outdated HPLC Messung 
-
-Die Anschaffungskosten für Spektralphotometer und HPLC-Apparaturen sind für Privatpersonen nur schwer zu decken. \textcite{Calado2019} haben aber eine kostengünstige, auf Fluoreszenz basierte, Messmethode unter dem Einsatz einer UV-LED, einer Digitalkamera und Bildverarbeitungsalgorithmen vorgeschlagen, die eine mittlere quadratische Abweichungen von 3~IBU im Vergleich zur Messung mit einem Spektralphotometer erreicht. Darüber hinaus bieten einige Labore, wie „\href{https://bieranalyse.de}{Bieranalyse Fuchs}“ und „\href{https://www.weinlabor-krauss.de}{Weinlabor Krauß}“, bezahlbare Messdienste für Heimbrauer/-innen an.
-
-%TODO IBU limit
+Die Anschaffungskosten für Spektralphotometer und HPLC-Apparaturen sind für Privatpersonen nur schwer zu decken. \textcite{Calado2019} haben aber eine kostengünstige, auf Fluoreszenz basierte, Messmethode unter dem Einsatz einer UV-LED, einer Digitalkamera und Bildverarbeitungsalgorithmen vorgeschlagen, die eine mittlere quadratische Abweichungen von 3~IBU im Vergleich zur Messung mit einem Spektralphotometer erreicht. Darüber hinaus bieten einige Labore, wie „\href{https://bieranalyse.de}{Bieranalyse Fuchs}“ und „\href{https://www.weinlabor-krauss.de}{Weinlabor Krauß}“, Messdienste für Privatpersonen an.
 
 \section*{Bitterstoffausbeute}
 
-Nur etwa 10 bis 40~\% der dosierten Alphasäuremenge gelangt als Isoalphasäure in das fertige Bier. Der genaue Prozentsatz ist dabei unter anderem abhängig wie viel Alphasäure aus dem eingesetzten Hopfenprodukt extrahiert werden kann, wie vollständig die Isomerisierung verläuft und wie viele Bitterstoffe durch Trubbildung, Filterung und Gärung verloren gehen. \parencite[9]{Malowicki2005}
+Nur etwa 10 bis 40~\% der dosierten Alphasäuremenge gelangt als Isoalphasäure in das fertige Bier. Der genaue Prozentsatz ist dabei unter anderem abhängig wie viel Alphasäure aus dem eingesetzten Hopfenprodukt extrahiert werden kann, wie vollständig die Isomerisierung verläuft und wie viele Bitterstoffe durch Trubbildung, Filterung und Gärung verloren gehen. Hopfen verliert auch Oxidation bei längerer Lagerung zunehmend an Alphasäure. Der zu erwartende Verlust ist sortenabhängig und wird über den Hop Storage Index (HSI) quantifiziert, der sich über die spektralphotometrische Methode ermittelt lässt. \parencites[9]{Malowicki2005}[103\psq]{Garetz1994} 
 
-Der Prozessparameter, der beschreibt wie effektiv Bitterstoffe verwertet werden, heißt Bitterstoffausbeute (BA) und ist gemäß \autoref{eq:badef} basierend auf dem Verhältnis zwischen den in einem Bier enthaltenen Bittereinheiten und der in der Pfannenvollwürze (Pfvw) dosierten Alphasäure definiert. Die Bitterstoffausbeute lässt sich alternativ auch in Bezug auf die Anstellwürze statt dem fertigen Bier spezifizieren. Dabei sind aber keine Gärungsverluste berücksichtigt. \parencite[163]{Annemueller2015} 
+Der Prozessparameter, der beschreibt wie effektiv Bitterstoffe verwertet werden, heißt Bitterstoffausbeute (BA) und ist gemäß \autoref{eq:badef} basierend auf dem Verhältnis zwischen den in einem Bier enthaltenen Bittereinheiten und der in der Pfannenvollwürze (Pfvw; vor dem Hopfenkochen) dosierten Alphasäure definiert. Die Bitterstoffausbeute lässt sich alternativ auch in Bezug auf die Anstellwürze statt dem fertigen Bier spezifizieren. Dabei sind aber keine Gärungsverluste berücksichtigt. \parencite[163]{Annemueller2015} 
 
 \begin{equation}
 \BA \uper = \frac{\text{Isohumulongehalt des Bieres [IBU]}}{\text{Alphasäuredosage in kalter Pfvw} \ucon} \cdot 100
@@ -120,7 +100,6 @@ Der Prozessparameter, der beschreibt wie effektiv Bitterstoffe verwertet werden,
 \end{equation}
 
 Sind die Bitterstoffausbeute und der Alphasäuregehalt eines Hopfens bekannt, so kann für eine Hopfengabe die resultierenden Bittereinheiten durch \autoref{eq:ibucalc} bestimmen werden \parencite{Thesseling2019}.
-%TODO messung per ballen
 
 \begin{equation}
 \IBU = \frac{\text{Hopfenmenge [mg]} \cdot \frac{\text{Alphasäuregehalt} \uper}{100} \cdot \frac{\BA}{100}}{\text{Volumen kalte Anstellwürze} \uli}
@@ -139,132 +118,17 @@ höhere Kochtemperaturen, höherer Zerkleinerungsgrad des Hopfens, geringere Alp
 
 Während der Gärung treibt die gebildete Kohlensäure einen Teil der Isoalphasäuren aus. Ein Teil davon verfängt sich in der Hefedecke oder sammelt sich am Rand des Gärbehälters und verhärtet sich aufgrund der Oxidierung. Ein weiterer Teil haftet an den Hefezellen an. Je langsamer eine Hefe ausflockt, desto mehr Bitterstoffe können an ihr anhaften und sendimentieren. Verbleibt die Hefe im Bier so wie beim Weißbier, ist dementsprechend auch der Bitterstoffverlust geringer. \parencite[126]{Garetz1994} 
 
+\section*{Hopfenprodukte}
 
-
-
-
-
-\section*{Hopfenprodukte und Hopfengaben}
-
-\parencite[80\psq]{Garetz1994}
-Doldenhopfen: am wenigsten verarbeitet, manche Brauer glauben
-liefert das beste Aroma. Verbraucen viel Lagerplatz.
-
-\parencite[82\psqq]{Garetz1994}
-Pellets: pulverisiert und gepresst, verlust von 4 bis 6 \% Alpha
-und Ölen.
-T90
-T45: enriched, teile des Pflanzenmaterials wird mechanisch
-entfernt, doppelter Alpha.
-Stabilisierte und isomerisierte Plellets, im Normalfall nicht
-erhältlich. Ein Teil der Alphasäure in Iso Alphasäure
-isomerisiert. Nicht für Dryhopping und Aromagaben.
-chemisch verarbeitet, Magnesium hinzugefügt.
-Pellets zerfallen zu Pulver
-Schwerer zu entfernen, wird im Whilpool entfernt \parencite[87]{Garetz1994}
-
-\parencite[84\psq]{Garetz1994}
-Plugs und Bricks: 
-Plug gepresster Doldenhopfen, in England gerne für Cask Dry Hopping
-mehrere Dolden in Form, braucht einige Minuten bis sie auseinander
-brechen. Schwer kleine Poritionen zu entnehmen.
-
-\parencite[88-93]{Garetz1994}
-Extrakte, mit mehreren Methoden hergestellt. Chemisch per Lösungsmittel
-oder Dampfdestillation. Um an Alphasäure und Öle zu kommen.
-Um Brauprozess berechenbarer zu machen und zu verinfachen.
-iso-alpha extrakt: am Ende vom Prozess nach kochen oder
-nach Gärung -> verluste, nicht sensitiv zu sonnenlicht, chemisch verändert
-Hopfenöle: Aroma, Tasting panel hat schlechter gefunden wenn
-late hops, wird in England für Casc conditioning, bessere konsistenz
-Stark konzentriert, weniger für Anwendung im Heimbereich für
-kleine Sude
-
-\parencite[52]{Davidson1997}
-nicht pre-isomerisiert
-Pre-isomerized Hop Products -> doppelter gehalt
-pre-isomerisierte pellets enthalten öle
-The reduced (rho) , hexa, and tetra extracts
-all provide bitterness and protection against
-the sunstruck reaction that produces a
-skunky note in beer. Additionally, hexa and
-tetra improve foam stability.
-The
-reduced, hexa and tetra extracts are the
-reduced fo rms (by hydrogen addition to
-the iso-alpha acids) and the sensory bit-
-terness of these compounds differs. Tetra-
-iso-extract has a prolonged senso ry bitter-
-ness , a lingering bitterness compared to
-the normal iso-al pha acids . He xa-iso-
-extract is less lingering and prolonged and
-is more similar to iso-alpha acids . The
-reduced iso-extract also is similar to iso-
-alpha acids, in that it tends to be a quick,
-clean bitterness.
-
-found isohumulone (with traces of
-iso-adhumu lone) was preferred to isoco-
-humulone.
-
-\parencite[58]{Hall1997}
-Schätzung alle Effekte für Bitterstoffausbeute zu beachten schwierig
-Starke Schwankungen bei Doldenhopfen
-geringer bei Pellets weil geblendet
-abhängig von Kochtemperatur abhängig von Seehöhe
-undissolved iso-alpha acids and unsaturated wort -> boil vigor, gravity -> viscosity
-Hopfenform, pellets > dolden
-Wasserprofil bitterness auswirkung
-andere effekte -> oxidationsprodukte, röstmalze -> tannine, 
-kommerzielle brauereien können messen und batches blenden.
-
-
- Darüber hinaus erfolgt auch unter einer Temperatur von 90~°C eine substantielle Isomerisierung \parencite[29]{Malowicki2005}.
-
-\parencite[15]{Garetz1994}
-Spät: Aromaöle verdampschen schnell, verlust nach mehreren Minuten
-oder gleich durch Kochen. Oder verändert, nicht mehr gleich
-wie im Naturhopfen. 15 Minuten vor Ende. Wenig isomerisierung.
-
-\section*{Effekte der Hopfenalterung}
-
-Nördliche Hemisphere einmal Ernte pro Jahr. Mitte August bis
-Anfang September.
-\parencite[97]{Garetz1994}
-
-\parencite[97]{Garetz1994} Hopfen verliert Alphasäure und Öle
-durch Oxidation. Vakuimieren und gekühlte Aufbewahrung verlangsamen
-den Prozess. Auch kein Licht. 
-
-\parencite[103]{Garetz1994} Alphasäure oxidiert an luft, oxidationsprodukte
-nicht mehr isomerisierbar. Nicht mehr so bitter. Betssäuren bilden
-Bitterstoffe. bei Oxidation.
-
-\parencite[104]{Garetz1994} 
-Unter gleichen Lagerbedingungen verlieren Hopfen unterschiedlich an
-Alpha wegen unterschiedliche Menge Oxidantien.
--HSI spektroskopisch analyse von alpha und beta. Test für Halbarkeit:
-Verlust von Alpha und Betasäure über 6 Montate über Raumtemperatur 20c.
-Korrelation zwischen beiden. Der ursprüngliche Alphagehalt und der
-zkünftige
-Ölverluste nicht ausreichend erforscht.
-
-\parencite[104]{Garetz1994} 
-HSI Nummer, nich von Händlern, hauptsächlich als interne Referenz
-in den Laboren
-Percent Alpha remaining or Lost after 6 Months at 20c
-\% Alpha /nach 6 Monaten
-
-
-
-\parencite[52]{Davidson1997}
-Oxidation von beta säuren -> ähnliche hulupones wie isohomulone
-
-
-% TODO ev. Berechnung beschreiben
-% TODO Diagramm zu Alphaverlust
+Dolden werden nach der Ernte aufgrund ihrer Verderblichkeit zunächst getrocknet, konditioniert, gepresst und schließend zu verschiedenen Endprodukten weiterverarbeitet. Ausgenommen davon ist der Grünhopfen, dessen Verwendung möglichst direkt nach der Ernte erfolgt. Eine Erhebung des Alphasäuregehalts des Grünhopfens erfolgt im Normalfall nicht. Im Heimbraubereich sind vor allem T90 Pellets, die circa aus 95~\% des ursprünglichen Pflanzenmaterials bestehen, gängig. Bei deren Herstellung werden Dolden zunächst geschreddert, gepresst und extrudiert. Das Schreddern zerstört auch die Lupulindrüsen, was beim Hopfenkochen für eine bessere Ausbeute sorgt. Wird bis zu 45~\% des ursprünglichen Pflanzenmaterials entfernt, entstehen dabei die angereicherten T45 Pellets. Es ist möglich bei der Verarbeitung noch weiteres Pflanzenmaterial zu entfernen und somit konzentriertes Lupulinpulver zu erhalten. Dieses Endprodukt wird zum Beispiel unter den Namen Cryo Hops, Hop Hash oder Nectar vertrieben. Alternativ können Hopfenharze auch durch verschiedene Lösungsmittel aus den Dolden gelöst werden. Einige Hopfenprodukte sind auch in vorisomerisierter Form erhältlich. \parencites[166-172]{Nottebohm2020}[80-90]{Garetz1994}
 
 \section*{Modelle zur Schätzung der Bitterstoffausbeute}
+
+\url{https://jphosom.github.io/alchemyoverlord}
+
+\parencite{Hosom2015}
+
+
 
 Spätenstens seit der Veröffentlichung des Berechnungsverfahrens nach
 Rager im Zymurgy Magazin im Jahr 1990 stand einem breiteren
@@ -284,9 +148,6 @@ zu berücksichtigen. Aktuelle Ansätze versuchen diesen Fehler zu korrigieren.
 \parencite[39]{Novotny2018}
 
 
-\parencite[51]{Holle2010}
-ibu = mg hop * util * alpha acid \% / l
-
 \parencite[127]{Garetz1994} 
 Keine in professioneller Brauliteratur, Messtechnisch erhoben
 werden. Nach einigen Brauversuchen lässt sich also einstellen.
@@ -302,14 +163,12 @@ Einziger verlässliche Weg ist labortechnische Analysen.
 
 
 
-\subsection*{Historische Modelle}
-
 Hall hat einen Großteil der relevanten, ab 1990 veröffentlichten, Modelle analysiert,
 deren Daten normalisiert und in ein gemeinsames Berechnungsschema überführt. Dabei ist
 pro Hopfengabe zuerst eine initiale Bitterstoffausbeute basierend auf der Kochzeit
 ($\BAKt$) zu bestimmen und anschließend durch mehrere Korrekturfaktoren anzupassen.
 Aus den eingebrachten Alphasäuremengen der einzelnen Gaben und den ermittelten
-Bitterstoffausbeute lässt sich dann ein IBU Wert für ein Rezept berechnen. \parencite[59-65]{Hall1997}
+Bitterstoffausbeute lässt sich dann ein IBU Wert für ein Rezept berechnen. \parencite{Hall1997}
 
 % TODO verweis konzentration
 
@@ -791,7 +650,7 @@ vorgesehen (\autoref{eq:tinsethbakt}). Die Konstante 0,04 steuert die
 Kurvenform und die Konstante 4,15  die maximale Ausbeute
 \parencite{Tinseth1997}.
 
-\subsubsection*{Modellvergleich}
+\subsection*{Modellvergleich}
 
 \parencite[61]{Beechum2017}
 Relative dichte der Kochwürze wird als Konstante betrachtet
@@ -802,6 +661,12 @@ IGOR volunteers Basic Pale Ale, Basic IPA, or
 Basic DIPA 
 Versuch mit 22 Suden, verschiedene Rezpete
 Oregon Brew Lab, sensorisch getestet.
+
+\parencite[58]{Hall1997}
+Schätzung alle Effekte für Bitterstoffausbeute zu beachten schwierig
+Starke Schwankungen bei Doldenhopfen
+geringer bei Pellets weil geblendet
+kommerzielle brauereien können messen und batches blenden.
 
 
 \parencite[62]{Beechum2017}
@@ -939,68 +804,10 @@ numbers change with different chill-
 ing regimes, kettle geometry, and boil
 vigor.
 
+ Darüber hinaus erfolgt auch unter einer Temperatur von 90~°C eine substantielle Isomerisierung \parencite[29]{Malowicki2005}.
 
 
-\subsection*{Aktuelle Ansätze}
 
-\subsubsection*{Wolf (2012)}
-
-„\href{https://www.maischemalzundmehr.de/index.php?inhaltmitte=toolsiburechner}{Maische, Malz und Mehr}“
-
-die Nachisomerisierungzeit (Zeit zwischen Kochende und Whirlpool) wird zur Kochzeit jeder Hopfengabe hinzugerechnet, allerdings entsprechenend ihrer Dauer und der Geschwindigkeit der Abkühlung mit einem niedrigeren Wert gegenüber der regulären Kochzeit (siehe Theorieteil) 
-
-bei Verwendung von Hopfenpellets wird gegenüber Hopfendolden eine 10% höhere Hopfenausnutzung angenommen
-Da die Tinseth-Formel auf Experimenten mit Hopfendolden basiert, wird bei der Verwendung von Hopfenpellets die Hopfenausnutzung mit dem Faktor 1.1 nach oben korrigiert, während bei Verwendung von Hopfendolden nicht korrigiert wird. 
-
-Weiterhin hat Glenn Tinseth seine Formel mit Hopfengaben direkt zu Kochbeginn entwickelt. Durch Ausscheidungen mit dem Würzebruch gehen der Würze jedoch eine gewisse Menge an Bitterstoffen verloren. Der IBU-Rechner ehöht die Hopfenausnutzung bei Gaben nach dem Würzebruch um den Faktor 1.1 gegenüber der Tinseth-Formel. Bei Vorderwürzehopfung bzw. bei Hopfengaben zu Kochbeginn gilt die Tinseth-Formel unverändert. 
-
-bei Hopfengaben nach dem Würzebruch (>15 min nach Kochbeginn, d.h. Gesamtkochzeit minus individuelle Hopfenkochzeit > 15) wird eine 10% höhere Hopfenausnutzung angenommen 
-
-In der Zeit zwischen Kochende und Kühlschlange werden weiterhin alpha-Säuren zu iso-alpha-Säuren isomerisiert. Diese Nachisomerisierung wird von der Tinseth-Formel nicht berücksichtigt. Da sie bei Temperaturen <100°C stattfindet, verläuft sie nicht so schnell wie die reguläre Isomerisierung während des Hopfenkochens. Je niedriger die Temperatur, desto langsamer. Die Nachisomerisierung kann mit dem IBU-Rechner jedoch abgeschätzt werden. Dazu wird die Nachisomerisierungszeit zur Würzekochzeit jeder Hopfengabe hinzugerechnet, allerdings entsprechenend ihrer Dauer und der Geschwindigkeit der Abkühlung der Würze mit einem niedrigeren Wert gegenüber der regulären Kochzeit. Dabei wird davon ausgegangen, dass sich die Geschwindigkeit der Isomerisierung alle 10°C unter 100°C halbiert. Diese Abhängigkeit kann mit einem Faktor ausgedrückt werden, welcher bei 100°C daher 1.0, bei 90°C 0.5 und bei 80°C 0.25 usw. entspricht. über eine Regression kann er rechnerisch auch wie folgt ermittelt werden: 
-
-%Isomerisierungsgeschwindigkeitsfaktor = 0.001 x e^0.069 x Temperatur
-
-Mit der Nachisomerisierungszeit multipliziert ergibt dieser Wert die Effektive Kochzeit während der Nachisomerisierung. Bei einer Nachisomerisierung von 30 min und einer Temperatur von 90°C, entspricht die Zeit der Nachisomerisierung effektiv einer Kochzeit von nur 15 min %(Effektive Kochzeit = 30 min x 0.001 x e^0.069 x 90 = 15 min). In der Realität läuft die Nachisomerisierung allerdings nicht bei einer konstanten Temperatur ab. Die Würze kühlt sich in der Nachisomerisierungszeit ausgehend von ca. 100°C kontinuierlich ab. In dieser Abkühlungsphase verringert sich natürlich der Isomerisierungsgeschwindigkeitsfaktor permanent. Messen wir die Temperatur am Ende der Nachisomerisierungszeit, können wir den Isomerisierungsgeschwindigkeitsfaktor allerdings über den Temperaturbereich der Nachisomerisierung (100°C bis Temperatur am Ende der Nachisomerisierung) integrieren: 
-
-%Gleichung 3: Integrierter Isomerisierungsgeschwindigkeitsfaktor = 0.046 e^(0.031 x Temperatur am Ende der Nachisomerisierung). 
-
-Dieser Integrierte Isomerisierungsgeschwindigkeitsfaktor ist dann der Wert, welcher mit der Nachisomerisierungszeit multipliziert die Zeit ergibt, welche im IBU-Rechner zur regulären Kochzeit hinzugerechnet wird. So werden z.B. bei einer Nachisomerisierungszeit von 30 min, während der die Würze auf 80°C abkühlt (errechneter Integrierter Isomerisierungsgeschwindigkeitsfaktor = 0.53), zu jeder Hopfengabe 16 min (30 min x 0.53 = 16 min) zusätzliche Kochzeit hinzugerechnet. Insbesonder bei reichlichen Hopfengaben gegen Kochende, d.h. wenn der Hopfen noch nicht "ausgelutscht" ist, hat die Nachisomerisierung einen enormen Einfluss auf die Gesamtbittere. 
-
-Bereits seit 2012
-
-\parencite{Wolf2022}
-
-\subsubsection*{Hosom – mIBU (2015)}
-
-\url{https://jphosom.github.io/alchemyoverlord}
-
-\parencite{Hosom2015}
-
-\subsubsection*{Novotný (2016)}
-
-\url{https://www.diversity.beer/2018/02/ibu-spreadsheet-english-version.html}
-\parencite{Novotny2016}
-\parencite{Novotny2018}
-
-\subsubsection*{Smith (2019)}
-
-Zur Berechnung der Bitterstoffausbeute im Whirlpool wendet \citeauthor{Smith2019}
-einen von der Temperatur abhängigen, durch \autoref{eq:smithkfwp} definierten,
-Korrekturfaktor an. Dabei ist für Hopfengabe, die erst während des Whirlpools
-erfolgen, die Ausbeute für eine äquivalente Kochzeit zu berechnen und dann der
-Korrekturfaktor anzuwenden. Bei Hopfengaben, die bereits vor dem Whirlpool erfolgt
-sind, ist berücksichtigen, dass bereits ein Teil Alphasäuren isomerisiert wurde.
-Der verbleibende nicht isomerisierte Säuregehalt ist die Basis für weitere
-Berechnungen. \parencite{Smith2019}
-
-\begin{equation}
-\mathit{F}_{\mathit{WP}} = 2,39 \cdot 10^{11} \cdot e^{\left(\frac{-9773}{\text{Whirlpool-Temperatur}\:[K]} \right)}
-\label{eq:smithkfwp}
-\end{equation}
-
-\subsubsection*{Hosom – SMPH (2021)}
-
-\parencite{Hosom2021}
 
 \section*{Berechnungsbespiel}
 
