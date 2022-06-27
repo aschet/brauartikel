@@ -13,6 +13,7 @@
 \usepackage{icomma}
 \usepackage{gensymb}
 \usepackage{float}
+\usepackage[section]{placeins}
 \usepackage[style=apa,backend=biber]{biblatex}
 \DeclareLanguageMapping{naustrian}{naustrian-apa}
 
@@ -52,10 +53,10 @@
 \newcommand{\ume}{\:[\text{m}]}
 \newcommand{\ucon}{\:[\text{mg/l}]}
 \newcommand{\FKd}{F_{\mathit{Kd}}}
-\newcommand{\FHR}{F_{\mathit{HK}}}
+\newcommand{\FHR}{F_{\mathit{KA}}}
 \newcommand{\FSP}{F_{\mathit{SW}}}
-\newcommand{\FAH}{F_{\mathit{AH}}}
-\newcommand{\FHF}{F_{\mathit{HF}}}
+\newcommand{\FAH}{F_{\mathit{SH}}}
+\newcommand{\FHF}{F_{\mathit{HP}}}
 \newcommand{\FHS}{F_{\mathit{HS}}}
 \newcommand{\FFil}{F_{\mathit{FI}}}
 \newcommand{\dPfvw}{d_\mathit{Pfvw}}
@@ -99,14 +100,14 @@ Der Prozessparameter, der beschreibt wie effektiv Bitterstoffe verwertet werden,
 \label{eq:badef}
 \end{equation}
 
-Sind die Bitterstoffausbeute und der Alphasäuregehalt eines Hopfens bekannt, so kann für eine Hopfengabe die resultierenden Bittereinheiten durch \autoref{eq:ibucalc} bestimmen werden \parencite{Thesseling2019}.
+Sind die Bitterstoffausbeute und der Alphasäuregehalt eines Hopfens bekannt, so kann für eine Hopfengabe die resultierenden Bittereinheiten durch \autoref{eq:ibucalc} bestimmen werden \parencite{Thesseling2019}. Es ist möglich Hopfengaben zusammenzustellen, die rechnerisch in Summe 100 IBU überschreiten. Die die zugrundeliegenden chemischen Reaktionen beim Hopfenkochen sind dabei aber ein limitierender Faktor \parencite{Deutschman2017}.
 
 \begin{equation}
-\IBU = \frac{\text{Hopfenmenge [mg]} \cdot \frac{\text{Alphasäuregehalt} \uper}{100} \cdot \frac{\BA}{100}}{\text{Volumen kalte Anstellwürze} \uli}
+\IBU \ucon = \frac{\text{Hopfenmenge [mg]} \cdot \frac{\text{Alphasäuregehalt} \uper}{100} \cdot \frac{\BA \uper}{100}}{\text{Volumen kalte Anstellwürze} \uli}
 \label{eq:ibucalc}
 \end{equation}
 
-Folgende Faktoren begünstigen die BA: längere Kochzeiten, höhere Kochtemperaturen, höherer Zerkleinerungsgrad des Hopfens, geringere Alphasäuredosierung, geringerer Extraktgehalt in der Würze, geringere Trubbildung und schnellere Ausflockung der Hefe \parencite{Hosom2017}. Kochzeiten zwischen 60 bis 90~Minuten (\autoref{fig:utiltinseth}) sind in Hinsicht auf die Hopfenausnutzung optimal \parencite[5]{Malowicki2005}. Dabei ist jedoch zu beachten, dass mit zunehmender Kochdauer Isoalphasäuren zu anderen, teilweise sensorisch unangenehmen, Produkten abgebaut werden \parencite{Kappler2010}.
+Folgende Faktoren begünstigen die Bitterstoffausbeute: längere Kochzeiten, höhere Kochtemperaturen, höherer Zerkleinerungsgrad des Hopfens, geringere Alphasäuredosierung, geringerer Extraktgehalt in der Würze, geringere Trubbildung und schnellere Ausflockung der Hefe \parencite{Hosom2017}. Kochzeiten zwischen 60 bis 90~Minuten (\autoref{fig:utiltinseth}) sind in Hinsicht auf die Hopfenausnutzung optimal \parencite[5]{Malowicki2005}. Dabei ist jedoch zu beachten, dass mit zunehmender Kochdauer Isoalphasäuren zu anderen, teilweise sensorisch unangenehmen, Produkten abgebaut werden \parencite{Kappler2010}.
 
 \begin{figure}[H]
 \centering
@@ -127,30 +128,22 @@ Brauereien mit der entsprechenden Laborausrüstung können die Bitterstoffausbeu
 
 Zur Herstellung von hopfenaromatischen Bieren erfolgen mittlerweile größere Hopfengaben bei Kochende oder während der Whirlpoolrast. Hierbei ist zu beachten, dass bei Temperaturen geringeren als 100~°C noch eine Nachisomerisierung stattfindet \parencite{Weiss2019}. Die Modelle der Neunzigerjahre berücksichtigen diesen Effekt nicht, was bei späten Hopfengaben zu einer geringen Schätzung der Bitterstoffausbeute führt. Inzwischen wurde das Tinseth Modell bereits mehrfach erweitert um die Nachisomerisierung zu berücksichtigen. Besonders aktiv bei der Suche nach besseren Modellen ist der Heimbrauer J.-P. Hosom mit seinem Blog „\href{https://jphosom.github.io/alchemyoverlord}{Alchemyoverlord}“. Er darauf inzwischen das mIBU und das SMPH Modell veröffentlicht \parencites{Hosom2015}{Hosom2021}.
 
-Hall hat einen Großteil der relevanten, ab 1990 veröffentlichten, Modelle analysiert,
-deren Daten normalisiert und in ein gemeinsames Berechnungsschema überführt. Dabei ist
-pro Hopfengabe zuerst eine initiale Bitterstoffausbeute basierend auf der Kochzeit
-($\BAKt$) zu bestimmen und anschließend durch mehrere Korrekturfaktoren anzupassen.
-Aus den eingebrachten Alphasäuremengen der einzelnen Gaben und den ermittelten
-Bitterstoffausbeute lässt sich dann ein IBU Wert für ein Rezept berechnen. \parencite{Hall1997}
-
-% TODO verweis konzentration
-
-Folgende Korrekturfaktoren sind modellabhängig vorgesehen:
+\textcite{Hall1997} hat die relevanten, in den Neunzigerjahren veröffentlichten, Modelle analysiert, deren Daten normalisiert und in ein gemeinsames Berechnungsschema überführt. Dabei ist pro Hopfengabe zuerst eine initiale Bitterstoffausbeute basierend auf der Kochzeit ($\BAKt$) zu bestimmen und anschließend durch mehrere Korrekturfaktoren anzupassen. Aus den eingebrachten Alphasäuremengen der einzelnen Gaben und den ermittelten Bitterstoffausbeuten lässt sich dann ein IBU-Wert für ein Rezept berechnen. Folgende Korrekturfaktoren sind modellabhängig vorgesehen:
 
 \begin{itemize}
 \item Relative Dichte der „Kochwürze“ ($\FKd$)
-\item Hopfenkonzentration ($\FHR$)
+\item Alphasäurekonzentration ($\FHR$)
 \item Siedepunkt des Wassers basierend auf der Seehöhe ($\FSP$)
 \item Sedimentationsverhalten der Hefe ($\FAH$)
-\item Hopfenform: Dolden oder Pellets ($\FHF$)
+\item Hopfenprodukt: Dolden oder Pellets ($\FHF$)
 \item Verwendung eines Hopfensacks ($\FHS$)
 \item Filtration ($\FFil$)
 \end{itemize}
 
-Die Umrechnung von Extraktgehalt in relative Dichte erfolgt auf Basis
-der Plato Tabellen über die Goldiner Gleichungen (\autoref{eq:calcptosg})
-oder vergleichbaren Näherungsverfahren \parencite[140\psq]{Spedding2016}.
+Die Umrechnung in relative Dichte aus dem Extraktgehalt für den Faktor $\FKd$  erfolgt auf Basis der Plato Tabellen über die Goldiner Gleichungen (\autoref{eq:calcptosg}) oder vergleichbaren Näherungsverfahren \parencite[140\psq]{Spedding2016}.
+
+
+
 
 \begin{equation}
 d_{\frac{20}{20}} \uden = \frac{\degree P}{258,6 - \degree P / 258,2 \cdot 227,1} + 1
@@ -159,9 +152,9 @@ d_{\frac{20}{20}} \uden = \frac{\degree P}{258,6 - \degree P / 258,2 \cdot 227,1
 
 \subsubsection*{Burch (1986)}
 
-In der ersten Ausgabe des Buches, basierend auf kommerziellen erfahrungswerten \parencite[28-32]{Burch1992}
+In der Erstausgabe seines Buches „\citetitle{Burch1992}“ hat Burch eines der ersten Modelle zur Schätzung der Bitterstoffausbeute veröffentlicht. Alle Modelldaten basieren auf Erfahrungswerten aus der Brauindustrie. \parencite[28-32]{Burch1992}
 
-Auch für Dry hop 5 \parencite[33]{Burch1992}
+Die Bitterstoffausbeute nach Burch Berücksichtigt nur die Kochzeit für Dolden basierend auf \autoref{table:burchbakt}. Darüber hinaus wird für gestopfter Hopfen eine Ausbeute von 5~\% veranschlagt. \parencite[33]{Burch1992}.
 
 \begin{table}[H]
 \centering
@@ -236,7 +229,7 @@ Für die Modellberechnung ist zuerst die Ausbeute $\BAKt$ über die \autoref{tab
 
 Das grundlegende Berechnungsverfahren für das von Garetz in 1994 veröffentlichte Modell übernahm er von Rager. Anpassungen sind jedoch an der Tabelle zur Bestimmung der Ausbeute anhand der Kochzeit und den Korekturfaktoren erfolgt \parencite[134-144]{Garetz1994}.
 
-Die Berechnung nach Garetz kann in mehreren Ausbaustufen erfolgen, deren Umfang von den gewählten Korrekturfaktoren abhängt. Der Minimalumfang ist dabei durch \autoref{eq:garetzba1} definiert \parencite[137]{Garetz1994}. Zunächst ist die Ausbeute $\BAKt$ anhand der Kochzeit der jeweiligen Hopfengabe über die \autoref{table:garetzbakt} oder die \autoref{eq:garetzbakt} zu bestimmen \parencite{Steinmeyer2021}. Danach erfolgt die Berechnung der Faktoren $\FKd$, $\FHR$ und $\FSP$ gemäß \autoref{eq:garetzkd}, \autoref{eq:garetzhr} und \autoref{eq:garetzsp}. Der Faktor $\FHR$ basiert auf dem Zielwert der gesamten Bittereinheiten eines Rezepts. Das Modell von Garetz geht nämlich im Standardfalls davon aus, Hopfenmengen auf Basis gewünschter IBU Werte zu schätzen. Hier ist es entweder möglich den Faktor zunächst zu ignorieren und und iterativ den Gesamtwert zu schätzen oder den Faktor bei nur einer Hopfengabe durch eine quadratische Gleichung zu eliminieren \parencite[63]{Hall1997}.
+Die Berechnung nach Garetz kann in mehreren Ausbaustufen erfolgen, deren Umfang von den gewählten Korrekturfaktoren abhängt. Der Minimalumfang ist dabei durch \autoref{eq:garetzba1} definiert \parencite[137]{Garetz1994}. Zunächst ist die Ausbeute $\BAKt$ anhand der Kochzeit der jeweiligen Hopfengabe über die \autoref{table:garetzbakt} oder die \autoref{eq:garetzbakt} zu bestimmen \parencite{Steinmeyer2021}. Danach erfolgt die Berechnung der Faktoren $\FKd$, $\FHR$ und $\FSP$ gemäß \autoref{eq:garetzkd}, \autoref{eq:garetzhr} und \autoref{eq:garetzsp}. Der Faktor $\FHR$ basiert auf dem Zielwert der gesamten Bittereinheiten eines Rezepts. Das Modell von Garetz geht nämlich im Standardfalls davon aus, Hopfenmengen auf Basis gewünschter IBU-Werte zu schätzen. Hier ist es entweder möglich den Faktor zunächst zu ignorieren und und iterativ den Gesamtwert zu schätzen oder den Faktor bei nur einer Hopfengabe durch eine quadratische Gleichung zu eliminieren \parencite[63]{Hall1997}.
 
 \begin{table}[H]
 \centering
@@ -493,8 +486,7 @@ Extraktgehalt [\%w/w]:                    & 8–12,5 & 12,5–16 & 16–18 & 18�
 
 \subsubsection*{Tinseth (1997)}
 
-Während Tinseth in den Neunzigerjahren an der Oregon State University sein Doktoratsstudium in Chemie absolvierte, betrieb er nebenbei einen kleinen Hopfenhandel mit dem Namen HopTech. Für dessen Onlinepräsenz stelle er Informationen zur Hopfenausbeute zusammen, die er aus Brauliteratur. Durch kleine Gefälligkeiten wurde es ihm erlaubt die Messgeräte der USDA Hop Labs für eigene Zwecke zu nutzen. Zum Zeitvertreib und aus der Vermutung heraus, dass die Ausbeutekurve von Ragers Modell die stattfindende chemische Reaktion inkorrekt beschrieb, begann er dann mit der Entwicklung eines eigenen Berechnungsverfahrens. Grundlagen für sein Ergebnis waren Messergebnisse seiner eigenen Brauversuche, Messdaten des Brauprogramms der Universität und publizierte und nicht publizierten Daten verschiedener Brauereien. Die von Tinseth erhobenen Daten sind für Brauvorgänge mit Hopfendolen gültig. Pellets waren zur damaligen Zeit in guter Qualität schlichtweg nicht für Privatpersonen
-verfügbar. \parencites[0:55:45-1:08:00]{Beechum2017a}[2:10-6:30]{Smith2011}
+Während Tinseth in den Neunzigerjahren an der Oregon State University sein Doktoratsstudium in Chemie absolvierte, betrieb er nebenbei einen kleinen Hopfenhandel mit dem Namen HopTech. Für dessen Onlinepräsenz stelle er Informationen zur Hopfenausbeute zusammen, die er aus Brauliteratur. Durch kleine Gefälligkeiten wurde es ihm erlaubt die Messgeräte der USDA Hop Labs für eigene Zwecke zu nutzen. Zum Zeitvertreib und aus der Vermutung heraus, dass die Ausbeutekurve von Ragers Modell die stattfindende chemische Reaktion inkorrekt beschrieb, begann er dann mit der Entwicklung eines eigenen Berechnungsverfahrens. Grundlagen für sein Ergebnis waren Messergebnisse seiner eigenen Brauversuche, Messdaten des Brauprogramms der Universität und publizierte und nicht publizierten Daten verschiedener Brauereien. Die von Tinseth erhobenen Daten sind für Brauvorgänge mit Hopfendolen gültig. Pellets waren zur damaligen Zeit in guter Qualität nicht für Privatpersonen verfügbar. \parencites[0:55:45-1:08:00]{Beechum2017a}[2:10-6:30]{Smith2011}
 
 Die Berechnung der Bitterstoffausbeute nach Tinseth erfolgt über \autoref{eq:tinsethbakt}, \autoref{eq:tinsethgf} und \autoref{eq:tinsethba} anhand der Kochzeit der jeweiligen Hopfengabe und der mittleren spezifischen Dichte ($\dKt$) über den gesamten Kochverlauf \parencite{Tinseth1997}.
 
@@ -515,159 +507,66 @@ Die Berechnung der Bitterstoffausbeute nach Tinseth erfolgt über \autoref{eq:ti
 
 Während Tinseths Modell die Isomerisierung der Alphasäure über die Kochzeit korrekt beschreibt \parencite[43]{Malowicki2005}, ist es nicht allgemeingültig sondern wie alle anderen Modelle für ein Brausystem kalibriert. Es sind daher mehrere Faktoren zur Anpassung vorgesehen (\autoref{eq:tinsethbakt}). Die Konstante 0,04 steuert die Kurvenform und die Konstante 4,15 die maximale Ausbeute \parencite{Tinseth1997}.
 
+Einige Quellen wie \textcite{Novotny2018} erhöhen die Bitterstoffausbeute nach Tinseth für T90 Pellets um 10~\% (\autoref{eq:garetzhf}).
+
 \subsection*{Modellvergleich}
 
-\parencite[61]{Beechum2017}
-Relative dichte der Kochwürze wird als Konstante betrachtet
-Nur für gekochte Hopfen
-Nur für Dolen, es gibt verschiedene Korrekturfaktoren
+Die \autoref{fig:utilcompare} zeigt die Entwicklung Bitterstoffausbeute für Dolden über die Kochzeit für die verschiedene Modelle in Relation zum Tinseth Modell in einem Bereich des Extraktgehalts, bei dem noch keine wesentliche Korrektur für diesen vorgenommen wird. Um die Isomerisierungsreaktion korrekt zu beschreiben, müsste die Kurvenform einer Funktion ersten Grades entsprechen. Dies ist beim beim Rager Modell nicht der Fall.
 
-IGOR volunteers Basic Pale Ale, Basic IPA, or
-Basic DIPA 
-Versuch mit 22 Suden, verschiedene Rezpete
-Oregon Brew Lab, sensorisch getestet.
+Es ist nahezu unmöglich ein universelles Berechnungsmodell aufzustellen, welches alle Einflüsse auf Bitterstoffausbeute korrekt bewertet. Dabei ist auch zu berücksichtigen, dass selbst der bekannte Alphasäuregehalt eines eingesetzten Hopfens aufgrund von Rohstoffschwankungen nicht dem realen Alphasäuregehalt entspricht. Die zugrundeliegenden Messdaten für die verglichenen Modelle sind spezifisch für die Brausysteme, für die diese erhoben wurden. Tinseth schätzt, dass ein mit diesen Modellen berechneter IBU-Wert im Idealfall innerhalb einer Abweichung von 10~\% vom realen Messwert liegt. \parencite[22:05-23:00]{Smith2011}.  
 
-\parencite[58]{Hall1997}
-Schätzung alle Effekte für Bitterstoffausbeute zu beachten schwierig
-Starke Schwankungen bei Doldenhopfen
-geringer bei Pellets weil geblendet
-kommerzielle brauereien können messen und batches blenden.
+Eine Empfehlung zum Umgang mit Modellen zur Schätzung der Bitterstoffausbeute ist, Biere in einem durch ein Modell berechneten IBU-Bereich von 15 bis 70 mit dem eigenen Brausystem zu brauen und daran den Geschmackssinn daran zu kalibrieren.  \parencite{Beechum2017}
 
-
-\parencite[62]{Beechum2017}
-
-APAs. Both the median and mode of the
-sample set were spot on with the formula’s
-calculated estimate. As the beers increase
-in gravity, the wobbliness we expected
-begins to emerge. The IPA is still close,
-with the average about 5 IBUs below the
-predicted value. The DIPA, though, is a
-full 21 IBUs (about 28 percent) below the
-calculated value.
-
-
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
-\includegraphics[width=10cm]{graph_utilization.pdf}
+\includegraphics[width=14cm]{graph_utilization.pdf}
 \caption{Bitterstoffausbeute bei 10,5 \%w/w Extrakt in Pfvw (Ascher, 2022)}
 \label{fig:utilcompare}
 \end{figure}
 
+Es sind nur wenige veröffentlichte Vergleichsdaten von gemessenen IBU-Werten eines Bieres und den berechneten Modellschätzungen verfügbar. \textcite{Hall1997} hat die Daten in \autoref{table:exphall} für ein American Pale Ale mit drei Hopfengaben während des Hopfenkochens ermittelt.
 
-1:03:21- time und gravity weil in literatur
-die wichtigsten. how much hops 1:04:20
+\begin{table}[h]
+\centering
+\begin{tabular}{lr}
+\toprule
+\multicolumn{1}{c}{\textbf{Modell}} & \multicolumn{1}{c}{\textbf{IBU}} \\
+\midrule
+Messwert nach ASBC & 45,50 \\
+Rager             & 57,82 \\
+Garetz            & 24,12 \\
+Mosher            & 35,65 \\
+Daniels           & 46,51 \\
+Noonan            & 53,21 \\
+Tinseth           & 47,54 \\
+\bottomrule
+\end{tabular}
+\caption{Modellvergleich für ein American Pale Ale \parencite{Hall1997}}
+\label{table:exphall}
+\end{table}
 
-1.06 pale ale 1.07.40
-SELBES rezept gescalt, pale ale, ipa, dipa. ctz, cent cascade
-20-43 31,8 mit beersmith berechnet
+Bei einem Gemeinschaftsexperiment des „Homebrew Digest“ in 2001 wurden 33 Biere analysiert (\autoref{table:expbonham}), die von verschiedenen Personen nach dem gleichen Rezept gebraut wurden. Nach der Eliminierung einiger Ausreißer lagen rund 80~\% der Messwerte innerhalb von 15~\% des Mittelwerts der Messwerte. Die Hälfte der Messwerte sogar innerhalb von 5~\%. Diese Streuung verdeutlicht, dass Unterschiede im Brauprozess und von Braugeräten einen relevanten Einfluss auf Bitterstoffausbeute haben. \parencite{Bonham2001}
 
-1:08:00 boil vigor, pellets nicht ausgelegt, nie daten genutzt die pellets
-pellets waren nicht von gutre qualität 1:09
+\begin{table}[h]
+\centering
+\begin{tabular}{lr}
+\toprule
+\multicolumn{1}{c}{\textbf{Modell}} & \multicolumn{1}{c}{\textbf{IBU}} \\
+\midrule
+Messwert nach ASBC (gemittelt) & 62,1 \\
+Burch             & 45,6 \\
+Rager             & 53,5 \\
+Garetz            & 41,0 \\
+Daniels           & 67,9 \\
+Noonan            & 56,9 \\
+Tinseth           & 48,0 \\
+\bottomrule
+\end{tabular}
+\caption{Modellvergleich für ein American Pale Ale \parencite{Bonham2001}}
+\label{table:expbonham}
+\end{table}
 
-1:09:38 58
-38, 66
-dipa 57,9 l 44 71
-1:11:00
-
-1:11:35 within 10 % genauigkeit wenn glück, +30
-konsistent, sensorisches eindruck korrelieren
-1:12:20
-
-1:18:10
-protein level 
-\parencite{Beechum2017a}
-
-BSHB
-
-11:10--11:14
-easily reliable calculate AA Percent
-
-12:00--12:10
-11-30% alpha util
-
-20:55-22:00
-From Daten nicht herausrechenbar
-10 % Genauigkeit
-Nicht einmal genau welche alpha der Hopfen weil nur ein eine geringe 
-Probe davon.
-
-22:05-23
-within 10 ibu
-konsistenz ist wichtiger, feinadjustment, nummer nicht,
-korrelation zwischen nummer aus gleichung und sensorischem eindruck
-\parencite{Smith2011}
-
-Die Beträge der geschätzten
-Bitterstoffausbeute scheinen insgesamt zu gering zu sein \parencite{Jones1995}.
-
-Die Beträge
-der berechneten Bitterstoffausbeute scheinen insgesamt zu hoch zu sein \parencite{Jones1995}.
-
-\parencite[65]{Hall1997}
-Kochbeginn, mitte kochzeit und Ende, Stopfen
-45.5
-RAGER  57.82
-%GARETZ 24.12
-MOSHER 35.65
-TINSETH  47.54
-NOONAN 53.21
-DANIELS 46.51
-
-\parencite[65\psqq]{Beechum2017}
-Here’s our recommendation: ignore the
-number as “concrete reality.” No calcula-
-tion is ever going to be perfect for you.
-Unless you take the time to dial in your
-process, analyze your beers, and create
-your own utilization curves, the number
-will always be a bit of a lie. Instead, treat it
-as a squishy imprecise landmark that only
-has meaning for you.
-Learn what calculated IBU values of 15,
-30, 50, 70, and so on mean to your taste
-buds when brewed on your equipment.
-Use those landmarks to hit what you want
-to taste. That’s the only value to the num-
-ber, because, frankly, the number itself is
-fairly taste-free.
-
-\parencite{Bonham2001}
-Kochzeit , Hopfen bit bekannter Alphasäure und gleicher Brauverfahren
-Korrigiert OG
-ASBC Mittelwert, 33 Bier: 62.1, 80\% innerhalb einer Abweichung von 15\%, 50\% innerhalb
-von  bis 20 Abweichung
-
-Rager: 53.5
-Burch: 45.6
-Garetz: 41
-Mosher: 61
-Tinseth: 48
-Daniels: 67.9
-Noonan: 56.9
-
-\parencite[65]{Beechum2017}
-we think the “undershoot” is due to the
-rapid chilling procedures that are more
-common today than they were during the
-formulae’s development.
-Well,
-one is that there’s probably more work
-to be done to figure out how the
-numbers change with different chill-
-ing regimes, kettle geometry, and boil
-vigor.
-
-Well,
-one is that there’s probably more work
-to be done to figure out how the
-numbers change with different chill-
-ing regimes, kettle geometry, and boil
-vigor.
-
-
-
-
+\textcite{Beechum2017} führten später ebenfalls ein ähnliches Gemeinschaftsexperiment durch. Dabei wurden jeweils mehrere American Pale Ales (32~IBU), American IPAs (58~IBU) und Double IPAs (76~IBU) nach gleichem Rezept gebraut, gemessen und mit dem durch das Tinseth Modell berechneten IBU-Wert verglichen. Beim American Pale Ale war eine mittlere absolute Abweichung von 4,5~IBU, beim American IPA von 7,4~IBU und beim Double IPA von 21,3~IBU zu beobachten. Eine höhere Stammwürze verursacht daher vermutlich eine höhere Abweichung vom Messwert. Auch Unterschiede in der Dauer der Würzekühlung dürften einen stärkeren Einfluss. Inzwischen wird im Heimbraubereich schneller gekühlt zur Zeit der Veröffentlichung des Tinseth Modells. Dies sollte insgesamt zu überhöhten Schätzungen der Bitterstoffausbeute führen.
 
 
 \section*{Berechnungsbespiel}
