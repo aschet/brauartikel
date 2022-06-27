@@ -44,7 +44,7 @@
 }
 
 \newcommand{\BA}{\mathit{BA}}
-\newcommand{\BAKt}{{\mathit{BA}}_{\mathit{Kt}}}
+\newcommand{\BAKt}{{\mathit{BA}}_{\mathit{Kd}}}
 \newcommand{\IBU}{\mathit{IBU}}
 \newcommand{\umin}{\:[\textrm{min}]}
 \newcommand{\uden}{\:[\text{g/cm³}]}
@@ -52,7 +52,7 @@
 \newcommand{\uli}{\:[\text{l}]}
 \newcommand{\ume}{\:[\text{m}]}
 \newcommand{\ucon}{\:[\text{mg/l}]}
-\newcommand{\FKd}{F_{\mathit{Kd}}}
+\newcommand{\FKd}{F_{\mathit{d}}}
 \newcommand{\FHR}{F_{\mathit{KA}}}
 \newcommand{\FSP}{F_{\mathit{SW}}}
 \newcommand{\FAH}{F_{\mathit{SH}}}
@@ -60,7 +60,7 @@
 \newcommand{\FHS}{F_{\mathit{HS}}}
 \newcommand{\FFil}{F_{\mathit{FI}}}
 \newcommand{\dPfvw}{d_\mathit{Pfvw}}
-\newcommand{\dKt}{\overline{d_{\mathit{Kt}}}}
+\newcommand{\dKt}{\overline{d_{\mathit{Kd}}}}
 
 \title{Eine bittere Angelegenheit: klassische IBU Berechnungen}
 \author{Thomas Ascher <thomas.ascher@gmx.at>}
@@ -107,7 +107,7 @@ Sind die Bitterstoffausbeute und der Alphasäuregehalt eines Hopfens bekannt, so
 \label{eq:ibucalc}
 \end{equation}
 
-Folgende Faktoren begünstigen die Bitterstoffausbeute: längere Kochzeiten, höhere Kochtemperaturen, höherer Zerkleinerungsgrad des Hopfens, geringere Alphasäuredosierung, geringerer Extraktgehalt in der Würze, geringere Trubbildung und schnellere Ausflockung der Hefe \parencite{Hosom2017}. Kochzeiten zwischen 60 bis 90~Minuten (\autoref{fig:utiltinseth}) sind in Hinsicht auf die Hopfenausnutzung optimal \parencite[5]{Malowicki2005}. Dabei ist jedoch zu beachten, dass mit zunehmender Kochdauer Isoalphasäuren zu anderen, teilweise sensorisch unangenehmen Produkten abgebaut werden \parencite{Kappler2010}.
+Folgende Faktoren begünstigen die Bitterstoffausbeute: längere Kochdauer, höhere Kochtemperaturen, höherer Zerkleinerungsgrad des Hopfens, geringere Alphasäuredosierung, geringerer Extraktgehalt in der Würze, geringere Trubbildung und schnellere Ausflockung der Hefe \parencite{Hosom2017}. Eine Kochdauer zwischen 60 bis 90~Minuten (\autoref{fig:utiltinseth}) sind in Hinsicht auf die Hopfenausnutzung optimal \parencite[5]{Malowicki2005}. Dabei ist jedoch zu beachten, dass mit zunehmender Kochdauer Isoalphasäuren zu anderen, teilweise sensorisch unangenehmen Produkten abgebaut werden \parencite{Kappler2010}.
 
 \begin{figure}[H]
 \centering
@@ -130,7 +130,7 @@ Brauereien mit der entsprechenden Laborausrüstung können die Bitterstoffausbeu
 
 Zur Herstellung von hopfenaromatischen Bieren erfolgen mittlerweile größere Hopfengaben bei Kochende oder während der Whirlpoolrast. Hierbei ist zu beachten, dass bei Temperaturen geringeren als 100~°C noch eine Nachisomerisierung stattfindet \parencite{Weiss2019}. Die Modelle der Neunzigerjahre berücksichtigen diesen Effekt nicht, was bei späten Hopfengaben zu einer geringen Schätzung der Bitterstoffausbeute führt. Inzwischen wurde das Tinseth Modell bereits mehrfach erweitert, um die Nachisomerisierung zu berücksichtigen. Besonders aktiv bei der Suche nach besseren Modellen ist der Heimbrauer J.-P. Hosom mit seinem Blog „\href{https://jphosom.github.io/alchemyoverlord}{Alchemyoverlord}“. Er hat darauf inzwischen das mIBU und das SMPH Modell veröffentlicht \parencites{Hosom2015}{Hosom2021}.
 
-\textcite{Hall1997} hat bereits die relevanten Modelle der Neunzigerjahre analysiert, deren Daten normalisiert und in ein gemeinsames Berechnungsschema überführt. Die nachfolgenden Beschreibungen enthalten jedoch die Angaben der ursprünglichen Publikationen. Bei dem allgemeinen Berechnungsschema ist pro Hopfengabe zuerst eine initiale Bitterstoffausbeute basierend auf der Kochzeit ($\BAKt$) zu bestimmen und anschließend durch mehrere Korrekturfaktoren anzupassen. Aus den eingebrachten Alphasäuremengen der einzelnen Gaben und den ermittelten Bitterstoffausbeuten lässt sich dann ein IBU-Wert für ein Rezept berechnen. Folgende Korrekturfaktoren sind modellabhängig vorgesehen:
+\textcite{Hall1997} hat bereits die relevanten Modelle der Neunzigerjahre analysiert, deren Daten normalisiert und in ein gemeinsames Berechnungsschema überführt. Die nachfolgenden Beschreibungen enthalten jedoch die Angaben der ursprünglichen Publikationen. Bei dem allgemeinen Berechnungsschema ist pro Hopfengabe zuerst eine initiale Bitterstoffausbeute basierend auf der Kochdauer ($\BAKt$) zu bestimmen und anschließend durch mehrere Korrekturfaktoren anzupassen. Aus den eingebrachten Alphasäuremengen der einzelnen Gaben und den ermittelten Bitterstoffausbeuten lässt sich dann ein IBU-Wert für ein Rezept berechnen. Folgende Korrekturfaktoren sind modellabhängig vorgesehen:
 
 \begin{itemize}
 \item Relative Dichte der „Kochwürze“ ($\FKd$)
@@ -145,7 +145,7 @@ Zur Herstellung von hopfenaromatischen Bieren erfolgen mittlerweile größere Ho
 Die Umrechnung in relative Dichte aus dem Extraktgehalt für den Faktor $\FKd$  erfolgt auf Basis der Plato-Tabellen über die Goldiner Gleichungen (\autoref{eq:calcptosg}) oder durch ein vergleichbares Näherungsverfahren \parencite[140\psq]{Spedding2016}.
 
 \begin{equation}
-d_{\frac{20}{20}} \uden = \frac{\degree P}{258,6 - \degree P / 258,2 \cdot 227,1} + 1
+d_{\frac{20}{20}} \uden = \frac{\degree P}{258,6 - \frac{\degree P}{258,2} \cdot 227,1} + 1
 \label{eq:calcptosg}
 \end{equation}
 
@@ -153,13 +153,13 @@ d_{\frac{20}{20}} \uden = \frac{\degree P}{258,6 - \degree P / 258,2 \cdot 227,1
 
 In der Erstausgabe seines Buches „\citetitle{Burch1992}“ hat Burch eines der ersten Modelle zur Schätzung der Bitterstoffausbeute veröffentlicht. Alle Modelldaten basieren auf Erfahrungswerten aus der Brauindustrie. \parencite[28-32]{Burch1992}
 
-Die Bitterstoffausbeute nach Burch berücksichtigt nur die Kochzeit für Dolden basierend auf \autoref{table:burchbakt}. Darüber hinaus wird für gestopften Hopfen eine Ausbeute von 5~\% veranschlagt. \parencite[33]{Burch1992}.
+Die Bitterstoffausbeute nach Burch berücksichtigt nur die Kochdauer für Dolden basierend auf \autoref{table:burchbakt}. Darüber hinaus wird für gestopften Hopfen eine Ausbeute von 5~\% veranschlagt. \parencite[33]{Burch1992}.
 
 \begin{table}[H]
 \centering
 \begin{tabular}{rr}
 \toprule
-\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
+\multicolumn{1}{c}{\textbf{Kochdauer [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
 \midrule
 0–14  & 5 \\
 15–40 & 8–12 \\
@@ -180,7 +180,7 @@ Für die Modellberechnung ist zuerst die Ausbeute $\BAKt$ über die \autoref{tab
 \centering
 \begin{tabular}{rr}
 \toprule
-\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
+\multicolumn{1}{c}{\textbf{Kochdauer [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
 \midrule
 0–5             & 5 \\
 6–10            & 6 \\
@@ -200,7 +200,7 @@ Für die Modellberechnung ist zuerst die Ausbeute $\BAKt$ über die \autoref{tab
 \end{table}
 
 \begin{equation}
-\BAKt \uper = 18,11 + \left(13,86 \cdot \tanh{\frac{\text{Kochzeit} \umin - 31,32}{18,27}}\right)
+\BAKt \uper = 18,11 + \left(13,86 \cdot \tanh{\frac{\text{Kochdauer} \umin - 31,32}{18,27}}\right)
 \label{eq:ragerbakt}
 \end{equation}
 
@@ -226,15 +226,15 @@ Für die Modellberechnung ist zuerst die Ausbeute $\BAKt$ über die \autoref{tab
 
 \subsubsection*{Garetz (1994)}
 
-Das grundlegende Berechnungsverfahren für das von Garetz in 1994 veröffentlichte Modell übernahm er von Rager. Anpassungen sind jedoch an der Tabelle zur Bestimmung der Ausbeute anhand der Kochzeit und den Korekturfaktoren erfolgt \parencite[134-144]{Garetz1994}.
+Das grundlegende Berechnungsverfahren für das von Garetz in 1994 veröffentlichte Modell übernahm er von Rager. Anpassungen sind jedoch an der Tabelle zur Bestimmung der Ausbeute anhand der Kochdauer und den Korekturfaktoren erfolgt \parencite[134-144]{Garetz1994}.
 
-Die Berechnung nach Garetz kann in mehreren Ausbaustufen erfolgen, deren Umfang von den gewählten Korrekturfaktoren abhängt. Der Minimalumfang ist dabei durch \autoref{eq:garetzba1} definiert \parencite[137]{Garetz1994}. Zunächst ist die Ausbeute $\BAKt$ anhand der Kochzeit der jeweiligen Hopfengabe über die \autoref{table:garetzbakt} oder die \autoref{eq:garetzbakt} zu bestimmen \parencite{Steinmeyer2021}. Danach erfolgt die Berechnung der Faktoren $\FKd$, $\FHR$ und $\FSP$ gemäß \autoref{eq:garetzkd}, \autoref{eq:garetzhr} und \autoref{eq:garetzsp}. Der Faktor $\FHR$ basiert auf dem Zielwert der gesamten Bittereinheiten eines Rezepts. Das Modell von Garetz geht nämlich im Standardfalls davon aus, Hopfenmengen auf Basis eines gewünschten IBU-Ziels zu schätzen. Hier ist es entweder möglich den Faktor zunächst zu ignorieren und iterativ den Gesamtwert zu schätzen oder den Faktor bei nur einer Hopfengabe durch eine quadratische Gleichung zu eliminieren \parencite[63]{Hall1997}.
+Die Berechnung nach Garetz kann in mehreren Ausbaustufen erfolgen, deren Umfang von den gewählten Korrekturfaktoren abhängt. Der Minimalumfang ist dabei durch \autoref{eq:garetzba1} definiert \parencite[137]{Garetz1994}. Zunächst ist die Ausbeute $\BAKt$ anhand der Kochdauer der jeweiligen Hopfengabe über die \autoref{table:garetzbakt} oder die \autoref{eq:garetzbakt} zu bestimmen \parencite{Steinmeyer2021}. Danach erfolgt die Berechnung der Faktoren $\FKd$, $\FHR$ und $\FSP$ gemäß \autoref{eq:garetzkd}, \autoref{eq:garetzhr} und \autoref{eq:garetzsp}. Der Faktor $\FHR$ basiert auf dem Zielwert der gesamten Bittereinheiten eines Rezepts. Das Modell von Garetz geht nämlich im Standardfalls davon aus, Hopfenmengen auf Basis eines gewünschten IBU-Ziels zu schätzen. Hier ist es entweder möglich den Faktor zunächst zu ignorieren und iterativ den Gesamtwert zu schätzen oder den Faktor bei nur einer Hopfengabe durch eine quadratische Gleichung zu eliminieren \parencite[63]{Hall1997}.
 
 \begin{table}[H]
 \centering
 \begin{tabular}{rr}
 \toprule
-\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
+\multicolumn{1}{c}{\textbf{Kochdauer [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
 \midrule
 0–10            & 0 \\
 11–15           & 2 \\
@@ -256,7 +256,7 @@ Die Berechnung nach Garetz kann in mehreren Ausbaustufen erfolgen, deren Umfang 
 \end{table}
 
 \begin{equation}
-\BAKt \uper = 7,2994 + \left(15,0746 \cdot \tanh{\frac{\text{Kochzeit} \umin - 21,86}{24,71}}\right)
+\BAKt \uper = 7,2994 + \left(15,0746 \cdot \tanh{\frac{\text{Kochdauer} \umin - 21,86}{24,71}}\right)
 \label{eq:garetzbakt}
 \end{equation}
 
@@ -304,7 +304,7 @@ d \uden = \begin{cases}
 \label{eq:garetzba1}
 \end{equation}
 
-Alle weiteren Faktoren erachtet Garetz als optional. Der Faktor $\FAH$ (\autoref{eq:garetzah}) ist anhand des Sedimentationsverhaltens der Hefe zu wählen. Je schneller eine Hefe sedimentiert, desto weniger Isoalphasäure haftet an den Zellwänden an und desto mehr Isoalphasäure bleibt in Lösung. Dementsprechend ist die Bitterstoffausbeute um 5~\% nach unten oder nach oben zu korrigieren.  Für Weißbier veranschlagt Garetz eine 20~\% höhere Ausbeute, da die Hefe beim Trinken ebenfalls konsumiert wird. Bei der Verwendung von Pellets erfolgt eine erhöhung der Ausbeute um 10~\% bei einer Kochzeit bis 30~Minuten (\autoref{eq:garetzhf}). Für Hopfensäcke ist eine Reduktion der Ausbeute, basierend auf Packdichte, um bis zu 20~\% durchzuführen. (\autoref{eq:garetzhs}). Der Einsatz eines Filtersystems kann die Ausbeute inetwa um 1,25 bis 2,5~\% reduzieren (\autoref{eq:garetzfil}), dementsprechend empfieht Garetz eine messtechnische Erhebung des Faktors $\FFil$. \parencite[140\psq]{Garetz1994}
+Alle weiteren Faktoren erachtet Garetz als optional. Der Faktor $\FAH$ (\autoref{eq:garetzah}) ist anhand des Sedimentationsverhaltens der Hefe zu wählen. Je schneller eine Hefe sedimentiert, desto weniger Isoalphasäure haftet an den Zellwänden an und desto mehr Isoalphasäure bleibt in Lösung. Dementsprechend ist die Bitterstoffausbeute um 5~\% nach unten oder nach oben zu korrigieren.  Für Weißbier veranschlagt Garetz eine 20~\% höhere Ausbeute, da die Hefe beim Trinken ebenfalls konsumiert wird. Bei der Verwendung von Pellets erfolgt eine erhöhung der Ausbeute um 10~\% bei einer Kochdauer bis 30~Minuten (\autoref{eq:garetzhf}). Für Hopfensäcke ist eine Reduktion der Ausbeute, basierend auf Packdichte, um bis zu 20~\% durchzuführen. (\autoref{eq:garetzhs}). Der Einsatz eines Filtersystems kann die Ausbeute inetwa um 1,25 bis 2,5~\% reduzieren (\autoref{eq:garetzfil}), dementsprechend empfieht Garetz eine messtechnische Erhebung des Faktors $\FFil$. \parencite[140\psq]{Garetz1994}
 
 \begin{equation}
 \FAH = \begin{cases}
@@ -320,7 +320,7 @@ Alle weiteren Faktoren erachtet Garetz als optional. Der Faktor $\FAH$ (\autoref
 \begin{equation}
 \FHF = \begin{cases}
 1,0 \quad \text{für Dolden}, \\
-1,1 \quad \text{für Pellets für} \quad 10 < \text{Kochzeit} \umin \le 30. \\
+1,1 \quad \text{für Pellets für} \quad 10 < \text{Kochdauer} \umin \le 30. \\
 \end{cases}
 \label{eq:garetzhf}
 \end{equation}
@@ -346,15 +346,15 @@ Alle weiteren Faktoren erachtet Garetz als optional. Der Faktor $\FAH$ (\autoref
 
 \subsubsection*{Mosher (1994)}
 
-Bereits am Ende der Achzigerjahre hatte Mosher einen aus mehreren Drehscheiben bestehenden Rechenschieber zur IBU Berechnung erstellt und später auch vertrieben \parencite{Mosher2022}. Sein in 1994 veröffentlichtes Buch „\citetitle{Mosher1994}“ enthält zwei Diagramme zur grafischen Bestimmung der Bitterstoffausbeute für Kochzeiten bis zu drei Stunden \parencite[160\psq]{Mosher1994}. \textcite{Holle2010} und \textcite{Thesseling2019} verwenden einen Teil der abgemessenen Diagrammdaten noch immer in aktuelleren Publikationen für grobe Abschätzungen.
+Bereits am Ende der Achzigerjahre hatte Mosher einen aus mehreren Drehscheiben bestehenden Rechenschieber zur IBU Berechnung erstellt und später auch vertrieben \parencite{Mosher2022}. Sein in 1994 veröffentlichtes Buch „\citetitle{Mosher1994}“ enthält zwei Diagramme zur grafischen Bestimmung der Bitterstoffausbeute für eine Kochdauer bis zu drei Stunden \parencite[160\psq]{Mosher1994}. \textcite{Holle2010} und \textcite{Thesseling2019} verwenden einen Teil der abgemessenen Diagrammdaten noch immer in aktuelleren Publikationen für grobe Abschätzungen.
 
-Die Bitterstoffausbeute nach Mosher ist basierend auf der relativen Dichte und der Kochzeit der jeweiligen Hopfengabe zu bestimmen. Für Dolden ist dabei der Wert aus \autoref{table:mosherbakt} und für Pellets aus \autoref{table:mosherbaktpellets} zu entnehmen. Ob sich die relativen Dichte dabei wie bei Rager auf die Pfannenvollwürze bezieht, ist aus Moshers Publikation nicht ersichtlich. Holle geht bei seinen Beispielen von der Stammwürze aus \parencite[53]{Holle2010}.
+Die Bitterstoffausbeute nach Mosher ist basierend auf der relativen Dichte und der Kochdauer der jeweiligen Hopfengabe zu bestimmen. Für Dolden ist dabei der Wert aus \autoref{table:mosherbakt} und für Pellets aus \autoref{table:mosherbaktpellets} zu entnehmen. Ob sich die relativen Dichte dabei wie bei Rager auf die Pfannenvollwürze bezieht, ist aus Moshers Publikation nicht ersichtlich. Holle geht bei seinen Beispielen von der Stammwürze aus \parencite[53]{Holle2010}.
 
 \begin{table}[H]
 \centering
 \begin{tabular}{rrrrrrrr} 
 \toprule
-\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{7}{c}{\textbf{Ausbeute [\%]}}  \\
+\multicolumn{1}{c}{\textbf{Kochdauer [min]}} & \multicolumn{7}{c}{\textbf{Ausbeute [\%]}}  \\
 Relative Dichte [g/cm³]:                                        & 1,030 & 1,040 & 1,050 & 1,060 & 1,070 & 1,080  & 1,090                   \\
 Extraktgehalt [\%w/w]:                                            & 7,6 & 10 & 12,4 & 14,7 & 17,1 & 19,3  & 21,6                   \\                                            
 \midrule
@@ -375,7 +375,7 @@ Extraktgehalt [\%w/w]:                                            & 7,6 & 10 & 1
 \centering
 \begin{tabular}{rrrrrrrr} 
 \toprule
-\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{7}{c}{\textbf{Ausbeute [\%]}}  \\
+\multicolumn{1}{c}{\textbf{Kochdauer [min]}} & \multicolumn{7}{c}{\textbf{Ausbeute [\%]}}  \\
 Relative Dichte [g/cm³]:                                        & 1,030 & 1,040 & 1,050 & 1,060 & 1,070 & 1,080  & 1,090                   \\
 Extraktgehalt [\%w/w]:                                            & 7,6 & 10 & 12,4 & 14,7 & 17,1 & 19,3  & 21,6                   \\  
 \midrule
@@ -393,13 +393,13 @@ Extraktgehalt [\%w/w]:                                            & 7,6 & 10 & 1
 
 \subsubsection*{Daniels (1996)}
 
-Das Modell von Daniels verwendet Teile der Berechnungsvorschriften von Rager und Garetz aber eigene Tabellen für die Bestimmung der Bitterstoffausbeute basierend auf der Kochzeit und des verwendeten Hopfenprodukts (\autoref{table:danielsbakt} und \autoref{table:danielsbaktpellets}). Der Faktor $\FKd$ ist nach Rager mit \autoref{eq:ragerfkd} zu berechnen. Für den Faktor $\FHR$ hat Daniels eine eigene Tabelle vorgesehen, die hier nicht angeführt wurde, nachdem deren Berechnung auch durch \autoref{eq:garetzhr} möglich ist. Die gesamte Bitterstoffausbeute wird gemäß \autoref{eq:danielsba} gebildet. Neben Moshers Rechenschieber bilden noch weitere Quellen und eigene Tests die Datenbasis für Daniels Tabellen. \parencite[80,85-88]{Daniels1996}
+Das Modell von Daniels verwendet Teile der Berechnungsvorschriften von Rager und Garetz aber eigene Tabellen für die Bestimmung der Bitterstoffausbeute basierend auf der Kochdauer und des verwendeten Hopfenprodukts (\autoref{table:danielsbakt} und \autoref{table:danielsbaktpellets}). Der Faktor $\FKd$ ist nach Rager mit \autoref{eq:ragerfkd} zu berechnen. Für den Faktor $\FHR$ hat Daniels eine eigene Tabelle vorgesehen, die hier nicht angeführt wurde, nachdem deren Berechnung auch durch \autoref{eq:garetzhr} möglich ist. Die gesamte Bitterstoffausbeute wird gemäß \autoref{eq:danielsba} gebildet. Neben Moshers Rechenschieber bilden noch weitere Quellen und eigene Tests die Datenbasis für Daniels Tabellen. \parencite[80,85-88]{Daniels1996}
 
 \begin{table}[H]
 \centering
 \begin{tabular}{rr}
 \toprule
-\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
+\multicolumn{1}{c}{\textbf{Kochdauer [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
 \midrule
 0–9            & 5  \\
 10–19          & 12 \\
@@ -418,7 +418,7 @@ Das Modell von Daniels verwendet Teile der Berechnungsvorschriften von Rager und
 \centering
 \begin{tabular}{rr}
 \toprule
-\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
+\multicolumn{1}{c}{\textbf{Kochdauer [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
 \midrule
 0–9            & 6 \\
 10–19          & 15 \\
@@ -441,13 +441,13 @@ Das Modell von Daniels verwendet Teile der Berechnungsvorschriften von Rager und
 
 \subsubsection*{Noonan (1996)}
 
-Die Bitterstoffausbeute nach Noonan ist basierend auf der relativen Dichte und der Kochzeit der jeweiligen Hopfengabe zu bestimmen. Für Dolden ist dabei der Wert aus \autoref{table:noonanbakt} und für Pellets aus \autoref{table:noonanbaktpellets} zu entnehmen. Ob sich die relative Dichte dabei wie bei Rager auf die Pfannenvollwürze bezieht, ist aus Noonans Publikation nicht ersichtlich. Die in der Quelle fehlerhafte angegebene Bitterstoffausbeute für Pellets bei 90~Minuten und einem Extraktgehalt von 20,5 bis 23~\%w/w wurde durch korrigiert.
+Die Bitterstoffausbeute nach Noonan ist basierend auf der relativen Dichte und der Kochdauer der jeweiligen Hopfengabe zu bestimmen. Für Dolden ist dabei der Wert aus \autoref{table:noonanbakt} und für Pellets aus \autoref{table:noonanbaktpellets} zu entnehmen. Ob sich die relative Dichte dabei wie bei Rager auf die Pfannenvollwürze bezieht, ist aus Noonans Publikation nicht ersichtlich. Die in der Quelle fehlerhafte angegebene Bitterstoffausbeute für Pellets bei 90~Minuten und einem Extraktgehalt von 20,5 bis 23~\%w/w wurde durch korrigiert.
 
 \begin{table}[H]
 \centering
 \begin{tabular}{rrrrrr} 
 \toprule
-\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{5}{c}{\textbf{Ausbeute [\%]}}                                 \\
+\multicolumn{1}{c}{\textbf{Kochdauer [min]}} & \multicolumn{5}{c}{\textbf{Ausbeute [\%]}}                                 \\
 Spezifische Dichte [g/cm³]:                    & 1,032–50 & 1,050–65 & 1,065–75 & 1,075–85 & 1,085–95  \\
 Extraktgehalt [\%w/w]:                    & 8–12,5 & 12,5–16 & 16–18 & 18–20,5 & 20,5–23  \\
 \midrule                                             
@@ -467,7 +467,7 @@ Extraktgehalt [\%w/w]:                    & 8–12,5 & 12,5–16 & 16–18 & 18�
 \centering
 \begin{tabular}{rrrrrr} 
 \toprule
-\multicolumn{1}{c}{\textbf{Kochzeit [min]}} & \multicolumn{5}{c}{\textbf{Ausbeute [\%]}}                                 \\
+\multicolumn{1}{c}{\textbf{Kochdauer [min]}} & \multicolumn{5}{c}{\textbf{Ausbeute [\%]}}                                 \\
 Spezifische Dichte [g/cm³]:                    & 1,032–50 & 1,050–65 & 1,065–75 & 1,075–85 & 1,085–95  \\
 Extraktgehalt [\%w/w]:                    & 8–12,5 & 12,5–16 & 16–18 & 18–20,5 & 20,5–23  \\
 \midrule
@@ -487,10 +487,10 @@ Extraktgehalt [\%w/w]:                    & 8–12,5 & 12,5–16 & 16–18 & 18�
 
 Während Tinseth in den Neunzigerjahren an der Oregon State University sein Doktoratsstudium in Chemie absolvierte, betrieb er nebenbei einen kleinen Hopfenhandel mit dem Namen HopTech. Für dessen Onlinepräsenz stelle er Informationen zur Hopfenausbeute zusammen, die er aus Brauliteratur bezog. Durch kleine Gefälligkeiten wurde es ihm erlaubt die Messgeräte der USDA Hop Labs für eigene Zwecke zu nutzen. Zum Zeitvertreib und aus der Vermutung heraus, dass die Ausbeutekurve von Ragers Modell die stattfindende chemische Reaktion inkorrekt beschrieb, begann er dann mit der Entwicklung eines eigenen Berechnungsverfahrens. Grundlagen für sein Ergebnis waren Messergebnisse seiner eigenen Brauversuche, Messdaten des Brauprogramms der Universität und publizierte und nicht publizierten Daten verschiedener Brauereien. Die von Tinseth erhobenen Daten sind für Brauvorgänge mit Hopfendolen gültig. Pellets waren zur damaligen Zeit in guter Qualität nicht für Privatpersonen verfügbar. \parencites[0:55:45-1:08:00]{Beechum2017a}[2:10-6:30]{Smith2011}
 
-Die Berechnung der Bitterstoffausbeute nach Tinseth erfolgt über \autoref{eq:tinsethbakt}, \autoref{eq:tinsethgf} und \autoref{eq:tinsethba} anhand der Kochzeit der jeweiligen Hopfengabe und der mittleren spezifischen Dichte ($\dKt$) über den gesamten Kochverlauf \parencite{Tinseth1997}.
+Die Berechnung der Bitterstoffausbeute nach Tinseth erfolgt über \autoref{eq:tinsethbakt}, \autoref{eq:tinsethgf} und \autoref{eq:tinsethba} anhand der Kochdauer der jeweiligen Hopfengabe und der mittleren spezifischen Dichte ($\dKt$) über den gesamten Kochverlauf \parencite{Tinseth1997}.
 
 \begin{equation}
-\BAKt \uper = \frac{1 - e^{\left(-0,04 \cdot \text{Kochzeit} \umin \right)}}{4,15} \cdot 100
+\BAKt \uper = \frac{1 - e^{\left(-0,04 \cdot \text{Kochdauer} \umin \right)}}{4,15} \cdot 100
 \label{eq:tinsethbakt}
 \end{equation}
 
@@ -504,11 +504,11 @@ Die Berechnung der Bitterstoffausbeute nach Tinseth erfolgt über \autoref{eq:ti
 \label{eq:tinsethba}
 \end{equation}
 
-Während Tinseths Modell die Isomerisierung der Alphasäure über die Kochzeit von der Funktionsform korrekt beschreibt \parencite[43]{Malowicki2005}, ist es nicht allgemeingültig. Es sind daher mehrere Faktoren zur Anpassung an andere Brausysteme vorgesehen (\autoref{eq:tinsethbakt}). Die Konstante 0,04 steuert die Kurvenform und die Konstante 4,15 die maximale Ausbeute \parencite{Tinseth1997}. Einige Quellen wie \textcite{Novotny2018} erhöhen die Bitterstoffausbeute nach Tinseth für T90 Pellets um 10~\% (\autoref{eq:garetzhf}).
+Während Tinseths Modell die Isomerisierung der Alphasäure über die Kochdauer von der Funktionsform korrekt beschreibt \parencite[43]{Malowicki2005}, ist es nicht allgemeingültig. Es sind daher mehrere Faktoren zur Anpassung an andere Brausysteme vorgesehen (\autoref{eq:tinsethbakt}). Die Konstante 0,04 steuert die Kurvenform und die Konstante 4,15 die maximale Ausbeute \parencite{Tinseth1997}. Einige Quellen wie \textcite{Novotny2018} erhöhen die Bitterstoffausbeute nach Tinseth für T90 Pellets um 10~\% (\autoref{eq:garetzhf}).
 
 \subsection*{Modellvergleich}
 
-Die \autoref{fig:utilcompare} zeigt die der Entwicklung Bitterstoffausbeute für Dolden über die Kochzeit für die verschiedenen Modelle in Relation zum Tinseth Modell in einem Bereich des Extraktgehalts, bei dem noch keine wesentliche Korrektur für diesen vorgenommen wird. Um die Isomerisierungsreaktion korrekt zu beschreiben, müsste die Kurvenform wie beim Tinseth Modell einer Funktion ersten Grades entsprechen. Dies ist beim Rager Modell nicht der Fall.
+Die \autoref{fig:utilcompare} zeigt die der Entwicklung Bitterstoffausbeute für Dolden über die Kochdauer für die verschiedenen Modelle in Relation zum Tinseth Modell in einem Bereich des Extraktgehalts, bei dem noch keine wesentliche Korrektur für diesen vorgenommen wird. Um die Isomerisierungsreaktion korrekt zu beschreiben, müsste die Kurvenform wie beim Tinseth Modell einer Funktion ersten Grades entsprechen. Dies ist beim Rager Modell nicht der Fall.
 
 Es ist nahezu unmöglich, ein universelles Berechnungsmodell aufzustellen, welches alle Einflüsse auf Bitterstoffausbeute korrekt bewertet. Dabei ist auch zu berücksichtigen, dass selbst der bekannte Alphasäuregehalt eines eingesetzten Hopfens aufgrund von Rohstoffschwankungen nicht dem realen Alphasäuregehalt entsprechen muss. Die zugrunde liegenden Messdaten für die verglichenen Modelle sind spezifisch für die Brausysteme, für die diese erhoben wurden. Tinseth schätzt, dass ein mit diesen Modellen berechneter IBU-Wert im Idealfall innerhalb einer Abweichung von 10~\% vom realen Messwert liegt \parencite[22:05-23:00]{Smith2011}.
 
@@ -529,13 +529,13 @@ Es sind nur wenige veröffentlichte Vergleichsdaten von gemessenen IBU-Werten ei
 \toprule
 \multicolumn{1}{c}{\textbf{Modell}} & \multicolumn{1}{c}{\textbf{IBU}} \\
 \midrule
-Messwert nach ASBC & 45,50 \\
-Rager             & 57,82 \\
-Garetz            & 24,12 \\
-Mosher            & 35,65 \\
-Daniels           & 46,51 \\
-Noonan            & 53,21 \\
-Tinseth           & 47,54 \\
+Messwert nach ASBC & 45,5 \\
+Rager             & 57,8 \\
+Garetz            & 24,1 \\
+Mosher            & 35,7 \\
+Daniels           & 46,5 \\
+Noonan            & 53,2 \\
+Tinseth           & 47,5 \\
 \bottomrule
 \end{tabular}
 \caption{Modellvergleich für ein American Pale Ale \parencite{Hall1997}}
@@ -567,6 +567,21 @@ Tinseth           & 48,0 \\
 
 \section*{Berechnungsbespiel}
 
+Bei einem Kleinsud mit einer Vorderwürzekonzentration (VWK) von 10,5~\%w/w und 20 Litern kalter Anstellwürze  mit einer Stammwürze (Stw) von 12~°P erfolgen zwei Hopfengaben: 10~g Magnum Pellets mit 16,4~\% Alphasäure 60~Minuten vor Kochende und 7~g Tradition Pellets mit 6,6~\% Alphasäure 5 Minuten vor Kochende. Berechne die resultierende Isoalphasäurekonzentration mithilfe des Tinseth Modells. Unter der Anwendung von \autoref{eq:calcptosg}, \autoref{eq:tinsethba} und \autoref{eq:ibucalc} (für Pellets ist die Bitterstoffausbeute mit 1,1 zu multiplizieren) ergibt sich folgender Berechnungsweg:
+
+\begin{align*}
+d_{VWK} \uden &= \frac{10,5}{258,6 - \frac{10,5}{258,2} \cdot 227,1} + 1 = 1,042 \\
+d_{Stw} \uden &= \frac{12}{258,6 - \frac{12}{258,2} \cdot 227,1} + 1 = 1,048 \\
+\overline{d_{\mathit{Kt}}} \uden &= \frac{d_{VWK} + d_{Stw}}{2} = 1,045 \\
+\BA_{1} \uper &= \frac{1 - e^{\left(-0,04 \cdot 60 \right)}}{4,15} \cdot 100 \cdot 1,65 \cdot 0,000125^{\left(1,045 - 1 \right)} \cdot 1,1 = 26,5 \\
+\IBU_{1} \ucon &= \frac{10 \cdot 1000 \cdot \frac{16,6}{100} \cdot \frac{26,5}{100}}{20} = 21,7 \\
+\BA_{2} \uper &= \frac{1 - e^{\left(-0,04 \cdot 5 \right)}}{4,15} \cdot 100 \cdot 1,65 \cdot 0,000125^{\left(1,045 - 1 \right)} \cdot 1,1 = 5,3 \\
+\IBU_{2} \ucon &= \frac{7 \cdot 1000 \cdot \frac{6,6}{100} \cdot \frac{4,8}{100}}{20} = 1,2 \\
+\IBU \ucon &= \IBU_{1} + \IBU_{2} = 22,9
+\end{align*}
+
+
+
 \section*{Zusammenfassung}
 
 Die relevanten Eckpunkte dieses Artikels sind:
@@ -576,7 +591,7 @@ Die relevanten Eckpunkte dieses Artikels sind:
    
 \item Die Kennzahl für den sensorischen Bittereindruck eines Bieres ist die International Bitterness Unit (IBU). Diese quantifiziert die Konzentration der Isoalphasäuren im Bier in Milligramm pro Liter. Gemessen wird die IBU entweder indirekt mit einem Spektralphotometer oder einer HPLC-Apparatur.
 
-\item Nur ein Teil der während eines Brauvorgangs zugeführten Alphasäuren finden sich im fertigen Bier als Isoalphasäuren wieder. Einerseits ist die Isomerisierungsrate abhängig von verschiedenen Parametern des Brauprozesses, insbesondere der Kochzeit, anderseits gehen Isoalphasäuren auch nach dem Hopfenkochen verloren. Prozesstechnisch wird dieser Anteil in Prozent als Bitterstoffausbeute gemessen.
+\item Nur ein Teil der während eines Brauvorgangs zugeführten Alphasäuren finden sich im fertigen Bier als Isoalphasäuren wieder. Einerseits ist die Isomerisierungsrate abhängig von verschiedenen Parametern des Brauprozesses, insbesondere die Kochdauer, anderseits gehen Isoalphasäuren auch nach dem Hopfenkochen verloren. Prozesstechnisch wird dieser Anteil in Prozent als Bitterstoffausbeute gemessen.
 
 \item Sind die Bitterstoffausbeute des Brauprozesses und der Alphasäuregehalt eines Hopfens bekannt, lassen sich benötigte Hopfenmengen berechnen um einen bestimmten IBU-Wert einzustellen.
 
