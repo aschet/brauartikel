@@ -50,7 +50,7 @@
 \newcommand{\ucon}{\:[\text{mg/l}]}
 \newcommand{\FKd}{F_{\mathit{d}}}
 
-\title{Es wird bunt: Berechnung der Bierfarbe}
+\title{Es wird bunt: Bierfarbe aus Schüttung berechnen}
 \author{Thomas Ascher <thomas.ascher@gmx.at>}
 \date{\today, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
 
@@ -66,37 +66,101 @@
 Die Einstellung des durch Hopfen eingebrachten Bitterstoffgehalts eines Biers, den wir als IBU-Angabe kennen, ist ein wesentlicher Bestandteil des Brauprozesses und der Rezeptentwicklung. Typischerweise helfen uns heute Braurechner bei Bestimmung von benötigten Hopfenmengen. Aber wie funktionieren deren Berechnungen? Dieser Artikel soll darüber Aufschluss geben und stellt historische Berechnungsverfahren aus dem Heimbraubereich vor.
 
 
+\begin{table}[H]
+\centering
+\begin{tabular}{rrr}
+\toprule
+\multicolumn{1}{c}{\textbf{Beschreibung}} & \multicolumn{1}{c}{\textbf{EBC}} & \multicolumn{1}{c}{\textbf{SRM}} \\
+\midrule
+Stroh & - & 2-3 \\
+Gelb & - & 3-4 \\
+Gold & - & 5-6 \\
+Berstein & - & 6-9 \\
+Dunkles Bernstein / Helles Kupfer & - & 10-14 \\
+Kupfer & - & 14-17 \\
+Dunkles Kupfer / Helles Braun & - & 17-18 \\
+Braun & - & 19-22 \\
+Dunkles Braun & - & 22-30 \\
+Sehr dunkles Braun & - & 30-35 \\
+Schwarz & - & 30+ \\
+Blickdichtes Schwarz & - & 40+ \\
+\bottomrule
+\end{tabular}
+\caption{TODO \parencite{BJCP2015}}
+\label{table:bjcpcolor}
+\end{table}
 
+
+
+\parencite[11]{Noonan1996}
+Color may not be stated as SRM/ASBC/°L units.
+Where EBC units are given, the formula ASBC = (°EBC
++ 1.2)/2.65 gives reasonable but not entirely accurate
+transposition. The color for English malts is often given as
+Color IOB, EBC method. IOB color is only approximately
+80 percent of EBC color. Where IOB units are given, the
+formula ASBC = [(IOB/.80) + 1.2]/2.65 can be used.
+HCU color units are a summary measurement of
+wort color that is equal to the sum of the SRM/°Lovibond
+of all the malts used to make a wort. HCU units and SRM
+wort color are comparable up to about 10 °SRM; after that,
+corrections must be made. See the conversion chart in
+table 15 to convert from HCU color to approximate °SRM.
+The color ranges for most malt types vary widely,
+depending on the country of origin and the maltster. From
+the maltster’s point of view, it is of some advantage to
+have a “unique” color range, since it requires any brewer
+using the malt to make serious adjustments in the brew
+house program in order to switch suppliers. To some
+extent, this diversity also benefits brewers, but on the
+whole, color variation in the same nominal malt types is a
+problem for the brewer seeking predictable results.
 
 
 \begin{table}[H]
 \centering
 \begin{tabular}{rr}
 \toprule
-\multicolumn{1}{c}{\textbf{Kochdauer [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
+\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{MCU}} \\
 \midrule
-0–10            & 0 \\
-11–15           & 2 \\
-16–20           & 5 \\
-21–25           & 8 \\
-26–30           & 11 \\
-31–35           & 14 \\
-36–40           & 16 \\
-41–45           & 18 \\
-46–50           & 19 \\
-51–60           & 20 \\
-61–70           & 21 \\
-70–80           & 22 \\
-81–90           & 23 \\
+1–10 & 1-10 \\
+10,5 & 10,8 \\
+11   & 11,6 \\
+11,5 & 12,4 \\
+12   & 13,3 \\
+12,5 & 14,1 \\
+13   & 14,9 \\
+13,5 & 17,7 \\
+14   & 18,6 \\
+14,5 & 20,5 \\
+15   & 22,4 \\
+15,5 & 24,3 \\
+16   & 26,2 \\
+16,5 & 28,1 \\
+17   & 30 \\
+17,5 & 32,9 \\
+18   & 35,8 \\
+18,5 & 38,8 \\
+19   & 41,9 \\
+19,5 & 45 \\
+20   & 47,8 \\
 \bottomrule
 \end{tabular}
-\caption{Bitterstoffausbeute für Dolden nach Garetz }
-\label{table:garetzbakt}
+\caption{TODO \parencite[206]{Noonan1996}}
+\label{table:noonanmcu}
 \end{table}
 
 
 
 \section*{Zusammenfassung}
+
+\parencite{BJCP2015}
+\parencite{Noonan1996}
+\parencite{Bruecklmeier2018}
+\parencite{Holle2010}
+\parencite{Mosher1994}
+\parencite{Daniels1996}
+
 
 Die relevanten Eckpunkte dieses Artikels sind:
 
