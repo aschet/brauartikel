@@ -1,0 +1,109 @@
+% Copyright 2022 Thomas Ascher
+% SPDX-License-Identifier: CC-BY-SA-4.0
+
+\documentclass[a4paper,parskip=half]{scrartcl}
+
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage[naustrian]{babel}
+\usepackage{csquotes}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{chemformula}
+\usepackage{icomma}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage[section]{placeins}
+\usepackage[style=apa,backend=biber]{biblatex}
+
+\usepackage[hidelinks,pdfencoding=auto,
+  pdfauthor={Thomas Ascher},
+  pdfusetitle,
+  pdfkeywords={Bier,Farbe,SRM,IBU,EBC,Morey}]{hyperref}
+\usepackage{microtype}
+
+\setkomafont{disposition}{\normalfont\bfseries}
+
+\addto\extrasnaustrian{
+\def\figureautorefname{Abb.}
+\def\tableautorefname{Tab.}
+\def\equationautorefname{Gl.}
+}
+
+\addto\captionsnaustrian{
+\renewcommand{\figurename}{Abb.}
+\renewcommand{\tablename}{Tab.}
+}
+
+\NewBibliographyString{gethesis}
+\DefineBibliographyStrings{naustrian}{
+  mathesis = {Masterarbeit},
+  gethesis = {Diplomarbeit},
+}
+
+\newcommand{\BA}{\mathit{BA}}
+\newcommand{\umin}{\:[\textrm{min}]}
+\newcommand{\uden}{\:[\text{g/cm³}]}
+\newcommand{\uper}{\:[\text{\%}]}
+\newcommand{\uli}{\:[\text{l}]}
+\newcommand{\ume}{\:[\text{m}]}
+\newcommand{\ucon}{\:[\text{mg/l}]}
+\newcommand{\FKd}{F_{\mathit{d}}}
+
+\title{Es wird bunt: Berechnung der Bierfarbe}
+\author{Thomas Ascher <thomas.ascher@gmx.at>}
+\date{\today, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
+
+\addbibresource{bierfarbe.bib}
+
+\begin{document}
+\maketitle
+
+\section*{Einleitung}
+
+„\href{https://bieranalyse.de}{Bieranalyse Fuchs}“
+
+Die Einstellung des durch Hopfen eingebrachten Bitterstoffgehalts eines Biers, den wir als IBU-Angabe kennen, ist ein wesentlicher Bestandteil des Brauprozesses und der Rezeptentwicklung. Typischerweise helfen uns heute Braurechner bei Bestimmung von benötigten Hopfenmengen. Aber wie funktionieren deren Berechnungen? Dieser Artikel soll darüber Aufschluss geben und stellt historische Berechnungsverfahren aus dem Heimbraubereich vor.
+
+
+
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{rr}
+\toprule
+\multicolumn{1}{c}{\textbf{Kochdauer [min]}} & \multicolumn{1}{c}{\textbf{Ausbeute [\%]}} \\
+\midrule
+0–10            & 0 \\
+11–15           & 2 \\
+16–20           & 5 \\
+21–25           & 8 \\
+26–30           & 11 \\
+31–35           & 14 \\
+36–40           & 16 \\
+41–45           & 18 \\
+46–50           & 19 \\
+51–60           & 20 \\
+61–70           & 21 \\
+70–80           & 22 \\
+81–90           & 23 \\
+\bottomrule
+\end{tabular}
+\caption{Bitterstoffausbeute für Dolden nach Garetz }
+\label{table:garetzbakt}
+\end{table}
+
+
+
+\section*{Zusammenfassung}
+
+Die relevanten Eckpunkte dieses Artikels sind:
+
+\begin{itemize}
+\item TODO
+\end{itemize}
+
+\printbibliography[title=Quellen]
+
+\end{document}
