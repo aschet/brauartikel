@@ -63,8 +63,10 @@
 
 „\href{https://bieranalyse.de}{Bieranalyse Fuchs}“
 
-Die Einstellung des durch Hopfen eingebrachten Bitterstoffgehalts eines Biers, den wir als IBU-Angabe kennen, ist ein wesentlicher Bestandteil des Brauprozesses und der Rezeptentwicklung. Typischerweise helfen uns heute Braurechner bei Bestimmung von benötigten Hopfenmengen. Aber wie funktionieren deren Berechnungen? Dieser Artikel soll darüber Aufschluss geben und stellt historische Berechnungsverfahren aus dem Heimbraubereich vor.
-
+%In \autoref{table:parameters} sind die vom \citeauthor{BJCP2015} und die von
+%\citeauthor{Strottner1999} genannten brautechnischen Parameter erfasst.
+%Die Angaben der Brewers Association Stil-Richtlinien sind annähernd
+%deckungsgleich \parencites[24]{BA2021}. 
 
 \begin{table}[H]
 \centering
@@ -72,16 +74,16 @@ Die Einstellung des durch Hopfen eingebrachten Bitterstoffgehalts eines Biers, d
 \toprule
 \multicolumn{1}{c}{\textbf{Beschreibung}} & \multicolumn{1}{c}{\textbf{EBC}} & \multicolumn{1}{c}{\textbf{SRM}} \\
 \midrule
-Stroh & - & 2-3 \\
-Gelb & - & 3-4 \\
-Gold & - & 5-6 \\
-Berstein & - & 6-9 \\
-Dunkles Bernstein / Helles Kupfer & - & 10-14 \\
-Kupfer & - & 14-17 \\
-Dunkles Kupfer / Helles Braun & - & 17-18 \\
-Braun & - & 19-22 \\
-Dunkles Braun & - & 22-30 \\
-Sehr dunkles Braun & - & 30-35 \\
+Stroh & - & 2–3 \\
+Gelb & - & 3–4 \\
+Gold & - & 5–6 \\
+Berstein & - & 6–9 \\
+Dunkles Bernstein / Helles Kupfer & - & 10–14 \\
+Kupfer & - & 14–17 \\
+Dunkles Kupfer / Helles Braun & - & 17–18 \\
+Braun & - & 19–22 \\
+Dunkles Braun & - & 22–30 \\
+Sehr dunkles Braun & - & 30–35 \\
 Schwarz & - & 30+ \\
 Blickdichtes Schwarz & - & 40+ \\
 \bottomrule
@@ -90,6 +92,7 @@ Blickdichtes Schwarz & - & 40+ \\
 \label{table:bjcpcolor}
 \end{table}
 
+\parencite{BA2021}
 
 
 \parencite[11]{Noonan1996}
@@ -116,6 +119,19 @@ extent, this diversity also benefits brewers, but on the
 whole, color variation in the same nominal malt types is a
 problem for the brewer seeking predictable results.
 
+\section*{Messung von Malz- und Bierfarbe}
+
+
+
+
+
+\subsection*{Mosher (1994)}
+
+\parencite{Mosher1994}
+
+\subsection*{Daniels (1996)}
+
+\parencite{Daniels1996}
 
 \begin{table}[H]
 \centering
@@ -123,7 +139,30 @@ problem for the brewer seeking predictable results.
 \toprule
 \multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{MCU}} \\
 \midrule
-1–10 & 1-10 \\
+1–10 & 1–10 \\
+11–20 & 8–12 \\
+21–30 & 11–15 \\
+31–40 & 14–17 \\
+41–50 & 17–20 \\
+50–85 & 20–30 \\
+>85 & >30 \\
+\bottomrule
+\end{tabular}
+\caption{Ungefähre Korrelation zwischen SRM und MCU \parencite[61]{Daniels1996}}
+\label{table:danielsmcu}
+\end{table}
+
+\parencite[10]{Holle2010}
+
+\subsection*{Noonan (1996)}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{rr}
+\toprule
+\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{MCU}} \\
+\midrule
+1–10 & 1–10 \\
 10,5 & 10,8 \\
 11   & 11,6 \\
 11,5 & 12,4 \\
@@ -146,20 +185,39 @@ problem for the brewer seeking predictable results.
 20   & 47,8 \\
 \bottomrule
 \end{tabular}
-\caption{TODO \parencite[206]{Noonan1996}}
+\caption{Ungefähre Korrelation zwischen SRM und MCU \parencite[206]{Noonan1996}}
 \label{table:noonanmcu}
 \end{table}
 
+\parencite{Druey1998}
 
+\subsection*{Morey}
+
+
+\parencite{Morey}
+\parencite{Smith2010}
+
+\subsection*{Hanghofer}
+
+\parencite[78]{Hanghofer2019}
+
+\subsection*{Krüger (2019)}
+
+\subsection*{Weyermann (2021)}
 
 \section*{Zusammenfassung}
 
-\parencite{BJCP2015}
-\parencite{Noonan1996}
+
 \parencite{Bruecklmeier2018}
 \parencite{Holle2010}
-\parencite{Mosher1994}
-\parencite{Daniels1996}
+
+\parencite{Smith2008}
+\parencite{Bies2010}
+\parencite{Tucker2017}
+
+\parencite{KrausWeyermann2021a}
+\parencite{KrausWeyermann2021b}
+\parencite{KrausWeyermann2021c}
 
 
 Die relevanten Eckpunkte dieses Artikels sind:
