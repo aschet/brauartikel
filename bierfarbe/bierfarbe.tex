@@ -41,7 +41,8 @@
   gethesis = {Diplomarbeit},
 }
 
-\newcommand{\BA}{\mathit{BA}}
+\newcommand{\MCU}{\mathit{MCU}}
+\newcommand{\SRM}{\mathit{SRM}}
 \newcommand{\umin}{\:[\textrm{min}]}
 \newcommand{\uden}{\:[\text{g/cm³}]}
 \newcommand{\uper}{\:[\text{\%}]}
@@ -50,7 +51,7 @@
 \newcommand{\ucon}{\:[\text{mg/l}]}
 \newcommand{\FKd}{F_{\mathit{d}}}
 
-\title{Es wird bunt: Bierfarbe aus Schüttung berechnen}
+\title{Es wird bunt: Bierfarbe aus der Schüttung berechnen}
 \author{Thomas Ascher <thomas.ascher@gmx.at>}
 \date{\today, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
 
@@ -119,19 +120,58 @@ extent, this diversity also benefits brewers, but on the
 whole, color variation in the same nominal malt types is a
 problem for the brewer seeking predictable results.
 
-\section*{Messung von Malz- und Bierfarbe}
+\section*{Messung von Bier- und Malzfarbe}
 
 
 
+\section*{Malt Color Unit (MCU)}
+
+\parencite{Colby2000}
+The HCU equation is similar to the SGP and IBU calculations, except it is missing a utilization or efciency term.
+Essentially, it is only a measure of how much color is put into the beer from the grains. How that color is
+changed by the brewing process is ignored.
+Ignoring the effect of the brewing process on beer color is unfortunate, since many brewing processes affect
+wort and beer color. Some factors increase color. These include: high hop rates, longer boil times, ner grain
+crushes and oxidation from wort abuse or aging. Fermentation, in contrast, reduces the color of the wort.
+The equation could be improved if a factor was added to account for changes in color due to the brewing
+process. In fact, two factors would be needed. Some color changes are modications of the grain color added to
+the beer. Loss of color during fermentation, for example, depends on the amount of color initially in the wort.
+Other color changes do not depend on the initial beer color. Some of the wort darkening during the boil is due
+to the sugars caramelizing. In solution, the sugars are colorless. The color that sugar caramelization contributes
+does not come from the roasting of the grain.
+So, an equation that took both of these factors into consideration would need two new variables. The resulting
+equation would be:
+
+NHCU=[W(lbs) * CR(degrees L)*TF + AF]/V(gallon)
+NHBU is New Homebrew Color Units. The two new factors are TF and AF. TF is the transforming factor, the
+extent that the grain color is modidfied. AF is the additive factor, the amount of color that appears during the
+brewing process or aging that is not dependent on roasted grain-derived color.
+
+\section*{Modelle zur Korrelation zwischen MCU und Bierfarbe}
 
 
 \subsection*{Mosher (1994)}
 
-\parencite{Mosher1994}
+\parencite{Morey}:
+\begin{equation}
+\SRM = 0,3 \cdot \MCU + 4,7
+\label{eq:mcumosher}
+\end{equation}
+
+Homebrew Color Unit (HCU), digramm
+\parencite[34]{Mosher1994}
+
+Metric Malt Color Units = l*kg/l
+\parencite[258]{Mosher2015}
 
 \subsection*{Daniels (1996)}
 
 \parencite{Daniels1996}
+
+\begin{equation}
+\SRM = 0,2 \cdot \MCU + 8,4
+\label{eq:mcudaniels}
+\end{equation}
 
 \begin{table}[H]
 \centering
@@ -149,8 +189,15 @@ problem for the brewer seeking predictable results.
 \bottomrule
 \end{tabular}
 \caption{Ungefähre Korrelation zwischen SRM und MCU \parencite[61]{Daniels1996}}
-\label{table:danielsmcu}
+\label{table:mcudaniels}
 \end{table}
+
+\parencite{Morey}:
+Kyle Druey
+\begin{equation}
+\SRM = 1,73 \cdot \MCU^{0,64} - 0,27
+\label{eq:mcudanielsdruey}
+\end{equation}
 
 \parencite[10]{Holle2010}
 
@@ -186,12 +233,26 @@ problem for the brewer seeking predictable results.
 \bottomrule
 \end{tabular}
 \caption{Ungefähre Korrelation zwischen SRM und MCU \parencite[206]{Noonan1996}}
-\label{table:noonanmcu}
+\label{table:mcunoonan}
 \end{table}
+
+\parencite{Morey}:
+Kyle Druey
+\begin{equation}
+\SRM = 15,03 \cdot \MCU^{0,27} - 15,53
+\label{eq:mcunoonandruey}
+\end{equation}
 
 \parencite{Druey1998}
 
 \subsection*{Morey}
+
+\parencite{Morey}:
+\begin{equation}
+\SRM = 1,49 \cdot \MCU^{0,69}
+\label{eq:mcumorey}
+\end{equation}
+
 
 
 \parencite{Morey}
@@ -219,6 +280,9 @@ problem for the brewer seeking predictable results.
 \parencite{KrausWeyermann2021b}
 \parencite{KrausWeyermann2021c}
 
+\parencite{Lange2016}
+\parencite{Caro2019}
+\parencite{Daniels2012}
 
 Die relevanten Eckpunkte dieses Artikels sind:
 
