@@ -71,26 +71,27 @@
 
 \begin{table}[H]
 \centering
-\begin{tabular}{rrr}
+\begin{tabular}{lrr}
 \toprule
-\multicolumn{1}{c}{\textbf{Beschreibung}} & \multicolumn{1}{c}{\textbf{EBC}} & \multicolumn{1}{c}{\textbf{SRM}} \\
+\multicolumn{1}{c}{\textbf{Farbbeschreibung}} & \multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{EBC}} \\
 \midrule
-Stroh & - & 2–3 \\
-Gelb & - & 3–4 \\
-Gold & - & 5–6 \\
-Berstein & - & 6–9 \\
-Dunkles Bernstein / Helles Kupfer & - & 10–14 \\
-Kupfer & - & 14–17 \\
-Dunkles Kupfer / Helles Braun & - & 17–18 \\
-Braun & - & 19–22 \\
-Dunkles Braun & - & 22–30 \\
-Sehr dunkles Braun & - & 30–35 \\
-Schwarz & - & 30+ \\
-Blickdichtes Schwarz & - & 40+ \\
+Sehr hell & 1–1,5 & 2–3  \\
+Stroh & 2–3 & 4–6 \\
+Blass & 4 & 8 \\
+Gold & 5–6 & 10–12 \\
+Helles Bernstein & 7 & 14 \\
+Bernstein & 8 & 16 \\
+Dunkles Bernstein & 9 & 18 \\
+Kupfer/Granatrot & 10–12 & 20–24 \\
+Hellbraun & 13–15 & 26–30 \\
+Braun/Rotbraun/Kastanienbraun & 16–17 & 32–33 \\
+Dunkelbraun & 18–24 & 35–47 \\
+Sehr dunkel & 25–39 & 49–77 \\
+Schwarz & 40+ & 79 \\
 \bottomrule
 \end{tabular}
-\caption{TODO \parencite{BJCP2015}}
-\label{table:bjcpcolor}
+\caption{Farbeindruck TODO \parencite{BA2021}}
+\label{table:bacolor}
 \end{table}
 
 \parencite{BA2021}
@@ -122,7 +123,56 @@ problem for the brewer seeking predictable results.
 
 \section*{Messung von Bier- und Malzfarbe}
 
+\parencite{KrausWeyermann2021a}
+Erster systematischer Ansatz
+Josep W. Lovibon 1885 kolorimetischen Komperator, Farbe Bier in Glas bewerten
+Beobachtung von Lichtabsorption zwischen Probe und standertisierten
+gefärben Glassch3eiben. Lovibond--Skala °L (2-bis 70)
+Subjektive Wahrnehmung und Umwelteinflüsse haben Auswirkung auf Messwert.
+Kolorimeter
 
+\parencite{KrausWeyermann2021a}
+1951 ASBC Spektrophotometer. Die Intensität eines Lichstrahls vor und nach
+dem passieren einer Flüssigkeit. indirekt Messung. Wird Farbe zugeschrieben.
+Wellenlänge 430 nm, Quarzglasküvette 1cm. Gefilterte Würze oder Bierprobe.
+1 srm = 12,7-FACHE lOGARITHMUS DER aBSORPTION für grobe Äquivalenz mit Lovibond
+Skala.
+
+\parencite{KrausWeyermann2021a}
+SRM=L+0,04662*(L) hoch 2
+L= 0,808*SRM-0,0083 für Helle
+Kongressmaische, standartisierte Maischeprogramm
+EBC 1996 EBC Skala 25-fache log. 1EBC = srm * 1,97,
+3,6-25,3 zuverlässig. 
+Dunkle Flüssigkeit absorbiert Viel. Keine zuverlässige Messung ab 80-100 EBC
+80 EBC Wahrnehmungsschlelle. Dunkler als 80 wird nicht mehr vom Auge wahrgenommen.
+Mit wasser verdünnen. 
+
+\parencite{KrausWeyermann2021b}
+Stark divergierende Farbwerte für gleiche Schüttungen.
+Gleiche Farbwerte für unterschiedliche Schüttungen die 
+unterschiedliche Schüttungen verursachen.
+1L = 2,65 EBC
+EBC=0,377L
+bei mehreren Malzen proportionale Anteil der Schüttung.
+Malt Color Unit MCU=Malzfarbe[°L]*Schüttungsanteil[lb]/Volumen Anstellwürze [gal]
+lb gal 
+1MCU = 1 SRM (bis 6 SRM)
+cEBC=Malzfarbe[EBC]*Gewicht[kg]/Gesamtgewicht Maische * Stw/10 
+Je dunkler, desto mehr faktoren sind zu berechnen
+sobald bierfarbe 10 SRM überschreitet wird lineare MCU unbrauchbar
+
+CEBC = G/10+BT*D+CC
+CW= G/10+CC
+
+Krüger hat Zufärbungskorrekturen
+1-2 EBC pro Stunde kochen
+Morey hat sich zum Standard entwickelt.
+Mosher Kommerzielle Bire mit bekannten Schüttungen und Farbwerten. über 10 SRM nich sehr zuverlässig.
+Daniels; versuche mit Hobbysuden
+
+Morey: abnehmende Genauigkeit der Lineare für dunkel logarithmisch der Lichtabsoption
+anwendbar bis 50 SRM
 
 \section*{Malt Color Unit (MCU)}
 
@@ -149,6 +199,7 @@ brewing process or aging that is not dependent on roasted grain-derived color.
 
 \section*{Modelle zur Korrelation zwischen MCU und Bierfarbe}
 
+Farbvorhersage
 
 \subsection*{Mosher (1994)}
 
@@ -164,107 +215,149 @@ Homebrew Color Unit (HCU), digramm
 Metric Malt Color Units = l*kg/l
 \parencite[258]{Mosher2015}
 
-\subsection*{Daniels (1996)}
+\subsection*{Daniels (1995)}
 
-\parencite{Daniels1996}
+In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation zwischen SRM und MCU in \autoref{table:mcudaniels} veröffentlicht. \textcite[10]{Holle2010} verwendet die gleiche Tabelle für Farbvorhersagen. Die darauf basierende lineare \autoref{eq:mcudaniels} ist darin nicht enthalten, wird von \textcite{Morey} aber ebenfalls Daniels zugeschrieben. Eine in die Tabellenwerte eingepasste alternative Exponentationfunktion \autoref{eq:mcudanielsdruey} stammt von \textcite{Druey1998}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{rrr}
+\toprule
+\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{EBC}} & \multicolumn{1}{c}{\textbf{MCU}} \\
+\midrule
+1–10 & 2–20 & 1–10 \\
+11–20 & 22–39 & 8–12 \\
+21–30 & 41–59 & 11–15 \\
+31–40 & 61–79 & 14–17 \\
+41–50 & 81–98 & 17–20 \\
+50–85 & 98–167 & 20–30 \\
+>85 & >167 & >30 \\
+\bottomrule
+\end{tabular}
+\caption{Korrelation zwischen SRM und MCU \parencite[61]{Daniels1996}}
+\label{table:mcudaniels}
+\end{table}
 
 \begin{equation}
 \SRM = 0,2 \cdot \MCU + 8,4
 \label{eq:mcudaniels}
 \end{equation}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{rr}
-\toprule
-\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{MCU}} \\
-\midrule
-1–10 & 1–10 \\
-11–20 & 8–12 \\
-21–30 & 11–15 \\
-31–40 & 14–17 \\
-41–50 & 17–20 \\
-50–85 & 20–30 \\
->85 & >30 \\
-\bottomrule
-\end{tabular}
-\caption{Ungefähre Korrelation zwischen SRM und MCU \parencite[61]{Daniels1996}}
-\label{table:mcudaniels}
-\end{table}
-
-\parencite{Morey}:
-Kyle Druey
 \begin{equation}
-\SRM = 1,73 \cdot \MCU^{0,64} - 0,27
+\SRM = 1,73 \cdot \MCU^{0,64} - 0,267
 \label{eq:mcudanielsdruey}
 \end{equation}
-
-\parencite[10]{Holle2010}
 
 \subsection*{Noonan (1996)}
 
 \begin{table}[H]
 \centering
-\begin{tabular}{rr}
+\begin{tabular}{rrr}
 \toprule
-\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{MCU}} \\
+\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{EBC}} & \multicolumn{1}{c}{\textbf{MCU}} \\
 \midrule
-1–10 & 1–10 \\
-10,5 & 10,8 \\
-11   & 11,6 \\
-11,5 & 12,4 \\
-12   & 13,3 \\
-12,5 & 14,1 \\
-13   & 14,9 \\
-13,5 & 17,7 \\
-14   & 18,6 \\
-14,5 & 20,5 \\
-15   & 22,4 \\
-15,5 & 24,3 \\
-16   & 26,2 \\
-16,5 & 28,1 \\
-17   & 30 \\
-17,5 & 32,9 \\
-18   & 35,8 \\
-18,5 & 38,8 \\
-19   & 41,9 \\
-19,5 & 45 \\
-20   & 47,8 \\
+1–10 & 2–20 & 1–10 \\
+10,5 & 21 & 10,8 \\
+11   & 22 & 11,6 \\
+11,5 & 23 & 12,4 \\
+12   & 24 & 13,3 \\
+12,5 & 25 & 14,1 \\
+13   & 26 & 14,9 \\
+13,5 & 27 & 17,7 \\
+14   & 28 & 18,6 \\
+14,5 & 29 & 20,5 \\
+15   & 30 & 22,4 \\
+15,5 & 31 & 24,3 \\
+16   & 32 & 26,2 \\
+16,5 & 33 & 28,1 \\
+17   & 33 & 30 \\
+17,5 & 34 & 32,9 \\
+18   & 35 & 35,8 \\
+18,5 & 36 & 38,8 \\
+19   & 37 & 41,9 \\
+19,5 & 38 & 45 \\
+20   & 39 & 47,8 \\
 \bottomrule
 \end{tabular}
-\caption{Ungefähre Korrelation zwischen SRM und MCU \parencite[206]{Noonan1996}}
+\caption{Korrelation zwischen SRM und MCU \parencite[206]{Noonan1996}}
 \label{table:mcunoonan}
 \end{table}
 
-\parencite{Morey}:
+\parencite{Druey1998}:
 Kyle Druey
 \begin{equation}
 \SRM = 15,03 \cdot \MCU^{0,27} - 15,53
 \label{eq:mcunoonandruey}
 \end{equation}
 
-\parencite{Druey1998}
+\subsection*{Morey (1998)}
 
-\subsection*{Morey}
+Heimbrauer Daniel Morey war unzufrieden mit der Farbvorhersage, die er in seiner Brausoftware auf Basis der MCU ohne zusätzliche Korrelation integriert hatte. Diese berechnete seiner Meinung nach zu hohe SRM Werte. Im mittlerweile nicht mehr erhältlichem Brewing Techniques Magazin erfuhr er dann 1995 von der Mosher und Daniels Modell. Zunächst wollte er alle Korrelationen in ein Berechnungsmodell zusammenführen, entschied sich aber dann dazu, die ihm vorliegenden Daten so zu modifizieren, dass es möglich war eine seinen Annahmen entsprechende Kurve einzupassen. \parencite{Smith2010}
 
-\parencite{Morey}:
+Das von Morey veröffentlichte Modell beruht auf folgenden Annahmen: Bis zu einem Betrag von 10 entspricht die MCU ungefähr dem zu erwartenden SRM Messwert. Ab 10 MCU gibt das Daniels Modell eine bessere Korrelation, über 37 MCU hingegen das Mosher Modell. Das menschliche Auge kann keinen Farbunterschiede über 40 SRM mehr feststellen. Die \autoref{eq:mcumorey} wurde daher nur bis 50 SRM ausgelegt.
+\parencite{Morey}
+
 \begin{equation}
 \SRM = 1,49 \cdot \MCU^{0,69}
 \label{eq:mcumorey}
 \end{equation}
 
+\subsection*{Krüger (2019)}
 
 
-\parencite{Morey}
-\parencite{Smith2010}
 
-\subsection*{Hanghofer}
+\subsection*{Hanghofer (2019)}
 
 \parencite[78]{Hanghofer2019}
 
-\subsection*{Krüger (2019)}
+
 
 \subsection*{Weyermann (2021)}
+
+\parencite{KrausWeyermann2021b}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{rr}
+\toprule
+\multicolumn{1}{c}{\textbf{Stammwürze}} & \multicolumn{1}{c}{\textbf{CC [EBC]}} \\
+\midrule
+0–7 & 0 \\
+7,1–10 & 3 \\
+10,1–15 & 5 \\
+15,1–20 & 7 \\
+>20 & 0 \\
+\bottomrule
+\end{tabular}
+\caption{TODO \parencite{KrausWeyermann2021b}}
+\label{table:ccweyermann}
+\end{table}
+
+\subsection*{Modellvergleich}
+
+\parencite{KrausWeyermann2021b}
+20 Biere in Weyermann Braumanufaktur. Gemessen und Labo-Messung mit Formel verglichen.
+wobei 1 Bier (Export hell) als ausreißwer entfernt wurde.
+keine 100 prozen überinstimmung mit labormessung.
+Weyermann und Krüger beste Ergebnis.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lr}
+\toprule
+\multicolumn{1}{c}{\textbf{Modell}} & \multicolumn{1}{c}{\textbf{Mittlere Abw. [\%]}} \\
+\midrule
+Mosher & -57,2 \\
+Daniels & -14,4 \\
+Morey & -51,8 \\
+Krüger & 6,9 \\
+Weyermann & -2,1 \\
+\bottomrule
+\end{tabular}
+\caption{TODO \parencite{KrausWeyermann2021b}}
+\label{table:modelcompare}
+\end{table}
+
 
 \section*{Zusammenfassung}
 
