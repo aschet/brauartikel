@@ -62,12 +62,7 @@
 
 \section*{Einleitung}
 
-„\href{https://bieranalyse.de}{Bieranalyse Fuchs}“
-
-%In \autoref{table:parameters} sind die vom \citeauthor{BJCP2015} und die von
-%\citeauthor{Strottner1999} genannten brautechnischen Parameter erfasst.
-%Die Angaben der Brewers Association Stil-Richtlinien sind annähernd
-%deckungsgleich \parencites[24]{BA2021}. 
+Bernsteinfarben, Schwarz, Rot oder Braun: Abseits der blonden Lager existiert das Produkt Bier innerhalb eines weitreichenden Farbspektrums. Neben einem nicht weltweit normierten Vokabular, wie es zum Beispiel \autoref{table:bacolor} zeigt, werden auch verschiedene Skalen verwendet, um diese Farben zu beschreiben. Großteils verantwortlich für dieses Farbenspiel ist die in einem Rezept eingesetzte Malzmischung, die Schüttung. Wie aus dieser die zu erwartende Bierfarbe näherungsweise berechnet werden kann, wird in den folgenden Abschnitten dieses Artikels demonstriert.
 
 \begin{table}[H]
 \centering
@@ -90,60 +85,27 @@ Sehr dunkel & 25–39 & 49–77 \\
 Schwarz & 40+ & 79 \\
 \bottomrule
 \end{tabular}
-\caption{Farbeindruck TODO \parencite{BA2021}}
+\caption{Skalenwerte für Farbeindrücke \parencite{BA2021}}
 \label{table:bacolor}
 \end{table}
-
-\parencite{BA2021}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=14cm]{colorscale.pdf}
-\caption{TODO (Ascher, 2022)}
+\caption{Farbsimulation für Werte der \autoref{table:bacolor} (Ascher, 2022)}
 \label{fig:mcucompare}
 \end{figure}
 
 
-\parencite[11]{Noonan1996}
-Color may not be stated as SRM/ASBC/°L units.
-Where EBC units are given, the formula ASBC = (°EBC
-+ 1.2)/2.65 gives reasonable but not entirely accurate
-transposition. The color for English malts is often given as
-Color IOB, EBC method. IOB color is only approximately
-80 percent of EBC color. Where IOB units are given, the
-formula ASBC = [(IOB/.80) + 1.2]/2.65 can be used.
-HCU color units are a summary measurement of
-wort color that is equal to the sum of the SRM/°Lovibond
-of all the malts used to make a wort. HCU units and SRM
-wort color are comparable up to about 10 °SRM; after that,
-corrections must be made. See the conversion chart in
-table 15 to convert from HCU color to approximate °SRM.
-The color ranges for most malt types vary widely,
-depending on the country of origin and the maltster. From
-the maltster’s point of view, it is of some advantage to
-have a “unique” color range, since it requires any brewer
-using the malt to make serious adjustments in the brew
-house program in order to switch suppliers. To some
-extent, this diversity also benefits brewers, but on the
-whole, color variation in the same nominal malt types is a
-problem for the brewer seeking predictable results.
 
 \section*{Messung von Bier- und Malzfarbe}
 
-\parencite{KrausWeyermann2021a}
-Erster systematischer Ansatz
-Josep W. Lovibon 1885 kolorimetischen Komperator, Farbe Bier in Glas bewerten
-Beobachtung von Lichtabsorption zwischen Probe und standertisierten
-gefärben Glassch3eiben. Lovibond--Skala °L (2-bis 70)
-Subjektive Wahrnehmung und Umwelteinflüsse haben Auswirkung auf Messwert.
-Kolorimeter
+Zur Bestimmung der Bierfarbe existieren mehrere Messskalen und -verfahren. Die Älteste davon noch gebräuchliche, ist die Lovibond Skala. Diese wurde vom Brauer Josep W. Lovibond 1885 zusammen mit einem Messgerät, dem Tintometer, entwickelt. Damit wird per visuellem Eindruck von einer Person eine aufbereitete Bierprobe mit verschieden gefärbten Glasscheiben verglichen, um einen Messwert zwischen 2 bis 70~°L (hell bis dunkel) zu ermitteln. Unterschiede in der menschlichen Wahrnehmung und verschiedene Umwelteinflüsse verfälschen das Messergebnis. \parencite{KrausWeyermann2021a}
 
-\parencite{KrausWeyermann2021a}
-1951 ASBC Spektrophotometer. Die Intensität eines Lichstrahls vor und nach
-dem passieren einer Flüssigkeit. indirekt Messung. Wird Farbe zugeschrieben.
-Wellenlänge 430 nm, Quarzglasküvette 1cm. Gefilterte Würze oder Bierprobe.
-1 srm = 12,7-FACHE lOGARITHMUS DER aBSORPTION für grobe Äquivalenz mit Lovibond
-Skala.
+Im Jahr 1951 hat die \href{https://www.asbcnet.org}{American Society of Brewing Chemists (ASBC)} eine neue Analysemethode (Standard Reference Method) auf Basis des Spektrophotometers zusammen mit der SRM Skala, die an die Lovibond Skala gekoppelt ist, ratifiziert. Seit 1996 verwendet die \href{https://europeanbreweryconvention.eu}{European Brewery Convention (EBC)} die EBC Skala, die sich ebenfalls auf die Messwerte eines Spektrophotometers bezieht. Bis auf die Skala wurde die grundlegende Messmethode von beiden Normungsgremien mittlerweile harmonisiert. Bei dieser misst ein Spektrophotometer die Lichtabsorption einer entgasten Bierprobe oder eine aus einem Malz im Kongressmaischeverfahren hergestellten Würzeprobe bei einer Wellenlänge von 430~nm durch eine 1~cm breite Quarzglasküvette. Der 12,7-fache Logarithmus der gemessenen Absorption entspricht dabei einem Wert der SRM Skala und der 25-fache Logarithmus der EBC Skala. Das menschliche Auge kann Farbunterschiede ab 80~EBC nicht mehr wahrnehmen. Auch Messgeräte generieren darüber keine zuverlässigen Messwerte mehr. Dunkle Bierproben sind daher vor der Messung zu verdünnen. \parencite{KrausWeyermann2021a}
+
+% TODO: correlation models
+
 
 \parencite{KrausWeyermann2021a}
 SRM=L+0,04662*(L) hoch 2
@@ -181,7 +143,22 @@ Daniels; versuche mit Hobbysuden
 Morey: abnehmende Genauigkeit der Lineare für dunkel logarithmisch der Lichtabsoption
 anwendbar bis 50 SRM
 
-\section*{Malt Color Unit (MCU)}
+\section*{Homebrew/Malt Color Unit (HCU/MCU)}
+
+\parencite[11]{Noonan1996}
+HCU color units are a summary measurement of
+wort color that is equal to the sum of the SRM/°Lovibond
+of all the malts used to make a wort. HCU units and SRM
+wort color are comparable up to about 10 °SRM; after that,
+corrections must be made.
+
+
+„\href{https://bieranalyse.de}{Bieranalyse Fuchs}“
+
+%In \autoref{table:parameters} sind die vom \citeauthor{BJCP2015} und die von
+%\citeauthor{Strottner1999} genannten brautechnischen Parameter erfasst.
+%Die Angaben der Brewers Association Stil-Richtlinien sind annähernd
+%deckungsgleich \parencites[24]{BA2021}. 
 
 \parencite{Colby2000}
 The HCU equation is similar to the SGP and IBU calculations, except it is missing a utilization or efciency term.
@@ -297,7 +274,7 @@ Kyle Druey
 \label{eq:mcunoonandruey}
 \end{equation}
 
-\subsection*{Morey (1998)}
+\subsection*{Morey (1996)}
 
 Heimbrauer Daniel Morey war unzufrieden mit der Farbvorhersage, die er in seiner Brausoftware auf Basis der MCU ohne zusätzliche Korrelation integriert hatte. Diese berechnete seiner Meinung nach zu hohe SRM Werte. Im mittlerweile nicht mehr erhältlichem Brewing Techniques Magazin erfuhr er dann 1995 von der Mosher und Daniels Modell. Zunächst wollte er alle Korrelationen in ein Berechnungsmodell zusammenführen, entschied sich aber dann dazu, die ihm vorliegenden Daten so zu modifizieren, dass es möglich war eine seinen Annahmen entsprechende Kurve einzupassen. \parencite{Smith2010}
 
