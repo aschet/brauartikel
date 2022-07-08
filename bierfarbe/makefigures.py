@@ -48,8 +48,14 @@ def calc_cc_weyermann(oe):
     else:
         return 10
 
-def calc_ebc_weyermann(ebc, oe):
+def calc_ebc_weyermann(ebc, boil_time, oe):
     return ebc * oe / 10.0 + calc_cc_weyermann(oe)
+
+def calc_ebc_krueger(ebc, boil_time, oe):
+    return ebc * oe / 10.0 + (boil_time / 60.0 * 1.5) + 2.0
+
+def calc_ebc_hanghofer(ebc, boil_time, oe):
+    return -1.0
 
 class Addition:
     def __init__(self, weight, ebc):
@@ -63,19 +69,21 @@ class Addition:
         return self.weight * self.ebc / weight
 
 class BrewData:
-    def __init__(self, oe, volume, malt_additions):
+    def __init__(self, ebc_ref, oe, boil_time, volume, malt_additions):
+        self.ebc_ref = ebc_ref
         self.oe = oe
+        self.boil_time = boil_time
         self.volume = volume
         self.malt_additions = malt_additions
 
     def calc_ebc_imp(self, functor):
-        srm_lin = sum(i.calc_mcu_imp(self.volume) for i in self.malt_additions)
-        return srm_to_ebc(functor(srm_lin))
+        mcu = sum(i.calc_mcu_imp(self.volume) for i in self.malt_additions)
+        return srm_to_ebc(functor(mcu))
 
     def calc_ebc_met(self, functor):
         weight = sum(i.weight for i in self.malt_additions)
         ebc = sum(i.calc_mcu_met(weight) for i in self.malt_additions)
-        return functor(ebc, self.oe)
+        return functor(ebc, self.boil_time, self.oe)
 
 mcu_scale = np.linspace(0, 100, dtype=int)
 
@@ -106,5 +114,29 @@ plot_srm(axes[2], 'Noonan', [('Druey', calc_srm_noonan_druey)])
 
 
 
-pilsner = BrewData(11.7, 275.0, [Addition(42.8, 3.75), Addition(2.3, 4.5), Addition(0.9, 6), Addition(0.5, 195)])
-print(pilsner.calc_ebc_met(calc_ebc_weyermann))
+pilsner = BrewData(10.0, 11.7, 75.0, 275.0, [Addition(42.8, 3.75), Addition(2.3, 4.5), Addition(0.9, 6), Addition(0.5, 195)])
+amber = BrewData(40.0, 11.7, 75.0, 275.0, [Addition(41.4, 3.75), Addition(2.3, 4.5), Addition(0.9, 6), Addition(1.9, 400)])
+dark = BrewData(82.0, 12.3, 75.0, 275.0, [Addition(38.9, 3.75), Addition(2.4, 4.5), Addition(2.4, 195), Addition(0.9, 6), Addition(1.9, 1400)])
+
+def calc_stats(brew_data):
+    stats = []
+    stats.append(('Daniels-Druey', brew_data.calc_ebc_imp(calc_srm_daniels_druey)))
+    stats.append(('Daniels-Linear', brew_data.calc_ebc_imp(calc_srm_daniels_lin)))
+    stats.append(('Hanghofer', brew_data.calc_ebc_met(calc_ebc_hanghofer)))
+    stats.append(('Krüger', brew_data.calc_ebc_met(calc_ebc_krueger)))
+    stats.append(('Morey', brew_data.calc_ebc_imp(calc_srm_morey)))    
+    stats.append(('Mosher-Linear', brew_data.calc_ebc_imp(calc_srm_mosher_lin)))
+    stats.append(('Noonan-Druey', brew_data.calc_ebc_imp(calc_srm_noonan_druey)))
+    stats.append(('Weyermann', brew_data.calc_ebc_met(calc_ebc_weyermann)))
+    return stats
+
+def print_stats(stats):
+    for i in stats:
+        print(i[0] + ': ' + '{:.0f}'.format(i[1]))
+
+pilsner_stats = calc_stats(pilsner)
+print("Pilsner")
+print_stats(pilsner_stats)
+print("Dunkles")
+dark_stats = calc_stats(dark)
+print_stats(dark_stats)
