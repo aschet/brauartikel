@@ -41,17 +41,24 @@
   gethesis = {Diplomarbeit},
 }
 
-\newcommand{\MCUL}{\mathit{MCU}_{L}}
+\newcommand{\MCUL}{\mathit{MCU}}
+\newcommand{\MCUEBC}{\mathit{MCU}_{EBC}}
 \newcommand{\EBC}{\mathit{EBC}}
 \newcommand{\SRM}{\mathit{SRM}}
 \newcommand{\ulovi}{\:[\textrm{°L}]}
 \newcommand{\usrm}{\:[\textrm{SRM}]}
-\newcommand{\uebc}{\:[\textrm{ebc}]}
+\newcommand{\uebc}{\:[\textrm{EBC}]}
+\newcommand{\uebch}{\:[\textrm{EBC/h}]}
 \newcommand{\uli}{\:[\text{l}]}
 \newcommand{\ugal}{\:[\textrm{US gal}]}
 \newcommand{\ukg}{\:[\textrm{kg}]}
 \newcommand{\ulb}{\:[\textrm{lb}]}
-\newcommand{\umin}{\:[\textrm{min}]}
+\newcommand{\uplato}{\:[\textrm{°P}]}
+\newcommand{\fstw}{f_{Stw}}
+\newcommand{\khell}{k_{Hell}}
+\newcommand{\kkd}{k_{Kd}}
+\newcommand{\kstw}{k_{Stw}}
+\newcommand{\uhour}{\:[\textrm{h}]}
 
 
 
@@ -98,7 +105,7 @@ Schwarz & 40+ & 79 \\
 \centering
 \includegraphics[width=14cm]{colorscale.pdf}
 \caption{Farbsimulation für Werte der \autoref{table:bacolor} (Ascher, 2022)}
-\label{fig:mcucompare}
+\label{fig:bacolorscale}
 \end{figure}
 
 
@@ -107,7 +114,8 @@ Schwarz & 40+ & 79 \\
 
 Zur Bestimmung der Bierfarbe existieren mehrere Messskalen und -verfahren. Die Älteste davon noch gebräuchliche, ist die Lovibond Skala. Diese wurde vom Brauer Josep W. Lovibond 1885 zusammen mit einem Messgerät, dem Tintometer, entwickelt. Damit wird per visuellem Eindruck von einer Person eine aufbereitete Bierprobe mit verschieden gefärbten Glasscheiben verglichen, um einen Messwert zwischen 2 bis 70~°L (hell bis dunkel) zu ermitteln. Unterschiede in der menschlichen Wahrnehmung und verschiedene Umwelteinflüsse verfälschen das Messergebnis. \parencite{KrausWeyermann2021a}
 
-Im Jahr 1951 hat die \href{https://www.asbcnet.org}{American Society of Brewing Chemists (ASBC)} eine neue Analysemethode (Standard Reference Method) auf Basis des Spektrophotometers zusammen mit der SRM Skala, die an die Lovibond Skala gekoppelt ist, ratifiziert. Seit 1996 verwendet die \href{https://europeanbreweryconvention.eu}{European Brewery Convention (EBC)} die EBC Skala, die sich ebenfalls auf die Messwerte eines Spektrophotometers bezieht. Bis auf die Skala wurde die grundlegende Messmethode von beiden Normungsgremien mittlerweile harmonisiert. Bei dieser misst ein Spektrophotometer die Lichtabsorption einer entgasten Bierprobe oder eine aus einem Malz im Kongressmaischeverfahren hergestellten Würzeprobe bei einer Wellenlänge von 430~nm durch eine 1~cm breite Quarzglasküvette. Die 12,7-fache gemessenen Absorption entspricht dabei  einem Wert der SRM Skala und die 25-fache Absorption einem Wert der EBC Skala. Daraus leitet sich der Zusammenhang von \autoref{eq:ebctosrm} ab. Das menschliche Auge kann Farbunterschiede ab 80~EBC nicht mehr wahrnehmen. Auch Messgeräte generieren darüber keine zuverlässigen Messwerte mehr. Dunkle Bierproben sind daher vor der Messung zu verdünnen. \parencite{KrausWeyermann2021a}
+% TODO: use log again 12,5x
+Im Jahr 1951 hat die \href{https://www.asbcnet.org}{American Society of Brewing Chemists (ASBC)} eine neue Analysemethode (Standard Reference Method) auf Basis des Spektrophotometers zusammen mit der SRM Skala, die an die Lovibond Skala gekoppelt ist, ratifiziert. Seit 1996 verwendet die \href{https://europeanbreweryconvention.eu}{European Brewery Convention (EBC)} die EBC Skala, die sich ebenfalls auf die Messwerte eines Spektrophotometers bezieht. Bis auf die Skala wurde die grundlegende Messmethode von beiden Normungsgremien mittlerweile harmonisiert. Bei dieser misst ein Spektrophotometer die Lichtabsorption einer entgasten Bierprobe oder eine aus einem Malz im Kongressmaischeverfahren hergestellten Würzeprobe bei einer Wellenlänge von 430~nm durch eine 1~cm breite Quarzglasküvette. Die 12,7-fache gemessenen Absorption entspricht dabei  einem Wert auf der SRM Skala und die 25-fache Absorption einem Wert auf der EBC Skala. Daraus leitet sich der Zusammenhang von \autoref{eq:ebctosrm} ab. Das menschliche Auge kann Farbunterschiede ab 80~EBC nicht mehr wahrnehmen. Auch Messgeräte generieren darüber keine zuverlässigen Messwerte mehr. Dunkle Bierproben sind daher vor der Messung zu verdünnen. \parencite{KrausWeyermann2021a}
 
 \begin{equation}
 \EBC = \SRM \cdot 1,97
@@ -120,7 +128,6 @@ Im Jahr 1951 hat die \href{https://www.asbcnet.org}{American Society of Brewing 
 \parencite{KrausWeyermann2021a}
 SRM=L+0,04662*(L) hoch 2
 L= 0,808*SRM-0,0083 für Helle
-EBC 1996 EBC Skala 25-fache log. 1EBC = srm * 1,97,
 3,6-25,3 zuverlässig. 
 
 
@@ -143,12 +150,9 @@ CW= G/10+CC
 
 Krüger hat Zufärbungskorrekturen
 1-2 EBC pro Stunde kochen
-Morey hat sich zum Standard entwickelt.
+
 Mosher Kommerzielle Bire mit bekannten Schüttungen und Farbwerten. über 10 SRM nich sehr zuverlässig.
 Daniels; versuche mit Hobbysuden
-
-Morey: abnehmende Genauigkeit der Lineare für dunkel logarithmisch der Lichtabsoption
-anwendbar bis 50 SRM
 
 „\href{https://bieranalyse.de}{Bieranalyse Fuchs}“
 
@@ -211,7 +215,7 @@ In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation zwische
 \centering
 \begin{tabular}{rrr}
 \toprule
-\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{EBC}} & \multicolumn{1}{c}{\textbf{MCU$_L$}} \\
+\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{EBC}} & \multicolumn{1}{c}{\textbf{MCU}} \\
 \midrule
 1–10 & 2–20 & 1–10 \\
 11–20 & 22–39 & 8–12 \\
@@ -242,7 +246,7 @@ In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation zwische
 \centering
 \begin{tabular}{rrr}
 \toprule
-\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{EBC}} & \multicolumn{1}{c}{\textbf{MCU$_L$}} \\
+\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{EBC}} & \multicolumn{1}{c}{\textbf{MCU}} \\
 \midrule
 1–10 & 2–20 & 1–10 \\
 10,5 & 21 & 10,8 \\
@@ -299,36 +303,77 @@ Das von Morey veröffentlichte Modell beruht auf folgenden Annahmen: Bis zu eine
 \label{fig:mcucompare}
 \end{figure}
 
-\subsection*{Krüger (2019)}
-
-
-
 \subsection*{Hanghofer (2019)}
 
+\begin{equation}
+\MCUEBC = \frac{\sum \text{Malzgewicht}_i \ukg \cdot \text{Malzfarbe}_i \uebc}{\sum \text{Malzgewicht}_i \ukg} 
+\label{eq:mcubasisebc}
+\end{equation}
+
+\begin{equation}
+\fstw = \frac{\text{Stammwürze} \uplato}{9}
+\label{eq:hanghoferfstw}
+\end{equation}
+
+\begin{equation}
+\khell \uebc := \left[2, 4 \right]
+\label{eq:hanghoferhell}
+\end{equation}
+
+\begin{equation}
+\EBC = \MCUEBC \cdot \fstw + \khell
+\label{eq:ebchanghofer}
+\end{equation}
+
 \parencite[78]{Hanghofer2019}
+
+\subsection*{Krüger (2019)}
+
+\begin{equation}
+\fstw = \frac{\text{Stammwürze} \uplato}{10}
+\label{eq:krugerstw}
+\end{equation}
+
+\begin{equation}
+\kkd \uebc = \text{Kochdauer} \uhour \cdot 1,5 \uebch
+\label{eq:krugerkkd}
+\end{equation}
+
+\begin{equation}
+\EBC = \MCUEBC \cdot \fstw + \khell + \kkd
+\label{eq:ebckruger}
+\end{equation}
+
+
+
 
 
 
 \subsection*{Weyermann (2021)}
 
+\begin{equation}
+\fstw = \frac{\text{Stammwürze} \uplato}{10}
+\label{eq:weyermannstw}
+\end{equation}
+
+\begin{equation}
+\kstw \uebc = \begin{cases}
+0  & \text{für} \quad \text{Stammwürze} \le 7, \\
+3  & \text{für} \quad 7 > \text{Stammwürze} \le 10, \\
+5  & \text{für} \quad 10 > \text{Stammwürze} \le 15, \\
+7  & \text{für} \quad 15 > \text{Stammwürze} \le 20, \\
+10 & \text{für} \quad 20 > \text{Stammwürze}. \\
+\end{cases}
+\label{eq:weyermannkstw}
+\end{equation}
+
+\begin{equation}
+\EBC = \MCUEBC \cdot \fstw + \kstw
+\label{eq:ebcweyermann}
+\end{equation}
+
 \parencite{KrausWeyermann2021b}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{rr}
-\toprule
-\multicolumn{1}{c}{\textbf{Stammwürze}} & \multicolumn{1}{c}{\textbf{CC [EBC]}} \\
-\midrule
-0–7 & 0 \\
-7,1–10 & 3 \\
-10,1–15 & 5 \\
-15,1–20 & 7 \\
->20 & 0 \\
-\bottomrule
-\end{tabular}
-\caption{TODO \parencite{KrausWeyermann2021b}}
-\label{table:ccweyermann}
-\end{table}
 
 \subsection*{Modellvergleich}
 
@@ -353,7 +398,7 @@ Weyermann & -2,1 \\
 \bottomrule
 \end{tabular}
 \caption{TODO \parencite{KrausWeyermann2021b}}
-\label{table:modelcompare}
+\label{table:modelcompareall}
 \end{table}
 
 Ausschlagvolumen: 275 Liter
@@ -389,8 +434,15 @@ Weyermann & 12 & 92 \\
 \bottomrule
 \end{tabular}
 \caption{TODO \textcite{KrausWeyermann2021c}}
-\label{table:modelcomparepilsner}
+\label{table:modelcompare}
 \end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm]{graph_dev.pdf}
+\caption{TODO (Ascher, 2022)}
+\label{fig:modelcompare}
+\end{figure}
 
 \section*{Zusammenfassung}
 

@@ -114,11 +114,7 @@ def plot_srm(ax, name, srm_funcs):
 plot_srm(axes[0], 'Daniels', [('Linear', calc_srm_daniels_lin), ('Druey', calc_srm_daniels_druey)])
 plot_srm(axes[1], 'Mosher', [('Linear', calc_srm_mosher_lin)])
 plot_srm(axes[2], 'Noonan', [('Druey', calc_srm_noonan_druey)])
-
-#fig_srm.savefig('graph_srm.pdf', format='pdf')
-#plt.show()
-
-
+fig_srm.savefig('graph_srm.pdf', format='pdf')
 
 pilsner = BrewData(10.0, 11.7, 75.0, 275.0, [Addition(42.8, 3.75), Addition(2.3, 4.5), Addition(0.9, 6), Addition(0.5, 195)])
 amber = BrewData(40.0, 11.7, 75.0, 275.0, [Addition(41.4, 3.75), Addition(2.3, 4.5), Addition(0.9, 6), Addition(1.9, 400)])
@@ -137,6 +133,10 @@ def calc_stats(brew_data):
     stats.append(('Weyermann', brew_data.calc_ebc(calc_ebc_weyermann)))
     return stats
 
+def to_deviation(ebc_ref, stats):
+    for i, val in enumerate(stats):
+        stats[i] = (val[0], val[1] - ebc_ref)
+
 def print_stats(stats):
     for i in stats:
         print(i[0] + ': ' + '{:.0f}'.format(i[1]))
@@ -147,3 +147,25 @@ print_stats(pilsner_stats)
 print("Dunkles")
 dark_stats = calc_stats(dark)
 print_stats(dark_stats)
+
+to_deviation(pilsner.ebc_ref, pilsner_stats)
+to_deviation(dark.ebc_ref, dark_stats)
+
+labels = list(zip(*pilsner_stats))[0]
+dev_pilsner = list(zip(*pilsner_stats))[1]
+dev_dark = list(zip(*dark_stats))[1]
+
+fig_ebc_dev = plt.figure(constrained_layout=True, figsize=(8, 4))
+axes = fig_ebc_dev.subplots(1, 1)
+x = np.arange(len(labels))
+width = 0.35
+rects1 = axes.bar(x - width/2, dev_pilsner, width, label='Pilsner')
+rects2 = axes.bar(x + width/2, dev_dark, width, label='Dunkles')
+axes.set_ylabel('Abweichung [EBC]')
+axes.set_xticks(x, labels)
+axes.tick_params(axis="x", rotation=50)
+axes.legend()
+fig_ebc_dev.savefig('graph_dev.pdf', format='pdf')
+
+
+#plt.show()
