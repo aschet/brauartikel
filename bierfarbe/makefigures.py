@@ -55,17 +55,20 @@ def calc_ebc_krueger(ebc, boil_time, oe):
     return ebc * oe / 10.0 + (boil_time / 60.0 * 1.5) + 2.0
 
 def calc_ebc_hanghofer(ebc, boil_time, oe):
-    return -1.0
+    return ebc * oe / 9.0 + 2.0
 
 class Addition:
     def __init__(self, weight, ebc):
         self.weight = weight
         self.ebc = ebc
 
-    def calc_mcu_imp(self, volume):
+    def calc_mcu_l(self, volume):
         return kg_to_lb(self.weight) * ebc_to_l(self.ebc) / l_to_gal_us(volume)
 
-    def calc_mcu_met(self, weight):
+    def calc_mcu_srm(self, volume):
+        return kg_to_lb(self.weight) * ebc_to_srm(self.ebc) / l_to_gal_us(volume)
+
+    def calc_mcu_ebc(self, weight):
         return self.weight * self.ebc / weight
 
 class BrewData:
@@ -76,13 +79,16 @@ class BrewData:
         self.volume = volume
         self.malt_additions = malt_additions
 
-    def calc_ebc_imp(self, functor):
-        mcu = sum(i.calc_mcu_imp(self.volume) for i in self.malt_additions)
+    def calc_ebc_l(self, functor):
+        mcu = sum(i.calc_mcu_l(self.volume) for i in self.malt_additions)
         return srm_to_ebc(functor(mcu))
 
-    def calc_ebc_met(self, functor):
+    def calc_ebc_srm(self):
+        return sum(i.calc_mcu_srm(self.volume) for i in self.malt_additions)
+
+    def calc_ebc(self, functor):
         weight = sum(i.weight for i in self.malt_additions)
-        ebc = sum(i.calc_mcu_met(weight) for i in self.malt_additions)
+        ebc = sum(i.calc_mcu_ebc(weight) for i in self.malt_additions)
         return functor(ebc, self.boil_time, self.oe)
 
 mcu_scale = np.linspace(0, 100, dtype=int)
@@ -120,14 +126,15 @@ dark = BrewData(82.0, 12.3, 75.0, 275.0, [Addition(38.9, 3.75), Addition(2.4, 4.
 
 def calc_stats(brew_data):
     stats = []
-    stats.append(('Daniels-Druey', brew_data.calc_ebc_imp(calc_srm_daniels_druey)))
-    stats.append(('Daniels-Linear', brew_data.calc_ebc_imp(calc_srm_daniels_lin)))
-    stats.append(('Hanghofer', brew_data.calc_ebc_met(calc_ebc_hanghofer)))
-    stats.append(('Krüger', brew_data.calc_ebc_met(calc_ebc_krueger)))
-    stats.append(('Morey', brew_data.calc_ebc_imp(calc_srm_morey)))    
-    stats.append(('Mosher-Linear', brew_data.calc_ebc_imp(calc_srm_mosher_lin)))
-    stats.append(('Noonan-Druey', brew_data.calc_ebc_imp(calc_srm_noonan_druey)))
-    stats.append(('Weyermann', brew_data.calc_ebc_met(calc_ebc_weyermann)))
+    stats.append(('Burch', brew_data.calc_ebc_srm()))
+    stats.append(('Daniels-Druey', brew_data.calc_ebc_l(calc_srm_daniels_druey)))
+    stats.append(('Daniels-Linear', brew_data.calc_ebc_l(calc_srm_daniels_lin)))
+    stats.append(('Hanghofer', brew_data.calc_ebc(calc_ebc_hanghofer)))
+    stats.append(('Krüger', brew_data.calc_ebc(calc_ebc_krueger)))
+    stats.append(('Morey', brew_data.calc_ebc_l(calc_srm_morey)))    
+    stats.append(('Mosher-Linear', brew_data.calc_ebc_l(calc_srm_mosher_lin)))
+    stats.append(('Noonan-Druey', brew_data.calc_ebc_l(calc_srm_noonan_druey)))
+    stats.append(('Weyermann', brew_data.calc_ebc(calc_ebc_weyermann)))
     return stats
 
 def print_stats(stats):

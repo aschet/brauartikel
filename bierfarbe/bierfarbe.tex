@@ -19,7 +19,7 @@
 \usepackage[hidelinks,pdfencoding=auto,
   pdfauthor={Thomas Ascher},
   pdfusetitle,
-  pdfkeywords={Bier,Farbe,SRM,IBU,EBC,Morey}]{hyperref}
+  pdfkeywords={Bier,Farbe,Lovibond,SRM,EBC,Morey,Krüger}]{hyperref}
 \usepackage{microtype}
 
 \setkomafont{disposition}{\normalfont\bfseries}
@@ -41,15 +41,20 @@
   gethesis = {Diplomarbeit},
 }
 
-\newcommand{\MCU}{\mathit{MCU}}
+\newcommand{\MCUL}{\mathit{MCU}_{L}}
+\newcommand{\EBC}{\mathit{EBC}}
 \newcommand{\SRM}{\mathit{SRM}}
-\newcommand{\umin}{\:[\textrm{min}]}
-\newcommand{\uden}{\:[\text{g/cm³}]}
-\newcommand{\uper}{\:[\text{\%}]}
+\newcommand{\ulovi}{\:[\textrm{°L}]}
+\newcommand{\usrm}{\:[\textrm{SRM}]}
+\newcommand{\uebc}{\:[\textrm{ebc}]}
 \newcommand{\uli}{\:[\text{l}]}
-\newcommand{\ume}{\:[\text{m}]}
-\newcommand{\ucon}{\:[\text{mg/l}]}
-\newcommand{\FKd}{F_{\mathit{d}}}
+\newcommand{\ugal}{\:[\textrm{US gal}]}
+\newcommand{\ukg}{\:[\textrm{kg}]}
+\newcommand{\ulb}{\:[\textrm{lb}]}
+\newcommand{\umin}{\:[\textrm{min}]}
+
+
+
 
 \title{Es wird bunt: Bierfarbe aus der Schüttung berechnen}
 \author{Thomas Ascher <thomas.ascher@gmx.at>}
@@ -102,7 +107,12 @@ Schwarz & 40+ & 79 \\
 
 Zur Bestimmung der Bierfarbe existieren mehrere Messskalen und -verfahren. Die Älteste davon noch gebräuchliche, ist die Lovibond Skala. Diese wurde vom Brauer Josep W. Lovibond 1885 zusammen mit einem Messgerät, dem Tintometer, entwickelt. Damit wird per visuellem Eindruck von einer Person eine aufbereitete Bierprobe mit verschieden gefärbten Glasscheiben verglichen, um einen Messwert zwischen 2 bis 70~°L (hell bis dunkel) zu ermitteln. Unterschiede in der menschlichen Wahrnehmung und verschiedene Umwelteinflüsse verfälschen das Messergebnis. \parencite{KrausWeyermann2021a}
 
-Im Jahr 1951 hat die \href{https://www.asbcnet.org}{American Society of Brewing Chemists (ASBC)} eine neue Analysemethode (Standard Reference Method) auf Basis des Spektrophotometers zusammen mit der SRM Skala, die an die Lovibond Skala gekoppelt ist, ratifiziert. Seit 1996 verwendet die \href{https://europeanbreweryconvention.eu}{European Brewery Convention (EBC)} die EBC Skala, die sich ebenfalls auf die Messwerte eines Spektrophotometers bezieht. Bis auf die Skala wurde die grundlegende Messmethode von beiden Normungsgremien mittlerweile harmonisiert. Bei dieser misst ein Spektrophotometer die Lichtabsorption einer entgasten Bierprobe oder eine aus einem Malz im Kongressmaischeverfahren hergestellten Würzeprobe bei einer Wellenlänge von 430~nm durch eine 1~cm breite Quarzglasküvette. Der 12,7-fache Logarithmus der gemessenen Absorption entspricht dabei einem Wert der SRM Skala und der 25-fache Logarithmus der EBC Skala. Das menschliche Auge kann Farbunterschiede ab 80~EBC nicht mehr wahrnehmen. Auch Messgeräte generieren darüber keine zuverlässigen Messwerte mehr. Dunkle Bierproben sind daher vor der Messung zu verdünnen. \parencite{KrausWeyermann2021a}
+Im Jahr 1951 hat die \href{https://www.asbcnet.org}{American Society of Brewing Chemists (ASBC)} eine neue Analysemethode (Standard Reference Method) auf Basis des Spektrophotometers zusammen mit der SRM Skala, die an die Lovibond Skala gekoppelt ist, ratifiziert. Seit 1996 verwendet die \href{https://europeanbreweryconvention.eu}{European Brewery Convention (EBC)} die EBC Skala, die sich ebenfalls auf die Messwerte eines Spektrophotometers bezieht. Bis auf die Skala wurde die grundlegende Messmethode von beiden Normungsgremien mittlerweile harmonisiert. Bei dieser misst ein Spektrophotometer die Lichtabsorption einer entgasten Bierprobe oder eine aus einem Malz im Kongressmaischeverfahren hergestellten Würzeprobe bei einer Wellenlänge von 430~nm durch eine 1~cm breite Quarzglasküvette. Die 12,7-fache gemessenen Absorption entspricht dabei  einem Wert der SRM Skala und die 25-fache Absorption einem Wert der EBC Skala. Daraus leitet sich der Zusammenhang von \autoref{eq:ebctosrm} ab. Das menschliche Auge kann Farbunterschiede ab 80~EBC nicht mehr wahrnehmen. Auch Messgeräte generieren darüber keine zuverlässigen Messwerte mehr. Dunkle Bierproben sind daher vor der Messung zu verdünnen. \parencite{KrausWeyermann2021a}
+
+\begin{equation}
+\EBC = \SRM \cdot 1,97
+\label{eq:ebctosrm}
+\end{equation}
 
 % TODO: correlation models
 
@@ -110,12 +120,9 @@ Im Jahr 1951 hat die \href{https://www.asbcnet.org}{American Society of Brewing 
 \parencite{KrausWeyermann2021a}
 SRM=L+0,04662*(L) hoch 2
 L= 0,808*SRM-0,0083 für Helle
-Kongressmaische, standartisierte Maischeprogramm
 EBC 1996 EBC Skala 25-fache log. 1EBC = srm * 1,97,
 3,6-25,3 zuverlässig. 
-Dunkle Flüssigkeit absorbiert Viel. Keine zuverlässige Messung ab 80-100 EBC
-80 EBC Wahrnehmungsschlelle. Dunkler als 80 wird nicht mehr vom Auge wahrgenommen.
-Mit wasser verdünnen. 
+
 
 \parencite{KrausWeyermann2021b}
 Stark divergierende Farbwerte für gleiche Schüttungen.
@@ -143,53 +150,50 @@ Daniels; versuche mit Hobbysuden
 Morey: abnehmende Genauigkeit der Lineare für dunkel logarithmisch der Lichtabsoption
 anwendbar bis 50 SRM
 
-\section*{Homebrew/Malt Color Unit (HCU/MCU)}
-
-\parencite[11]{Noonan1996}
-HCU color units are a summary measurement of
-wort color that is equal to the sum of the SRM/°Lovibond
-of all the malts used to make a wort. HCU units and SRM
-wort color are comparable up to about 10 °SRM; after that,
-corrections must be made.
-
-
 „\href{https://bieranalyse.de}{Bieranalyse Fuchs}“
 
-%In \autoref{table:parameters} sind die vom \citeauthor{BJCP2015} und die von
-%\citeauthor{Strottner1999} genannten brautechnischen Parameter erfasst.
-%Die Angaben der Brewers Association Stil-Richtlinien sind annähernd
-%deckungsgleich \parencites[24]{BA2021}. 
+\section*{Modelle zur Schätzung der Bierfarbe}
 
-\parencite{Colby2000}
-The HCU equation is similar to the SGP and IBU calculations, except it is missing a utilization or efciency term.
-Essentially, it is only a measure of how much color is put into the beer from the grains. How that color is
-changed by the brewing process is ignored.
-Ignoring the effect of the brewing process on beer color is unfortunate, since many brewing processes affect
-wort and beer color. Some factors increase color. These include: high hop rates, longer boil times, ner grain
-crushes and oxidation from wort abuse or aging. Fermentation, in contrast, reduces the color of the wort.
-The equation could be improved if a factor was added to account for changes in color due to the brewing
-process. In fact, two factors would be needed. Some color changes are modications of the grain color added to
-the beer. Loss of color during fermentation, for example, depends on the amount of color initially in the wort.
-Other color changes do not depend on the initial beer color. Some of the wort darkening during the boil is due
-to the sugars caramelizing. In solution, the sugars are colorless. The color that sugar caramelization contributes
-does not come from the roasting of the grain.
-So, an equation that took both of these factors into consideration would need two new variables. The resulting
-equation would be:
+Seit etwa der Mitte der Neunzigerjahre sind im Heimbraubereich mehrere Berechnungsmodelle entstanden, die versuchen aus den proportionalen Farbbeiträgen der Malze in einer Schüttung die zu erwartende Bierfarbe vorhersagen. Diese Beiträge bezeichnet \textcite[34]{Mosher1994} als „Homebrew Color Units“ (HCU), \textcite[61]{Daniels1996} als „Malt Color Units“ (MCU), und \textcite[10]{Holle2010} als „Würze SRM“, denn die MCU beschreibt bestenfalls einen Eindruck der Würzefarbe.
 
-NHCU=[W(lbs) * CR(degrees L)*TF + AF]/V(gallon)
-NHBU is New Homebrew Color Units. The two new factors are TF and AF. TF is the transforming factor, the
-extent that the grain color is modidfied. AF is the additive factor, the amount of color that appears during the
-brewing process or aging that is not dependent on roasted grain-derived color.
+röstmalze intensiver
+\parencite{KrausWeyermann2021c}
 
-\section*{Modelle zur Korrelation zwischen MCU und Bierfarbe}
+Aufgrund verschiedener Einflüsse während des Brau- und Gärprozesses benötigt es weitere Korrekuren um aus Malt Color Units eine Schätzung der Bierfarbe zu erhalten. Das erste hierzu notwendige Korrelationsverfahren stammt vom Heimbrauer Randy Mosher. Mittlerweile hat sich das Modell von Daniel Morey weitgehend als Standard etabliert. \parencite{KrausWeyermann2021b}
 
-Farbvorhersage
+Folgende Faktoren führen unter anderem abseits der verwendeten Malzen zu einer dunkleren Bierfarbe: eine höhere Restalkalität des Brauwassers, eine feinere Schrotung, eine längere Maischedauer, der Einsatz intensiverer Maischeverfahren wie der Dekoktion, eine längere Kochdauer (Maillard-Rekation), eine höhere Stammwürze und eine stärkere Oxidation \parencites{KrausWeyermann2021c}[78]{Hanghofer2019}. Darüber hinaus haben auch die Trubbildung bei der Würzekühlung, der pH-Sturz während der Gärung und  Gärnebenprodukte der Hefen Einfluss auf die Bierfarbe \parencites{KrausWeyermann2021c}. Eine genaue Vorhersage müsste alle diese Faktoren berücksichtigen. Bei den Berechnungsverfahren aus den Vereinigte Staaten ist dies aber kaum der Fall. Deshalb formulierte \textcite{Colby2000} die Notwendigkeit der Einführung einer „New Homebrew Color Unit“ (NHCU), die einen additiven und einen multiplikativen Korrekturfaktor beinhaltet.
+
+Die folgenden Modelle, die in den Vereinigte Staaten entstanden sind, verwenden die United States Customary Units. \autoref{eq:kgtolb} und \autoref{eq:ltogal} definieren die notwendigen Umrechnungen aus den entsprechenden SI-Einheiten.
+
+\begin{equation}
+\text{lb} = \frac{\text{kg}}{0,45359237}
+\label{eq:kgtolb}
+\end{equation}
+
+\begin{equation}
+\text{US gal} = \frac{\text{l}}{3,785411784}
+\label{eq:ltogal}
+\end{equation}
+
+\subsection*{Burch (1993)}
+
+In der erweiterten zweiten Ausgabe des Buchs „\citetitle{Burch2010}“ stellt \textcite[102]{Burch2010} das Berechnungsverfahren in \autoref{eq:mcuburch} vor. Er geht dabei von einer gesamten Maischedauer von 90~min aus. Nachdem das Buch von Burch von 1986 bis 2010 mehrere Überarbeitungen erfahren hat (auch innerhalb der selben Ausgabe), ist das Jahr der eigentlichen Veröffentlichung unklar.
+
+\begin{equation}
+\SRM = \frac{\sum \text{Malzgewicht}_i \ulb \cdot \text{Malzfarbe}_i \usrm}{\text{Volumen kalte Anstellwürze} \ugal} 
+\label{eq:mcuburch}
+\end{equation}
 
 \subsection*{Mosher (1994)}
 
-\parencite{Morey}:
 \begin{equation}
-\SRM = 0,3 \cdot \MCU + 4,7
+\MCUL = \frac{\sum \text{Malzgewicht}_i \ulb \cdot \text{Malzfarbe}_i \ulovi}{\text{Volumen kalte Anstellwürze} \ugal} 
+\label{eq:mcubasis}
+\end{equation}
+
+\parencite{Morey2004}:
+\begin{equation}
+\SRM = 0,3 \cdot \MCUL + 4,7
 \label{eq:mcumosher}
 \end{equation}
 
@@ -201,13 +205,13 @@ Metric Malt Color Units = l*kg/l
 
 \subsection*{Daniels (1995)}
 
-In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation zwischen SRM und MCU in \autoref{table:mcudaniels} veröffentlicht. \textcite[10]{Holle2010} verwendet die gleiche Tabelle für Farbvorhersagen. Die darauf basierende lineare \autoref{eq:mcudaniels} ist darin nicht enthalten, wird von \textcite{Morey} aber ebenfalls Daniels zugeschrieben. Eine in die Tabellenwerte eingepasste alternative Exponentationfunktion \autoref{eq:mcudanielsdruey} stammt von \textcite{Druey1998}.
+In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation zwischen SRM und MCU in \autoref{table:mcudaniels} veröffentlicht. \textcite[10]{Holle2010} verwendet die gleiche Tabelle für Farbvorhersagen. Die darauf basierende lineare \autoref{eq:mcudaniels} ist darin nicht enthalten, wird von \textcite{Morey2004} aber ebenfalls Daniels zugeschrieben. Eine in die Tabellenwerte eingepasste alternative Exponentationfunktion \autoref{eq:mcudanielsdruey} stammt von \textcite{Druey1998}.
 
 \begin{table}[H]
 \centering
 \begin{tabular}{rrr}
 \toprule
-\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{EBC}} & \multicolumn{1}{c}{\textbf{MCU}} \\
+\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{EBC}} & \multicolumn{1}{c}{\textbf{MCU$_L$}} \\
 \midrule
 1–10 & 2–20 & 1–10 \\
 11–20 & 22–39 & 8–12 \\
@@ -223,12 +227,12 @@ In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation zwische
 \end{table}
 
 \begin{equation}
-\SRM = 0,2 \cdot \MCU + 8,4
+\SRM = 0,2 \cdot \MCUL + 8,4
 \label{eq:mcudaniels}
 \end{equation}
 
 \begin{equation}
-\SRM = 1,73 \cdot \MCU^{0,64} - 0,267
+\SRM = 1,73 \cdot \MCUL^{0,64} - 0,267
 \label{eq:mcudanielsdruey}
 \end{equation}
 
@@ -238,7 +242,7 @@ In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation zwische
 \centering
 \begin{tabular}{rrr}
 \toprule
-\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{EBC}} & \multicolumn{1}{c}{\textbf{MCU}} \\
+\multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{EBC}} & \multicolumn{1}{c}{\textbf{MCU$_L$}} \\
 \midrule
 1–10 & 2–20 & 1–10 \\
 10,5 & 21 & 10,8 \\
@@ -270,7 +274,7 @@ In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation zwische
 \parencite{Druey1998}:
 Kyle Druey
 \begin{equation}
-\SRM = 15,03 \cdot \MCU^{0,27} - 15,53
+\SRM = 15,03 \cdot \MCUL^{0,27} - 15,53
 \label{eq:mcunoonandruey}
 \end{equation}
 
@@ -279,12 +283,21 @@ Kyle Druey
 Heimbrauer Daniel Morey war unzufrieden mit der Farbvorhersage, die er in seiner Brausoftware auf Basis der MCU ohne zusätzliche Korrelation integriert hatte. Diese berechnete seiner Meinung nach zu hohe SRM Werte. Im mittlerweile nicht mehr erhältlichem Brewing Techniques Magazin erfuhr er dann 1995 von der Mosher und Daniels Modell. Zunächst wollte er alle Korrelationen in ein Berechnungsmodell zusammenführen, entschied sich aber dann dazu, die ihm vorliegenden Daten so zu modifizieren, dass es möglich war eine seinen Annahmen entsprechende Kurve einzupassen. \parencite{Smith2010}
 
 Das von Morey veröffentlichte Modell beruht auf folgenden Annahmen: Bis zu einem Betrag von 10 entspricht die MCU ungefähr dem zu erwartenden SRM Messwert. Ab 10 MCU gibt das Daniels Modell eine bessere Korrelation, über 37 MCU hingegen das Mosher Modell. Das menschliche Auge kann keinen Farbunterschiede über 40 SRM mehr feststellen. Die \autoref{eq:mcumorey} wurde daher nur bis 50 SRM ausgelegt.
-\parencite{Morey}
+\parencite{Morey2004}
 
 \begin{equation}
-\SRM = 1,49 \cdot \MCU^{0,69}
+\SRM = 1,49 \cdot \MCUL^{0,69}
 \label{eq:mcumorey}
 \end{equation}
+
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm]{graph_srm.pdf}
+\caption{TODO (Ascher, 2022)}
+\label{fig:mcucompare}
+\end{figure}
 
 \subsection*{Krüger (2019)}
 
@@ -318,13 +331,6 @@ Das von Morey veröffentlichte Modell beruht auf folgenden Annahmen: Bis zu eine
 \end{table}
 
 \subsection*{Modellvergleich}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=14cm]{graph_srm.pdf}
-\caption{TODO (Ascher, 2022)}
-\label{fig:mcucompare}
-\end{figure}
 
 
 \parencite{KrausWeyermann2021b}
@@ -374,7 +380,7 @@ kg (1400 EBC)
 Messwert nach EBC & 10 & 82 \\
 Daniels-Druey & 7 & 34 \\
 Daniels-Linear & 18 & 31 \\
-Hanghofer & & \\
+Hanghofer & 10 & 99 \\
 Krüger & 11 & 91 \\
 Morey & 6 & 36 \\
 Mosher-Linear & 11 & 32 \\
