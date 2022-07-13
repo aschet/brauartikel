@@ -5,6 +5,7 @@
 
 \usepackage[T1]{fontenc}
 \usepackage{mathpazo}
+\usepackage{amsmath}
 \usepackage[naustrian]{babel}
 \usepackage{csquotes}
 \usepackage{booktabs}
@@ -75,26 +76,22 @@ Bernsteinfarben, Schwarz, Rot oder Braun: Abseits der blonden Lager existiert da
 
 \begin{table}[H]
 \centering
-\begin{tabular}{lrr}
+\begin{tabular}{lr}
 \toprule
-\multicolumn{1}{c}{\textbf{Farbbeschreibung}} & \multicolumn{1}{c}{\textbf{SRM}} & \multicolumn{1}{c}{\textbf{EBC}} \\
+\multicolumn{1}{c}{\textbf{Farbbeschreibung}} & \multicolumn{1}{c}{\textbf{EBC}} \\
 \midrule
-Sehr hell & 1–1,5 & 2–3  \\
-Stroh & 2–3 & 4–6 \\
-Blass & 4 & 8 \\
-Gold & 5–6 & 10–12 \\
-Helles Bernstein & 7 & 14 \\
-Bernstein & 8 & 16 \\
-Dunkles Bernstein & 9 & 18 \\
-Kupfer/Granatrot & 10–12 & 20–24 \\
-Hellbraun & 13–15 & 26–30 \\
-Braun/Rotbraun/Kastanienbraun & 16–17 & 32–33 \\
-Dunkelbraun & 18–24 & 35–47 \\
-Sehr dunkel & 25–39 & 49–77 \\
-Schwarz & 40+ & 79 \\
+Hellgelb & 1 \\
+Strohgelb & 5 \\
+Goldgelb & 10 \\
+Bernstein & 15–20 \\
+Kupfer & 25–30 \\
+Hellbraun & 35–40 \\
+Braun & 45 \\
+Dunkelbraun & 50–55 \\
+Schwarz & 60 \\
 \bottomrule
 \end{tabular}
-\caption{Skalenwerte für Farbeindrücke \parencite{BA2021}}
+\caption{EBC Wert für Farbeindrücke \parencite[34]{Bruecklmeier2018}}
 \label{table:bacolor}
 \end{table}
 
@@ -104,6 +101,7 @@ Schwarz & 40+ & 79 \\
 \caption{Farbsimulation für die Werte der \autoref{table:bacolor} (Ascher, 2022)}
 \label{fig:bacolorscale}
 \end{figure}
+
 
 
 
@@ -270,7 +268,9 @@ Die \autoref{eq:mcumorey} beruht auf folgenden Annahmen: Bis zu einem Betrag von
 \label{fig:mcucompare}
 \end{figure}
 
-\subsection*{Hanghofer (2019)}
+\subsection*{Hanghofer (1999)}
+
+\textcite[76]{Hanghofer1999}
 
 Das Modell von Hanghofer basiert auf metrischen Einheiten und bestimmt die MCU nicht in Bezug auf das Volumen der Anstellwürze sondern auf das trockene Schüttungsgewicht (\autoref{eq:mcubasisebc}). Es ist ein Korrekturfaktor für die Stammwürze vorgesehen (\autoref{eq:hanghoferfstw}) sowie ein Korrekturwert für eine übermäßige Zufärbung bei hellen Bieren (\autoref{eq:hanghoferhell}), die laut \textcite{Krueger2019} empierisch ermittelt werden muss und üblicherweise zwischen 2 und 4~EBC liegt. Die Berechnung nach \textcite[78]{Hanghofer2019} erfolgt gemäß \autoref{eq:ebchanghofer}.
 
@@ -397,7 +397,7 @@ Carafa Typ III & 1,9 & 1400 \\
 \bottomrule
 \end{tabular}
 \caption{Dunkles mit 12,3~°P Stw. \parencite{KrausWeyermann2021c}}
-\label{table:pilsner}
+\label{table:dunkles}
 \end{table}
 
 \begin{table}[H]
@@ -430,6 +430,32 @@ Weyermann & 12 & 92 \\
 
 \section*{Farbsimulation von EBC Werten}
 
+Moussa Clarke
+
+\href{https://github.com/moussaclarke/ebc2hexjs}{Ebc2Hex.js}
+
+\begin{equation}
+\SRM = \frac{\max ( 0, \min ( 80, \EBC ) )}{1,97}
+\label{eq:srmtor}
+\end{equation}
+
+\begin{equation}
+R = \min ( 255, \lfloor 280 - \SRM \cdot 5,65 \rceil )
+\label{eq:srmtor}
+\end{equation}
+
+\begin{equation}
+G = \lfloor 0,188349 \cdot \SRM^2 - 13,2676 \cdot \SRM + 239,51 \rceil \\
+\label{eq:srmtog}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+B = \max ( 0, \lfloor 0,000933566 \cdot \SRM^4 - 0,0894788 \cdot \SRM^3 + \\ 
+3,00611 \cdot \SRM^2 - 40,8883 \cdot \SRM + 183,409 \rceil )
+\end{split}
+\label{eq:srmtob}
+\end{equation}
 
 
 \section*{Berechnungsbeispiel}
@@ -446,7 +472,7 @@ Für einen Sud mit einer Schhüttung bestehend aus 4~kg Pale Ale Malz (5,5~EBC) 
 \section*{Zusammenfassung}
 
 
-\parencite{Bruecklmeier2018}
+
 \parencite{Bies2010}
 \parencite{Tucker2017}
 \parencite{Lange2016}
