@@ -1,5 +1,4 @@
 # Based on an implementation by Thomas Mansencal
-# https://stackoverflow.com/questions/58722583/how-do-i-convert-srm-to-lab-using-e-308-as-an-algorithm
 
 import colour
 import colour.plotting

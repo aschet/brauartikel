@@ -54,7 +54,10 @@ def calc_ebc_weyermann(ebc, boil_time, oe):
 def calc_ebc_krueger(ebc, boil_time, oe):
     return ebc * oe / 10.0 + (boil_time / 60.0 * 1.5) + 2.0
 
-def calc_ebc_hanghofer(ebc, boil_time, oe):
+def calc_ebc_hanghofer_1999(ebc, boil_time, oe):
+    return ebc * oe / 10.0 + 2.0
+
+def calc_ebc_hanghofer_2019(ebc, boil_time, oe):
     return ebc * oe / 9.0 + 2.0
 
 class Addition:
@@ -117,15 +120,16 @@ plot_srm(axes[2], 'Noonan', [('Druey', calc_srm_noonan_druey)])
 fig_srm.savefig('graph_srm.pdf', format='pdf')
 
 pilsner = BrewData(10.0, 11.7, 75.0, 275.0, [Addition(42.8, 3.75), Addition(2.3, 4.5), Addition(0.9, 6), Addition(0.5, 195)])
-amber = BrewData(40.0, 11.7, 75.0, 275.0, [Addition(41.4, 3.75), Addition(2.3, 4.5), Addition(0.9, 6), Addition(1.9, 400)])
-dark = BrewData(82.0, 12.3, 75.0, 275.0, [Addition(38.9, 3.75), Addition(2.4, 4.5), Addition(2.4, 195), Addition(0.9, 6), Addition(1.9, 1400)])
+amber = BrewData(40.0, 11.7, 75.0, 275.0, [Addition(39.1, 3.75), Addition(2.3, 4.5), Addition(0.9, 6), Addition(1.9, 400)])
+dark = BrewData(82.0, 12.3, 75.0, 275.0, [Addition(39.1, 3.75), Addition(2.4, 4.5), Addition(2.4, 195), Addition(0.9, 6), Addition(1.9, 1400)])
 
 def calc_stats(brew_data):
     stats = []
     stats.append(('Burch', brew_data.calc_ebc_srm()))
     stats.append(('Daniels-Druey', brew_data.calc_ebc_l(calc_srm_daniels_druey)))
     stats.append(('Daniels-Linear', brew_data.calc_ebc_l(calc_srm_daniels_lin)))
-    stats.append(('Hanghofer', brew_data.calc_ebc(calc_ebc_hanghofer)))
+    stats.append(('Hanghofer 1999', brew_data.calc_ebc(calc_ebc_hanghofer_1999)))
+    stats.append(('Hanghofer 2019', brew_data.calc_ebc(calc_ebc_hanghofer_2019)))
     stats.append(('Krüger', brew_data.calc_ebc(calc_ebc_krueger)))
     stats.append(('Morey', brew_data.calc_ebc_l(calc_srm_morey)))    
     stats.append(('Mosher-Linear', brew_data.calc_ebc_l(calc_srm_mosher_lin)))
@@ -141,9 +145,12 @@ def print_stats(stats):
     for i in stats:
         print(i[0] + ': ' + '{:.0f}'.format(i[1]))
 
-pilsner_stats = calc_stats(pilsner)
 print("Pilsner")
+pilsner_stats = calc_stats(pilsner)
 print_stats(pilsner_stats)
+print("Bersteinfarbenes")
+amber_stats = calc_stats(amber)
+print_stats(amber_stats)
 print("Dunkles")
 dark_stats = calc_stats(dark)
 print_stats(dark_stats)

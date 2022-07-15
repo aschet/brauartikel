@@ -5,6 +5,7 @@
 
 \usepackage[T1]{fontenc}
 \usepackage{mathpazo}
+\usepackage{inconsolata}
 \usepackage{amsmath}
 \usepackage[naustrian]{babel}
 \usepackage{csquotes}
@@ -16,6 +17,8 @@
 \usepackage{float}
 \usepackage[section]{placeins}
 \usepackage[style=apa,backend=biber]{biblatex}
+\usepackage{listings}
+\usepackage{color}
 
 \usepackage[hidelinks,pdfencoding=auto,
   pdfauthor={Thomas Ascher},
@@ -72,13 +75,13 @@
 
 \section*{Einleitung}
 
-Bernsteinfarben, Schwarz, Rot oder Braun: Abseits der blonden Lager existiert das Produkt Bier innerhalb eines weitreichenden Farbspektrums. Neben einem nicht weltweit normierten Vokabular, wie es zum Beispiel \autoref{table:bacolor} zeigt, werden auch verschiedene Skalen verwendet, um diese Farben zu beschreiben. Großteils verantwortlich für dieses Farbenspiel ist die in einem Rezept eingesetzte Malzmischung, die Schüttung. Wie aus dieser die zu erwartende Bierfarbe näherungsweise berechnet werden kann, wird in den folgenden Abschnitten dieses Artikels demonstriert.
+Bernsteinfarben, Schwarz, Rot oder Braun: Abseits der blonden Lager existiert das Produkt Bier innerhalb eines weitreichenden Farbspektrums. Neben einem nicht weltweit normierten Vokabular, wie es zum Beispiel \autoref{table:bacolor} zeigt, werden auch verschiedene Skalen verwendet, um diese Farben zu beschreiben. Großteils verantwortlich für dieses Farbenvielfalt ist die in einem Rezept eingesetzte Malzmischung, die Schüttung. Wie aus dieser die zu erwartende Bierfarbe näherungsweise berechnet werden kann, wird in diesem Artikel demonstriert.
 
 \begin{table}[H]
 \centering
 \begin{tabular}{lr}
 \toprule
-\multicolumn{1}{c}{\textbf{Farbbeschreibung}} & \multicolumn{1}{c}{\textbf{EBC}} \\
+\multicolumn{1}{c}{\textbf{Farbeindruck}} & \multicolumn{1}{c}{\textbf{EBC}} \\
 \midrule
 Hellgelb & 1 \\
 Strohgelb & 5 \\
@@ -91,7 +94,7 @@ Dunkelbraun & 50–55 \\
 Schwarz & 60 \\
 \bottomrule
 \end{tabular}
-\caption{EBC Wert für Farbeindrücke \parencite[34]{Bruecklmeier2018}}
+\caption{EBC Wert zu Farbeindruck\parencite[34]{Bruecklmeier2018}}
 \label{table:bacolor}
 \end{table}
 
@@ -105,7 +108,7 @@ Schwarz & 60 \\
 
 
 
-\section*{Messung von Bier- und Malzfarbe}
+\section*{Messung der Bier- und Würzefarbe}
 
 Zur Bestimmung der Bierfarbe existieren mehrere Messskalen und Messverfahren. Die Älteste davon noch gebräuchliche, ist die Lovibond Skala. Diese wurde vom Brauer Josep W. Lovibond 1885 zusammen mit einem Messgerät, dem Tintometer, entwickelt. Damit wird per visuellem Eindruck von einer Person eine aufbereitete Bierprobe mit verschieden gefärbten Glasscheiben verglichen, um einen Messwert zwischen 2 bis 70~°L (hell bis dunkel) zu ermitteln. Unterschiede in der menschlichen Wahrnehmung und verschiedene Umwelteinflüsse verfälschen das Messergebnis. \parencite{KrausWeyermann2021a}
 
@@ -136,7 +139,7 @@ Im Jahr 1951 hat die \href{https://www.asbcnet.org}{American Society of Brewing 
 
 Seit etwa der Mitte der Neunzigerjahre sind im Heimbraubereich mehrere Berechnungsmodelle entstanden, die versuchen aus den proportionalen Farbbeiträgen der Malze in eine Schüttung die zu erwartende Bierfarbe vorhersagen. Diese Beiträge bezeichnet \textcite[61]{Daniels1996} als „Malt Color Units (MCU)“, \textcite[34]{Mosher1994} als „Homebrew Color Units (HCU)“  und \textcite[10]{Holle2010} als „Würze SRM“, denn die MCU beschreibt bestenfalls einen Eindruck der Würzefarbe. Bei dieser Art der Berechnung wird nicht berücksichtigt, dass dunklere Malze überproportional zufärben \parencite{KrausWeyermann2021c}.
 
-Aufgrund verschiedener Einflüsse während des Brau- und Gärprozesses benötigt es weitere Korrekuren um aus der MCU eine Schätzung der Bierfarbe zu erhalten. Folgende Faktoren führen unter anderem abseits der verwendeten Malzen zu einer dunkleren Bierfarbe: eine höhere Restalkalität des Brauwassers, eine feinere Schrotung, eine längere Maischedauer (Maillard-Rekation), der Einsatz intensiverer Maischeverfahren wie der Dekoktion, eine längere Kochdauer (Karamellisierung), eine höhere Stammwürze (Stw.) und eine stärkere Oxidation \parencites{KrausWeyermann2021c}[78]{Hanghofer2019}. Darüber hinaus haben auch die Trubbildung bei der Würzekühlung, der pH-Sturz während der Gärung und  Gärnebenprodukte der Hefen Einfluss auf die Bierfarbe. Die erste weit verbreitete Korrelation, die nur einen Bruchteil der genannten Faktoren berücksichtigt, stammt vom Heimbrauer Randy Mosher, wobei sich mittlerweile das Modell von Daniel Morey weitgehend als Standard im Heimbrauumfeld etabliert hat \parencite{KrausWeyermann2021b}. Eine genaue Vorhersage müsste alle Faktoren einbeziehen. Deshalb formulierte \textcite{Colby2000} die Notwendigkeit der Einführung einer „New Homebrew Color Unit (NHCU)“, die einen additiven und einen multiplikativen Korrekturfaktor beinhaltet.
+Aufgrund verschiedener Einflüsse während des Brau- und Gärprozesses benötigt es weitere Korrekuren um aus der MCU eine Schätzung der Bierfarbe zu erhalten. Folgende Faktoren führen unter anderem abseits der verwendeten Malzen zu einer dunkleren Bierfarbe: eine höhere Restalkalität des Brauwassers, eine feinere Schrotung, eine längere Maischedauer (Maillard-Rekation), der Einsatz intensiverer Maischeverfahren wie der Dekoktion, eine längere Kochdauer (Karamellisierung), eine höhere Stammwürze (Stw.) und eine stärkere Oxidation \parencites{KrausWeyermann2021c}[55]{Daniels1996}. Darüber hinaus haben auch die Trubbildung bei der Würzekühlung, der pH-Sturz während der Gärung und Gärnebenprodukte der Hefen und die anschließende Filtrierung Einfluss auf die Bierfarbe. Die erste weit verbreitete Korrelation, die nur einen Bruchteil der genannten Faktoren berücksichtigt, stammt vom Heimbrauer Randy Mosher, wobei sich mittlerweile das Modell von Daniel Morey weitgehend als Standard im Heimbrauumfeld etabliert hat \parencite{KrausWeyermann2021b}. Eine genaue Vorhersage müsste alle Faktoren einbeziehen. Deshalb formulierte \textcite{Colby2000} die Notwendigkeit der Einführung einer „New Homebrew Color Unit (NHCU)“, die einen additiven und einen multiplikativen Korrekturfaktor beinhaltet.
 
 Die Würzefarben von Braumalzen, die für die folgenden Berechnungen benötigt werden, sind üblicherweise auf den Webseite der jeweiligen Mälzereibetrieben einsehbar. Alternativ kann eine große Anzahl von Malzanalysedaten über die \href{https://obrama.mueggelland.de}{Obrama DB} von Jörg Krüger abgerufen werden. Notwendige Konvertierungen von SI-Einheiten zu United States Customary Units erfolgen \autoref{eq:kgtolb} und \autoref{eq:ltogal}.
 
@@ -152,7 +155,7 @@ Die Würzefarben von Braumalzen, die für die folgenden Berechnungen benötigt w
 
 \subsection*{Burch (1993)}
 
-In der erweiterten zweiten Ausgabe des Buchs „\citetitle{Burch2010}“ stellt \textcite[102]{Burch2010} das Berechnungsverfahren in \autoref{eq:mcuburch} vor. Er geht dabei von einer gesamten Maischedauer von 90~min aus. Nachdem das Buch von Burch von 1986 bis 2010 mehrere Überarbeitungen erfahren hat (auch innerhalb der selben Ausgabe), ist das Jahr der Veröffentlichung unklar.
+In der erweiterten zweiten Ausgabe des Buchs „\citetitle{Burch2010}“ stellt \textcite[102]{Burch2010} das Berechnungsverfahren in \autoref{eq:mcuburch} vor. Er geht dabei von einer gesamten Maischedauer von 90~min aus. Nachdem das Buch von Burch von 1986 bis 2010 mehrere Überarbeitungen auch innerhalb der selben Ausgabe erfahren hat, ist das Jahr der Veröffentlichung unklar.
 
 \begin{equation}
 \SRM = \frac{\sum \text{Malzgewicht}_i \ulb \cdot \text{Malzwürzefarbe}_i \usrm}{\text{Volumen kalte Anstellwürze} \ugal} 
@@ -161,7 +164,7 @@ In der erweiterten zweiten Ausgabe des Buchs „\citetitle{Burch2010}“ stellt 
 
 \subsection*{Mosher (1994)}
 
-Nicht als Gleichung sondern als Nomogramm ist das Modell von \textcite[34]{Mosher1994} ausgeführt. Die Datengrundlage dafür waren verfügbate Rezepte und Messwerte von kommerziellen Bieren \parencite{Morey2004}. Zur Berechnung nach Mosher ist die MCU nach \autoref{eq:mcubasis} zu bestimmen. Danach wird per Nomogramm der resultierende SRM Wert korreliert. Die \autoref{eq:mcumosher}, die anstatt des Nomogramms verwendet werden kann, wird von Morey Mosher zugeschrieben. In Moshers Buch „\citetitle{Mosher1994}“ ist diese aber nicht enthalten. 
+Nicht als Gleichung sondern als Nomogramm ist das Modell von \textcite[34]{Mosher1994} ausgeführt. Die Datengrundlage dafür waren verfügbate Rezepte und Messwerte von kommerziellen Bieren \parencite{Morey2004}. Zur Berechnung nach Mosher ist die MCU nach \autoref{eq:mcubasis} zu bestimmen. Danach wird per Nomogramm der resultierende SRM Wert korreliert. Die \autoref{eq:mcumosher}, die stattdessen verwendet werden kann, wird Mosher von Morey zugeschrieben. In Moshers Buch „\citetitle{Mosher1994}“ ist diese aber nicht enthalten. 
 
 \begin{equation}
 \MCUL = \frac{\sum \text{Malzgewicht}_i \ulb \cdot \text{Malzwürzefarbe}_i \ulovi}{\text{Volumen kalte Anstellwürze} \ugal} 
@@ -177,7 +180,7 @@ Später hat \textcite[258]{Mosher2015} in „\citetitle{Mosher2015}“ eine metr
 
 \subsection*{Daniels (1995)}
 
-In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation zwischen SRM und MCU in \autoref{table:mcudaniels} definiert, deren Datengrundlagen waren laut \textcite{Morey2004} Messwerte zu heimgebrauten Bieren, die während Heimbrau-Wettbewerten bezogen wurden. Mit dieser ist in Verbindung von \autoref{eq:mcubasis} der resultierende SRM Wert zu bestimmen. Die Daten von \autoref{table:mcudaniels} bilden ebenfalls die Grundlagen für die lineare Funktion in \autoref{eq:mcudaniels}, die Morey Daniels zuschreibt, und die Exponentialfunktion in \autoref{eq:mcudanielsdruey} von \textcite{Druey1998}. \textcite[10]{Holle2010} verwendet die gleichen Daten für Farbvorhersagen, berechnet die MCU jedoch nach \autoref{eq:mcuburch}.
+In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation zwischen SRM und MCU in \autoref{table:mcudaniels} auf Basis von Messungen von kommerziellen und heimgebrauten Bieren mit bekannten Rezepten definiert \parencite[59]{Daniels1996}. Mit der Tabelle und \autoref{eq:mcubasis} ist der resultierende SRM Wert zu bestimmen. Die Daten von \autoref{table:mcudaniels} bilden ebenfalls die Grundlagen für die lineare Funktion in \autoref{eq:mcudaniels}, die Morey Daniels zuschreibt, und die Exponentialfunktion in \autoref{eq:mcudanielsdruey} von \textcite{Druey1998}. \textcite[10]{Holle2010} verwendet die gleichen Daten für Farbvorhersagen, berechnet die MCU jedoch nach \autoref{eq:mcuburch}.
 
 \begin{table}[H]
 \centering
@@ -270,9 +273,7 @@ Die \autoref{eq:mcumorey} beruht auf folgenden Annahmen: Bis zu einem Betrag von
 
 \subsection*{Hanghofer (1999)}
 
-\textcite[76]{Hanghofer1999}
-
-Das Modell von Hanghofer basiert auf metrischen Einheiten und bestimmt die MCU nicht in Bezug auf das Volumen der Anstellwürze sondern auf das trockene Schüttungsgewicht (\autoref{eq:mcubasisebc}). Es ist ein Korrekturfaktor für die Stammwürze vorgesehen (\autoref{eq:hanghoferfstw}) sowie ein Korrekturwert für eine übermäßige Zufärbung bei hellen Bieren (\autoref{eq:hanghoferhell}), die laut \textcite{Krueger2019} empierisch ermittelt werden muss und üblicherweise zwischen 2 und 4~EBC liegt. Die Berechnung nach \textcite[78]{Hanghofer2019} erfolgt gemäß \autoref{eq:ebchanghofer}.
+Das Modell von Hanghofer basiert auf metrischen Einheiten und bestimmt die MCU nicht in Bezug auf das Volumen der Anstellwürze sondern auf das trockene Schüttungsgewicht (\autoref{eq:mcubasisebc}). Es ist ein Korrekturfaktor für die Stammwürze vorgesehen (\autoref{eq:hanghoferfstw}) sowie ein Korrekturwert für eine übermäßige Zufärbung bei hellen Bieren (\autoref{eq:hanghoferhell}), die empirisch ermittelt werden muss und üblicherweise zwischen 2 und 4~EBC liegt. Die gesamte Berechnung erfolgt gemäß \autoref{eq:ebchanghofer}. \parencite[76]{Hanghofer1999}
 
 \begin{equation}
 \MCUEBC = \frac{\sum \text{Malzgewicht}_i \ukg \cdot \text{Malzwürzefarbe}_i \uebc}{\sum \text{Malzgewicht}_i \ukg} 
@@ -280,7 +281,7 @@ Das Modell von Hanghofer basiert auf metrischen Einheiten und bestimmt die MCU n
 \end{equation}
 
 \begin{equation}
-\fstw = \frac{\text{Stammwürze} \uplato}{9}
+\fstw = \frac{\text{Stammwürze} \uplato}{10}
 \label{eq:hanghoferfstw}
 \end{equation}
 
@@ -292,6 +293,13 @@ Das Modell von Hanghofer basiert auf metrischen Einheiten und bestimmt die MCU n
 \begin{equation}
 \EBC = \MCUEBC \cdot \fstw + \khell
 \label{eq:ebchanghofer}
+\end{equation}
+
+In einer neueren Publikation wurde der Korrekturfaktor für die Stammwürze inzwischen zu \autoref{eq:hanghoferfstw2019} angepasst. \textcite[78]{Hanghofer2019}
+
+\begin{equation}
+\fstw = \frac{\text{Stammwürze} \uplato}{9}
+\label{eq:hanghoferfstw2019}
 \end{equation}
 
 \subsection*{Krüger (2019)}
@@ -379,7 +387,7 @@ Sauermalz & 0,9 & 6 \\
 Carabohemian & 0,5 & 195 \\
 \bottomrule
 \end{tabular}
-\caption{Pilsner mit 11,7~°P Stw. \parencite{KrausWeyermann2021c}}
+\caption{Pilsner mit 11,7~°P Stw. \parencite{KrausWeyermann2022}}
 \label{table:pilsner}
 \end{table}
 
@@ -389,16 +397,17 @@ Carabohemian & 0,5 & 195 \\
 \toprule
 \multicolumn{1}{c}{\textbf{Malz}} & \multicolumn{1}{c}{\textbf{Gewicht [kg]}} & \multicolumn{1}{c}{\textbf{Farbe [EBC]}} \\
 \midrule
-Pilsner Tennenmalz & 38,9 & 3,75 \\
+Pilsner Tennenmalz & 39,1 & 3,75 \\
 Carapils & 2,4 & 4,5 \\
 Sauermalz & 0,9 & 6 \\
 Carabohemian & 2,4 & 195 \\
 Carafa Typ III & 1,9 & 1400 \\
 \bottomrule
 \end{tabular}
-\caption{Dunkles mit 12,3~°P Stw. \parencite{KrausWeyermann2021c}}
+\caption{Dunkles mit 12,3~°P Stw. \parencite{KrausWeyermann2022}}
 \label{table:dunkles}
 \end{table}
+
 
 \begin{table}[H]
 \centering
@@ -409,7 +418,8 @@ Carafa Typ III & 1,9 & 1400 \\
 Messwert nach EBC & 10 & 82 \\
 Daniels-Druey & 7 & 34 \\
 Daniels-Linear & 18 & 31 \\
-Hanghofer & 10 & 99 \\
+Hanghofer 1999 & 9 & 89 \\
+Hanghofer 2019 & 10 & 98 \\
 Krüger & 11 & 91 \\
 Morey & 6 & 36 \\
 Mosher-Linear & 11 & 32 \\
@@ -428,11 +438,15 @@ Weyermann & 12 & 92 \\
 \label{fig:modelcompare}
 \end{figure}
 
-\section*{Farbsimulation von EBC Werten}
+\section*{SRM Farbsimulation}
 
-Moussa Clarke
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm]{graph_ebc_dist.pdf}
+\caption{EBC TODO \autoref{table:bacolor} (Ascher, 2022)}
+\label{fig:bacolordist}
+\end{figure}
 
-\href{https://github.com/moussaclarke/ebc2hexjs}{Ebc2Hex.js}
 
 \begin{equation}
 \SRM = \frac{\max ( 0, \min ( 80, \EBC ) )}{1,97}
@@ -480,12 +494,29 @@ Für einen Sud mit einer Schhüttung bestehend aus 4~kg Pale Ale Malz (5,5~EBC) 
 Die relevanten Eckpunkte dieses Artikels sind:
 
 \begin{itemize}
-\item Die Farbe eines Bieres und die Würzefarbe eines Malzes werden in EBC auf Basis der Lichtabsorption in einem Spektrophotometers gemessen. Es existieren noch weitere Messverfahren.
+\item Die Farbe eines Bieres und die Würzefarbe eines Malzes werden in EBC auf Basis der Lichtabsorption in einem Spektrophotometer oder einem Photometer gemessen. Es existieren noch weitere Messverfahren.
 \item Viele Faktoren während dem Brau- und Gärvorgang haben neben den eingesetzten Malzen einen signifikanten Einfluss auf die Bierfahre.
 \item Es existieren mehrere Berechnungsmodelle, die auf Basis der Schüttung einen EBC Wert bedingt vorhersagen können. Laut einer Versuchsreihe der Weyermann Mälzerei liefern derzeit die Modelle von Weyermann und Krüger die besten Schätzungen.
 \item TODO
 \end{itemize}
 
 \printbibliography[title=Quellen]
+
+\section*{Anhang}
+
+\lstset{
+    language=Python,
+    basicstyle=\scriptsize\ttfamily,
+    frame=tb,
+    tabsize=4,
+    columns=fixed,
+    showstringspaces=false,
+    showtabs=false,
+    keepspaces,
+    commentstyle=\color{red},
+    keywordstyle=\color{blue}
+}
+
+\lstinputlisting{beer_colour_chart.py}
 
 \end{document}
