@@ -101,7 +101,7 @@ Schwarz & 60 \\
 \begin{figure}[h]
 \centering
 \includegraphics[width=14cm]{colorscale.pdf}
-\caption{Farbsimulation für die Werte der \autoref{table:bacolor} (Ascher, 2022)}
+\caption{Simulation für die Farben der \autoref{table:bacolor} (Ascher, 2022)}
 \label{fig:bacolorscale}
 \end{figure}
 
@@ -295,7 +295,7 @@ Das Modell von Hanghofer basiert auf metrischen Einheiten und bestimmt die MCU n
 \label{eq:ebchanghofer}
 \end{equation}
 
-In einer neueren Publikation wurde der Korrekturfaktor für die Stammwürze inzwischen zu \autoref{eq:hanghoferfstw2019} angepasst. \textcite[78]{Hanghofer2019}
+In einer neueren Publikation wurde der Korrekturfaktor für die Stammwürze inzwischen zu \autoref{eq:hanghoferfstw2019} angepasst. \parencite[78]{Hanghofer2019}
 
 \begin{equation}
 \fstw = \frac{\text{Stammwürze} \uplato}{9}
@@ -304,12 +304,7 @@ In einer neueren Publikation wurde der Korrekturfaktor für die Stammwürze inzw
 
 \subsection*{Krüger (2019)}
 
-Abgesehen vom Korrekturfaktor für die Stammwürze (\autoref{eq:krugerstw}) entspricht das Krüger Modell von den Berechnungsvorschriften weitgehend dem Hanghofer Modell. Es ist jedoch eine weitere Korrektur für die Zufärbung (\autoref{eq:krugerkkd}) über die Kochdauer vorgesehen. Die Berechnung nach \textcite{Krueger2019} erfolgt gemäß \autoref{eq:ebckruger}.
-
-\begin{equation}
-\fstw = \frac{\text{Stammwürze} \uplato}{10}
-\label{eq:krugerstw}
-\end{equation}
+Abgesehen von einer zusätzlichen Korrektur für eine Zufärbung über die Kochdauer (\autoref{eq:krugerkkd}) entspricht das Krüger Modell dem Hanghofer Modell von 1999. Die Berechnung nach \textcite{Krueger2019} erfolgt gemäß \autoref{eq:ebckruger}.
 
 \begin{equation}
 \kkd \uebc = \text{Kochdauer} \uhour \cdot 1,5 \uebch
@@ -323,12 +318,7 @@ Abgesehen vom Korrekturfaktor für die Stammwürze (\autoref{eq:krugerstw}) ents
 
 \subsection*{Weyermann (2021)}
 
-Von der Weyermann Mälzerei wird die dem Krüger Modell ähnliche \autoref{eq:ebcweyermann} für Farbvorhersagen eingesetzt. Diese enthält zwei Korrekturen für die Stammwürze in der Form von \autoref{eq:weyermannstw} und \autoref{eq:weyermannkstw}. \parencite{KrausWeyermann2021b}
-
-\begin{equation}
-\fstw = \frac{\text{Stammwürze} \uplato}{10}
-\label{eq:weyermannstw}
-\end{equation}
+Von der Weyermann Mälzerei wird die dem Hanghofer und Krüger Modell ähnliche \autoref{eq:ebcweyermann} für Farbvorhersagen eingesetzt. Diese enthält zwei Korrekturen für die Stammwürze in der Form von \autoref{eq:hanghoferfstw} und \autoref{eq:weyermannkstw}. \parencite{KrausWeyermann2021b}
 
 \begin{equation}
 \kstw \uebc = \begin{cases}
@@ -348,12 +338,7 @@ Von der Weyermann Mälzerei wird die dem Krüger Modell ähnliche \autoref{eq:eb
 
 \subsection*{Modellvergleich}
 
-
-\parencite{KrausWeyermann2021b}
-20 Biere in Weyermann Braumanufaktur. Gemessen und Labo-Messung mit Formel verglichen.
-wobei 1 Bier (Export hell) als ausreißwer entfernt wurde.
-keine 100 prozen überinstimmung mit labormessung.
-Weyermann und Krüger beste Ergebnis.
+Bei einem Versuch, bei dem die spektrophotometrischen Messdaten von 19 in der Weyermann Braumanufaktur herstellen Bieren mit Modellvorhersagen verglichen wurden, kamen \textcite{KrausWeyermann2021b} zum Schluss, dass die von den untersuchten Modellen das Weyermann und das Krüger Modell die geringsten Abweichungen erzeugen (\autoref{table:modelcompareall}). Wie erwartet liefert aber kein Modell durchgehend perfekte Ergebnisse. Teilweise liegen die Schätzungen unter oder über den Messwerten, sodass sich kein allgemeiner Korrekturfaktor bestimmen lässt.
 
 \begin{table}[H]
 \centering
@@ -368,12 +353,11 @@ Mosher-Linear & -57,2 \\
 Weyermann & -2,1 \\
 \bottomrule
 \end{tabular}
-\caption{TODO \parencite{KrausWeyermann2021b}}
+\caption{Modellabweichung von Messwerten \parencite{KrausWeyermann2021b}}
 \label{table:modelcompareall}
 \end{table}
 
-Ausschlagvolumen: 275 Liter
-
+In einem Weiteren Versuch der Weyermann Braumanufaktur wurden drei untergärige Biere nach böhmischer Brauart mit einem Ausschlagsvolumen von 275~l hergestellt: ein Pilsner (\autoref{table:pilsner}), ein Bernsteinfarbenes und ein Dunkles (\autoref{table:dunkles}). Auf Basis dieser Daten wurden die Modellvorhersagen von \autoref{table:modelcompare} und die Abweichungen von \autoref{fig:modelcompare} berechnet. Folgende Annahmen wurden getroffen: die Kochdauer entspricht 75~min und es erfolgt eine Zufärbung durch $\khell$ von 2~EBC. Nachdem die gegebenen Daten keine Würzefarbe in Lovibond beinhalten, erfolgte eine Umrechung von EBC nach Grad Lovibond über die Näherung 1~°L~=~2,65~EBC. Während die meisten Werte von \autoref{table:modelcompare} in der Größenordnung der Vorhersagen von \textcite{KrausWeyermann2022} liegen, gibt es dennoch einige ungeklärte hohe Abweichungen. Diese sind im Fall des bernsteinfarben Biers so hoch, dass auf einen eigenen Vergleich verzichtet wurde. Für das Dunkle berechnen \textcite{KrausWeyermann2022} mit dem Krüger Modell (\autoref{eq:ebckruger}) einen Farbwert von 65,7~EBC. Ohne Berücksichtigung der Korrekturen durch $\khell$ und $\kkd$ sollte der Wert aufgrund der Angaben von \autoref{table:dunkles} aber mindesten 86,7~EBC betragen.
 
 \begin{table}[H]
 \centering
@@ -387,7 +371,7 @@ Sauermalz & 0,9 & 6 \\
 Carabohemian & 0,5 & 195 \\
 \bottomrule
 \end{tabular}
-\caption{Pilsner mit 11,7~°P Stw. \parencite{KrausWeyermann2022}}
+\caption{Pilsner mit 11,7~°P und 10~EBC \parencite{KrausWeyermann2022}}
 \label{table:pilsner}
 \end{table}
 
@@ -404,7 +388,7 @@ Carabohemian & 2,4 & 195 \\
 Carafa Typ III & 1,9 & 1400 \\
 \bottomrule
 \end{tabular}
-\caption{Dunkles mit 12,3~°P Stw. \parencite{KrausWeyermann2022}}
+\caption{Dunkles mit 12,3~°P und 80~EBC \parencite{KrausWeyermann2022}}
 \label{table:dunkles}
 \end{table}
 
@@ -415,7 +399,6 @@ Carafa Typ III & 1,9 & 1400 \\
 \toprule
 \multicolumn{1}{c}{\textbf{Modell}} & \multicolumn{1}{c}{\textbf{Pilsner [EBC]}} & \multicolumn{1}{c}{\textbf{Dunkles [EBC]}} \\
 \midrule
-Messwert nach EBC & 10 & 82 \\
 Daniels-Druey & 7 & 34 \\
 Daniels-Linear & 18 & 31 \\
 Hanghofer 1999 & 9 & 89 \\
@@ -427,14 +410,14 @@ Noonan-Druey & 10 & 48 \\
 Weyermann & 12 & 92 \\
 \bottomrule
 \end{tabular}
-\caption{TODO \textcite{KrausWeyermann2021c}}
+\caption{Modellvorhersage für \autoref{table:pilsner} und \autoref{table:dunkles} (Ascher, 2022)}
 \label{table:modelcompare}
 \end{table}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=14cm]{graph_dev.pdf}
-\caption{TODO (Ascher, 2022)}
+\caption{Modellabweichung für \autoref{table:pilsner} und \autoref{table:dunkles} (Ascher, 2022)}
 \label{fig:modelcompare}
 \end{figure}
 
