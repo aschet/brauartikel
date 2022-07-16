@@ -10,14 +10,14 @@ import colour.plotting
 
 # Adjust the following constants to alter the generated model
 BEER_GLAS_DIAMETER_CM = 7.5 # 7.5 is average diameter of a Teku glas
-OBSERVER_NAME = 'CIE 1964 10 Degree Standard Observer'
-ILLUMINANT_NAME = 'D65'
+OBSERVER_NAME = 'CIE 1931 2 Degree Standard Observer'
+ILLUMINANT_NAME = 'C'
 MAX_EBC = 80
 POLY_DEGREE_R = 4
 POLY_DEGREE_G = 4
 POLY_DEGREE_B = 6
 
-OBSERVER = colour.MSDS_CMFS[OBSERVER_NAME]
+OBSERVER = colour.MSDS_CMFS['CIE 1964 10 Degree Standard Observer']
 ILLUMINANT = colour.SDS_ILLUMINANTS[ILLUMINANT_NAME]
 ILLUMINANT_XY = colour.CCS_ILLUMINANTS[OBSERVER_NAME][ILLUMINANT_NAME]
 ASBC_SHAPE = colour.SpectralShape(380, 780, 5)
