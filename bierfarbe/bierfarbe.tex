@@ -211,7 +211,7 @@ In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation von SRM
 
 \subsection*{Noonan (1996)}
 
-Die Rechenblätter von Noonans Buch „\citetitle{Noonan1996}“ enthalten die Korrelation von \autoref{table:mcunoonan}. \textcite{Druey1998} formulierte hierzu die Exponentionfunktion in \autoref{eq:mcunoonandruey}, die in Verbindung mit \autoref{eq:mcubasis} zu verwenden ist.
+Die Rechenblätter von Noonans Buch „\citetitle{Noonan1996}“ enthalten die Korrelation von \autoref{table:mcunoonan}. \textcite{Druey1998} formulierte hierzu die Exponentialfunktion in \autoref{eq:mcunoonandruey}, die in Verbindung mit \autoref{eq:mcubasis} zu verwenden ist.
 
 \begin{table}[H]
 \centering
@@ -253,9 +253,9 @@ Die Rechenblätter von Noonans Buch „\citetitle{Noonan1996}“ enthalten die K
 
 \subsection*{Morey (1996)}
 
-Heimbrauer Daniel Morey war unzufrieden mit der Farbvorhersage, die er in seiner Brausoftware auf Basis der MCU ohne zusätzliche Korrelation integriert hatte. Diese berechnete seiner Meinung nach zu hohe SRM Werte. Im mittlerweile nicht mehr erhältlichem Brewing Techniques Magazin erfuhr er dann 1995 von den Modellen von  Mosher und Daniels. Zunächst wollte er alle Korrelationen in ein Berechnungsmodell zusammenführen, entschied sich aber dann dazu, die ihm vorliegenden Daten so zu modifizieren, dass es möglich war eine seinen Annahmen entsprechende Kurve einzupassen. \parencite{Smith2010}
+Heimbrauer Daniel Morey war unzufrieden mit der Farbvorhersage, die er in seine Brausoftware auf Basis der MCU ohne zusätzliche Korrekturen integriert hatte. Diese berechnete seiner Meinung nach zu hohe SRM Werte. Im mittlerweile nicht mehr erhältlichem Brewing Techniques Magazin erfuhr er dann 1995 von den Modellen von  Mosher und Daniels. Zunächst wollte er alle Korrelationen in ein Berechnungsmodell zusammenführen, entschied sich aber dann dazu, die ihm vorliegenden Daten so zu modifizieren, dass es möglich war, eine seinen Annahmen entsprechende Kurve einzupassen. \parencite{Smith2010}
 
-Die \autoref{eq:mcumorey} beruht auf folgenden Annahmen: Bis zu einem Betrag von 10 entspricht die MCU ungefähr dem zu erwartenden SRM Messwert. Ab 10 MCU gibt das Daniels Modell eine bessere Korrelation, über 37 MCU hingegen das Mosher Modell. Das menschliche Auge kann keinen Farbunterschiede über 40 SRM mehr feststellen, es erfolgt daher eine Beschränkung auf 50 SRM. Insgesamt ist eine Abweichung von 20~\% oder höher vom realen Messert zu erwarten. \autoref{fig:mcucompare} zeigt die Unterschieden zu den zuvor beschriebenen Berechnungsverfahren. \parencite{Morey2004}
+Die \autoref{eq:mcumorey} beruht auf folgenden Annahmen: Bis zu einem Betrag von 10 entspricht die MCU ungefähr dem zu erwartenden SRM Messwert. Ab 10 MCU liefert das Daniels Modell eine bessere Korrelation, über 37 MCU das Mosher Modell. Das menschliche Auge kann keine Farbunterschiede über 40 SRM mehr feststellen, es erfolgt daher eine Beschränkung auf 50 SRM. Insgesamt ist eine Abweichung von 20~\% oder höher vom realen Messwert zu erwarten. \autoref{fig:mcucompare} zeigt die Unterschieden zu den zuvor beschriebenen Berechnungsverfahren. \parencite{Morey2004}
 
 \begin{equation}
 \SRM = 1,49 \cdot \MCUL^{0,69}
