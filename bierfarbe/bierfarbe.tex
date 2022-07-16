@@ -75,7 +75,7 @@
 
 \section*{Einleitung}
 
-Bernsteinfarben, Schwarz, Rot oder Braun: Abseits der blonden Lager existiert das Produkt Bier innerhalb eines weitreichenden Farbspektrums. Neben einem nicht weltweit normierten Vokabular (\autoref{table:bacolor}) werden auch verschiedene Messgrößen (\autoref{fig:bacolorscale}) verwendet, um dieses zu beschreiben. Großteils verantwortlich für dieses Farbenvielfalt ist Malzzusammenstellung (Schüttung) in einem Bierrezept. Wie aus dieser die zu erwartende Bierfarbe näherungsweise berechnet werden kann, wird in diesem Artikel demonstriert.
+Bernsteinfarben, Schwarz, Rot oder Braun: Abseits der blonden Lager existiert das Produkt Bier innerhalb eines weitreichenden Farbspektrums. Neben einem nicht weltweit normierten Vokabular (\autoref{table:bacolor}) werden auch verschiedene Messgrößen (\autoref{fig:bacolorscale}) verwendet, um dieses zu beschreiben. Großteils verantwortlich für diese Farbvielfalt ist die Malzzusammenstellung in einem Bierrezept. Wie aus dieser die zu erwartende Bierfarbe näherungsweise berechnet werden kann, wird in diesem Artikel demonstriert.
 
 \begin{table}[H]
 \centering
@@ -100,16 +100,16 @@ Schwarz & 60 \\
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=14cm]{colorscale.pdf}
+\includegraphics[width=10cm]{colorscale.pdf}
 \caption{EBC sRGB Simulation für 7,5~cm Glasdurchmesser (Ascher, 2022)}
 \label{fig:bacolorscale}
 \end{figure}
 
 \section*{Messung der Bier- und Würzefarbe}
 
-Zur Bestimmung der Bierfarbe existieren mehrere Messskalen und Messverfahren. Die Älteste davon noch gebräuchliche, ist die Lovibond Skala. Diese wurde vom Brauer Josep W. Lovibond 1885 zusammen mit einem Messgerät, dem Tintometer, entwickelt. Damit wird per visuellem Eindruck von einer Person eine aufbereitete Bierprobe mit verschieden gefärbten Glasscheiben verglichen, um einen Messwert zwischen 2 bis 70~°L (hell bis dunkel) zu ermitteln. Unterschiede in der menschlichen Wahrnehmung und verschiedene Umwelteinflüsse verfälschen das Messergebnis. \parencite{KrausWeyermann2021a}
+Zur Bestimmung der Bierfarbe existieren mehrere Messskalen und Messverfahren. Die Älteste, die davon noch in Gebrauch ist, heißt Lovibond Skala. Sie wurde vom Brauer Josep W. Lovibond 1885 zusammen mit einem Messgerät, dem Tintometer, entwickelt. Damit wird per visuellem Eindruck von einer Person eine aufbereitete Bierprobe mit verschieden gefärbten Glasscheiben verglichen, um einen Messwert zwischen 2 bis 70~°L (hell bis dunkel) zu ermitteln. Unterschiede in der menschlichen Wahrnehmung und verschiedene Umwelteinflüsse verfälschen das Messergebnis. \parencite{KrausWeyermann2021a}
 
-Im Jahr 1951 hat die \href{https://www.asbcnet.org}{American Society of Brewing Chemists (ASBC)} eine neue Analysemethode (Standard Reference Method) auf Basis des Spektrophotometers zusammen mit der SRM Skala, die an die Lovibond Skala gekoppelt ist, ratifiziert. Eine bedingte Umbrechnung zwischen °L und SRM ist durch \autoref{eq:ltosrm} und \autoref{eq:srmtol} möglich. Seit 1996 verwendet die \href{https://europeanbreweryconvention.eu}{European Brewery Convention (EBC)} die EBC Skala, die sich ebenfalls auf die Messwerte eines Spektrophotometers bezieht. Bis auf die Skala wurde die grundlegende Messmethode von beiden Normungsgremien mittlerweile harmonisiert. Bei dieser misst ein Spektrophotometer die Lichtabsorption einer entgasten Bierprobe oder eine aus einem Malz im Kongressmaischeverfahren hergestellten Würzeprobe bei einer Wellenlänge von 430~nm durch eine 1~cm breite Quarzglasküvette. Der 12,7-fache Logarithmus der gemessenen Absorption entspricht dabei einem Wert auf der SRM Skala und der 25-fache Logarithmus der Absorption einem Wert auf der EBC Skala. Daraus leitet sich der Zusammenhang von \autoref{eq:ebctosrm} ab. Das menschliche Auge kann Farbunterschiede ab 80~EBC nicht mehr wahrnehmen. Auch Messgeräte generieren darüber keine zuverlässigen Messwerte mehr. Dunkle Bierproben sind daher vor der Messung zu verdünnen. \parencite{KrausWeyermann2021a}
+Im Jahr 1951 hat die \href{https://www.asbcnet.org}{American Society of Brewing Chemists (ASBC)} eine neue Analysemethode (Standard Reference Method) auf Basis des Spektrophotometers zusammen mit der SRM Skala, die an die Lovibond Skala gekoppelt ist, ratifiziert. Eine bedingte Konvertierung zwischen °L und SRM ist durch \autoref{eq:ltosrm} und \autoref{eq:srmtol} möglich. Die \href{https://europeanbreweryconvention.eu}{European Brewery Convention (EBC)} verwendet dieselbe Messmethode mit einer anderen Skala. Bei dieser wird mit einem Spektrophotometer die Lichtabsorption einer Probe bei einer Wellenlänge von 430~nm durch eine 1~cm breite Quarzglasküvette gemessen. Die Probe kann dabei entweder ein entgastes Bier oder eine aus einem Malz durch das Kongressmaischeverfahren hergestellten Würzeprobe sein. Der 12,7-fache Logarithmus der gemessenen Absorption entspricht dabei einem Wert der SRM Skala und der 25-fache Logarithmus der Absorption einem Wert der EBC Skala. Daraus leitet sich der Zusammenhang von \autoref{eq:ebctosrm} ab. Das menschliche Auge kann Farbunterschiede ab 80~EBC nicht mehr wahrnehmen. Auch Messgeräte generieren darüber keine zuverlässigen Messwerte mehr. Dunkle Bierproben sind daher vor der Messung zu verdünnen. \parencite{KrausWeyermann2021a}
 
 \begin{equation}
 \textrm{°L} = 0,808 \cdot \SRM - 0,0083
