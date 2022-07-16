@@ -75,7 +75,7 @@
 
 \section*{Einleitung}
 
-Bernsteinfarben, Schwarz, Rot oder Braun: Abseits der blonden Lager existiert das Produkt Bier innerhalb eines weitreichenden Farbspektrums. Neben einem nicht weltweit normierten Vokabular (\autoref{table:bacolor}) werden auch verschiedene Messgrößen (\autoref{fig:bacolorscale}) verwendet, um dieses zu beschreiben. Großteils verantwortlich für dieses Farbenvielfalt ist die in einem Rezept eingesetzte Malzzusammenstellung, die Schüttung. Wie aus dieser die zu erwartende Bierfarbe näherungsweise berechnet werden kann, wird in diesem Artikel demonstriert.
+Bernsteinfarben, Schwarz, Rot oder Braun: Abseits der blonden Lager existiert das Produkt Bier innerhalb eines weitreichenden Farbspektrums. Neben einem nicht weltweit normierten Vokabular, wie es zum Beispiel \autoref{table:bacolor} zeigt, werden auch verschiedene Skalen verwendet, um diese Farben zu beschreiben. Großteils verantwortlich für dieses Farbenvielfalt ist die in einem Rezept eingesetzte Malzmischung, die Schüttung. Wie aus dieser die zu erwartende Bierfarbe näherungsweise berechnet werden kann, wird in diesem Artikel demonstriert.
 
 \begin{table}[H]
 \centering
@@ -94,7 +94,7 @@ Dunkelbraun & 50–55 \\
 Schwarz & 60 \\
 \bottomrule
 \end{tabular}
-\caption{Farbvokabular \parencite[34]{Bruecklmeier2018}}
+\caption{EBC Wert zu Farbeindruck \parencite[34]{Bruecklmeier2018}}
 \label{table:bacolor}
 \end{table}
 
@@ -414,6 +414,40 @@ Weyermann & 12 & 92 \\
 \label{fig:modelcompare}
 \end{figure}
 
+\section*{sRGB Farbsimulation}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=14cm]{graph_ebc_dist.pdf}
+\caption{EBC TODO \autoref{table:bacolor} (Ascher, 2022)}
+\label{fig:bacolordist}
+\end{figure}
+
+Braurechner verwenden verschiedene Strategien um eine einfache Farbsimulation umzusetzen. Der „\href{https://kleiner-brauhelfer.de}{kleine-brauhelfer}“ besitzt eine fixe Farbtabelle undokumentierten Ursprungs. \href{http://www.brewtarget.org}{Brewtarget} verwendet statessen \autoref{eq:srmtor} bis \autoref{eq:srmtob} um Farbtripel zu generieren. Die Grundlage für diese vom Brewtarget Hauptautor Philip Lee aufgestellten Gleichungen, mit denen auch die Farben von \autoref{fig:bacolorscale} berechnet wurden, war eine Farbkarte.
+
+\begin{equation}
+R = \lfloor \min(253, \max(0, 0,5 + 272,098 - 5,80255 \cdot \SRM)) \rceil
+\label{eq:srmtor}
+\end{equation}
+
+\begin{equation}
+G' = \lfloor \min(255, \max(0, 0,5 + 241,975 - 13,314 \cdot \SRM + 0,1881895 \cdot \SRM^2)) \rceil
+\end{equation}
+
+\begin{equation}
+G = \begin{cases}
+0  & \text{für} \quad \SRM > 35, \\
+G'  & \text{für} \quad \SRM \le 35. \\
+\end{cases}
+\label{eq:srmtog}
+\end{equation}
+
+\begin{equation}
+B = \lfloor \min(255, \max(0, 0,5 + 179,3 - 28,7 \cdot \SRM)) \rceil
+\label{eq:srmtob}
+\end{equation}
+
+
 \section*{Berechnungsbeispiel}
 
 Für einen Sud mit einer Schhüttung bestehend aus 4~kg Pale Ale Malz (5,5~EBC) und 0,25~kg Kara­mell­mal­z (110~EBC) mit einer Stammwürze von 12~°P ist die zu erwartende Bierfarbe abzuschätzen. Berechne diese mithilfe des Weyermann Modells. Unter der Anwendung von \autoref{eq:ebcweyermann} ergibt sich folgender Berechnungsweg:
@@ -437,10 +471,28 @@ Die relevanten Eckpunkte dieses Artikels sind:
 
 \begin{itemize}
 \item Die Farbe eines Bieres und die Würzefarbe eines Malzes werden in EBC auf Basis der Lichtabsorption in einem Spektrophotometer oder einem Photometer gemessen. Es existieren noch weitere Messverfahren.
-\item Viele Faktoren während dem Brau- und Gärvorgang haben neben den eingesetzten Malzen einen signifikanten Einfluss auf die Bierfarbe.
+\item Viele Faktoren während dem Brau- und Gärvorgang haben neben den eingesetzten Malzen einen signifikanten Einfluss auf die Bierfahre.
 \item Es existieren mehrere Berechnungsmodelle, die auf Basis der Schüttung einen EBC Wert bedingt vorhersagen können. Laut einer Versuchsreihe der Weyermann Mälzerei liefern derzeit die Modelle von Weyermann und Krüger die besten Schätzungen.
+\item TODO
 \end{itemize}
 
 \printbibliography[title=Quellen]
+
+\section*{Anhang}
+
+\lstset{
+    language=Python,
+    basicstyle=\scriptsize\ttfamily,
+    frame=tb,
+    tabsize=4,
+    columns=fixed,
+    showstringspaces=false,
+    showtabs=false,
+    keepspaces,
+    commentstyle=\color{red},
+    keywordstyle=\color{blue}
+}
+
+\lstinputlisting{beer_colour_chart.py}
 
 \end{document}
