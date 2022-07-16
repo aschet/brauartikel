@@ -109,7 +109,7 @@ Schwarz & 60 \\
 
 Zur Bestimmung der Bierfarbe existieren mehrere Messskalen und Messverfahren. Die Älteste, die davon noch in Gebrauch ist, heißt Lovibond Skala. Sie wurde vom Brauer Josep W. Lovibond 1885 zusammen mit einem Messgerät, dem Tintometer, entwickelt. Damit wird per visuellem Eindruck von einer Person eine aufbereitete Bierprobe mit verschieden gefärbten Glasscheiben verglichen, um einen Messwert zwischen 2 bis 70~°L (hell bis dunkel) zu ermitteln. Unterschiede in der menschlichen Wahrnehmung und verschiedene Umwelteinflüsse verfälschen das Messergebnis. \parencite{KrausWeyermann2021a}
 
-Im Jahr 1951 hat die \href{https://www.asbcnet.org}{American Society of Brewing Chemists (ASBC)} eine neue Analysemethode (Standard Reference Method) auf Basis des Spektrophotometers zusammen mit der SRM Skala, die an die Lovibond Skala gekoppelt ist, ratifiziert. Eine bedingte Konvertierung zwischen °L und SRM ist durch \autoref{eq:ltosrm} und \autoref{eq:srmtol} möglich. Die \href{https://europeanbreweryconvention.eu}{European Brewery Convention (EBC)} verwendet dieselbe Messmethode mit einer anderen Skala. Bei dieser wird mit einem Spektrophotometer die Lichtabsorption einer Probe bei einer Wellenlänge von 430~nm durch eine 1~cm breite Quarzglasküvette gemessen. Die Probe kann dabei entweder ein entgastes Bier oder eine aus einem Malz durch das Kongressmaischeverfahren hergestellten Würzeprobe sein. Der 12,7-fache Logarithmus der gemessenen Absorption entspricht dabei einem Wert der SRM Skala und der 25-fache Logarithmus der Absorption einem Wert der EBC Skala. Daraus leitet sich der Zusammenhang von \autoref{eq:ebctosrm} ab. Das menschliche Auge kann Farbunterschiede ab 80~EBC nicht mehr wahrnehmen. Auch Messgeräte generieren darüber keine zuverlässigen Messwerte mehr. Dunkle Bierproben sind daher vor der Messung zu verdünnen. \parencite{KrausWeyermann2021a}
+Im Jahr 1951 hat die \href{https://www.asbcnet.org}{American Society of Brewing Chemists (ASBC)} eine neue Analysemethode (Standard Reference Method) auf Basis des Spektralphotometer zusammen mit der SRM Skala, die an die Lovibond Skala gekoppelt ist, ratifiziert. Eine bedingte Konvertierung zwischen °L und SRM ist durch \autoref{eq:ltosrm} und \autoref{eq:srmtol} möglich. Die \href{https://europeanbreweryconvention.eu}{European Brewery Convention (EBC)} verwendet dieselbe Messmethode mit einer anderen Skala. Bei dieser wird mit einem Spektralphotometer die Lichtabsorption einer Probe bei einer Wellenlänge von 430~nm durch eine 1~cm breite Quarzglasküvette gemessen. Die Probe kann dabei entweder ein entgastes Bier oder eine aus einem Malz durch das Kongressmaischeverfahren hergestellten Würzeprobe sein. Der 12,7-fache Logarithmus der gemessenen Absorption entspricht dabei einem Wert der SRM Skala und der 25-fache Logarithmus der Absorption einem Wert der EBC Skala. Daraus leitet sich der Zusammenhang von \autoref{eq:ebctosrm} ab. Das menschliche Auge kann Farbunterschiede ab 80~EBC nicht mehr wahrnehmen. Auch Messgeräte generieren darüber keine zuverlässigen Messwerte mehr. Dunkle Bierproben sind daher vor der Messung zu verdünnen. \parencite{KrausWeyermann2021a}
 
 \begin{equation}
 \textrm{°L} = 0,808 \cdot \SRM - 0,0083
@@ -271,7 +271,7 @@ Die \autoref{eq:mcumorey} beruht auf folgenden Annahmen: Bis zu einem Betrag von
 
 \subsection*{Hanghofer (1999)}
 
-Das Modell von Hanghofer basiert auf metrischen Einheiten und bestimmt die MCU nicht in Bezug auf das Volumen der Anstellwürze sondern auf das trockene Schüttungsgewicht (\autoref{eq:mcubasisebc}). Es ist ein Korrekturfaktor für die Stammwürze vorgesehen (\autoref{eq:hanghoferfstw}) sowie ein Korrekturwert für eine übermäßige Zufärbung bei hellen Bieren (\autoref{eq:hanghoferhell}), die empirisch ermittelt werden muss und üblicherweise zwischen 2 und 4~EBC liegt. Die gesamte Berechnung erfolgt gemäß \autoref{eq:ebchanghofer}. \parencite[76]{Hanghofer1999}
+Das Modell von Hanghofer basiert auf metrischen Einheiten und bestimmt die MCU nicht in Bezug auf das Volumen der Anstellwürze, sondern auf das trockene Schüttungsgewicht (\autoref{eq:mcubasisebc}). Es ist ein Korrekturfaktor für die Stammwürze vorgesehen (\autoref{eq:hanghoferfstw}) sowie ein Korrekturwert für eine übermäßige Zufärbung bei hellen Bieren (\autoref{eq:hanghoferhell}), die empirisch ermittelt werden muss und üblicherweise zwischen 2 und 4~EBC liegt. Die gesamte Berechnung erfolgt gemäß \autoref{eq:ebchanghofer}. \parencite[76]{Hanghofer1999}
 
 \begin{equation}
 \MCUEBC = \frac{\sum \text{Malzgewicht}_i \ukg \cdot \text{Malzwürzefarbe}_i \uebc}{\sum \text{Malzgewicht}_i \ukg} 
@@ -336,7 +336,7 @@ Von der Weyermann Mälzerei wird die dem Hanghofer und Krüger Modell ähnliche 
 
 \subsection*{Modellvergleich}
 
-Bei einem Versuch, bei dem die spektrophotometrischen Messdaten von 19 in der Weyermann Braumanufaktur herstellen Bieren mit Modellvorhersagen verglichen wurden, kamen \textcite{KrausWeyermann2021b} zum Schluss, dass die von den untersuchten Modellen das Weyermann und das Krüger Modell die geringsten Abweichungen erzeugen (\autoref{table:modelcompareall}). Wie erwartet liefert aber kein Modell durchgehend perfekte Ergebnisse. Teilweise liegen die Schätzungen unter oder über den Messwerten, sodass sich kein allgemeiner Korrekturfaktor bestimmen lässt.
+Bei einem Versuch, bei dem die photometrische Messdaten von 19 in der Weyermann Braumanufaktur herstellen Bieren mit Modellvorhersagen verglichen wurden, kamen \textcite{KrausWeyermann2021b} zum Schluss, dass die von den untersuchten Modellen das Weyermann und das Krüger Modell die geringsten Abweichungen erzeugen (\autoref{table:modelcompareall}). Wie erwartet liefert kein Modell durchgehend perfekte Ergebnisse. Teilweise liegen die Schätzungen unter oder über den Messwerten. Bei Modellberechnungen sind darüber hinaus auch Rohstoffschwankungen bei Malzen zu berücksichten. Während das Weyermann Pilsner Malz laut Datenblatt einen Würzefarbebereichs von 2,5 bis 4,5~EBC hat, liegt dieser beim CARAAMBER zwischen 60 und 80~EBC.
 
 \begin{table}[H]
 \centering
@@ -355,7 +355,7 @@ Weyermann & -2,1 \\
 \label{table:modelcompareall}
 \end{table}
 
-In einem Weiteren Versuch der Weyermann Braumanufaktur wurden drei untergärige Biere nach böhmischer Brauart mit einem Ausschlagsvolumen von 275~l hergestellt: ein Pilsner (\autoref{table:pilsner}), ein Bernsteinfarbenes und ein Dunkles (\autoref{table:dunkles}). Auf Basis dieser Daten wurden die Modellvorhersagen von \autoref{table:modelcompare} und die Abweichungen von \autoref{fig:modelcompare} berechnet. Folgende Annahmen wurden getroffen: die Kochdauer entspricht 75~min und es erfolgt eine Zufärbung durch $\khell$ von 2~EBC. Nachdem die gegebenen Daten keine Würzefarbe in Lovibond beinhalten, erfolgte eine Umrechung von EBC nach Grad Lovibond über die Näherung 1~°L~=~2,65~EBC. Während die meisten Werte von \autoref{table:modelcompare} in der Größenordnung der Vorhersagen von \textcite{KrausWeyermann2022} liegen, gibt es dennoch einige ungeklärte hohe Abweichungen. Diese sind im Fall des bernsteinfarben Biers so hoch, dass auf einen eigenen Vergleich verzichtet wurde. Für das Dunkle berechnen \textcite{KrausWeyermann2022} mit dem Krüger Modell (\autoref{eq:ebckruger}) einen Farbwert von 65,7~EBC. Ohne Berücksichtigung der Korrekturen durch $\khell$ und $\kkd$ sollte der Wert aufgrund der Angaben von \autoref{table:dunkles} aber mindesten 86,7~EBC betragen.
+In einem weiteren Versuch der Weyermann Braumanufaktur wurden drei untergärige Biere nach böhmischer Brauart mit einem Ausschlagsvolumen von 275~l hergestellt: ein Pilsner (\autoref{table:pilsner}), ein Bernsteinfarbenes und ein Dunkles (\autoref{table:dunkles}). Auf Basis dieser Biere wurden die Modellvorhersagen von \autoref{table:modelcompare} und die Abweichungen von \autoref{fig:modelcompare} mit folgende Annahmen berechnet: Die Kochdauer entspricht 75~min und es erfolgt eine Zufärbung durch $\khell$ von 2~EBC. Nachdem für die Malze keine Würzefarbe in Lovibond gegeben sind, erfolgte eine Umrechung von EBC über die Näherung 1~°L~=~2,65~EBC. Auch wenn die meisten Ergebnisse von \autoref{table:modelcompare} in der Größenordnung der Vorhersagen von \textcite{KrausWeyermann2022} liegen, sind dennoch einige ungeklärte hohe Abweichungen zu verzeichnen. Diese sind im Fall des bernsteinfarben Biers so hoch, dass auf einen eigenen Vergleich verzichtet wurde. Für das Dunkle berechnen \textcite{KrausWeyermann2022} mit dem Krüger Modell (\autoref{eq:ebckruger}) einen Farbwert von 65,7~EBC. Ohne Berücksichtigung der Korrekturen durch $\khell$ und $\kkd$ sollte der Wert aufgrund der Angaben von \autoref{table:dunkles} aber mindesten 86,7~EBC betragen.
 
 \begin{table}[H]
 \centering
@@ -364,9 +364,9 @@ In einem Weiteren Versuch der Weyermann Braumanufaktur wurden drei untergärige 
 \multicolumn{1}{c}{\textbf{Malz}} & \multicolumn{1}{c}{\textbf{Gewicht [kg]}} & \multicolumn{1}{c}{\textbf{Farbe [EBC]}} \\
 \midrule
 Pilsner Tennenmalz & 42,8 & 3,75 \\
-Carapils & 2,3 & 4,5 \\
+CARAPILS & 2,3 & 4,5 \\
 Sauermalz & 0,9 & 6 \\
-Carabohemian & 0,5 & 195 \\
+CARABOHEMIAN & 0,5 & 195 \\
 \bottomrule
 \end{tabular}
 \caption{Pilsner mit 11,7~°P und 10~EBC \parencite{KrausWeyermann2022}}
@@ -380,10 +380,10 @@ Carabohemian & 0,5 & 195 \\
 \multicolumn{1}{c}{\textbf{Malz}} & \multicolumn{1}{c}{\textbf{Gewicht [kg]}} & \multicolumn{1}{c}{\textbf{Farbe [EBC]}} \\
 \midrule
 Pilsner Tennenmalz & 39,1 & 3,75 \\
-Carapils & 2,4 & 4,5 \\
+CARAPILS & 2,4 & 4,5 \\
 Sauermalz & 0,9 & 6 \\
-Carabohemian & 2,4 & 195 \\
-Carafa Typ III & 1,9 & 1400 \\
+CARABOHEMIAN & 2,4 & 195 \\
+CARAFA Typ 3 & 1,9 & 1400 \\
 \bottomrule
 \end{tabular}
 \caption{Dunkles mit 12,3~°P und 80~EBC \parencite{KrausWeyermann2022}}
@@ -421,7 +421,7 @@ Weyermann & 12 & 92 \\
 
 \section*{Berechnungsbeispiel}
 
-Für einen Sud mit einer Schhüttung bestehend aus 4~kg Pale Ale Malz (5,5~EBC) und 0,25~kg Kara­mell­mal­z (110~EBC) mit einer Stammwürze von 12~°P ist die zu erwartende Bierfarbe abzuschätzen. Berechne diese mithilfe des Weyermann Modells. Unter der Anwendung von \autoref{eq:ebcweyermann} ergibt sich folgender Berechnungsweg:
+Für einen Sud mit einer Schüttung bestehend aus 4~kg Pale Ale Malz (5,5~EBC) und 0,25~kg Kara­mell­mal­z (110~EBC) bei einer Stammwürze von 12~°P ist die zu erwartende Bierfarbe abzuschätzen. Berechne diese mithilfe des Weyermann Modells. Unter der Anwendung von \autoref{eq:ebcweyermann} ergibt sich folgender Berechnungsweg:
 
 \begin{align*}
 \MCUEBC &= \frac{4 \cdot 5,5 + 0,25 \cdot 110}{4 + 0,25} = 11,6 \\
@@ -432,12 +432,10 @@ Für einen Sud mit einer Schhüttung bestehend aus 4~kg Pale Ale Malz (5,5~EBC) 
 
 \section*{Zusammenfassung}
 
-Die relevanten Eckpunkte dieses Artikels sind:
-
 \begin{itemize}
-\item Die Farbe eines Bieres und die Würzefarbe eines Malzes werden in EBC auf Basis der Lichtabsorption in einem Spektrophotometer oder einem Photometer gemessen. Es existieren noch weitere Messverfahren.
+\item Die Farbe eines Bieres und die Würzefarbe eines Malzes werden in EBC auf Basis der Lichtabsorption in einem Spektralphotometer oder einem Photometer gemessen. Es existieren noch weitere Messverfahren.
 \item Viele Faktoren während dem Brau- und Gärvorgang haben neben den eingesetzten Malzen einen signifikanten Einfluss auf die Bierfarbe.
-\item Es existieren mehrere Berechnungsmodelle, die auf Basis der Schüttung einen EBC Wert bedingt vorhersagen können. Laut einer Versuchsreihe der Weyermann Mälzerei liefern derzeit die Modelle von Weyermann und Krüger die besten Schätzungen.
+\item Es existieren mehrere Berechnungsmodelle, die auf Basis der Schüttung einen EBC Wert bedingt vorhersagen können. Laut einem Versuch von \citeauthor{KrausWeyermann2022} liefern derzeit die Modelle von Weyermann und Krüger die genauesten Schätzungen.
 \end{itemize}
 
 \printbibliography[title=Quellen]
