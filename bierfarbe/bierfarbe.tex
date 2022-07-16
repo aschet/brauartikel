@@ -153,7 +153,7 @@ Die Würzefarbe von Braumalzen, die für die folgenden Berechnungen benötigt we
 
 \subsection*{Burch (1993)}
 
-In der erweiterten zweiten Ausgabe des Buchs „\citetitle{Burch2010}“ stellt \textcite[102]{Burch2010} das Berechnungsverfahren in \autoref{eq:mcuburch} vor. Er geht dabei von einer gesamten Maischedauer von 90~min aus. Nachdem das Buch von Burch von 1986 bis 2010 mehrere Überarbeitungen auch innerhalb der selben Ausgabe erfahren hat, ist das Jahr der Veröffentlichung unklar.
+In der erweiterten zweiten Ausgabe des Buchs „\citetitle{Burch2010}“ stellt \textcite[102]{Burch2010} das Berechnungsverfahren in \autoref{eq:mcuburch} vor. Er geht dabei von einer gesamten Maischedauer von 90~min aus. Nachdem das Buch von Burch von 1986 bis 2010 mehrere Überarbeitungen auch innerhalb derselben Ausgabe erfahren hat, ist das Jahr der Veröffentlichung unklar.
 
 \begin{equation}
 \SRM = \frac{\sum \text{Malzgewicht}_i \ulb \cdot \text{Malzwürzefarbe}_i \usrm}{\text{Volumen kalte Anstellwürze} \ugal} 
@@ -162,7 +162,7 @@ In der erweiterten zweiten Ausgabe des Buchs „\citetitle{Burch2010}“ stellt 
 
 \subsection*{Mosher (1994)}
 
-Nicht als Gleichung sondern als Nomogramm ist das Modell von \textcite[34]{Mosher1994} ausgeführt. Die Datengrundlage dafür waren verfügbate Rezepte und Messwerte von kommerziellen Bieren \parencite{Morey2004}. Zur Berechnung nach Mosher ist die MCU nach \autoref{eq:mcubasis} zu bestimmen. Danach wird per Nomogramm der resultierende SRM Wert korreliert. Die \autoref{eq:mcumosher}, die stattdessen verwendet werden kann, wird Mosher von Morey zugeschrieben. In Moshers Buch „\citetitle{Mosher1994}“ ist diese aber nicht enthalten. 
+Nicht als Gleichung, sondern als Nomogramm ist das Modell von \textcite[34]{Mosher1994} ausgeführt. Die Datengrundlage dafür waren verfügbare Rezepte und Messwerte von kommerziellen Bieren \parencite{Morey2004}. Zur Berechnung nach Mosher ist die MCU nach \autoref{eq:mcubasis} zu bestimmen. Danach wird per Nomogramm der resultierende SRM Wert korreliert. Die \autoref{eq:mcumosher}, die stattdessen verwendet werden kann, wird Mosher von Morey zugeschrieben. In der ursprünglichen Quelle ist diese aber nicht enthalten. 
 
 \begin{equation}
 \MCUL = \frac{\sum \text{Malzgewicht}_i \ulb \cdot \text{Malzwürzefarbe}_i \ulovi}{\text{Volumen kalte Anstellwürze} \ugal} 
@@ -174,11 +174,11 @@ Nicht als Gleichung sondern als Nomogramm ist das Modell von \textcite[34]{Moshe
 \label{eq:mcumosher}
 \end{equation}
 
-Später hat \textcite[258]{Mosher2015} in „\citetitle{Mosher2015}“ eine metrische Variante der \autoref{eq:mcubasis} mit dazugehörigem Nomogramm veröffentlicht. Diese unterscheidet sich von den Berechnungen der folgenden metrischen Modelle und dürfte im Heimbrauumfeld aber keine wesentliche Bedeutung erlangt haben.
+\textcite[258]{Mosher2015} ebenfalls eine metrische Variante der \autoref{eq:mcubasis} mit dazugehörigem Nomogramm veröffentlicht. Diese unterscheidet sich von den Berechnungen der folgenden metrischen Modelle und dürfte im Heimbrauumfeld keine wesentliche Verbreitung erlangt haben.
 
 \subsection*{Daniels (1995)}
 
-In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation zwischen SRM und MCU in \autoref{table:mcudaniels} auf Basis von Messungen von kommerziellen und heimgebrauten Bieren mit bekannten Rezepten definiert \parencite[59]{Daniels1996}. Mit der Tabelle und \autoref{eq:mcubasis} ist der resultierende SRM Wert zu bestimmen. Die Daten von \autoref{table:mcudaniels} bilden ebenfalls die Grundlagen für die lineare Funktion in \autoref{eq:mcudaniels}, die Morey Daniels zuschreibt, und die Exponentialfunktion in \autoref{eq:mcudanielsdruey} von \textcite{Druey1998}. \textcite[10]{Holle2010} verwendet die gleichen Daten für Farbvorhersagen, berechnet die MCU jedoch nach \autoref{eq:mcuburch}.
+In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation von SRM zu MCU in \autoref{table:mcudaniels} auf Basis von Messungen von kommerziellen und heimgebrauten Bieren mit bekannten Rezepten definiert \parencite[59]{Daniels1996}. Mit der Tabelle und \autoref{eq:mcubasis} ist der resultierende SRM Wert zu bestimmen. Die Daten von \autoref{table:mcudaniels} bilden ebenfalls die Grundlagen für die lineare Funktion in \autoref{eq:mcudaniels}, die Morey Daniels zuschreibt, und die Exponentialfunktion in \autoref{eq:mcudanielsdruey} von \textcite{Druey1998}. \textcite[10]{Holle2010} verwendet die gleichen Daten für Farbvorhersagen, berechnet die MCU jedoch nach \autoref{eq:mcuburch}.
 
 \begin{table}[H]
 \centering
@@ -195,7 +195,7 @@ In seinem Buch „\citetitle{Daniels1996}“ hat Daniels die Korrelation zwische
 >85 & >167 & >30 \\
 \bottomrule
 \end{tabular}
-\caption{Korrelation zwischen SRM und MCU \parencite[61]{Daniels1996}}
+\caption{Korrelation von SRM und MCU \parencite[61]{Daniels1996}}
 \label{table:mcudaniels}
 \end{table}
 
@@ -242,7 +242,7 @@ Die Rechenblätter von Noonans Buch „\citetitle{Noonan1996}“ enthalten die K
 20   & 39 & 47,8 \\
 \bottomrule
 \end{tabular}
-\caption{Korrelation zwischen SRM und MCU \parencite[206]{Noonan1996}}
+\caption{Korrelation von SRM und MCU \parencite[206]{Noonan1996}}
 \label{table:mcunoonan}
 \end{table}
 
