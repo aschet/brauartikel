@@ -101,12 +101,9 @@ Schwarz & 60 \\
 \begin{figure}[h]
 \centering
 \includegraphics[width=14cm]{colorscale.pdf}
-\caption{Simulation für die Farben der \autoref{table:bacolor} (Ascher, 2022)}
+\caption{EBC sRGB Simulation bei 7,5~cm Glasdurchmesser (Ascher, 2022)}
 \label{fig:bacolorscale}
 \end{figure}
-
-
-
 
 \section*{Messung der Bier- und Würzefarbe}
 
@@ -417,17 +414,7 @@ Weyermann & 12 & 92 \\
 \label{fig:modelcompare}
 \end{figure}
 
-\section*{Farbsimulation}
-
- Philip Lee's approximation from a color swatch and curve fitting.
- http://www.brewtarget.org/
-
-
-%    if srm > 35.0:
-%        g = 0.0
-%    else:
-%        g = round(min(255, max(0, 0.5 + (2.41975e2 - 1.3314e1 * srm + 1.881895e-1 * srm * srm))))
-%    b = round(min(255, max(0, 0.5 + (179.3 - 28.7 * srm))))
+\section*{sRGB Farbsimulation}
 
 \begin{figure}[h]
 \centering
@@ -436,21 +423,27 @@ Weyermann & 12 & 92 \\
 \label{fig:bacolordist}
 \end{figure}
 
+Braurechner verwenden verschiedene Strategien um eine einfache Farbsimulation umzusetzen. Der „\href{https://kleiner-brauhelfer.de}{kleine-brauhelfer}“ besitzt eine fixe Farbtabelle undokumentierten Ursprungs. \href{http://www.brewtarget.org}{Brewtarget} verwendet statessen \autoref{eq:srmtor} bis \autoref{eq:srmtob} um Farbtripel zu generieren. Die Grundlage für diese vom Brewtarget Hauptautor Philip Lee aufgestellten Gleichungen, mit denen auch die Farben von \autoref{fig:bacolorscale} berechnet wurden, war eine Farbkarte.
+
 \begin{equation}
-R = \lfloor \min(253, \max(0, 0,5 + 272,098 - 5,80255 \cdot \SRM))) \rceil
+R = \lfloor \min(253, \max(0, 0,5 + 272,098 - 5,80255 \cdot \SRM)) \rceil
 \label{eq:srmtor}
 \end{equation}
 
 \begin{equation}
-G = \lfloor 0,188349 \cdot \SRM^2 - 13,2676 \cdot \SRM + 239,51 \rceil \\
+G' = \lfloor \min(255, \max(0, 0,5 + 241,975 - 13,314 \cdot \SRM + 0,1881895 \cdot \SRM^2)) \rceil
+\end{equation}
+
+\begin{equation}
+G = \begin{cases}
+0  & \text{für} \quad \SRM > 35, \\
+G'  & \text{für} \quad \SRM \le 35. \\
+\end{cases}
 \label{eq:srmtog}
 \end{equation}
 
 \begin{equation}
-\begin{split}
-B = \max ( 0, \lfloor 0,000933566 \cdot \SRM^4 - 0,0894788 \cdot \SRM^3 + \\ 
-3,00611 \cdot \SRM^2 - 40,8883 \cdot \SRM + 183,409 \rceil )
-\end{split}
+B = \lfloor \min(255, \max(0, 0,5 + 179,3 - 28,7 \cdot \SRM)) \rceil
 \label{eq:srmtob}
 \end{equation}
 
