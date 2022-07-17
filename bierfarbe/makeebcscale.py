@@ -27,8 +27,6 @@ ILLUMINANT = colour.SDS_ILLUMINANTS['C']
 ILLUMINANT_XY = colour.CCS_ILLUMINANTS['CIE 1931 2 Degree Standard Observer']['C']
 ASBC_SHAPE = colour.SpectralShape(380, 780, 5)
 
-# TODO: implement sampling distance for scale and fix tick labels in scale figure
-
 if USE_EBC_SCALE == True:
     unit_name = 'EBC'
     unit_conversion = 1 / 1.94
