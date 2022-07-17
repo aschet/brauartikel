@@ -126,10 +126,7 @@ Im Jahr 1951 hat die \href{https://www.asbcnet.org}{American Society of Brewing 
 \label{eq:ebctosrm}
 \end{equation}
 
-\parencite{Bies2010}
-\parencite{Tucker2017}
-\parencite{Lange2016}
-\parencite{Shellhammer2009}
+Die EBC als Messgröße hat Problem, dass sie Farben nicht eindeutig charakterisieren kann, weil von ihr nur die Absorption im blauen Bereich des sehbaren Spektrums berücksichtigt wird. Zwei visuell unterschiedliche Proben, die in den anderen Spektrumsbereichen verschieden absorbieren, können daher einen gleichen EBC Messwert generieren \parencite{Shellhammer2009}. Gedarrtes Malz wie Karamellmalz, erzeugt in einer Schüttung bei gleichem Messwert eher rötliche Farbtöne und geröstetes Malz braune Farbtöne \parencites{Tucker2017}{Bies2020}. Nicht betroffen von diesem Problem ist die von der ASBC ratifizierte zeitlich aufwendigere Tristimulus Methode, die die menschliche Wahrnehmung besser nachbildet. Bei ihr erfolgt die Messung bei mehreren Wellenlängen und eine Abbildung im CIE-Farbraum \parencite{Shellhammer2009}.
 
 Die Anschaffungskosten für Photometer, die für EBC Messungen geeignet sind, liegen selbst bei gebrauchten Laborgeräten vermutlich weit über den meisten Heimbraubudgets. Es existieren aber kostengünstigere Alternativen: \textcite{Fulgencio2019} haben zum Beispiel ein Modell mithilfe von digitaler Bildverarbeitung und multivariate Datenanalyse entwickelt, das es erlaubt, Bilder einer nur geringfügig aufbereitete Bierprobe mit einer Smartphone-Kamera in einer Dunkelkammer aufzunehmen und damit Messwerte in einem Bereich von 3 bis 130~SRM zu erfassen. \textcite{Caro2019} konstruierten stattdessen ein einfaches Photometer bestehend aus einer LED, einer Photodiode und einer Probenkammer. Die Ausgangsspannung der Photodiode lässt sich dabei zu einem EBC Wert korrelieren.
 
@@ -137,12 +134,12 @@ Die Anschaffungskosten für Photometer, die für EBC Messungen geeignet sind, li
 
 Seit etwa der Mitte der Neunzigerjahre sind im Heimbraubereich mehrere Berechnungsmodelle entstanden, die versuchen, aus den proportionalen Farbbeiträgen der Malze in eine Schüttung die zu erwartende Bierfarbe vorhersagen. Diese Beiträge bezeichnet \textcite[61]{Daniels1996} als „Malt Color Units (MCU)“, \textcite[34]{Mosher1994} als „Homebrew Color Units (HCU)“  und \textcite[10]{Holle2010} als „Würze SRM“, denn die MCU beschreibt bestenfalls einen Eindruck der Würzefarbe. Bei dieser Art der Berechnung wird nicht berücksichtigt, dass dunklere Malze überproportional färben \parencite{KrausWeyermann2021c}.
 
-Aufgrund verschiedener Einflüsse während des Brau- und Gärprozesses benötigt es weitere Korrekturen, um aus der MCU eine Schätzung der Bierfarbe zu erhalten. Folgende Faktoren führen abseits der eingesetzten Malze zu einer dunkleren Bierfarbe: eine höhere Restalkalität des Brauwassers, eine feinere Schrotung, eine längere Maischedauer (Maillard-Rekation), der Einsatz intensiverer Maischeverfahren wie der Dekoktion (\autoref{decoction}), eine längere Kochdauer (Karamellisierung), eine höhere Stammwürze und eine stärkere Oxidation \parencites{KrausWeyermann2021c}[55]{Daniels1996}. Darüber hinaus haben auch die Trubbildung bei der Würzekühlung, der pH-Sturz während der Gärung und Gärnebenprodukte der Hefen und die anschließende Filtrierung Einfluss auf die Bierfarbe. Die erste weitverbreitete Korrelation, die nur einen Bruchteil der genannten Faktoren berücksichtigt, stammt vom Heimbrauer Randy Mosher, wobei sich mittlerweile das Modell von Daniel Morey weitgehend als Standard etabliert hat \parencite{KrausWeyermann2021b}. Eine genaue Vorhersage müsste alle genannten Faktoren einbeziehen. Deshalb formulierte \textcite{Colby2000} die Notwendigkeit der Einführung einer „New Homebrew Color Unit (NHCU)“, die einen additive und eine multiplikative Korrektur beinhaltet.
+Aufgrund verschiedener Einflüsse während des Brau- und Gärprozesses benötigt es weitere Korrekturen, um aus der MCU eine Schätzung der Bierfarbe zu erhalten. Folgende Faktoren führen abseits der eingesetzten Malze zu einer dunkleren Bierfarbe: eine höhere Restalkalität des Brauwassers, eine feinere Schrotung, eine längere Maischedauer (Maillard-Rekation), der Einsatz intensiverer Maischeverfahren wie der Dekoktion (\autoref{fig:decoction}), eine längere Kochdauer (Karamellisierung), eine höhere Stammwürze und eine stärkere Oxidation \parencites{KrausWeyermann2021c}[55]{Daniels1996}. Darüber hinaus haben auch die Trubbildung bei der Würzekühlung, der pH-Sturz während der Gärung und Gärnebenprodukte der Hefen und die anschließende Filtrierung Einfluss auf die Bierfarbe. Die erste weitverbreitete Korrelation, die nur einen Bruchteil der genannten Faktoren berücksichtigt, stammt vom Heimbrauer Randy Mosher, wobei sich mittlerweile das Modell von Daniel Morey weitgehend als Standard etabliert hat \parencite{KrausWeyermann2021b}. Eine genaue Vorhersage müsste alle genannten Faktoren einbeziehen. Deshalb formulierte \textcite{Colby2000} die Notwendigkeit der Einführung einer „New Homebrew Color Unit (NHCU)“, die einen additive und eine multiplikative Korrektur beinhaltet.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=4.8cm]{dekoktion.jpg}
-\caption{Wiener Lager: Dekoktion vs. Infusion (Ascher, 2022)}
+\caption{Wiener Lager, Dekoktion vs. Infusion (Ascher, 2022)}
 \label{fig:decoction}
 \end{figure}
 
