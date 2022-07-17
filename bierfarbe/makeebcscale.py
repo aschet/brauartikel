@@ -63,18 +63,17 @@ plot_channel(G, G_COEFF, '#00ff00', 'G')
 plot_channel(B, B_COEFF, '#0000ff', 'B')
 ax_model.legend()
 
+def format_poly_const(val):
+    return '{:.3e}'.format(val)
+
 def print_poly(name, coeff):
-    parts = []
-    exp = len(coeff) - 1
-    for i in coeff:
-        multiplier = ''
-        if exp == 1:
-            multiplier = '*EBC'
-        elif exp > 1:
-            multiplier = '*EBC**' + str(exp)
-        parts.append('(' + '{:.4E}'.format(i) + multiplier + ')')
-        exp = exp - 1
-    print(name + '=round(max(0, min(255, ' + '+'.join(parts) + ')))')
+    var_name = 'ebc'
+    text=''
+    for i in reversed(coeff[1:]):
+        text += format_poly_const(i) + '+' + var_name + '*('
+    text += format_poly_const(coeff[0])
+    text = name + '=round(max(0, min(255, ' + text + ')' * (len(coeff) -1 + 3)
+    print(text)
 
 print('Model:')
 print('# observer=' + OBSERVER_NAME + ', illuminant=' + ILLUMINANT_NAME + ', path=' + str(BEER_GLAS_DIAMETER_CM) + 'cm')
