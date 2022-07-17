@@ -16,7 +16,7 @@ import colour.plotting
 # deLange, A.J. (2016). Color. Brewing Materials and Processes. Elsevier. https://doi.org/10.1016/b978-0-12-799954-8.00011-3
 
 # Adjust the following constants to alter the generated model
-BEER_GLAS_DIAMETER_CM = 7.5 # 7.5 is average diameter of a Teku glas
+BEER_GLAS_DIAMETER_CM = 7.5 # 7.5 is the average diameter of a Teku glas
 USE_EBC_SCALE = False
 MAX_SRM_SCALE_VALUE = 40
 POLY_DEGREE_R = 4
