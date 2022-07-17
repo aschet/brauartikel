@@ -53,9 +53,9 @@ fig_scale, ax_scale = colour.plotting.plot_multi_colour_swatches([colour.plottin
 ax_scale.xaxis.set_label_text(unit_name)
 ax_scale.xaxis.set_ticks_position('bottom')
 
-r = [ 255 * i[0] for i in rgb]
-g = [ 255 * i[1] for i in rgb]
-b = [ 255 * i[2] for i in rgb]
+r = [i[0] for i in rgb]
+g = [i[1] for i in rgb]
+b = [i[2] for i in rgb]
 
 r_coeff = np.polyfit(scale, r, POLY_DEGREE_R)
 g_coeff = np.polyfit(scale, g, POLY_DEGREE_G)
@@ -65,7 +65,7 @@ fig_model = plt.figure()
 ax_model = fig_model.subplots(1)
 ax_model.set_title(unit_name + ' to sRGB Model for ' + '{:.1f}'.format(BEER_GLAS_DIAMETER_CM) + ' cm Glas Diameter')
 ax_model.xaxis.set_label_text(unit_name)
-ax_model.yaxis.set_label_text('Channel Intensity')
+ax_model.yaxis.set_label_text('Intensity')
 
 def plot_channel(values, coeff, color, label):
     ax_model.plot(scale, values, color=color, label=label)
@@ -85,7 +85,7 @@ def print_poly(name, unit_name, coeff):
     for i in reversed(coeff[1:]):
         text += format_poly_const(i) + '+' + var_name + '*('
     text += format_poly_const(coeff[0])
-    text = name + '=round(max(0, min(255, ' + text + ')' * (len(coeff) -1 + 3)
+    text = name + '=round(max(0.0, min(255.0, 255.0*(' + text + ')' * (len(coeff) -1 + 4)
     print(text)
 
 print('# ' + unit_name + ' to sRGB model for ' + str(BEER_GLAS_DIAMETER_CM) + ' cm glas diameter')
