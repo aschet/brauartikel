@@ -12,8 +12,10 @@ def ebc_to_rgb(ebc):
     b=1.0531e+00+ebc*(-2.8811e-01+ebc*(2.4180e-02+ebc*(-9.7637e-04+ebc*(2.1588e-05+ebc*(-2.6749e-07+ebc*(1.7427e-09+ebc*(-4.6448e-12)))))))
     return [r, g, b]
 
-ebc = np.arange(start=0, stop=80+1, dtype='int')
+ebc = np.arange(start=0, stop=80)
 
-fig_scale, ax_scale = colour.plotting.plot_multi_colour_swatches([colour.plotting.ColourSwatch(RGB=np.clip(ebc_to_rgb(i), 0, 1)) for i in ebc], **{'standalone': False})
+fig_scale, ax_scale = colour.plotting.plot_multi_colour_swatches([colour.plotting.ColourSwatch(RGB=np.clip(ebc_to_rgb(i), 0, 1)) for i in ebc],
+    **{'standalone': False, 'tight_layout': True })
 ax_scale.xaxis.set_label_text('EBC')
 ax_scale.xaxis.set_ticks_position('bottom')
+#fig_scale.savefig('colorscale.pdf')
