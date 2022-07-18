@@ -14,14 +14,14 @@ import colour.plotting
 
 # Adjust the following constants to alter the generated model
 BEER_GLAS_DIAMETER_CM = 7.5
-USE_EBC_SCALE = False
-MAX_SCALE_VALUE = 50
+USE_EBC_SCALE = True
+MAX_SCALE_VALUE = 80
 POLY_DEGREE_R = 5
-POLY_DEGREE_G = 5
+POLY_DEGREE_G = 6
 POLY_DEGREE_B = 7
 OBSERVER = colour.MSDS_CMFS['CIE 1964 10 Degree Standard Observer']
-ILLUMINANT = colour.SDS_ILLUMINANTS['C']
-ILLUMINANT_XY = colour.CCS_ILLUMINANTS['CIE 1931 2 Degree Standard Observer']['C']
+ILLUMINANT = colour.SDS_ILLUMINANTS['D65']
+ILLUMINANT_XY = colour.CCS_ILLUMINANTS['CIE 1964 10 Degree Standard Observer']['D65']
 
 if USE_EBC_SCALE == True:
     unit_name = 'EBC'
@@ -61,7 +61,7 @@ def calc_r2(actual, predicted):
     return r2
 
 # Generate sRGB input data for model fit
-scale = np.arange(start=0, stop=MAX_SCALE_VALUE+1, dtype='int')
+scale = np.arange(start=0, stop=MAX_SCALE_VALUE+1,step=1)
 wl = colour.SpectralShape(380, 780, 5).range()
 rgb = []
 for i in scale:
