@@ -79,14 +79,10 @@ for i in scale:
     xyz = colour.sd_to_XYZ(colour.SpectralDistribution(values, wl), cmfs=observer, illuminant=illuminant) / 100.0
     rgb.append(colour.XYZ_to_sRGB(xyz, illuminant=illuminant_xy))
 
-r = [i[0] for i in rgb]
-g = [i[1] for i in rgb]
-b = [i[2] for i in rgb]
-
 # Fit data
-r_coeff = np.polyfit(scale, r, POLY_DEGREE_R)
-g_coeff = np.polyfit(scale, g, POLY_DEGREE_G)
-b_coeff = np.polyfit(scale, b, POLY_DEGREE_B)
+r_coeff = np.polyfit(scale, [i[0] for i in rgb], POLY_DEGREE_R)
+g_coeff = np.polyfit(scale, [i[1] for i in rgb], POLY_DEGREE_G)
+b_coeff = np.polyfit(scale, [i[2] for i in rgb], POLY_DEGREE_B)
 
 # Generate and compile model code
 r_text, r_code = compile_poly(r_coeff, unit_name)
