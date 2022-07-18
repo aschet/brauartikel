@@ -47,8 +47,12 @@ def compile_poly(coeff, input_name):
     return poly_text, code
 
 def eval_poly(code):
-    srm = scale
-    return eval(code)
+    if USE_EBC_SCALE == True:
+        ebc = scale
+        return eval(code)
+    else:
+        srm = scale
+        return eval(code)
 
 def calc_r2(actual, predicted):
     corr_matrix = np.corrcoef(actual, predicted)
