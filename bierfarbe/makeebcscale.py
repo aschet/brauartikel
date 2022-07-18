@@ -1,11 +1,11 @@
 # Beer SRM/EBC to sRGB Model Generator
 # Copyright 2022 Thomas Ascher
-# sRGB value generation was derived from an implementation by Thomas Mansencal
+# sRGB value generation was partially derived from an implementation by Thomas Mansencal
 # For more information about the computational methods see:
 # deLange, A.J. (2016). Color. Brewing Materials and Processes. Elsevier. https://doi.org/10.1016/b978-0-12-799954-8.00011-3
-# SPDX-License-Identifier: MIT
 # The following dependencies are required: numpy, matplotlib, colour-science
 # Run within Jupyter Notebook for better visualisation
+# SPDX-License-Identifier: MIT
 import math
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,8 +16,8 @@ import colour.plotting
 BEER_GLAS_DIAMETER_CM = 7.5
 USE_EBC_SCALE = False
 MAX_SCALE_VALUE = 50
-POLY_DEGREE_R = 6
-POLY_DEGREE_G = 6
+POLY_DEGREE_R = 5
+POLY_DEGREE_G = 5
 POLY_DEGREE_B = 7
 OBSERVER = colour.MSDS_CMFS['CIE 1964 10 Degree Standard Observer']
 ILLUMINANT = colour.SDS_ILLUMINANTS['C']
@@ -31,7 +31,7 @@ else:
     unit_conversion = 1.0
 
 def poly_const_to_text(val):
-    return '{:.4e}'.format(val)
+    return '{:.5e}'.format(val)
 
 def poly_to_text(coeff, input_name):
     text=''
@@ -50,7 +50,13 @@ def eval_poly(code):
     srm = scale
     return eval(code)
 
-# Generate sRGB input for model fit
+def calc_r2(actual, predicted):
+    corr_matrix = np.corrcoef(actual, predicted)
+    corr = corr_matrix[0, 1]
+    r2 = corr**2
+    return r2
+
+# Generate sRGB input data for model fit
 scale = np.arange(start=0, stop=MAX_SCALE_VALUE+1, dtype='int')
 wl = colour.SpectralShape(380, 780, 5).range()
 rgb = []
@@ -83,7 +89,7 @@ for i in zip(r_new, g_new, b_new):
     rgb.append(i)
 
 # Print model
-print('# ' + unit_name + ' to sRGB model fitted up to ' + str(MAX_SCALE_VALUE) + ' ' + unit_name + ' for ' + str(BEER_GLAS_DIAMETER_CM) + ' cm glas diameter' )
+print('# ' + unit_name + ' to sRGB model fitted up to ' + str(MAX_SCALE_VALUE) + ' ' + unit_name + ' for a ' + str(BEER_GLAS_DIAMETER_CM) + ' cm glas diameter' )
 print('# Multiply outputs by 255 and clip between 0 and 255')
 print('r=' + r_text)
 print('g=' + g_text)
@@ -101,7 +107,8 @@ ax_model.xaxis.set_label_text(unit_name)
 ax_model.yaxis.set_label_text('Intensity')
 
 def plot_channel(values, new_values, color, label):
-    ax_model.plot(scale, new_values, color=color, label=label + ' Fit', linestyle=':')    
+    r2 = calc_r2(values, new_values)
+    ax_model.plot(scale, new_values, color=color, label=label + ' Fit ' +  ' (R²=' + '%.3f'%r2 + ')', linestyle=':')    
     ax_model.plot(scale, values, color=color, label=label + ' Data')
 
 plot_channel(r, r_new, '#ff0000', 'R')
