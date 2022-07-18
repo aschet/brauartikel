@@ -22,7 +22,6 @@ POLY_DEGREE_B = 7
 OBSERVER = colour.MSDS_CMFS['CIE 1964 10 Degree Standard Observer']
 ILLUMINANT = colour.SDS_ILLUMINANTS['C']
 ILLUMINANT_XY = colour.CCS_ILLUMINANTS['CIE 1931 2 Degree Standard Observer']['C']
-ASBC_SHAPE = colour.SpectralShape(380, 780, 5)
 
 if USE_EBC_SCALE == True:
     unit_name = 'EBC'
@@ -31,31 +30,66 @@ else:
     unit_name = 'SRM'
     unit_conversion = 1.0
 
-def create_sdist(srm, path_cm):
-    wl = ASBC_SHAPE.range()
-    values = 10**(-(srm / 12.7) * (0.018747 * math.e**(-(wl - 430.0) / 13.374) + 0.98226 * math.e**(-(wl - 430.0) / 80.514)) * path_cm)
-    return colour.SpectralDistribution(values, wl)
+def poly_const_to_text(val):
+    return '{:.4e}'.format(val)
 
+def poly_to_text(coeff, input_name):
+    text=''
+    for i in reversed(coeff[1:]):
+        text += poly_const_to_text(i) + '+' + input_name + '*('
+    text += poly_const_to_text(coeff[0])
+    text = text + ')' * (len(coeff) - 1)
+    return text
+
+def compile_poly(coeff, input_name):
+    poly_text = poly_to_text(coeff, input_name.lower())
+    code = compile(poly_text, 'model', 'eval')
+    return poly_text, code
+
+def eval_poly(code):
+    srm = scale
+    return eval(code)
+
+# Generate sRGB input for model fit
 scale = np.arange(start=0, stop=MAX_SCALE_VALUE+1, dtype='int')
+wl = colour.SpectralShape(380, 780, 5).range()
 rgb = []
 for i in scale:
-    xyz = colour.sd_to_XYZ(create_sdist(i * unit_conversion, BEER_GLAS_DIAMETER_CM), cmfs=OBSERVER, illuminant=ILLUMINANT) / 100.0
+    srm = i * unit_conversion
+    values = 10**(-(srm / 12.7) * (0.018747 * math.e**(-(wl - 430.0) / 13.374) + 0.98226 * math.e**(-(wl - 430.0) / 80.514)) * BEER_GLAS_DIAMETER_CM)
+    xyz = colour.sd_to_XYZ(colour.SpectralDistribution(values, wl), cmfs=OBSERVER, illuminant=ILLUMINANT) / 100.0
     rgb.append(colour.XYZ_to_sRGB(xyz, illuminant=ILLUMINANT_XY))
 
 r = [i[0] for i in rgb]
 g = [i[1] for i in rgb]
 b = [i[2] for i in rgb]
 
+# Fit data
 r_coeff = np.polyfit(scale, r, POLY_DEGREE_R)
-r_new = np.poly1d(r_coeff)(scale)
 g_coeff = np.polyfit(scale, g, POLY_DEGREE_G)
-g_new = np.poly1d(g_coeff)(scale)
 b_coeff = np.polyfit(scale, b, POLY_DEGREE_B)
-b_new = np.poly1d(b_coeff)(scale)
+
+# Generate and compile model code
+r_text, r_code = compile_poly(r_coeff, unit_name)
+g_text, g_code = compile_poly(g_coeff, unit_name)
+b_text, b_code = compile_poly(b_coeff, unit_name)
+
+# Generate sRGB output
+r_new = eval_poly(r_code)
+g_new = eval_poly(g_code)
+b_new = eval_poly(b_code)
 
 for i in zip(r_new, g_new, b_new):
     rgb.append(i)
 
+# Print model
+print('# ' + unit_name + ' to sRGB model fitted up to ' + str(MAX_SCALE_VALUE) + ' ' + unit_name + ' for ' + str(BEER_GLAS_DIAMETER_CM) + ' cm glas diameter' )
+print('# Multiply outputs by 255 and clip between 0 and 255')
+print('r=' + r_text)
+print('g=' + g_text)
+print('b=' + b_text)
+
+# Plot figures
 fig_scale, ax_scale = colour.plotting.plot_multi_colour_swatches([colour.plotting.ColourSwatch(RGB=np.clip(i, 0, 1)) for i in rgb], columns=len(scale), **{'standalone': False})
 ax_scale.xaxis.set_label_text(unit_name)
 ax_scale.xaxis.set_ticks_position('bottom')
@@ -67,28 +101,10 @@ ax_model.xaxis.set_label_text(unit_name)
 ax_model.yaxis.set_label_text('Intensity')
 
 def plot_channel(values, new_values, color, label):
-    ax_model.plot(scale, new_values, color=color, label=label + ' Model', linestyle=':')    
-    ax_model.plot(scale, values, color=color, label=label + ' Target')
+    ax_model.plot(scale, new_values, color=color, label=label + ' Fit', linestyle=':')    
+    ax_model.plot(scale, values, color=color, label=label + ' Data')
 
 plot_channel(r, r_new, '#ff0000', 'R')
 plot_channel(g, g_new, '#00ff00', 'G')
 plot_channel(b, b_new, '#0000ff', 'B')
 ax_model.legend()
-
-def format_poly_const(val):
-    return '{:.4e}'.format(val)
-
-def print_poly(name, unit_name, coeff):
-    var_name = unit_name.lower()
-    text=''
-    for i in reversed(coeff[1:]):
-        text += format_poly_const(i) + '+' + var_name + '*('
-    text += format_poly_const(coeff[0])
-    text = name + '=' + text + ')' * (len(coeff) - 1)
-    print(text)
-
-print('# ' + unit_name + ' to sRGB model fitted to ' + str(MAX_SCALE_VALUE) + ' ' + unit_name + ' for ' + str(BEER_GLAS_DIAMETER_CM) + ' cm glas diameter' )
-print('# Multiply outputs by 255 and clip between 0 and 255')
-print_poly('r', unit_name, r_coeff)
-print_poly('g', unit_name, g_coeff)
-print_poly('b', unit_name, b_coeff)
