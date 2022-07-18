@@ -13,15 +13,18 @@ import colour
 import colour.plotting
 
 # Adjust the following constants to alter the generated model
-BEER_GLAS_DIAMETER_CM = 7.5
+GLAS_DIAMETER_CM = 7.5
+OBSERVER_NAME = 'CIE 1964 10 Degree Standard Observer'
+ILLUMINANT_NAME = 'D65'
 USE_EBC_SCALE = True
 MAX_SCALE_VALUE = 80
 POLY_DEGREE_R = 5
 POLY_DEGREE_G = 6
 POLY_DEGREE_B = 7
-OBSERVER = colour.MSDS_CMFS['CIE 1964 10 Degree Standard Observer']
-ILLUMINANT = colour.SDS_ILLUMINANTS['D65']
-ILLUMINANT_XY = colour.CCS_ILLUMINANTS['CIE 1964 10 Degree Standard Observer']['D65']
+
+observer = colour.MSDS_CMFS[OBSERVER_NAME]
+illuminant = colour.SDS_ILLUMINANTS[ILLUMINANT_NAME]
+illuminant_xy = colour.CCS_ILLUMINANTS[OBSERVER_NAME][ILLUMINANT_NAME]
 
 if USE_EBC_SCALE == True:
     unit_name = 'EBC'
@@ -60,6 +63,12 @@ def calc_r2(actual, predicted):
     r2 = corr**2
     return r2
 
+def print_comment(text):
+    print('# ' + text)
+
+def print_tag_comment(tag, value):
+    print_comment(tag + ': ' + value)
+
 # Generate sRGB input data for model fit
 scale = np.arange(start=0, stop=MAX_SCALE_VALUE+1,step=1)
 wl = colour.SpectralShape(380, 780, 5).range()
@@ -67,8 +76,8 @@ rgb = []
 for i in scale:
     srm = i * unit_conversion
     values = 10**(-(srm / 12.7) * (0.018747 * math.e**(-(wl - 430.0) / 13.374) + 0.98226 * math.e**(-(wl - 430.0) / 80.514)) * BEER_GLAS_DIAMETER_CM)
-    xyz = colour.sd_to_XYZ(colour.SpectralDistribution(values, wl), cmfs=OBSERVER, illuminant=ILLUMINANT) / 100.0
-    rgb.append(colour.XYZ_to_sRGB(xyz, illuminant=ILLUMINANT_XY))
+    xyz = colour.sd_to_XYZ(colour.SpectralDistribution(values, wl), cmfs=observer, illuminant=illuminant) / 100.0
+    rgb.append(colour.XYZ_to_sRGB(xyz, illuminant=illuminant_xy))
 
 r = [i[0] for i in rgb]
 g = [i[1] for i in rgb]
@@ -93,8 +102,11 @@ for i in zip(r_new, g_new, b_new):
     rgb.append(i)
 
 # Print model
-print('# ' + unit_name + ' to sRGB model fitted up to ' + str(MAX_SCALE_VALUE) + ' ' + unit_name + ' for a ' + str(BEER_GLAS_DIAMETER_CM) + ' cm glas diameter' )
-print('# Multiply outputs by 255 and clip between 0 and 255')
+print_comment(unit_name + ' to sRGB model, multiply outputs by 255 and clip between 0 and 255')
+print_tag_comment('glas diameter', str(GLAS_DIAMETER_CM) + ' cm')
+print_tag_comment('observer', OBSERVER_NAME)
+print_tag_comment('illuminant', ILLUMINANT_NAME)
+print_tag_comment('scale', str(MAX_SCALE_VALUE) + ' ' + unit_name)
 print('r=' + r_text)
 print('g=' + g_text)
 print('b=' + b_text)
@@ -106,7 +118,7 @@ ax_scale.xaxis.set_ticks_position('bottom')
 
 fig_model = plt.figure()
 ax_model = fig_model.subplots(1)
-ax_model.set_title(unit_name + ' to sRGB Model for ' + '{:.1f}'.format(BEER_GLAS_DIAMETER_CM) + ' cm Glas Diameter')
+ax_model.set_title(unit_name + ' to sRGB Model')
 ax_model.xaxis.set_label_text(unit_name)
 ax_model.yaxis.set_label_text('Intensity')
 
