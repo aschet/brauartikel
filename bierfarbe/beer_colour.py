@@ -2,11 +2,14 @@ import numpy as np
 import colour.plotting
 
 def ebc_to_rgb(ebc):
-    srm = ebc / 1.94
-    # SRM to sRGB model for 7.5 cm glas diameter
-    r=1.0022e+00+srm*(-3.1966e-02+srm*(-2.5115e-03+srm*(2.3949e-04+srm*(-8.1638e-06+srm*(1.2825e-07+srm*(-7.7209e-10))))))
-    g=9.9473e-01+srm*(-1.5079e-01+srm*(1.0788e-02+srm*(-4.8003e-04+srm*(1.3086e-05+srm*(-1.9252e-07+srm*(1.1490e-09))))))
-    b=1.0284e+00+srm*(-5.5003e-01+srm*(8.7968e-02+srm*(-6.6913e-03+srm*(2.7656e-04+srm*(-6.3720e-06+srm*(7.6924e-08+srm*(-3.7921e-10)))))))
+    # EBC to sRGB model, multiply outputs by 255 and clip between 0 and 255
+    # glas diameter: 7.5 cm
+    # observer: CIE 1964 10 Degree Standard Observer
+    # illuminant: D65
+    # scale: 80 EBC
+    r=1.0149e+00+ebc*(-2.0207e-02+ebc*(-3.1471e-04+ebc*(1.7334e-05+ebc*(-2.3906e-07+ebc*(1.1090e-09)))))
+    g=9.9965e-01+ebc*(-8.3923e-02+ebc*(3.6936e-03+ebc*(-1.0839e-04+ebc*(1.9421e-06+ebc*(-1.8311e-08+ebc*(6.8745e-11))))))
+    b=1.0531e+00+ebc*(-2.8811e-01+ebc*(2.4180e-02+ebc*(-9.7637e-04+ebc*(2.1588e-05+ebc*(-2.6749e-07+ebc*(1.7427e-09+ebc*(-4.6448e-12)))))))
     return [r, g, b]
 
 ebc = np.arange(start=0, stop=80+1, dtype='int')

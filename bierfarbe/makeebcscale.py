@@ -84,7 +84,7 @@ r = [i[0] for i in rgb]
 r_coeff = np.polyfit(scale, r, POLY_DEGREE_R)
 g = [i[1] for i in rgb]
 g_coeff = np.polyfit(scale, g, POLY_DEGREE_G)
-b = [i[1] for i in rgb]
+b = [i[2] for i in rgb]
 b_coeff = np.polyfit(scale, b, POLY_DEGREE_B)
 
 # Generate and compile model code
