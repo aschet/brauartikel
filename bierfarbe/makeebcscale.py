@@ -31,7 +31,7 @@ else:
     unit_conversion = 1.0
 
 def poly_const_to_text(val):
-    return '{:.5e}'.format(val)
+    return '{:.4e}'.format(val)
 
 def poly_to_text(coeff, input_name):
     text=''
