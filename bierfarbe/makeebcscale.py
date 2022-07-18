@@ -75,14 +75,17 @@ wl = colour.SpectralShape(380, 780, 5).range()
 rgb = []
 for i in scale:
     srm = i * unit_conversion
-    values = 10**(-(srm / 12.7) * (0.018747 * math.e**(-(wl - 430.0) / 13.374) + 0.98226 * math.e**(-(wl - 430.0) / 80.514)) * BEER_GLAS_DIAMETER_CM)
+    values = 10**(-(srm / 12.7) * (0.018747 * math.e**(-(wl - 430.0) / 13.374) + 0.98226 * math.e**(-(wl - 430.0) / 80.514)) * GLAS_DIAMETER_CM)
     xyz = colour.sd_to_XYZ(colour.SpectralDistribution(values, wl), cmfs=observer, illuminant=illuminant) / 100.0
     rgb.append(colour.XYZ_to_sRGB(xyz, illuminant=illuminant_xy))
 
 # Fit data
-r_coeff = np.polyfit(scale, [i[0] for i in rgb], POLY_DEGREE_R)
-g_coeff = np.polyfit(scale, [i[1] for i in rgb], POLY_DEGREE_G)
-b_coeff = np.polyfit(scale, [i[2] for i in rgb], POLY_DEGREE_B)
+r = [i[0] for i in rgb]
+r_coeff = np.polyfit(scale, r, POLY_DEGREE_R)
+g = [i[1] for i in rgb]
+g_coeff = np.polyfit(scale, g, POLY_DEGREE_G)
+b = [i[1] for i in rgb]
+b_coeff = np.polyfit(scale, b, POLY_DEGREE_B)
 
 # Generate and compile model code
 r_text, r_code = compile_poly(r_coeff, unit_name)
