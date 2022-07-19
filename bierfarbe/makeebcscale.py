@@ -18,9 +18,9 @@ OBSERVER_NAME = 'CIE 1964 10 Degree Standard Observer'
 ILLUMINANT_NAME = 'D65'
 USE_EBC_SCALE = True
 MAX_SCALE_VALUE = 80
-POLY_DEGREE_R = 5
-POLY_DEGREE_G = 6
-POLY_DEGREE_B = 7
+POLY_DEGREE_R = 3
+POLY_DEGREE_G = 3
+POLY_DEGREE_B = 3
 
 observer = colour.MSDS_CMFS[OBSERVER_NAME]
 illuminant = colour.SDS_ILLUMINANTS[ILLUMINANT_NAME]
@@ -57,8 +57,20 @@ def eval_poly(code):
         srm = scale
         return eval(code)
 
+def fit_poly(channel, degree):
+    idx = np.isfinite(channel)
+    return np.polyfit(scale[idx], channel[idx], degree)
+
+def cutoff_signal(signal):
+    signal[(signal < 0.0)] = np.nan
+    return signal
+
+def cutoff_channel(rgb, channel):
+    return cutoff_signal(np.array([i[channel] for i in rgb]))
+
 def calc_r2(actual, predicted):
-    corr_matrix = np.corrcoef(actual, predicted)
+    idx = np.isfinite(actual) & np.isfinite(predicted)
+    corr_matrix = np.corrcoef(actual[idx], predicted[idx])
     corr = corr_matrix[0, 1]
     r2 = corr**2
     return r2
@@ -80,12 +92,12 @@ for i in scale:
     rgb.append(colour.XYZ_to_sRGB(xyz, illuminant=illuminant_xy))
 
 # Fit data
-r = [i[0] for i in rgb]
-r_coeff = np.polyfit(scale, r, POLY_DEGREE_R)
-g = [i[1] for i in rgb]
-g_coeff = np.polyfit(scale, g, POLY_DEGREE_G)
-b = [i[2] for i in rgb]
-b_coeff = np.polyfit(scale, b, POLY_DEGREE_B)
+r = cutoff_channel(rgb, 0)
+r_coeff = fit_poly(r, POLY_DEGREE_R)
+g = cutoff_channel(rgb, 1)
+g_coeff = fit_poly(g, POLY_DEGREE_G)
+b = cutoff_channel(rgb, 2)
+b_coeff = fit_poly(b, POLY_DEGREE_B)
 
 # Generate and compile model code
 r_text, r_code = compile_poly(r_coeff, unit_name)
@@ -93,9 +105,9 @@ g_text, g_code = compile_poly(g_coeff, unit_name)
 b_text, b_code = compile_poly(b_coeff, unit_name)
 
 # Generate sRGB output
-r_new = eval_poly(r_code)
-g_new = eval_poly(g_code)
-b_new = eval_poly(b_code)
+r_new = cutoff_signal(eval_poly(r_code))
+g_new = cutoff_signal(eval_poly(g_code))
+b_new = cutoff_signal(eval_poly(b_code))
 
 for i in zip(r_new, g_new, b_new):
     rgb.append(i)
