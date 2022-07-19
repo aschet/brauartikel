@@ -17,8 +17,11 @@ GLAS_DIAMETER_CM = 7.5
 OBSERVER_NAME = 'CIE 1964 10 Degree Standard Observer'
 ILLUMINANT_NAME = 'D65'
 USE_EBC_SCALE = False
-MAX_SCALE_VALUE = 100
+MAX_SCALE_VALUE = 50
 SCALE_STEP = 0.25
+POLY_DEGREE_R = 3
+POLY_DEGREE_G = 3
+POLY_DEGREE_B = 3
 
 observer = colour.MSDS_CMFS[OBSERVER_NAME]
 illuminant = colour.SDS_ILLUMINANTS[ILLUMINANT_NAME]
@@ -84,11 +87,11 @@ rgb_display = generate_cruves(scale_display)
 
 # Fit data
 r = clip_channel(rgb_fit, 0)
-r_coeff = fit_poly(r, 3)
+r_coeff = fit_poly(r, POLY_DEGREE_R)
 g = clip_channel(rgb_fit, 1)
-g_coeff = fit_poly(g, 3)
+g_coeff = fit_poly(g, POLY_DEGREE_G)
 b = clip_channel(rgb_fit, 2)
-b_coeff = fit_poly(b, 3)
+b_coeff = fit_poly(b, POLY_DEGREE_B)
 
 # Generate and compile model code
 r_text, r_code = compile_poly(r_coeff, unit_name)
@@ -105,7 +108,7 @@ for i in zip(eval_poly(r_code, scale_display), eval_poly(g_code, scale_display),
 
 # Print model
 print('# ' + unit_name + ' to sRGB model, multiply outputs by 255 and clip between 0 and 255')
-print('# ' + str(GLAS_DIAMETER_CM) + ' cm, ' +  OBSERVER_NAME + ', ' + ILLUMINANT_NAME + ', ' + str(MAX_SCALE_VALUE) + ' ' + unit_name)
+print('# ' + str(GLAS_DIAMETER_CM) + ' cm, ' +  OBSERVER_NAME + ', ' + ILLUMINANT_NAME + ', ' + str(MAX_SCALE_VALUE) + ' ' + unit_name + ' fit')
 print('r=' + r_text)
 print('g=' + g_text)
 print('b=' + b_text)
