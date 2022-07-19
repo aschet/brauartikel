@@ -17,7 +17,7 @@ GLAS_DIAMETER_CM = 7.5
 OBSERVER_NAME = 'CIE 1964 10 Degree Standard Observer'
 ILLUMINANT_NAME = 'D65'
 USE_EBC_SCALE = False
-MAX_SCALE_VALUE = 50
+MAX_SCALE_VALUE = 100
 SCALE_STEP = 0.25
 
 observer = colour.MSDS_CMFS[OBSERVER_NAME]
@@ -122,7 +122,7 @@ ax_model.xaxis.set_label_text(unit_name)
 ax_model.yaxis.set_label_text('Intensity')
 
 def plot_channel(values, new_values, color, label):
-    ax_model.plot(scale_fit, new_values, color=color, label=label, linestyle=':')    
+    ax_model.plot(scale_fit, new_values, color=color, label=label + ' Fit', linestyle=':')    
     ax_model.plot(scale_fit, values, color=color, label=label + ' Data')
 
 plot_channel(r, r_new, '#ff0000', 'R')
