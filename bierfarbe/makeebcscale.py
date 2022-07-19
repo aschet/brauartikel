@@ -16,11 +16,9 @@ import colour.plotting
 GLAS_DIAMETER_CM = 7.5
 OBSERVER_NAME = 'CIE 1964 10 Degree Standard Observer'
 ILLUMINANT_NAME = 'D65'
-USE_EBC_SCALE = True
-MAX_SCALE_VALUE = 80
-POLY_DEGREE_R = 3
-POLY_DEGREE_G = 3
-POLY_DEGREE_B = 3
+USE_EBC_SCALE = False
+MAX_SCALE_VALUE = 50
+SCALE_STEP = 0.25
 
 observer = colour.MSDS_CMFS[OBSERVER_NAME]
 illuminant = colour.SDS_ILLUMINANTS[ILLUMINANT_NAME]
@@ -49,7 +47,7 @@ def compile_poly(coeff, input_name):
     code = compile(poly_text, 'model', 'eval')
     return poly_text, code
 
-def eval_poly(code):
+def eval_poly(code, scale):
     if USE_EBC_SCALE == True:
         ebc = scale
         return eval(code)
@@ -59,45 +57,38 @@ def eval_poly(code):
 
 def fit_poly(channel, degree):
     idx = np.isfinite(channel)
-    return np.polyfit(scale[idx], channel[idx], degree)
+    return np.polyfit(scale_fit[idx], channel[idx], degree)
 
-def cutoff_signal(signal):
-    signal[(signal < 0.0)] = np.nan
+def clip_signal(signal):
+    signal[(signal < 0.0) | (signal > 1.0)] = np.nan
     return signal
 
-def cutoff_channel(rgb, channel):
-    return cutoff_signal(np.array([i[channel] for i in rgb]))
+def clip_channel(rgb, channel):
+    return clip_signal(np.array([i[channel] for i in rgb]))
 
-def calc_r2(actual, predicted):
-    idx = np.isfinite(actual) & np.isfinite(predicted)
-    corr_matrix = np.corrcoef(actual[idx], predicted[idx])
-    corr = corr_matrix[0, 1]
-    r2 = corr**2
-    return r2
-
-def print_comment(text):
-    print('# ' + text)
-
-def print_tag_comment(tag, value):
-    print_comment(tag + ': ' + value)
+def generate_cruves(scale):
+    rgb = []
+    for i in scale:
+        wl = colour.SpectralShape(380, 780, 5).range()
+        srm = i * unit_conversion
+        values = 10**(-(srm / 12.7) * (0.018747 * math.e**(-(wl - 430.0) / 13.374) + 0.98226 * math.e**(-(wl - 430.0) / 80.514)) * GLAS_DIAMETER_CM)
+        xyz = colour.sd_to_XYZ(colour.SpectralDistribution(values, wl), cmfs=observer, illuminant=illuminant) / 100.0
+        rgb.append(colour.XYZ_to_sRGB(xyz, illuminant=illuminant_xy))
+    return rgb
 
 # Generate sRGB input data for model fit
-scale = np.arange(start=0, stop=MAX_SCALE_VALUE+1,step=1)
-wl = colour.SpectralShape(380, 780, 5).range()
-rgb = []
-for i in scale:
-    srm = i * unit_conversion
-    values = 10**(-(srm / 12.7) * (0.018747 * math.e**(-(wl - 430.0) / 13.374) + 0.98226 * math.e**(-(wl - 430.0) / 80.514)) * GLAS_DIAMETER_CM)
-    xyz = colour.sd_to_XYZ(colour.SpectralDistribution(values, wl), cmfs=observer, illuminant=illuminant) / 100.0
-    rgb.append(colour.XYZ_to_sRGB(xyz, illuminant=illuminant_xy))
+scale_fit = np.arange(start=0, stop=MAX_SCALE_VALUE+SCALE_STEP,step=SCALE_STEP)
+scale_display = np.arange(start=0, stop=MAX_SCALE_VALUE+1,step=1)
+rgb_fit = generate_cruves(scale_fit)
+rgb_display = generate_cruves(scale_display)
 
 # Fit data
-r = cutoff_channel(rgb, 0)
-r_coeff = fit_poly(r, POLY_DEGREE_R)
-g = cutoff_channel(rgb, 1)
-g_coeff = fit_poly(g, POLY_DEGREE_G)
-b = cutoff_channel(rgb, 2)
-b_coeff = fit_poly(b, POLY_DEGREE_B)
+r = clip_channel(rgb_fit, 0)
+r_coeff = fit_poly(r, 3)
+g = clip_channel(rgb_fit, 1)
+g_coeff = fit_poly(g, 3)
+b = clip_channel(rgb_fit, 2)
+b_coeff = fit_poly(b, 3)
 
 # Generate and compile model code
 r_text, r_code = compile_poly(r_coeff, unit_name)
@@ -105,25 +96,22 @@ g_text, g_code = compile_poly(g_coeff, unit_name)
 b_text, b_code = compile_poly(b_coeff, unit_name)
 
 # Generate sRGB output
-r_new = cutoff_signal(eval_poly(r_code))
-g_new = cutoff_signal(eval_poly(g_code))
-b_new = cutoff_signal(eval_poly(b_code))
+r_new = clip_signal(eval_poly(r_code, scale_fit))
+g_new = clip_signal(eval_poly(g_code, scale_fit))
+b_new = clip_signal(eval_poly(b_code, scale_fit))
 
-for i in zip(r_new, g_new, b_new):
-    rgb.append(i)
+for i in zip(eval_poly(r_code, scale_display), eval_poly(g_code, scale_display), eval_poly(b_code, scale_display)):
+    rgb_display.append(i)
 
 # Print model
-print_comment(unit_name + ' to sRGB model, multiply outputs by 255 and clip between 0 and 255')
-print_tag_comment('glas diameter', str(GLAS_DIAMETER_CM) + ' cm')
-print_tag_comment('observer', OBSERVER_NAME)
-print_tag_comment('illuminant', ILLUMINANT_NAME)
-print_tag_comment('scale', str(MAX_SCALE_VALUE) + ' ' + unit_name)
+print('# ' + unit_name + ' to sRGB model, multiply outputs by 255 and clip between 0 and 255')
+print('# ' + str(GLAS_DIAMETER_CM) + ' cm, ' +  OBSERVER_NAME + ', ' + ILLUMINANT_NAME + ', ' + str(MAX_SCALE_VALUE) + ' ' + unit_name)
 print('r=' + r_text)
 print('g=' + g_text)
 print('b=' + b_text)
 
 # Plot figures
-fig_scale, ax_scale = colour.plotting.plot_multi_colour_swatches([colour.plotting.ColourSwatch(RGB=np.clip(i, 0, 1)) for i in rgb], columns=len(scale), **{'standalone': False})
+fig_scale, ax_scale = colour.plotting.plot_multi_colour_swatches([colour.plotting.ColourSwatch(RGB=np.clip(i, 0, 1)) for i in rgb_display], columns=len(scale_display), **{'standalone': False})
 ax_scale.xaxis.set_label_text(unit_name)
 ax_scale.xaxis.set_ticks_position('bottom')
 
@@ -134,9 +122,8 @@ ax_model.xaxis.set_label_text(unit_name)
 ax_model.yaxis.set_label_text('Intensity')
 
 def plot_channel(values, new_values, color, label):
-    r2 = calc_r2(values, new_values)
-    ax_model.plot(scale, new_values, color=color, label=label + ' Fit ' +  ' (R²=' + '%.3f'%r2 + ')', linestyle=':')    
-    ax_model.plot(scale, values, color=color, label=label + ' Data')
+    ax_model.plot(scale_fit, new_values, color=color, label=label, linestyle=':')    
+    ax_model.plot(scale_fit, values, color=color, label=label + ' Data')
 
 plot_channel(r, r_new, '#ff0000', 'R')
 plot_channel(g, g_new, '#00ff00', 'G')
