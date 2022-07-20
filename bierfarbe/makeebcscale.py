@@ -1,4 +1,4 @@
-# Beer SRM/EBC to sRGB Model Generator
+# Beer Color SRM/EBC to sRGB Model Generator
 # Copyright 2022 Thomas Ascher
 # sRGB value generation was partially derived from an implementation by Thomas Mansencal
 # For more information about the computational methods see:
@@ -12,20 +12,20 @@ import matplotlib.pyplot as plt
 import colour
 import colour.plotting
 
-# Adjust the following constants to alter the generated model
-GLAS_DIAMETER_CM = 7.5
-OBSERVER_NAME = 'CIE 1964 10 Degree Standard Observer'
-ILLUMINANT_NAME = 'D65'
+# Adjust the following constants to alter the model generation
+GLAS_DIAMETER_CM = 5
+CIE_OBSERVER_NAME = 'CIE 1964 10 Degree Standard Observer'
+CIE_ILLUMINANT_NAME = 'D65'
 USE_EBC_SCALE = False
 MAX_SCALE_VALUE = 50
 SCALE_STEP = 0.25
-POLY_DEGREE_R = 3
-POLY_DEGREE_G = 3
-POLY_DEGREE_B = 3
+POLYFIT_DEGREE_R = 3
+POLYFIT_DEGREE_G = 3
+POLYFIT_DEGREE_B = 3
 
-observer = colour.MSDS_CMFS[OBSERVER_NAME]
-illuminant = colour.SDS_ILLUMINANTS[ILLUMINANT_NAME]
-illuminant_xy = colour.CCS_ILLUMINANTS[OBSERVER_NAME][ILLUMINANT_NAME]
+observer = colour.MSDS_CMFS[CIE_OBSERVER_NAME]
+illuminant = colour.SDS_ILLUMINANTS[CIE_ILLUMINANT_NAME]
+illuminant_xy = colour.CCS_ILLUMINANTS[CIE_OBSERVER_NAME][CIE_ILLUMINANT_NAME]
 
 if USE_EBC_SCALE == True:
     unit_name = 'EBC'
@@ -71,8 +71,8 @@ def clip_channel(rgb, channel):
 
 def generate_cruves(scale):
     rgb = []
+    wl = colour.SpectralShape(380, 780, 5).range()
     for i in scale:
-        wl = colour.SpectralShape(380, 780, 5).range()
         srm = i * unit_conversion
         values = 10**(-(srm / 12.7) * (0.018747 * math.e**(-(wl - 430.0) / 13.374) + 0.98226 * math.e**(-(wl - 430.0) / 80.514)) * GLAS_DIAMETER_CM)
         xyz = colour.sd_to_XYZ(colour.SpectralDistribution(values, wl), cmfs=observer, illuminant=illuminant) / 100.0
@@ -83,50 +83,48 @@ def generate_cruves(scale):
 scale_fit = np.arange(start=0, stop=MAX_SCALE_VALUE+SCALE_STEP,step=SCALE_STEP)
 scale_display = np.arange(start=0, stop=MAX_SCALE_VALUE+1,step=1)
 rgb_fit = generate_cruves(scale_fit)
-rgb_display = generate_cruves(scale_display)
 
 # Fit data
 r = clip_channel(rgb_fit, 0)
-r_coeff = fit_poly(r, POLY_DEGREE_R)
+r_coeff = fit_poly(r, POLYFIT_DEGREE_R)
 g = clip_channel(rgb_fit, 1)
-g_coeff = fit_poly(g, POLY_DEGREE_G)
+g_coeff = fit_poly(g, POLYFIT_DEGREE_G)
 b = clip_channel(rgb_fit, 2)
-b_coeff = fit_poly(b, POLY_DEGREE_B)
+b_coeff = fit_poly(b, POLYFIT_DEGREE_B)
 
 # Generate and compile model code
 r_text, r_code = compile_poly(r_coeff, unit_name)
 g_text, g_code = compile_poly(g_coeff, unit_name)
 b_text, b_code = compile_poly(b_coeff, unit_name)
 
-# Generate sRGB output
-r_new = clip_signal(eval_poly(r_code, scale_fit))
-g_new = clip_signal(eval_poly(g_code, scale_fit))
-b_new = clip_signal(eval_poly(b_code, scale_fit))
-
-for i in zip(eval_poly(r_code, scale_display), eval_poly(g_code, scale_display), eval_poly(b_code, scale_display)):
-    rgb_display.append(i)
-
 # Print model
 print('# ' + unit_name + ' to sRGB model, multiply outputs by 255 and clip between 0 and 255')
-print('# ' + str(GLAS_DIAMETER_CM) + ' cm, ' +  OBSERVER_NAME + ', ' + ILLUMINANT_NAME + ', ' + str(MAX_SCALE_VALUE) + ' ' + unit_name + ' fit')
+print('# ' + str(GLAS_DIAMETER_CM) + ' cm transmission, ' +  CIE_OBSERVER_NAME + ', ' + CIE_ILLUMINANT_NAME + ' illuminant')
 print('r=' + r_text)
 print('g=' + g_text)
 print('b=' + b_text)
 
 # Plot figures
+rgb_display = generate_cruves(scale_display)
+for i in zip(eval_poly(r_code, scale_display), eval_poly(g_code, scale_display), eval_poly(b_code, scale_display)):
+    rgb_display.append(i)
+
 fig_scale, ax_scale = colour.plotting.plot_multi_colour_swatches([colour.plotting.ColourSwatch(RGB=np.clip(i, 0, 1)) for i in rgb_display], columns=len(scale_display), **{'standalone': False})
 ax_scale.xaxis.set_label_text(unit_name)
 ax_scale.xaxis.set_ticks_position('bottom')
 
 fig_model = plt.figure()
 ax_model = fig_model.subplots(1)
-ax_model.set_title(unit_name + ' to sRGB Model')
 ax_model.xaxis.set_label_text(unit_name)
-ax_model.yaxis.set_label_text('Intensity')
+ax_model.yaxis.set_label_text('Relative Intensity')
 
 def plot_channel(values, new_values, color, label):
     ax_model.plot(scale_fit, new_values, color=color, label=label + ' Fit', linestyle=':')    
-    ax_model.plot(scale_fit, values, color=color, label=label + ' Data')
+    ax_model.plot(scale_fit, values, color=color, label=label)
+
+r_new = clip_signal(eval_poly(r_code, scale_fit))
+g_new = clip_signal(eval_poly(g_code, scale_fit))
+b_new = clip_signal(eval_poly(b_code, scale_fit))
 
 plot_channel(r, r_new, '#ff0000', 'R')
 plot_channel(g, g_new, '#00ff00', 'G')
