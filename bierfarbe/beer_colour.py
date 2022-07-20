@@ -4,10 +4,10 @@ import colour.plotting
 def ebc_to_rgb(ebc):
     srm = ebc / 1.94
     # SRM to sRGB model, multiply outputs by 255 and clip between 0 and 255
-    # 7.5 cm, CIE 1964 10 Degree Standard Observer, D65, 50 SRM fit
-    r=1.0379e+00+srm*(-5.4150e-02+srm*(1.1040e-03+srm*(-8.3300e-06)))
-    g=9.7813e-01+srm*(-1.3992e-01+srm*(7.8410e-03+srm*(-1.6906e-04)))
-    b=1.0102e+00+srm*(-5.4806e-01+srm*(1.4730e-01+srm*(-2.2536e-02)))
+    # 5 cm transmission, CIE 1964 10 Degree Standard Observer, D65 illuminant
+    r=1.0362e+00+srm*(-3.5446e-02+srm*(4.4920e-04+srm*(-1.8232e-06)))
+    g=9.7869e-01+srm*(-9.3377e-02+srm*(3.4883e-03+srm*(-5.0097e-05)))
+    b=1.0043e+00+srm*(-3.5269e-01+srm*(5.8755e-02+srm*(-5.6951e-03)))
     return [r, g, b]
 
 ebc = np.arange(start=1, stop=81)
