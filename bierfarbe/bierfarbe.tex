@@ -166,7 +166,7 @@ In der erweiterten zweiten Ausgabe des Buchs „\citetitle{Burch2010}“ stellt 
 
 \subsection*{Mosher (1994)}
 
-Nicht als Gleichung, sondern als Nomogramm, ist das Modell von \textcite[34]{Mosher1994} ausgeführt. Die Datengrundlage dafür waren verfügbare Rezepte und Messwerte von kommerziellen Bieren \parencite{Morey2004}. Zur Berechnung nach Mosher ist die MCU nach \autoref{eq:mcubasis} zu bestimmen. Danach wird per Nomogramm der resultierende SRM Wert korreliert. Die \autoref{eq:mcumosher}, die stattdessen verwendet werden kann, wird Mosher von Morey zugeschrieben. In der ursprünglichen Quelle ist diese aber nicht enthalten. 
+Nicht als Gleichung, sondern als Nomogramm, ist das Modell von \textcite[34]{Mosher1994} ausgeführt. Die Datengrundlage dafür waren verfügbare Rezepte und Messwerte von kommerziellen Bieren \parencite{Morey2004}. Zur Berechnung nach Mosher ist die MCU nach \autoref{eq:mcubasis} zu bestimmen. Danach wird per Nomogramm der resultierende SRM Wert korreliert. Die \autoref{eq:mcumosher}, die stattdessen verwendet werden kann, wird Mosher von Morey zugeschrieben. In der ursprünglichen Quelle ist sie aber nicht enthalten. 
 
 \begin{equation}
 \MCUL = \frac{\sum \text{Malzgewicht}_i \ulb \cdot \text{Malzwürzefarbe}_i \ulovi}{\text{Volumen kalte Anstellwürze} \ugal} 
@@ -178,7 +178,7 @@ Nicht als Gleichung, sondern als Nomogramm, ist das Modell von \textcite[34]{Mos
 \label{eq:mcumosher}
 \end{equation}
 
-\textcite[258]{Mosher2015} ebenfalls eine metrische Variante der \autoref{eq:mcubasis} mit dazugehörigem Nomogramm veröffentlicht. Diese unterscheidet sich von den Berechnungen der folgenden metrischen Modelle und dürfte im Heimbrauumfeld keine wesentliche Verbreitung erlangt haben.
+\textcite[258]{Mosher2015} hat ebenfalls eine metrische Variante der \autoref{eq:mcubasis} mit dazugehörigem Nomogramm veröffentlicht. Diese unterscheidet sich von den Berechnungen der folgenden metrischen Modelle und dürfte im Heimbrauumfeld keine wesentliche Verbreitung erlangt haben.
 
 \subsection*{Daniels (1995)}
 
@@ -259,7 +259,7 @@ Die Rechenblätter von Noonans Buch „\citetitle{Noonan1996}“ enthalten die K
 
 Heimbrauer Daniel Morey war unzufrieden mit der Farbvorhersage, die er in seine Brausoftware auf Basis der MCU ohne zusätzliche Korrekturen integriert hatte. Diese berechnete seiner Meinung nach zu hohe SRM Werte. Im mittlerweile nicht mehr erhältlichem Brewing Techniques Magazin erfuhr er dann 1995 von den Modellen von  Mosher und Daniels. Zunächst wollte er alle Korrelationen in ein Berechnungsmodell zusammenführen, entschied sich aber dann dazu, die ihm vorliegenden Daten so zu modifizieren, dass es möglich war, eine seinen Annahmen entsprechende Kurve einzupassen. \parencite{Smith2010}
 
-Die \autoref{eq:mcumorey} beruht auf folgenden Annahmen: Bis zu einem Betrag von 10 entspricht die MCU ungefähr dem zu erwartenden SRM Messwert. Ab 10 MCU liefert das Daniels Modell eine bessere Korrelation, über 37 MCU das Mosher Modell. Das menschliche Auge kann keine Farbunterschiede über 40 SRM mehr feststellen, es erfolgt daher eine Beschränkung auf 50 SRM. Insgesamt ist eine Abweichung von 20~\% oder höher vom realen Messwert zu erwarten. \autoref{fig:mcucompare} zeigt die Unterschieden zu den zuvor beschriebenen Berechnungsverfahren. \parencite{Morey2004}
+\autoref{eq:mcumorey} beruht auf folgenden Annahmen: Bis zu einem Betrag von 10 entspricht die MCU ungefähr dem zu erwartenden SRM Messwert, ab 10 MCU liefert das Daniels Modell eine bessere Korrelation, über 37 MCU das Mosher Modell. Das menschliche Auge kann keine Farbunterschiede über 40 SRM mehr feststellen, es erfolgt daher eine Beschränkung auf 50 SRM. Insgesamt ist eine Abweichung von 20~\% oder höher vom realen Messwert zu erwarten. \autoref{fig:mcucompare} zeigt die Unterschiede zu den zuvor beschriebenen Berechnungsverfahren. \parencite{Morey2004}
 
 \begin{equation}
 \SRM = 1,49 \cdot \MCUL^{0,69}
@@ -320,7 +320,7 @@ Abgesehen von einer zusätzlichen Korrektur für eine Zufärbung über die Kochd
 
 \subsection*{Weyermann (2021)}
 
-Von der Weyermann Mälzerei wird die dem Hanghofer und Krüger Modell ähnliche \autoref{eq:ebcweyermann} für Farbvorhersagen eingesetzt. Diese enthält zwei Korrekturen für die Stammwürze in der Form von \autoref{eq:hanghoferfstw} und \autoref{eq:weyermannkstw}. \parencite{KrausWeyermann2021b}
+Von der Weyermann Mälzerei wird die dem Hanghofer und Krüger Modell ähnliche \autoref{eq:ebcweyermann} für Farbvorhersagen eingesetzt. Sie enthält zwei Korrekturen für die Stammwürze in der Form von \autoref{eq:hanghoferfstw} und \autoref{eq:weyermannkstw}. \parencite{KrausWeyermann2021b}
 
 \begin{equation}
 \kstw \uebc = \begin{cases}
@@ -340,7 +340,7 @@ Von der Weyermann Mälzerei wird die dem Hanghofer und Krüger Modell ähnliche 
 
 \subsection*{Modellvergleich}
 
-Bei einem Versuch, bei dem die photometrische Messdaten von 19 in der Weyermann Braumanufaktur herstellen Bieren mit Modellvorhersagen verglichen wurden, kamen \textcite{KrausWeyermann2021b} zum Schluss, dass die von den untersuchten Modellen das Weyermann und das Krüger Modell die geringsten Abweichungen erzeugen (\autoref{table:modelcompareall}). Wie erwartet liefert kein Modell durchgehend perfekte Ergebnisse. Teilweise liegen die Schätzungen unter oder über den Messwerten. Bei Modellberechnungen sind darüber hinaus auch Rohstoffschwankungen bei Malzen zu berücksichtigten. Während das Weyermann Pilsner Malz laut Datenblatt einen Würzefarbebereich von 2,5 bis 4,5~EBC hat, liegt dieser beim CARAAMBER zwischen 60 und 80~EBC.
+Bei einem Versuch, bei dem die photometrischen Messdaten von 19 in der Weyermann Braumanufaktur herstgellten Bieren mit Modellvorhersagen verglichen wurden, kamen \textcite{KrausWeyermann2021b} zum Schluss, dass die von den untersuchten Modellen das Weyermann und das Krüger Modell die geringsten Abweichungen erzeugen (\autoref{table:modelcompareall}). Wie erwartet liefert kein Modell durchgehend perfekte Ergebnisse, teilweise liegen die Schätzungen unter oder über den Messwerten. Bei Modellberechnungen sind darüber hinaus auch Rohstoffschwankungen bei Malzen zu berücksichtigten. Während das Weyermann Pilsner Malz laut Datenblatt einen Würzefarbebereich von 2,5 bis 4,5~EBC hat, liegt dieser beim CARAAMBER zwischen 60 und 80~EBC.
 
 \begin{table}[H]
 \centering
@@ -359,7 +359,7 @@ Weyermann & -2,1 \\
 \label{table:modelcompareall}
 \end{table}
 
-In einem weiteren Versuch der Weyermann Braumanufaktur wurden drei untergärige Biere nach böhmischer Brauart mit einem Ausschlagsvolumen von 275~l hergestellt: ein Pilsner (\autoref{table:pilsner}), ein Bernsteinfarbenes und ein Dunkles (\autoref{table:dunkles}). Auf Basis dieser Biere wurden die Modellvorhersagen von \autoref{table:modelcompare} und die Abweichungen von \autoref{fig:modelcompare} mit folgende Annahmen berechnet: Die Kochdauer entspricht 75~min und es erfolgt eine Zufärbung durch $\khell$ von 2~EBC. Nachdem für die Malze keine Würzefarbe in Lovibond gegeben sind, erfolgte eine Umrechung von EBC über die Näherung 1~°L~=~2,65~EBC. Auch wenn die meisten Ergebnisse von \autoref{table:modelcompare} in der Größenordnung der Vorhersagen von \textcite{KrausWeyermann2022} liegen, sind dennoch einige ungeklärte hohe Abweichungen zu verzeichnen. Diese sind im Fall des bernsteinfarben Biers so hoch, dass auf einen eigenen Vergleich verzichtet wurde. Für das Dunkle berechnen \textcite{KrausWeyermann2022} mit dem Krüger Modell (\autoref{eq:ebckruger}) einen Farbwert von 65,7~EBC. Ohne Berücksichtigung der Korrekturen durch $\khell$ und $\kkd$ sollte der Wert aufgrund der Angaben von \autoref{table:dunkles} aber mindesten 86,7~EBC betragen.
+In einem weiteren Versuch der Weyermann Braumanufaktur wurden drei untergärige Biere nach böhmischer Brauart mit einem Ausschlagsvolumen von 275~l hergestellt: ein Pilsner (\autoref{table:pilsner}), ein Bernsteinfarbenes und ein Dunkles (\autoref{table:dunkles}). Auf Basis dieser Biere wurden die Modellvorhersagen von \autoref{table:modelcompare} und die Abweichungen von \autoref{fig:modelcompare} mit folgenden Annahmen berechnet: Die Kochdauer entspricht 75~Minuten und es erfolgt eine Zufärbung durch $\khell$ von 2~EBC. Nachdem für die Malze keine Würzefarbe in Lovibond gegeben ist, erfolgt eine Umrechung von EBC über die Näherung 1~°L~=~2,65~EBC. Auch wenn die meisten Ergebnisse von \autoref{table:modelcompare} in der Größenordnung der Vorhersagen von \textcite{KrausWeyermann2022} liegen, sind dennoch einige ungeklärte hohe Abweichungen zu verzeichnen. Sie sind im Fall des bernsteinfarbenen Biers so hoch, dass auf einen eigenen Vergleich verzichtet wurde. Für das Dunkle berechnen \textcite{KrausWeyermann2022} mit dem Krüger Modell (\autoref{eq:ebckruger}) einen Farbwert von 65,7~EBC. Ohne Berücksichtigung der Korrekturen durch $\khell$ und $\kkd$ sollte der Wert aufgrund der Angaben von \autoref{table:dunkles} aber mindesten 86,7~EBC betragen.
 
 \begin{table}[H]
 \centering
@@ -438,7 +438,7 @@ Für einen Sud mit einer Schüttung bestehend aus 4~kg Pale Ale Malz (5,5~EBC) u
 
 \begin{itemize}
 \item Die Farbe eines Bieres und die Würzefarbe eines Malzes werden in EBC auf Basis der Lichtabsorption in einem Spektralphotometer oder einem Photometer gemessen. Es existieren noch weitere Messverfahren.
-\item Viele Faktoren während dem Brau- und Gärvorgang haben neben den eingesetzten Malzen einen signifikanten Einfluss auf die Bierfarbe.
+\item Viele Faktoren während des Brau- und Gärvorgangs haben neben den eingesetzten Malzen einen signifikanten Einfluss auf die Bierfarbe.
 \item Es existieren mehrere Berechnungsmodelle, die auf Basis der Schüttung einen EBC Wert bedingt vorhersagen können. Laut einem Versuch von \citeauthor{KrausWeyermann2022} liefern derzeit die Modelle von Weyermann und Krüger die genauesten Schätzungen.
 \end{itemize}
 
