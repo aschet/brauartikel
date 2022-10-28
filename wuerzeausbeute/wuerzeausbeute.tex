@@ -1,0 +1,177 @@
+% Copyright 2022 Thomas Ascher
+% SPDX-License-Identifier: CC-BY-SA-4.0
+
+\documentclass[a4paper,parskip=half]{scrartcl}
+
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage{inconsolata}
+\usepackage{amsmath}
+\usepackage[naustrian]{babel}
+\usepackage{csquotes}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{chemformula}
+\usepackage{icomma}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage[section]{placeins}
+\usepackage[style=apa,backend=biber]{biblatex}
+\usepackage{listings}
+\usepackage{color}
+
+\usepackage[hidelinks,pdfencoding=auto,
+  pdfauthor={Thomas Ascher},
+  pdfusetitle,
+  pdfkeywords={Bier,Würzeausbeute,Sudhausausbeute}]{hyperref}
+\usepackage{microtype}
+
+\setkomafont{disposition}{\normalfont\bfseries}
+
+\addto\extrasnaustrian{
+\def\figureautorefname{Abb.}
+\def\tableautorefname{Tab.}
+\def\equationautorefname{Gl.}
+}
+
+\addto\captionsnaustrian{
+\renewcommand{\figurename}{Abb.}
+\renewcommand{\tablename}{Tab.}
+}
+
+\NewBibliographyString{gethesis}
+\DefineBibliographyStrings{naustrian}{
+  mathesis = {Masterarbeit},
+  gethesis = {Diplomarbeit},
+}
+
+\newcommand{\ukg}{\:[\textrm{kg}]}
+\newcommand{\uper}{\:[\textrm{\%}]}
+\newcommand{\umper}{\:[\textrm{g/100g}]}
+\newcommand{\uli}{\:[\text{l}]}
+
+\title{Würzeausbeute}
+\author{Thomas Ascher <thomas.ascher@gmx.at>}
+\date{\today, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
+
+\addbibresource{wuerzeausbeute.bib}
+
+\begin{document}
+\maketitle
+
+\section*{Einleitung}
+
+\parencite{Kunze2016}
+
+TODO
+
+%\begin{equation}
+%\SRM = \textrm{°L} + 0,04662 \cdot \textrm{°L}^2
+%\label{eq:srmtol}
+%\end{equation}
+
+Wassergehtlt bei Gerste Normwerte 
+hell 3 bis 5,8 (frisch gedarrt 0,5 bis 4)
+dunkel 1,0 bis 4,5 (frisch gedarrt 0,5 bis 4)
+\parencite[194]{Kunze2016}
+
+\section*{Sudhausausbeute}
+
+Ausschlagwürze nachdem Kochen. Menge und Extraktgehalt sind Grundlage für die Sudhausausbeute \parencite[350-358]{Kunze2016}
+
+Wie viel prozent der Schüttungsmenge als Extranktmenge in Der ausschlagwürze vorhanden sind. Innerbetriebliches Kriterium für die Arbeit im Sudhaus.
+Mittlerweile durch Messonden ermittelt und berechnet.
+Wie viel Extraktmasse in der Würzepfanne vorhanden ist.
+Älter:
+Größe von 75 bis 80 Prozent in kommerziellen Brauereien.
+Rund ein Viertel bis ein fünftel der Schüttung besteht aus unlöslichem Trebern
+
+aufgewendete Schüttungsmenge,
+Massepronzent durch Spindelung, Extraktmessung bei 20°C oder korregiert auf 20C
+Ermittlung der Ausschlagmenge
+
+\parencite[350\psqq]{Kunze2016}
+
+Ermittlung der Masse des Extraktes je 1hl Würze Extraktgehalt von
+Masse nicht benötigt, Würzemenge in hl. umrechung erfolgt über dichte der würze
+Extraktgehalt in kg/dt* dicht
+Dichte ist temperatur und druckabhängig
+Flüssigkeiten sind inkompresiebel kg extragt/dt in kg extrakt/hl dichte bei 20C bezogen auf wasser von 4C d20/4.
+
+Gewichtsverhältnis Sl 20/20C Platotabelle p 20/4
+
+Volumensumrechnung der heißen Ausschlagwürze in das der kalten Würze
+ende des würzekochens mit messlatte oder induktiver Durchflussmessung (MID)
+
+Messung erfolgt bei 100 C, Spindelung bei 20 C, kühlt würze ab ohne Verdampfung sind nur noch 96 \% vorhanden, Kontraktionsfaktor 0,96. Berücksichtigt auch Hopfentreber und Eiweißbruch, die nicht Teil des Extrakts sind. 
+
+Sudhausausbeute ist in erster Linie eine innerbetriebliche Kennziffer, spielt Abweichung keine Rolle, solange die Hopfenzusammensetzung nicht geändert wird.
+
+\begin{equation}
+A_s \uper = \frac{\text{Extrakt} \ukg \cdot 100}{\text{Schüttung} \ukg}
+\label{eq:sha1}
+\end{equation}
+
+
+\begin{equation}
+A_s \uper = \frac{\text{Extraktgehalt} \umper \cdot d_{20/4} \cdot \text{Ausschlagmenge} \uli \cdot 0,96}{\text{Schüttung} \ukg}
+\label{eq:sha2}
+\end{equation}
+
+Beeinflussung:
+Abhängig von Rohstoffen, Sudhaus, Maischeverfahren, Läuterarbeit, Arbeitsweiße. wzwischen 74 und 79 perce,
+höchstens 1 per unter der lufttrockenen Laborausbeute des Mazlfeinmehles
+
+Lufftrocken, Wasserghelt des Malzes, carbonathaltiges wasser vermindert ausbeute,
+Höhere Auslaugung des Trebers besser aus beute
+längere intensivere Maische = höhere ausbeute, 
+ungleichmäßiges anschwänzen und ungleiches laufen der läuterwechsel bringen verluste, mehrere kleine nachgüsse geben höhere als kontinuierlich
+
+Bewertung
+mit der Laborausbeute vergleichen, diese ist immer höher, , auslaugung der Treber verzichtet,
+je geringer, desto besser
+
+\begin{equation}
+d_{20/4} = (d_{20/20} \cdot 0,99703) + 0,0012
+\label{eq:d204}
+\end{equation}
+
+\parencite{Rokweiler2019}
+
+\section*{Gärkellerausbeute}
+
+\parencite[432\psq]{Kunze2016}
+
+Angekommen in Gärkeller. Wie die Sudhausausbeute berechnet, 0,96 fällt weg, weil volumen der Anstellwürze im kalten Zustandt bestimmt wird. Extraktmengen durch Benetzung der Gefäße und Rohrleitungen sowie durch Hopfentreber und Trub verloren. Kleiner als SHA. Hat keine Aussagekraft, interessant ist differenz zur Sudhausbeute. Veränderung von Differenz ist Hinweis auf prozessabweichung.
+
+\begin{equation}
+A_g \uper = \frac{\text{Extraktgehalt} \umper \cdot d_{20/4} \cdot \text{Anstellmenge} \uli}{\text{Schüttung} \ukg}
+\label{eq:gka}
+\end{equation}
+
+
+\section*{Kongressmaischeverfahren}
+
+Standardisiertes Maischeverfahren mit Maischebad, Ausbeute bestimmt, , besser gelöste malze weniger Zerkleinerung auf Ausbeute,
+deshalb zwei maischen, einmal sehr grob zerkleinert (25 proz mehlanteil), einmal sehr fein zerkleinert (90 proz mehlanteil). Nach EBC bestimmungen. mit 200 ml destilliertem wasser 30 mi beit 45 °C gemaischt, danach 25 min bis auf 70C gesteigert. Temperatr eine stunde gehalten. Verzuckerungsgrad. 10 bis 15 minuten auf zimmertemp. auf 450 g mit destilliertem wasser aufgewogen, durch faltenfilter, ersten 100 ml erneut durch filter, abbruch bei trockenem Filterkuchen. Kongresswürze -> gewonnener extrakt bestimmen mithilfe der Plato-Tabelle.
+Angabe in lufttrockene Substanz und Trockensubstandz. (Trs) Luftr.  abhängig vom Wassergehalt. Nicht mit Bedingungen im Brauprozess. Übertragen auf realen Maischeprzess nicht möglich. Neuer bei 65°C beginnen.
+\parencite[194\psq]{Kunze2016}
+
+Normale Werte Extraktausbeute von Kongressmaische
+helles mazl 9 bis 82 proz in TrS, dunkles malz 75 bis 78 in TrS. Bei gut gelöstem Malz ist die Extraktdifferenz iwschen grobschrot- und feinmehlanalyse gering, 
+Extrakt ein Feinmehl-TrS - Extrakt in Grobschrot-TRs -> < 1,8 proz gut, über 1,8 mäßig
+\parencite[195]{Kunze2016}
+
+B ei lagerung steigt Wasssergahlt auf 4 bis 5 prozent an. \parencite[191]{Kunze2016}
+Malzkörner hygroskopisch, feuchte Luft fernhalten
+
+\parencite{Holle2010}
+\parencite{Carr2015}
+
+\section*{Zusammenfassung}
+
+TODO
+
+\printbibliography[title=Quellen]
+
+\end{document}
