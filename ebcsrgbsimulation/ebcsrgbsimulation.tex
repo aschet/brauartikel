@@ -79,7 +79,7 @@ Bei der spektralphotometrischen Methode erfolgt eine Messung auf Basis des bougu
 
 Die EBC Skala kann die Bierfarbe an sich nicht ausreichend charakterisieren, da das zugrundeliegende Verfahren nur eine Wellenlänge im blauen Bereich des sichtbaren Spektrums misst. Je nach verwendeter Schüttung kann die Bierfarbe bei gleicher Absorption visuell entweder rötlicher oder bräunlicher wahrgenommen werden \parencite{Tucker2017}. Messungen nach der Tristimulus-Methode sind nicht von der selben Problematik betroffen. Bei dieser wird das gesamte sichtbare Transmissionsspektrum gemäß dem Verfahren ASTM~E-308 zunächst in das CIE-Normvalenzsystem (XYZ-Farbraum) überführt und daraus dann anschließend ein eindeutiger Farbwert im CIELAB-Farbraum bestimmt \parencites{deLange2016}{ASBC2011}. Transformationen zu anderen Farbräumen sind ebenfalls möglich. Die entsprechenden Berechnungsvorschriften für den sRGB-Farbraum sind im Standard IEC~61966-2-1 festgelegt \parencite{W3C2015}.
 
-\section*{Berechnung mit dem deLange Modell}
+\section*{Anwendung des deLange Modells}
 
 Das Modell von \cite{deLange2016} berechnet nicht direkt ein RGB-Zahlentripel im sRGB-Farbraum, sondern bildet stattdessen ein konstantes normalisiertes Bierabsorptionsspektrum ab. Unter Angabe einer spezifischen Wellenlänge $\lambda$ des Lichtspektrums in Nanometern, einer Pfadlänge $l$ in Zentimetern und dem gewünschten EBC Wert lässt sich damit ein entsprechender Transmissionsgrad $T$ bestimmen:
 
@@ -172,7 +172,7 @@ B_{8bit} = \operatorname{quant}(B)
 
 \subsection*{Beispielimplementierung}
 
-Im Gegensatz zu vielen Berechnungen im Heimbraubereich ist der zuvor beschriebene Algorithmus aufgrund der Anzahl der durchzuführenden Rechenschritte eher komplex. Der Autor hat deshalb dazu entschieden, eine Beispielimplementierung für mehrere Programmiersprachen im GitHub Repository \url{https://github.com/aschet/olfarve} zu hinterlegen, anstatt die Verwendung der Formeln mit einem Rechenbeispiel zu demonstrieren. Das Repository enthält auch eine Microsoft Excel im XLSX-Format (\autoref{fig:olfarve}).
+Im Gegensatz zu vielen Berechnungen im Heimbraubereich ist der zuvor beschriebene Algorithmus aufgrund der Anzahl der durchzuführenden Rechenschritte eher komplex. Der Autor hat deshalb dazu entschieden, eine Beispielimplementierung für mehrere Programmiersprachen im GitHub Repository \url{https://github.com/aschet/olfarve} zu hinterlegen, anstatt die Verwendung der Formeln mit einem Rechenbeispiel zu demonstrieren. Das Repository enthält auch eine Microsoft Excel Arbeitsmappe im XLSX-Format (\autoref{fig:olfarve}).
 
 \begin{figure}[H]
 	\centering
