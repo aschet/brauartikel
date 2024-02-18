@@ -14,7 +14,7 @@ axes = fig.subplots(1, 1)
 axes.set_xlabel('EBC')
 axes.set_ylabel('T')
 axes.plot(ebc_values, transmission_10mm, label='1.0 cm path length ')
-axes.set_xticks(ticks=np.arange(0, len(transmission_10mm), 5), dtype=int)
+axes.set_xticks(ticks=np.arange(0, len(transmission_10mm), 5))
 axes.set_yticks(ticks=np.arange(0, 1.1, 0.1))
 fig.savefig('transmission.pdf', format='pdf')
 
