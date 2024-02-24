@@ -46,12 +46,12 @@ pdfkeywords={Bier,Farbe,sRGB,Simulation,EBC}]{hyperref}
 
 \section*{Einleitung}
 
-Braurechner für den Heimbereich, wie etwa BeerSmith, schätzen zumeist nicht nur die Bierfarbe aufgrund einer Schüttung in EBC Einheiten, sondern stellen diese auch in einem RGB-Farbraum dar. Im Consumer-Bereich hat sich der sRGB-Farbraum als ein weit verbreiteter Standard für Computer-Monitore und andere Geräte etabliert. Während in der Heimbrauliteratur einige Modelle zur Schätzung von EBC Einheiten zu finden sind, ist nur wenig Information verfügbar, wie Braurechner diese Werte in ein RGB-Zahlentripel transformieren. Typischerweise greifen diese dazu auf eine Referenz wie zum Beispiel die \href{https://www.bierfarbkarte.de}{Bierfarbkarte} von Hubert Hanghofer und Thomas Vogel zurück. Die Referenz wird dabei entweder fest codiert oder durch eine Kurvenanpassung in die Farbverläufe abgebildet. Wie werden nun die Farben von Bierfarbkarten festgelegt? Im Fall vom BJCP Color Guide (\autoref{fig:colorguide}) bildet ein mathematisches Modell die Basis, das auf der spektralen Messung von ungefähr 100 Bieren fußt \parencite{BJCP}. Eine detaillierte Beschreibung dieses Modells findet sich bei \cite{deLange2016}. Dieser Artikel zeigt die notwendigen Rechenschritte zur Anwendung des deLange Modells.
+Braurechner für den Heimbereich, wie etwa BeerSmith, schätzen zumeist nicht nur die Bierfarbe aufgrund einer Schüttung in EBC Einheiten, sondern stellen diese auch in einem RGB-Farbraum dar. Im Consumer-Bereich hat sich der sRGB-Farbraum als ein weit verbreiteter Standard für Computer-Monitore und andere Geräte etabliert. Während in der Heimbrauliteratur einige Modelle zur Schätzung von EBC Einheiten beschrieben sind, ist nur wenig Information verfügbar, wie Braurechner diese Werte in ein RGB-Zahlentripel transformieren. Typischerweise greifen diese dazu auf eine Referenz wie zum Beispiel die \href{https://www.bierfarbkarte.de}{Bierfarbkarte} von Hubert Hanghofer und Thomas Vogel zurück. Die Referenz wird dabei entweder fest codiert oder durch eine Kurvenanpassung in die Farbverläufe abgebildet. Wie werden nun die Farben von Bierfarbkarten festgelegt? Im Fall vom BJCP Color Guide (\autoref{fig:colorguide}) bildet ein mathematisches Modell die Basis, das auf der spektralen Messung von ungefähr 100 Bieren fußt \parencite{BJCP}. Eine detaillierte Beschreibung dieses Modells findet sich bei \cite{deLange2016}. Dieser Artikel zeigt die notwendigen Rechenschritte zur Anwendung des deLange Modells.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=4.8cm]{color_guide.pdf}
-	\caption{Bierfarbkarte im Stil des BJCP Color Guide (Ascher, 2022)}
+	\caption{Bierfarbkarte im Stil des BJCP Color Guide}
 	\label{fig:colorguide}
 \end{figure}
 
@@ -59,12 +59,12 @@ Braurechner für den Heimbereich, wie etwa BeerSmith, schätzen zumeist nicht nu
 
 Die \href{https://www.asbcnet.org}{ASBC} hat zwei Analysemethoden zur Messung der Bierfarbe ratifiziert: die spektralphotometrische Methode, bei der die Lichtabsorption durch eine entgaste und gefilterte Bierprobe in einer Küvette mit einer Schichtdicke von 1~cm bei einer Wellenlänge von 430~nm gemessen wird und die Tristimulus-Methode, die das Lichtspektrum in Bereich von 380--780~nm (5~nm Abstand) mit einem Kolorimeter oder einem Spektralfotometer erfasst. \parencite{ASBC2011}
 
-Bei der spektralphotometrischen Methode erfolgt eine Messung auf Basis des bouguer-lambert-beerschen Gesetzes. Dabei wird der Transmissionsgrad ($T$) des Lichts durch eine Probe bestimmt, aus dem sich die Absorption ($A$) berechnen lässt. Der Transmissionsgrad ist der Quotient zwischen den Lichtsintensitäten nach dem Austritt ($I$) aus einer Probe und vor dem Eintritt ($I_0$) in eine Probe. Die Absorption verhält sich entlang eines gewählten Messpfads proportional. Eine Skalierung ist daher möglich, was eine Umrechnung zwischen verschiedenen Behältnisgrößen erlaubt. Es gelten folgende Zusammenhänge \parencite{deLange2016}:
+Bei der spektralphotometrischen Methode erfolgt eine Messung auf Basis des bouguer-lambert-beerschen Gesetzes. Dabei wird der Transmissionsgrad ($T$) des Lichts durch eine Probe bestimmt, aus dem sich die Absorption ($A$) berechnen lässt. Der Transmissionsgrad ist der Quotient zwischen den Lichtsintensitäten nach dem Austritt ($I$) aus einer Probe und vor dem Eintritt ($I_0$) in eine Probe. Die Absorption verhält sich entlang eines gewählten Messpfads proportional. Eine Skalierung ist daher möglich, was eine Umrechnung zwischen verschiedenen Behältnisgrößen erlaubt. Es gelten folgende in \autoref{fig:transmission} dargestellten Zusammenhänge \parencite{deLange2016}:
 
 \begin{equation*}
 	\begin{gathered}
 		T =  I / I_0 \\
-		A = \log T \\		
+		A = -\log T \\		
 		\textrm{EBC} = 25 \cdot A_{430}
 	\end{gathered}
 \end{equation*}
@@ -72,12 +72,12 @@ Bei der spektralphotometrischen Methode erfolgt eine Messung auf Basis des bougu
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=6cm]{transmission.pdf}
-	\caption{Transmissionsgrad über die EBC Skala (Ascher, 2024)}
+	\caption{Transmissionsgrad über die EBC Skala}
 	\label{fig:transmission}
 \end{figure}
 
 
-Die EBC Skala kann die Bierfarbe an sich nicht ausreichend charakterisieren, da das zugrundeliegende Verfahren nur eine Wellenlänge im blauen Bereich des sichtbaren Spektrums misst. Je nach verwendeter Schüttung kann die Bierfarbe bei gleicher Absorption visuell entweder rötlicher oder bräunlicher wahrgenommen werden \parencite{Tucker2017}. Messungen nach der Tristimulus-Methode sind nicht von der selben Problematik betroffen. Bei dieser wird das gesamte sichtbare Transmissionsspektrum gemäß dem Verfahren ASTM~E-308 zunächst in das CIE-Normvalenzsystem (XYZ-Farbraum) überführt und daraus dann anschließend ein eindeutiger Farbwert im CIELAB-Farbraum bestimmt \parencites{deLange2016}{ASBC2011}. Transformationen zu anderen Farbräumen sind ebenfalls möglich. Die entsprechenden Berechnungsvorschriften für den sRGB-Farbraum sind im Standard IEC~61966-2-1 festgelegt \parencite{W3C2015}.
+Die EBC Skala kann die Bierfarbe an sich nicht ausreichend charakterisieren, da das zugrundeliegende Verfahren nur eine Wellenlänge im blauen Bereich des sichtbaren Spektrums misst. Je nach verwendeter Schüttung kann die Bierfarbe bei gleicher Absorption visuell entweder rötlicher oder bräunlicher wahrgenommen werden \parencite{Tucker2017}. Messungen nach der Tristimulus-Methode sind nicht von der selben Problematik betroffen. Bei dieser wird fast das gesamte sichtbare Transmissionsspektrum gemäß dem Verfahren ASTM~E-308 zunächst in das CIE-Normvalenzsystem (XYZ-Farbraum) überführt und daraus dann anschließend ein eindeutiger Farbwert im CIELAB-Farbraum bestimmt \parencites{deLange2016}{ASBC2011}. Transformationen zu anderen Farbräumen sind ebenfalls möglich. Die entsprechenden Berechnungsvorschriften für den sRGB-Farbraum sind im Standard IEC~61966-2-1 festgelegt \parencite{W3C2015}.
 
 \section*{Anwendung des deLange Modells}
 
@@ -92,7 +92,7 @@ Die Pfadlänge $l$ beschreibt zum Beispiel den Durchmesser eines Verkostungsglas
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=9cm]{ebc_scale.pdf}
-	\caption{Farbänderung bei zunehmender Pfadlänge (Ascher, 2024)}
+	\caption{Farbänderung bei zunehmender Pfadlänge}
 	\label{fig:ebcscale}
 \end{figure}
 
@@ -145,8 +145,8 @@ Z \\
 \begin{equation*}
 \operatorname{cct}(x)=
 \begin{cases}
-12,92 \cdot x & \text{für } x \leq 0,0031308, \\
-1,055 \cdot x^{1/2,4} - 0,055 & \text{für } x > 0,0031308. \\
+12,92 x & \text{für } x \leq 0,0031308, \\
+1,055 x^{1/2,4} - 0,055 & \text{für } x > 0,0031308. \\
 \end{cases}
 \end{equation*}
 
@@ -159,7 +159,7 @@ B = \operatorname{cct}(\operatorname{clip}(B_{l}))
 \end{equation*}
 
 \begin{equation*}
-\operatorname{quant}(x) = \lfloor (2^8-1) \cdot x \rceil
+\operatorname{quant}(x) = \lfloor (2^8-1) x \rceil
 \end{equation*}
 
 \begin{equation*}
@@ -172,18 +172,18 @@ B_{8bit} = \operatorname{quant}(B)
 
 \subsection*{Beispielimplementierung}
 
-Im Gegensatz zu vielen Berechnungen im Heimbraubereich ist der zuvor beschriebene Algorithmus aufgrund der Anzahl der durchzuführenden Rechenschritte eher komplex. Der Autor hat deshalb dazu entschieden, eine Beispielimplementierung für mehrere Programmiersprachen im GitHub Repository \url{https://github.com/aschet/olfarve} zu hinterlegen, anstatt die Verwendung der Formeln mit einem Rechenbeispiel zu demonstrieren. Das Repository enthält auch eine Microsoft Excel Arbeitsmappe im XLSX-Format (\autoref{fig:olfarve}).
+Im Gegensatz zu vielen Berechnungen im Heimbraubereich ist der zuvor beschriebene Algorithmus aufgrund der Anzahl der durchzuführenden Rechenschritte eher komplex. Der Autor hat sich deshalb dazu entschieden, eine Beispielimplementierung für mehrere Programmiersprachen im GitHub Repository \url{https://github.com/aschet/olfarve} zu hinterlegen, anstatt die Verwendung der Formeln mit einem Rechenbeispiel zu demonstrieren. Das Repository enthält auch eine Microsoft Excel Arbeitsmappe im XLSX-Format (\autoref{fig:olfarve}).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=6cm]{olfarve.png}
-	\caption{XLSX Beispielimplementierung (Ascher, 2024)}
+	\includegraphics[width=8cm]{olfarve.png}
+	\caption{XLSX Beispielimplementierung}
 	\label{fig:olfarve}
 \end{figure}
 
 \section*{Zusammenfassung}
 
-Mit dem deLange Modell und in den Standards ASTM~E308 und IEC~61966-2-1 beschriebenen Verfahren kann für einen EBC Wert eine Farbe im sRGB-Farbraum für verschiedene Behältnisdurchmesser simuliert werden. Hierbei ist zu beachten, dass Biere je nach eingesetzter Schüttung bei gleichen EBC Einheiten unterschiedliche Farben haben können. Das ist eine Einschränkung des zugrundeliegenden Messprinzips. Das deLange Modell kann diesen Effekt weder berücksichtigen noch kompensieren.
+Mit dem deLange Modell und in den Standards ASTM~E308 und IEC~61966-2-1 beschriebenen Verfahren kann für einen EBC Wert eine Farbe im sRGB-Farbraum für verschiedene Behältnisdurchmesser simuliert werden. Hierbei ist zu beachten, dass Biere je nach eingesetzter Schüttung bei gleichen EBC Einheiten unterschiedliche Farben haben können. Das ist eine Einschränkung des zugrundeliegenden Messprinzips. Das deLange Modell kann diesen Effekt nicht berücksichtigen.
 
 \printbibliography[title=Quellen]
 
