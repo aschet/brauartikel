@@ -8,3 +8,4 @@ Alle folgenden Artikel sind auch auf der Webseite des [BrauCampus Graz](https://
 * [Stilportrait: Witbier / Biere blanché](https://github.com/aschet/brauartikel/releases/download/WITBIER_v1.0.0/Stilportrait_Witbier.pdf)
 * [Eine bittere Angelegenheit: Historische IBU Berechnungen](https://github.com/aschet/brauartikel/releases/download/IBU_v1.1.0/Historische_IBU_Berechnungen.pdf)
 * [Es wird bunt: Bierfarbe aus der Schüttung berechnen](https://github.com/aschet/brauartikel/releases/download/EBC_v1.0.0/Bierfarbe_aus_der_Schuettung_berechnen.pdf)
+* [EBC Bierfarbsimulation im sRGB-Farbraum](https://github.com/aschet/brauartikel/releases/download/EBCSRGB_v1.0.0/EBC_Bierfarbsimulation.pdf)
