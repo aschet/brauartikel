@@ -1,0 +1,88 @@
+% !TeX program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+% !TEX spellcheck = de_DE
+% !BIB program = biber
+
+\documentclass[10pt,a4paper,DIV=12,parskip=half]{scrarticle}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{csquotes}
+\usepackage{mathpazo}
+\usepackage{amsmath}
+\usepackage[output-decimal-marker={,}]{siunitx}
+\usepackage{gensymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[section]{placeins}
+\usepackage[style=apa,backend=biber]{biblatex}
+
+\usepackage[hidelinks,pdfencoding=auto,
+pdfauthor={Thomas Ascher},
+pdfusetitle,
+pdfkeywords={Bier,Farbe,sRGB,Simulation,EBC}]{hyperref}
+\usepackage{microtype}
+
+\setkomafont{disposition}{\normalfont\bfseries}
+
+\addto\extrasngerman{
+	\def\figureautorefname{Abb.}
+	\def\tableautorefname{Tab.}
+	\def\equationautorefname{Gl.}
+}
+
+\addto\captionsngerman{
+	\renewcommand{\figurename}{Abb.}
+	\renewcommand{\tablename}{Tab.}
+}
+
+\title{Brauwasseraufbereitung im Heimbereich}
+\author{Thomas Ascher <thomas.ascher@gmx.at>}
+\date{\today, \href{http://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}}
+
+\addbibresource{brauwasseraufbereitung.bib}
+
+\begin{document}
+\maketitle
+
+\section*{Einleitung}
+
+Wasser ist Hauptbestandteil von Bier und an allen Teilen der Bierherstellung beteiligt, angefangen beim Mälzen. Maische, Kochen, Gärung, Reinigung, Kühlung. \autocite[3]{EBC2001}.
+
+Biersorten aufgrund von Wasserzusammensetzung entstanden: Burton-on-Trent, München, Pilsen, Dortmund. \autocite[3]{EBC2001}.
+
+Verunreinigungen, Minerale Zusammensetzung wichtig. \autocite[3]{EBC2001}.
+
+Good practice: 4,6 hl pro hl Bier \autocite[5]{EBC2001}.
+
+\section*{Brauwasseranforderungen}
+
+microbiologisch, organisch und inorganische anteile für potable water. \autocite[7]{EBC2001}.
+
+Mineralgehalt macht important contribution for sensory profile Hat sich in der Vergangenheit stark auf die regional entwickelten Bierstile ausgewirkt. \autocite[7]{EBC2001}.
+
+Lager: weiches mineralarmes wasser , wenig carbonate -> pH reduktion notwendig, calcium ionen weniger wichtig bei hellem malz \autocite[9]
+Pale ales and bitters: bicarbonate level < 60 mg/liter calcium > 125 mg/liter Sulphate > chloride um bittere aromen zu unterstützen.
+
+Milds and stouts: carbonates < 60mg/l calcium weniger, 75mg/l for milds, <30mg/l stouts
+
+\section*{Effekte von Ionen bei der Bierherstellung}
+
+Ionenkonzentrationen haben Auswirkungen effekt auf Brewing performance und Bierqualität. 
+\autocite[9]{EBC2001}
+
+Hydrogen und hydroxyl, H+ OH- \autocite[9]{EBC2001}:
+Immer präsent, pH-Wert ist bestimmt durch das Verhältnis dieser Ionen. Reaktionen sind pH-Wert abhängig. Geringer pH-Wert:
+Mehr total soluble nitrogen and free amino nitrogen
+Increased extract yield
+Increased wort run-off rate
+Decreased extraction of tannins and hop bittering compounds
+increased fermentability.
+Empfohlen zwischen 6.0 und 7.5.
+
+Calcium Ca²+ \autocite[10]{EBC2001}: Spielt wichtige Rolle bei Wasserhärte (temporär und permanent), Ca
+
+
+\printbibliography[title=Quellen]
+
+\end{document}
+
